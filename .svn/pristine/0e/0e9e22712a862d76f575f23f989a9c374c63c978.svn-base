@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>温州市出租汽车申报服务管理系统</title>
+	
+    <meta charset="UTF-8">
+    <link rel="icon" href="resources/images/I16.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="libs/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bs/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="app/main.css">
+	<script type="text/javascript" src="resources/js/jquery-1.12.1.min.js"></script>
+      <script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="app/config.js"></script>
+    <script type="text/javascript" src="app/main.js"></script>
+
+     <style type="text/css">
+        .newsTitle {
+            width: 900px;
+            height: 70px;
+            line-height: 70px;
+            margin: 20px auto 0;
+            border-bottom: 2px solid #307abd;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+        .newsTime {
+            text-align: center;
+        }
+        .newsContent {
+            padding: 8px;
+            border-top: 1px dashed #2b542c;
+        }
+        p {
+            text-indent: 2em;
+        }
+        .topWrapper{
+        	//background:
+        }
+        .pageCenter{
+            margin: 0;
+        	padding: 20px 40px;
+            list-style: none;
+        }
+        .pageCenter li{
+        	position:relative;
+        	height:50px;
+        	line-height:50px;
+        	border-bottom: 1px dashed #eee;
+        }
+         .pageCenter a{
+             padding: 0 1em;
+             font-size: 16px;
+             display: block;
+         }
+         .pageCenter a:hover {text-decoration: underline}
+         .t-datetime { position: absolute; top: 0; right: 10px; width: 8em; }
+    </style>
+  </head>
+<body>
+<input type="hidden" id="twkj_jddsb" value="1">
+<div class="topWrapper">
+  <div class="topHeaderBox">
+      <div class="topHeader">
+          <div class="topGh"></div>
+          <h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+      </div>
+  </div>
+  <div id="mainbav">
+      <ul class="nav">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="app/html/sqlcsm/zcsq.html" target="_Blank">操作说明</a></li>
+      </ul>
+  </div>
+</div>
+<div class="infoBox">
+    <div class="infoPage no">
+        <div class="panel-body">
+            <div class="control-group font-gray bbGrayLine" style="line-height: 30px;">
+				<a class="font-gray" href="index.html">首页</a>&gt;
+				<a class="font-gray" href="javascript:void(0);">政策法规</a>
+            </div>
+            <h2 class="newsTitle" id="tzggbt">政策法规</h2>
+            <ul class="pageCenter" id="more-zcfg">
+<!--                 <li><a href="http://www.wenzhou.gov.cn/art/2016/12/29/art_1229314_40770.html">温州市网络预约出租汽车经营服务管理实施细则（试行）</a><span class="t-datetime">2016-11-23</span></li> -->
+                <!--     			<li><a href="">温州市网约车驾驶员区域科目考试学习资料</a></li> -->
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+<script type="text/javascript">
+    stringLengthFormat($('.pageCenter a'), 55);
+    $.ajax({
+    	type: "POST",
+    	url: basePath + "user/findzcfg",
+    	data:{},
+    	timeout : 180000,
+    	dataType: 'json',
+    	success:function(data){
+   			for(var i=0; i<data.length; i++){
+   				$("#more-zcfg").append(' <li><a href="'+data[i].FJNAME+'">'+data[i].BT+'</a><span class="t-datetime">'+fomart_time1(new Date(data[i].FSSJ))+'</span></li>');
+   			}
+    	},
+    	error: function(){
+    	}         
+    });
+</script>
+<script type="text/javascript"></script>
+</body>
+</html>

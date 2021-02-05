@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.Wyc_appointmentMapper">
+  <resultMap id="BaseResultMap" type="entity.Wyc_appointment">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="TestPlan_id" jdbcType="INTEGER" property="testplanId" />
+    <result column="StuID" jdbcType="INTEGER" property="stuid" />
+    <result column="TicketNumber" jdbcType="DECIMAL" property="ticketnumber" />
+    <result column="Seat_id" jdbcType="INTEGER" property="seatId" />
+    <result column="State" jdbcType="DECIMAL" property="state" />
+    <result column="SignTime" jdbcType="DATE" property="signtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, TestPlan_id, StuID, TicketNumber, Seat_id, State, SignTime
+  </sql>
+  <select id="selectByExample" parameterType="entity.Wyc_appointmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_wyc_appointment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="entity.Wyc_appointmentExample">
+    delete from tb_wyc_appointment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Wyc_appointment">
+    insert into tb_wyc_appointment (id, TestPlan_id, StuID, 
+      TicketNumber, Seat_id, State, 
+      SignTime)
+    values (#{id,jdbcType=INTEGER}, #{testplanId,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, 
+      #{ticketnumber,jdbcType=DECIMAL}, #{seatId,jdbcType=INTEGER}, #{state,jdbcType=DECIMAL}, 
+      #{signtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Wyc_appointment">
+    insert into tb_wyc_appointment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="testplanId != null">
+        TestPlan_id,
+      </if>
+      <if test="stuid != null">
+        StuID,
+      </if>
+      <if test="ticketnumber != null">
+        TicketNumber,
+      </if>
+      <if test="seatId != null">
+        Seat_id,
+      </if>
+      <if test="state != null">
+        State,
+      </if>
+      <if test="signtime != null">
+        SignTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testplanId != null">
+        #{testplanId,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="ticketnumber != null">
+        #{ticketnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="seatId != null">
+        #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="signtime != null">
+        #{signtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.Wyc_appointmentExample" resultType="java.lang.Long">
+    select count(*) from tb_wyc_appointment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_wyc_appointment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.testplanId != null">
+        TestPlan_id = #{record.testplanId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuid != null">
+        StuID = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketnumber != null">
+        TicketNumber = #{record.ticketnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.seatId != null">
+        Seat_id = #{record.seatId,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        State = #{record.state,jdbcType=DECIMAL},
+      </if>
+      <if test="record.signtime != null">
+        SignTime = #{record.signtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_wyc_appointment
+    set id = #{record.id,jdbcType=INTEGER},
+      TestPlan_id = #{record.testplanId,jdbcType=INTEGER},
+      StuID = #{record.stuid,jdbcType=INTEGER},
+      TicketNumber = #{record.ticketnumber,jdbcType=DECIMAL},
+      Seat_id = #{record.seatId,jdbcType=INTEGER},
+      State = #{record.state,jdbcType=DECIMAL},
+      SignTime = #{record.signtime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

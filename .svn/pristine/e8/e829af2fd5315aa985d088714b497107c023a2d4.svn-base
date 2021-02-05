@@ -1,0 +1,106 @@
+@CHARSET "UTF-8";
+
+#msg_bg {
+	position: absolute;
+	background-color: #000000;
+	left: 0;
+	top: 0;
+	opacity: 0.3;
+	filter: alpha(opacity : 30);
+	z-index: 999;
+	/*cursor:wait;*/
+}
+
+#msg_box {
+	position: absolute;
+	left: 10%;
+	top: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	border: 2px solid #0000ff;
+	background-color: #FFFFFF;
+	color: #006699;
+	z-index: 9999;
+}
+
+#msg_box .title {
+	display: block;
+	background-color: #D2D2FF;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#msg_box .title .tit {
+	margin: 0;
+	padding: 5px;
+	float: left;
+	width: 90%;
+}
+
+#msg_box .title .close {
+	float: left;
+	width: 5%;
+	text-align: right;
+	margin: 0;
+	padding: 5px 0;
+}
+
+#msg_box .co {
+	margin: 0;
+	padding: 3em; <!--
+	color: #00CC33; -->
+	font-size: 16px;
+	text-align: center;
+}
+
+a:link,a:visited {
+	color: #666666;
+}
+
+/*
+input {
+	border-top: 1px solid #999999;
+	border-right: 3px solid #999999;
+	border-bottom: 1px solid #999999;
+	border-left: 3px solid #999999;
+	background-color: #FFFFFF;
+}
+*/
+.pics_div {
+	border: 0px solid;
+	height: 0px;
+	width: 100%;
+	padding-top: 0px;
+	display: none;
+}
+
+.files_div {
+	border: 1px;
+	height: 170px;
+	width: 300px;
+}
+
+.pic_delete {
+	background-image: url('../v2/imgs/cds/delete.gif');
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: -45px;
+	left: 69px;
+}
+
+.pic_cancel {
+	background-image: url('../v2/imgs/cds/cancel.gif');
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: -45px;
+	left: 69px;
+}
+
+.addFileIco {
+
+}

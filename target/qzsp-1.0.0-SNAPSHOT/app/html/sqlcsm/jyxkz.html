@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>经营许可证申请流程</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<style>
+		.dyb{
+			padding: 0 10px;
+			border:1px solid #ccc;
+		}
+		.dyb img{
+			display: block;
+			width:700px;
+			margin:0 auto;
+		}
+		.dyb h3{
+			height:38px;
+			line-height: 38px;
+			font-size:18px;
+			color:#212121;
+		}
+		.nav{
+			width:1000px;
+			height:50px;
+			margin:0;
+			line-height:100px;
+			text-align: center;
+			color:#fff;
+		}
+		#btnFhsy {
+			display: block;
+			position:fixed;
+			top:40px;
+			color:#fff;
+		}
+		.btnfh{
+			color:#fff;
+			position:absolute;
+			top:40px;
+			right:0;
+		}
+		#btnFhsy:hover,.btnfh:hover{
+			color: #d6e9c6;
+		}
+		#gdxs{
+			width:1024px;
+			height:128px;
+			text-align: center;
+			color:#fff;
+			font-size:30px;
+			line-height:100px;
+			position:fixed;
+			top:0px;
+			display:none;
+		}
+		.dyb h4{
+			font-size:16px;
+			text-indent:2em;
+		}
+		.txt{
+			width:80%;
+			margin:0 auto;
+			margin-bottom: 10px;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeader">
+		<div class="topGh"></div>
+		<div class="topTitle">温州市出租汽车申报服务管理系统</div>
+		<div class="topLogin"></div>
+	</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT">
+		<div class="infoBox">
+			<div class="infoPage noMT">
+				<div class="top_banner">
+					<h2 class="nav">经营许可证申请流程
+						<a class="btn btnfh" href="../../../index.html">返回首页</a>
+					</h2>
+				</div>
+				<div id="gdxs" class="top_banner">经营许可证申请流程
+					<a id="btnFhsy" class="btn" href="../../../index.html">返回首页</a>
+				</div>
+				<div class="dyb">
+					<h3>第一步：注册(点击注册，进入注册页面)</h3>
+					<div class="txt">1、请阅读温州市网络预约出租汽车驾驶员从业资格考试大纲、
+						出租车驾驶员从业资格管理规定、
+						温州市人民政府办公厅关于印发温州市网络预约出租汽车和私人小客车合乘管理实施细则、
+						网路预约出租汽车经营管理。阅读完毕后选择相应的用户类型，点击下一步，进入注册填写页面</div>
+					<img src="../../../resources/images/sqlcsm/2016-11-21_105430.png"/>
+					<div class="txt">2、填写完成后，点击提交按钮，注册成功，进入登录页面</div>
+					<img src="../../../resources/images/sqlcsm/2016-11-21_105535.png">
+					<h3>第二步：登录(登录成功后，请点击经营许可证申请，进入申请填写页面)</h3>
+					<img src="../../../resources/images/sqlcsm/icon006.png"/>
+					<h3>第三步：填写申请(申请填写完成，点击提交，进入短信确认页面)</h3>
+					<img src="../../../resources/images/sqlcsm/2016-11-21_161421.png">
+					<h3>第四步：短信确认(申请填写完成后，进入短信确认页面)</h3>
+					<img src="../../../resources/images/sqlcsm/2016-11-21_161603.png"/>
+					<h3>第五步：完成注册(短信确认完成后，点击提交，进入完成注册页面)</h3>
+					<img src="../../../resources/images/sqlcsm/2016-11-21_161500.png"/>
+					<h3>第六步：签发电子证件</h3>
+					<img src="../../../resources/images/sqlcsm/2016-11-21_161524.png"/>
+					<!--<h3>第七步：办理签约</h3>-->
+					<!--<img src="../../../resources/images/sqlcsm/clys/2016-11-04_191756.png"/>-->
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>>
+        <div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+		<script>
+			$(function(){
+				rebtnFhsyLeft();
+				$(window).resize(function(){
+					rebtnFhsyLeft();
+				})
+			});
+			var rebtnFhsyLeft = function(){
+				var winwidth = $(window).width();
+				var bodywidth = $('body').width();
+				var dybwidth = $('.infoPage').width();
+				var fhsyBtn = $('#btnFhsy');
+				if (winwidth > dybwidth){
+					fhsyBtn.css({'right': ((bodywidth - dybwidth) / 2)});
+				}else{
+					fhsyBtn.css({'right':("winwidth")});
+				}
+			}
+			$(window).scroll(function(){
+				if($(this).scrollTop()>130){
+					$("#gdxs").css("display","block");
+				}else{
+					$("#gdxs").css("display","none");
+				}
+			});
+		</script>
+		<!--<script type="text/javascript">
+			function getOs(){
+				var OsObject = "";
+				if(navigator.userAgent.indexOf("MSIE")>0){
+				}
+				if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){
+				}
+				if(isSafari=navigator.userAgent.indexOf("Safari")>0){
+				}
+				if(isCamino=navigator.userAgent.indexOf("Camino")>0){
+				}
+				if(isMozilla=navigator.userAgent.indexOf("Gecko/")>0){
+				}
+			}
+			var isIE=getOs();
+		</script>-->
+	</body>
+</html>

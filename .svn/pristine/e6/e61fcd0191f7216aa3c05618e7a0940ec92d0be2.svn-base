@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../util.js"></script>
+	<script type="text/javascript" src="../../../libs/md5.js"></script>
+	<script type="text/javascript" src="../../json2.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cityselect.js"></script>
+	<link rel="stylesheet" href="userInfo.css">
+	<style>
+		.xgxxBox { display: inline-block; float: right; position: relative; }
+		.xgxxATag { color: #a0a0a0; }
+		.xgxxBox .buttonList { position: absolute; top: 100%; left: 0; width: 9em; margin: 0; padding: 0; list-style: none; }
+		.buttonList li a {color: #a0a0a0; background: white; }
+		.buttonList li:hover a { color: #0000ff; }
+		.textInfoBox table { table-layout:fixed; border: 2px solid #307abd;}
+	</style>
+</head>
+<body>
+	<div class="topWrapper">
+		<div class="topHeaderBox">
+			<div class="topHeader">
+				<div class="topGh"></div>
+				<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+				<!--<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>-->
+			</div>
+		</div>
+		<div id="mainbav">
+			<ul class="nav">
+				<li class="select" data-select=""><a href="javascript:void(0);">账号信息</a></li>
+<!-- 				<li><a href="../../qy_dl_clysqlc.html" target="_Blank">车辆运输证申请说明</a></li> -->
+<!-- 				<li id="clyszsq"><a class="qyzjsq">车辆运输证申请</a></li> -->
+				<li><a href="../../../index.html">退出</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="indexInfoBox" class="infoBox" style="background-image: none;">
+		<div class="infoPage noMT">
+			<div class="pageCenter">
+				<div class="panel-body userInfo">
+					<div class="title">
+						<span>账号信息</span>
+						<div class="xgxxBox">
+							<a href="javascript:void(0);" class="xgxxATag">修改信息</a>
+							<ul class="buttonList" style="display: none;">
+<!-- 								<li><a href="javascript:void(0);" id="xgsjhm" class="xgxxBtn">修改手机号</a></li> -->
+<!-- 								<li><a href="javascript:void(0);" id="xgjbrxx" class="xgxxBtn">修改经办人信息</a></li> -->
+<!-- 								<li><a href="javascript:void(0);" id="xgqyxx" class="xgxxBtn">修改企业信息</a></li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="center">
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th colspan="5" class="title has-blue">企业账号信息</th>
+								</tr>
+								<tr>
+									<th>企业名称</th>
+									<th>法人代表</th>
+									<th>经办人姓名</th>
+									<th>经办人手机号</th>
+									<th>注册时间</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td id="qymc"></td>
+									<td id="frdb"></td>
+									<td id="jbrcm"></td>
+									<td id="jbrsjh"></td>
+									<td id="zcsj"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-body userInfo panel-tabBox" id="xsnr">
+					<div class="panel-leftButton">
+						<ul class="panelButton">
+							<li class="title">企业运输证</li>
+							<li><button skip="pt_qyyszdb" class="btn-bgImg checked btn-tab">企业车辆运输证<i class="icon-arrow"></i></button></li>
+							<li class="title">企业代办</li>
+							<li><button skip="pt_grjsyzdb" class="btn-bgImg btn-tab">驾驶员证<i class="icon-arrow"></i></button></li>
+							<li class="title">状态查询</li>
+							<li><button skip="pt_jsyblcx" class="btn-bgImg btn-tab">驾驶员证查询<i class="icon-arrow"></i></button></li>
+							<li class="title">注册注销</li>
+							<li><button skip="#xyczxList" class="btn-bgImg btn-tab">巡游车注册与注销<i class="icon-arrow"></i></button></li>
+							<li class="title">奖补申请</li>
+							<li><button skip="#czcjbsq" class="btn-bgImg btn-tab">出租车奖补申请<i class="icon-arrow"></i></button></li>
+							<li class="title">专项补助申请</li>
+							<li><button skip="#jyqrzxbzsq" class="btn-bgImg btn-tab">经营权人专项补助申请<i class="icon-arrow"></i></button></li>
+							<li><button skip="#qyzxbzsq" class="btn-bgImg btn-tab">企业专项补助申请<i class="icon-arrow"></i></button></li>
+						</ul>
+					</div>
+					<!--申请代办-->
+					<div class="panel-middleContent" id="pt_grjsyzdb" style="display: none; overflow: auto;"><!--个人驾驶员证代办-->
+						<form class="form-inline" id="pt_grjsyzdb_form" action="../../../jyxk/upload" target="upload" method="post" enctype="multipart/form-data" >
+							<div class="inputBox panel-body">
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+									<div>
+										<label for="pt_grjsyzdb_zjlx" class="fontLength8 fontRight">证件类型:&nbsp;</label>
+										<select id="pt_grjsyzdb_zjlx" class="form-control" name="pt_gryszdb_zjlx">
+											<option value="身份证">身份证</option>
+											<option value="护照">护照</option>
+										</select>
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+									<div id="editjsy">
+										<label for="pt_grjsyzdb_zjhm" class="fontLength8 fontRight">证件号码:&nbsp;</label>
+										<input type="text" name="pt_gryszdb_zjhm" id="pt_grjsyzdb_zjhm" class="form-control">
+										<button type="button" class="btn btn-info" onclick="findzjhm(0);" id="pt_grjsyzdb_cx">查询</button>
+										<button type="button" id="pt_grjsyzdb_xg" class="btn btn-info" style="display:none;">修改</button>
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+									<div>
+										<label for="pt_grjsyzdb_jsyxm" class="fontLength8 fontRight">驾驶员姓名:&nbsp;</label>
+										<input class="form-control pt_grjsyzdb disabled kjbky" type="text" id="pt_grjsyzdb_jsyxm" name="pt_grjsyzdb_jsyxm">
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+									<div>
+										<label class="fontLength8 fontRight">性别:&nbsp;</label>
+										<label style="cursor: pointer;"><input type="radio" name="pt_grjsyzdb_xb" class="kjbky" id="pt_grjsyzdb_xb1" value="男" checked="true">&nbsp;男</label>
+										<label style="margin-left: 2em; cursor: pointer;"><input  type="radio" class="kjbky" name="pt_grjsyzdb_xb" value="女" id="pt_grjsyzdb_xb2">&nbsp;女</label>
+
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+									<div>
+										<label for="pt_grjsyzdb_csrq" class="fontLength8 fontRight">出生日期:&nbsp;</label>
+										<input class="form-control pt_grjsyzdb disabled kjbky" type="text" name="pt_grjsyzdb_csrq" id="pt_grjsyzdb_csrq">
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+									<div>
+										<label for="pt_grjsyzdb_sjhm" class="fontLength8 fontRight">手机号码:&nbsp;</label>
+										<input class="form-control pt_grjsyzdb disabled kjbky" type="text" id="pt_grjsyzdb_sjhm" name="pt_grjsyzdb_sjhm">
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+		                            <div class="">
+		                                <label class="fontLength8 fontRight">居住地址:</label>
+										<div id="pt_grjsyzdb_city" style="display: inline-block;" class="kjbky"> 
+									      	<select class="form-control prov kjbky" name="pt_grjsyzdb_SHENG" id="pt_grjsyzdb_SHENG"></select>
+										    <select class="form-control city kjbky" name="pt_grjsyzdb_SHI" id="pt_grjsyzdb_SHI" disabled="disabled"></select>
+										    <select class="form-control dist kjbky" name="pt_grjsyzdb_QU" id="pt_grjsyzdb_QU" disabled="disabled"></select>
+										</div>
+										<div style="margin-left: 157px;"><textarea class="form-control pt_grjsyzdb disabled kjbky" rows="3" cols="24" id="pt_grjsyzdb_lxdz" name="pt_grjsyzdb_LXDZ" style="width: 265px; margin-top: .4em; resize: none;"></textarea></div>
+		                            </div>
+		                        </div>
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+									<div class="">
+										<label class="fontLength8 fontRight">身份证地址：</label>
+										<div id="pt_grjsyzdb_sfzcity" style="display: inline-block;">
+											<select class="form-control prov kjbky" name="pt_grjsyzdb_SFZSHENG" id="pt_grjsyzdb_SFZSHENG"></select>
+											<select class="form-control city kjbky" name="pt_grjsyzdb_SFZSHI" id="pt_grjsyzdb_SFZSHI" disabled="disabled"></select>
+											<select class="form-control dist kjbky" name="pt_grjsyzdb_SFZQU" id="pt_grjsyzdb_SFZQU" disabled="disabled"></select>
+										</div>
+										<div style="margin-left: 157px;">
+											<textarea class="form-control kjbky" rows="3" cols="24" id="pt_grjsyzdb_sfzdz" name="pt_grjsyzdb_SFZDZ" style="width: 265px; margin-top: .4em; resize: none;"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine B_alignCenterSpan">
+									<div style="margin: 0; text-indent: .3em;">
+										<label class="fontCenter" style="display: block; line-height: 25px;"><input class="pt_grjsyzdb_gx" type="checkbox" name="cn">&nbsp;本平台承诺所申请代办的所有事项均已获得当事人的委托，若因此引起争议纠纷，<br>本平台承担一切法律后果。&nbsp;</label>
+									</div>
+								</div>
+								<div class="control-group" style="margin-top: 30px;">
+									<div class="controls fontCenter">
+										<button type="button" id="pt_grjsyzdb_sqdb" class="btn btn-info">网约车驾驶员证代办</button>
+										<button type="button" id="pt_grjsyzdb_sqdb_xyc" class="btn btn-info">巡游车驾驶员证代办</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="panel-middleContent" id="pt_qyyszdb"><!--企业运输证代办-->
+						<div class="panel-body userInfo" id="sqtg">
+							<div class="title">
+								<span>车辆申请信息</span>
+							</div>
+							<div class="center">
+								<label class="" style="margin-left: 30px; margin-top: 20px;">新增车辆申请
+									<button class="btn btnBlue qyzjsq">填报申请</button>
+								</label>
+							</div>
+						</div>
+						<div class="panel-body userInfo" id="clcxDiv">
+							<div class="title">
+								<span>车辆查询</span>
+							</div>
+							<div class="center" style="min-height: 100px; padding-bottom: 10px;">
+								<div class="inputBox bbGreenDashedLine" style="padding-bottom: 10px;">
+									<label class="" style="margin-left: 20px;">车牌号码&nbsp;
+										<input type="text" id="pt_clblcx_cphm" class="form-control" name="pt_clblcx_cphm" style="width: 12em;">
+									</label>
+									<label class="" style="margin-left: 20px;">办理状态&nbsp;
+										<select id="pt_clblcx_blzt" class="form-control" name="pt_clblcx_blzt" style="width: 10em;">
+											<option value="0">全部</option>
+											<option value="1">审核中</option>
+											<option value="2">审核通过</option>
+											<option value="3">审核未通过</option>
+										</select>
+									</label>&nbsp;
+									&nbsp;<button class="btn btn-info" id="clcx_query" onclick="qy_findsj(1)">查询</button>
+									&nbsp;<button class="btn btn-info" id="cldc_query">数据导出</button>
+								</div>
+								<div class="textInfoBox">
+									<table id="clxx_tabel" border="1">
+										<thead>
+										<tr>
+											<th style="width: 6em;">序号</th>
+											<th style="width: 10em;">车牌号码</th>
+											<th style="width: 10em;">经办人</th>
+											<th style="width: 10em;">办理状态</th>
+											<th style="width: 10em;">查看</th>
+										</tr>
+										</thead>
+		<!-- 								<tr> -->
+		<!-- 									<td colspan="6" style="height: 80px; font-size: 24px; text-align: center;">暂无数据</td> -->
+		<!-- 								</tr> -->
+										<tbody id="qyclbody">
+										</tbody>
+									</table>
+								</div>
+								<div id="carInfoPageTabs_blz" class="pageTabs">
+									<button id="carFirstPage_blz" class="btn btn-info btn-firstPage" onclick="qy_gopage()">首页</button>
+									<button id="carPrevPage_blz" class="btn btn-info btn-prevPage" onclick="qy_goxyy()">上一页</button>
+									<button id="carNextPage_blz" class="btn btn-info btn-nextPage" onclick="qy_gosyy()">下一页</button>
+									<button id="carLastPage_blz" class="btn btn-info btn-lastPage" onclick="qy_goend()">尾页</button>
+									<div class="message" style="display:inline-block;">
+										共&nbsp;<i class="blue" id="blz_totalnum">0</i>&nbsp;条记录，当前显示第&nbsp;
+										<i class="blue" id="blz_currentpage">1</i>&nbsp;页&nbsp;/&nbsp;共&nbsp;
+										<i class="blue" id="blz_totalpage">0</i>&nbsp;页&nbsp;&nbsp;&nbsp;跳转到第&nbsp;
+										<input id="blz_ym" style="width:25px;height:32px;text-align:center;">&nbsp;页&nbsp;
+										<button id="tzym_blz" class="btn btn-info btn-lastPage" onclick="qy_tzym()">跳转</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-middleContent" id="pt_jsyblcx" style="display: none;"><!--驾驶员状态查询-->
+						<div class="panel-body">
+							<div class="inputBox bbGreenLine" style="padding-bottom: 10px;">
+									<label class="" style="margin-left: 20px; margin-top: 20px;">驾驶员姓名&nbsp;<input type="text" id="pt_jsyblz_jsyxm" class="form-control" name="pt_jsyblz_jsyxm" style="width: 6em;"></label>
+									<label class="" style="margin-left: 20px; margin-top: 20px;">证件号码&nbsp;<input type="text" id="pt_jsyblz_zjhm" class="form-control" name="pt_jsyblz_zjhm"></label>
+<!-- 									<label class="" style="margin-left: 20px; margin-top: 20px;">代办人&nbsp;<input type="text" id="pt_qjsyblz_dbr" class="form-control" name="pt_jsyblz_dbr" style="width: 6em;"></label>&nbsp; -->
+									<label class="" style="margin-left: 20px; margin-top: 20px;">办理状态&nbsp;
+										<select id="pt_qjsyblz_blzt" class="form-control" name="pt_jsyblz_blzt" style="width: 10em;">
+											<option value="0">全部</option>
+											<option value="1">审核中</option>
+											<option value="2">审核通过</option>
+											<option value="3">审核未通过</option>
+<!-- 											<option value="3">审核完成</option> -->
+										</select>
+									</label>&nbsp;
+									<button class="btn btn-info" id="pt_jsyblz_query" onclick="blz_findsj(1);">查询</button>
+									<button class="btn btn-info" id="pt_jsyblz_daochu">导出</button>
+							</div>
+							<div class="textInfoBox">
+								<table id="pt_jsyblz_tabel" border="1">
+									<thead>
+									<tr>
+										<th style="width: 4em;">序号</th>
+										<th style="width: 7em;">驾驶员姓名</th>
+										<th style="width: 10em;">申请类型</th>
+										<th>代办人</th>
+										<th>办理状态</th>
+										<th style="width: 9em;">查看</th>
+									</tr>
+									</thead>
+									<tbody id="jsylb">
+									</tbody>
+								</table>
+								
+								<div id="carInfoPageTabs_jsyblz" class="pageTabs" style="margin-left: 20px;">
+								<button id="carFirstPage_jsyblz" class="btn btn-info btn-firstPage" onclick="blz_gopage()">首页</button>
+								<button id="carPrevPage_jsyblz" class="btn btn-info btn-prevPage" onclick="blz_goxyy()">上一页</button>
+								<button id="carNextPage_jsyblz" class="btn btn-info btn-nextPage" onclick="blz_gosyy()">下一页</button>
+								<button id="carLastPage_jsyblz" class="btn btn-info btn-lastPage" onclick="blz_goend()">尾页</button>
+								<div class="message" style="display:inline-block;">
+									共&nbsp;<i class="blue" id="jsyblz_totalnum">0</i>&nbsp;条记录，当前显示第&nbsp;<i
+										class="blue" id="jsyblz_currentpage">1</i>&nbsp;页&nbsp;/&nbsp;共&nbsp;<i
+										class="blue" id="jsyblz_totalpage">0</i>&nbsp;页&nbsp;&nbsp;&nbsp;跳转到第<input id="jsyblz_ym" style="width:25px;height:32px;text-align:center;">页
+										<button id="tzym_jsyblz" class="btn btn-info btn-lastPage" onclick="blz_tzym()">跳转</button>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-middleContent" id="pt_clgl" style="display:none;">
+							<div style="width:95%;margin:0 auto;">
+								<button class="tjjbr">添加经办人</button>
+							</div>
+							<table style="margin:0 auto;width:95%">
+								<thead>
+									<tr>
+										<td style="width:70px;">序号</td>
+										<td style="width:145px;">经办人姓名</td>
+										<td style="width:145px;">手机号码</td>
+										<td style="width:330px">操作</td>
+									</tr>
+								</thead>
+								<tbody id=jbrbody>
+								</tbody>
+							</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<iframe id = "interface_data" name="upload" style="display:none"></iframe>
+	<div class="bottomFooler"></div>
+	<script src="Info_tj.js"></script>
+    <script class="resize" type="text/javascript">
+        $(window).resize(setInfoPageHeight);
+        $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+        setInfoPageHeight()
+    </script>
+<!-- 	<script type="text/javascript" src="jyzInfo.js"></script> -->
+<!-- 	<script type="text/javascript" src="blzclcx.js"></script> -->
+<!-- 	<script type="text/javascript" src="yblclcx.js"></script> -->
+	<script type="text/javascript" src="qyInfo.js"></script>
+	<script type="text/javascript">
+		$('.kjbky').attr("readonly","readonly")
+		var a= 0;
+		var list;
+		$('.sqlcsmList, .myCarInfo, .point').hide();
+		$('.sqlcsm').hover(function() {
+			$('.sqlcsmList').show();
+		}, function() {
+			$('.sqlcsmList').hide();
+		});
+		$('.myCar input').focus(function() {
+			$('.myCarInfo').show();
+		}).blur(function() {
+			$('.myCarInfo').hide();
+		});
+		$('.xgxxATag').click(function() {
+			var btnList = $('.buttonList');
+			if (btnList.css('display') == 'none') {
+				btnList.show();
+			} else {
+				btnList.hide();
+			}
+		});
+		$('#pt_grjsyzdb_sqdb').on('click', function () {
+		    if(jsy_tj()){
+		    	grjszsh(0);
+			}
+        });
+		$('#pt_grjsyzdb_sqdb_xyc').on('click', function () {
+		    if(jsy_tj()){
+		    	grjszsh(1);
+			}
+        });
+		$('.xgxxBtn').click(function() {
+			$('.buttonList').hide();
+			var text = $(this).text();
+			var type = null;
+			if ('修改企业名称' == text) { type = '1-3'; }
+			else if ('修改经办人手机号' == text) { type = '1-0'; }
+			else if ('修改经办人姓名' == text) { type = '1-1'; }
+			else if ('修改密码' == text) { type = '1-2'; }
+			else if ('其他修改' == text) { type = '1-5'; }
+			if (type != null) {
+				layer.open({
+					type: 1,
+					title: text,
+					area: ['560px', '420px'],
+					content: 'updateInfo.html?type=' + type
+				});
+			}
+		});
+		$('.tjjbr').on('click', function () {
+            var title = '添加经办人',
+				html = jbrHtml('add', '');
+            layer.open({
+                type: 1,
+                title: title,
+                area: ['750px', '480px'],
+                content: html,
+                btn: ['提交', '取消'],
+                yes: function(index) {
+                    if(jbr_tj(1)){
+                    	a = 1;
+                    	jyz_form.submit();
+                    };
+                },
+                btn2: function (index) {
+
+                }
+//                cancel: function (index) {
+////                     alert('是取消还是右上角关闭按钮自行查看')
+//                }
+            });
+            bindImageChange();
+            qyInfo_yz();
+            $("#jbrlxfs").removeAttr("readonly");
+        });
+        /**
+		 * 经办人信息模板
+         * @param type 模板类型（add：添加经办人；edit：修改下属经办人；myEdit：修改自己的信息；myEditPhone：修改自己的手机号码）
+         * @param action 路径 表单提交的路径
+         * @param data 数据 如修改经办人可以将信息传入进行赋值
+         * @returns {string} 返回经办人的html代码
+         */
+		function jbrHtml(type, action, data) {
+			var html = '<form class="form-inline" id="jyz_form" action="../../../upload/upload_tjjbr" target="upload" method="post" enctype="multipart/form-data" >',
+				sfzhmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength12 fontRight ml_5em fontNormal" for="zzjgdmz">身份证号码：</label><input type="text" class="form-control" id="zzjgdmz" name="ZZJGDMZ" value="' + (data ? data.zzjgdmz : '') + '"></div></div>',
+				xmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength12 fontRight ml_5em fontNormal" for="jbrName">姓名：</label><input type="text" id="qy_jbrName" class="form-control" name="XM" value="' + (data ? data.xm : '') + '"/></div></div>',
+				sjhmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength12 fontRight ml_5em fontNormal" for="jbrlxfs">手机号码：</label><input type="text" class="form-control" id="jbrlxfs" name="SJHM" value="' + (data ? data.sjhm : '') + '" readonly="readonly">' + (type.indexOf('my') >= 0 ? '&nbsp;<button class="btn btn-info" type="button" onclick="fsyzm();" id="jbrlxfsButton">点击获取验证码</button>' : '') + '<span class="has-red">&nbsp;此号码即为登录时用户名。</span></div></div>',
+				old_sjhmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength12 fontRight ml_5em fontNormal" for="old_jbrlxfs">修改后手机号码：</label><input type="text" class="form-control" id="old_jbrlxfs" name="OLDSJHM">' + '</div></div>',
+				yzmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength12 fontRight ml_5em fontNormal" for="jyzyzm">验证码：</label><input id="jyzyzm" name="JYZYZM" class="form-control fontLength15"/></div></div>',
+				yzmHtml2 = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength12 fontRight ml_5em fontNormal" for="jyzyzm2">验证码：</label><input id="jyzyzm2" name="JYZYZM2" class="form-control fontLength15"/></div></div>',
+				mmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength12 fontRight ml_5em fontNormal" for="jyzpwd">密码：</label><input type="password" class="form-control" id="jyzpwd" name="JYZPWD"></div></div>',
+				rmmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength12 fontRight ml_5em fontNormal" for="jyzrepwd">确认密码：</label><input type="password" class="form-control" id="jyzrepwd" name="JYZREPWD"></div></div>',
+				sfzzmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div class="control-file B_towSpan noMargin"><div class"panel-body"><label for="fileupload_jbrsfzm">经办人身份证明(正面)：</label><img width="220" height="130" src="" alt=""><input type="file" id="fileupload_jbrsfzm" name="jbrsfzzm" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jbrsfzm\').click();">上传</button></div><div class="panel-body"><label for="fileupload_jbrsfzmfm">经办人身份证明(反面)：</label><img width="220" height="130" src="" alt=""><input type="file" id="fileupload_jbrsfzmfm" name="jbrsfzfm" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jbrsfzmfm\').click();">上传</button></div></div></div>';
+			if ('add' === type) {
+                html += sfzhmHtml + xmHtml + sjhmHtml  + mmHtml + rmmHtml + sfzzmHtml;
+			} else if ('edit' === type) {
+			    html += sfzhmHtml + xmHtml + sjhmHtml + mmHtml + rmmHtml;
+			} else if ('myEdit' === type) {
+                html += sfzhmHtml + xmHtml + sjhmHtml + yzmHtml + mmHtml + rmmHtml;
+			} else if ('myEditPhone' === type) {
+			    html += sjhmHtml + yzmHtml + old_sjhmHtml;
+			}
+			return html + '</form>';
+        }
+        /**
+		 * 企业信息模板
+         * @param action 路径 表单提交的路径
+         * @param data 数据 如修改经办人可以将信息传入进行赋值
+         * @returns {string} 返回企业的html代码
+         */
+        function qyHtml(action, data) {
+            return '<form class="form-inline" id="jyz_form" action="' + (action ? action : '') + '" target="upload" method="post" enctype="multipart/form-data" >' +
+            	'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="sjhm">手机号码：</label><input type="text" id="jbrlxfs" class="form-control" name="SJHM" readonly="readonly" value="' + (data ? data.sjhm : '') + '"/>&nbsp;<button class="btn btn-info" type="button" onclick="fsyzm();" id="jbrlxfsButton">点击获取验证码</button></div></div>' +
+            	'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="yzm">验证码：</label><input type="text" id="jyzyzm" class="form-control" name="JYZYZM" value=""/></div></div>' +
+            	'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="wycjyzxm">企业名称：</label><input type="text" id="wycjyzxm" class="form-control" name="WYCJYZXM" value="' + (data ? data.wycjyzxm : '') + '"/></div></div>' +
+				'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="zzjgdmz">证件类型：</label><select name="zjlx" class="form-control" id="qy_zjhm"><option value="企业营业执照（五证合一）">企业营业执照（五证合一）</option></select></div></div>' +
+				'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="zzjgdmz">证件号码：</label><input type="text" class="form-control" id="zzjgdmz" name="ZZJGDMZ" value="' + (data ? data.zzjgdmz : '') + '"></div></div>' +
+				'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="frdbxm"> 法定代表人姓名：</label><input id="frdbxm" name="FRDBXM" class="form-control fontLength15" value="' + (data ? data.frdbxm : '') + '"/></div></div>' +
+				'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength12 fontRight ml_5em fontNormal" style="margin-left: -2.5em;" for="zjlx_select">法定代表人证件类型：</label><select name="ZJLX_FR" class="form-control" id="zjlx_select"><option value="居民身份证">身份证</option><option value="护照">护照</option></select></div></div>' +
+				'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength12 fontRight ml_5em fontNormal" style="margin-left: -2.5em;" for="frsfzh">法定代表人证件号码：</label><input type="text" class="form-control" id="frsfzh" name="FRSFZH" value="' + (data ? data.frsfzh : '') + '"></div></div>' +
+				'<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="qylxdz">企业联系地址：</label><div id="city" style="display: inline-block;"><select class="form-control prov" name="SHENG"></select><select class="form-control city" name="SHI" disabled="disabled"></select><select class="form-control dist" name="QU" disabled="disabled"></select></div><div style="margin-left: 133px;"><textarea rows="3" cols="24" id="qylxdz" class="form-control" name="QYLXDZ" style="width: 256px; margin-top: .4em; resize: none; ">'+data.lxdz+'</textarea></div></div></div>' +
+                '</form>';
+        }
+         var wait = 60;
+         function fsyzm(){
+         	if ($("#jbrlxfs").val() == "") {
+                 hint_info("jbrlxfs", "手机号码不能为空!", "1");
+                 return false;
+             } else if (!regPhone.test($("#jbrl	xfs").val())) {
+                 hint_info("jbrlxfs", "手机号码格式不正确!", "1");
+                 return false;
+             }
+             time(this);
+             tjstime = fomart_time(new Date());
+             $.ajax({
+                 type : "post",
+                 url : basePath + "register/dxfs",
+                 //提交的数据
+                 data:'postData={"phone":"'+$("#jbrlxfs").val()+
+                 '","type":"0"}',
+                 //返回数据的格式
+                 dataType : "json",
+                 //成功返回之后调用的函数
+                 success : function(data) {
+                     if(data.info!=''){
+                     	Pop_up_box(data.info,2);
+                     }
+                 },
+                 //调用出错执行的函数
+                 error : function() {
+                     //请求出错处理
+                 }
+             });
+         }
+         function time(o) {
+             if (wait == 0) {
+                 $("#jbrlxfsButton").css('background','#51bbdb');
+                 $("#jbrlxfsButton").css("border","1px solid #51bbdb");
+                 $("#jbrlxfsButton").css("color","#fff");
+                 $("#jbrlxfsButton").removeAttr("disabled");
+                 $("#jbrlxfsButton").text("免费获取验证码");
+                 fssj = new Date().getTime();
+                 wait = 60;
+             } else {
+                 $("#jbrlxfsButton").css('background-color','#ddd');
+                 $("#jbrlxfsButton").css("border","none");
+                 $("#jbrlxfsButton").css("color","#000");
+                 $("#jbrlxfsButton").attr("disabled", true);
+                 $("#jbrlxfsButton").text("重新发送(" + wait + ")");
+                 wait--;
+                 setTimeout(function() {
+                     time(o)
+                 }, 1000)
+             }
+         }
+         $("#pt_grjsyzdb_city").citySelect({  
+ 	        url:"../../../resources/js/city.min.js",  
+ 	        prov:"浙江", //省份 
+ 	        city:"温州", //城市
+ 	        dist:"鹿城区", //区县
+ 	        nodata:"none" //当子集无数据时，隐藏select 
+ 	    });
+ 		$("#pt_grjsyzdb_sfzcity").citySelect({
+ 	        url:"../../../resources/js/city.min.js",
+ 	       	prov:"浙江", //省份 
+	        city:"温州", //城市
+	        dist:"鹿城区", //区县
+ 	        nodata:"none" //当子集无数据时，隐藏select
+ 	    });
+ 		$(".qyzjsq").click(function(){
+ 			$.cookie('set', { duration: .2, name: 'sqlx', value: 'qyzjsq'});
+ 			$.cookie('set', { duration: .2, name: 'regsiterbdlx', value: 'qysq'});
+ 			window.location.href='../clsq/clxxtx.html';
+         })
+         /**
+ * 添加经办人图片提交成功后将文字信息提交过去
+ */
+ var oFrm = document.getElementById("interface_data");
+ oFrm.onload  = function() {
+ /* 	console.log('oFrm onload...') */
+//	 console.log(a)
+ 	if(a==0)return;
+      if (this.readyState && this.readyState != 'complete') return;
+      else{
+         if (document.all){//IE
+                 var sub_con = document.frames["interface_data"].document;
+         }else{//Firefox
+                 var sub_con = document.getElementById("interface_data").contentDocument;
+         }
+         sub_con = sub_con.body.innerHTML;  //取得返回值
+			if(sub_con.indexOf("OK")>=0){
+				var dataPara = getFormJson("jyz_form");
+				dataPara.JYZPWD = hex_md5(dataPara.JYZPWD);
+			    dataPara.JYZREPWD = hex_md5(dataPara.JYZREPWD);
+				var datap = JSON.stringify(dataPara);
+				$.ajax({
+					type: "post",
+					url: basePath + "EditInfo/addqyjbr",
+					data: {
+						"postData": datap
+					},
+					dataType: "json",
+					success: function (data) {
+//						console.log(data)
+						if(data.info=='添加成功'){
+							layer.alert(data.info, function(index){
+								layer.closeAll();
+								addjbr();
+							});       
+						}else{
+							Pop_up_box(data.info,2);
+						}
+					},
+					error: function () {
+						layer.closeAll('loading');
+					}
+				});
+			}else{
+				layer.closeAll('loading');
+				var dainfo = sub_con;
+				var obj = JSON.parse(dainfo);
+				Pop_up_box(obj.info,'2');
+			}
+   }
+ };
+	</script>
+</body>
+</html>

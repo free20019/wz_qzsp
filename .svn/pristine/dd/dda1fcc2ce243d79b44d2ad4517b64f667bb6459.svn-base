@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	    <script type="text/javascript" src="app/config.js"></script>
+	<script type="text/javascript" src="resources/js/jquery-1.12.1.min.js"></script>
+	<link rel="stylesheet" href="libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/bs/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="libs/bs/js/bootstrap.min.js"></script>
+<!-- 	<script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+    <meta charset=UTF-8">
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	  <link rel="icon" href="resources/images/I16.ico" type="image/x-icon" />
+	  <link rel="stylesheet" href="libs/bs/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="libs/bs/css/bootstrap-theme.min.css">
+	  <link rel="stylesheet" href="app/main.css">
+	  <script type="text/javascript" src="resources/js/jquery-1.12.1.min.js"></script>
+	  <script type="text/javascript" src="libs/bs/js/bootstrap.min.js"></script>
+	  <script type="text/javascript" src="libs/layer/layer.js"></script>
+	  <script type="text/javascript" src="libs/My97DatePicker/WdatePicker.js"></script>
+	  <script type="text/javascript" src="app/config.js"></script>
+	  <script type="text/javascript" src="app/main.js"></script>
+	  <script type="text/javascript" src="app/json2.js"></script>
+	<style type="text/css">
+		#jczxx,#ksfbxx,#yqlj{
+			cursor:pointer;
+		}
+		#ksfbxxPanel,#lxfsPanel{
+			margin-bottom:10px;
+		}
+		#jczxxxx,#yqljxxx{
+			display:block;
+		}
+		#ksfbxxPanel a, #lxfsPanel span {
+			display: block;
+			padding: 10px 0;
+			text-indent: 1.5em;
+		}
+		#mainbav .nav {
+			text-align: left;
+		}
+		.glyphicon {
+			position: relative;
+			top: 1px;
+			display: inline-block;
+			font-family: 'Glyphicons Halflings';
+			font-style: normal;
+			font-weight: normal;
+			line-height: 1;
+			-webkit-font-smoothing: antialiased;
+		}
+		#indexTopWrapper {
+			height: 75px;
+			line-height: 75px;
+			position: relative;
+			background: url('resources/images/topHeaderBg.png');
+			z-index: 1;
+		}
+		#indexTopWrapper .topHeader {
+			position: relative;
+		}
+		#indexTopWrapper .topHeader .topTitle {
+			float: left;
+			line-height: 70px;
+			font-size: 20px;
+			font-family: "Microsoft YaHei", sans-serif;
+			text-indent: 60px;
+			color: white;
+		}
+		#topNavBox {
+			height: 100%;
+			line-height: 70px;
+			text-align: center;
+		}
+		.topNav {
+			height: 100%;
+			padding-left: 10px;
+			float: left;
+		}
+		*+html .topNav {
+			padding-left: 0;
+		}
+		.topNav li {
+			float: left;
+			width: 110px;
+			position: relative;
+			height: 100%;
+			list-style: none;
+		}
+		*+html .topNav > li {
+			width: 105px;
+			height: 67px;
+		}
+		.topNav > li {
+			border-top: 4px solid transparent;
+			border-bottom: 4px solid transparent;
+		}
+		.topNav > li > a {
+			display: block;
+			line-height: 60px;
+			font-weight: bold;
+			font-size: 15px;
+			color: white;
+		}
+		.topNav > li.select, .topNav > li[data-select] {
+			border-top: 4px solid #fff100;
+			border-bottom: 4px solid #fff100;
+		}
+		.topNav > li.select a, .topNav > li[data-select] a, .topNav > li a:hover {
+			color: #fff100;
+		}
+		.sqlcsmList {
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: #1347A4;
+			z-index: 10;
+		}
+		.sqlcsmList li {
+			width: 180px;
+		}
+		.sqlcsmList li a {
+			display: block;
+			width: 180px;
+			height: 30px;
+			margin: 0;
+			line-height: 30px;
+			text-align: left;
+			text-indent: 15px;
+			color: white;
+			border-left: 4px solid transparent;
+		}
+		.sqlcsmList li a:hover {
+			border-left-color: #fff100;
+		}
+		*+html .infoBox .infoPage {
+			padding-top: 10px;
+		}
+		.leftPage {
+			float: left;
+			width: 760px;
+		}
+		.rightPage {
+			float: right;
+			width: 254px;
+		}
+		#bannerBox {
+			height: 400px;
+			background: yellow;
+		}
+
+		.panel-TBorder { border: 0; border-top: 4px solid #6DB4F2; border-radius: 0; }
+		/*.panel-TBlueBorder { border-top: 4px solid #6DB4F2; }*/
+		.panel-TPurpleBorder { border-top: 4px solid #6DB4F2; }
+		.panel-TGreenBorder { border-top: 4px solid #2e853e; }
+		.panel-TGrayBorder { border: 2px solid #AEB9BF; }
+		.panel-TYellowBorder { border-top: 4px solid #6DB4F2; }
+		.panel-TGreen2Border { border-top: 4px solid #6DB4F2; }
+		.panel-twoSpanUl, .panel-threeSpanUl, .panel-oneSpanUl, .panel-fourSpanUl { margin: 0; padding: 0; }
+		.panel-oneSpanUl { position: relative; border-bottom: 1px dashed #D2D2D2; }
+		.panel-oneSpanUl a { display: inline-block; width: 97%; padding: .5em .3em .5em .8em; }
+		.panel-oneSpanUl .t-datetime { position: absolute; top: 8px; right: 10px; width: 6em; }
+		.panel-twoSpanUl .line { border-right: 1px dashed #2e853e; }
+		*+html .panel-twoSpanUl > a, *+html .panel-threeSpanUl > a,
+		*+html .panel-twoSpanUl > div, *+html .panel-threeSpanUl > div {
+			display: inline;
+			height: 80px;
+		}
+		.panel-twoSpanUl > a, .panel-threeSpanUl > a,
+		.panel-twoSpanUl > div, .panel-threeSpanUl > div {
+			display: inline-block;
+			height: 80px;
+		}
+		.panel-twoSpanUl > a, .panel-twoSpanUl > div, .panel-twoSpanUl > li {
+			display: inline-block;
+			width: 50%;
+			margin-right: -4px;
+			box-sizing: border-box;
+		}
+		.panel-twoSpanUl > a, .panel-twoSpanUl div {
+			position: relative;
+			width: 49.6%;
+		}
+		.panel-threeSpanUl > a, .panel-threeSpanUl > div {
+			position: relative;
+			width: 32.9%;
+		}
+		.panel-twoSpanUl > div > a, .panel-threeSpanUl > div > a {
+			display: block;
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 10px;
+			text-align: center;
+		}
+		/*.panel-threeSpanUl li.bBottom {
+            display: inline-block;
+            width: 32.7%;
+            height: 80px;
+            list-style: none;
+        }*/
+		.panel-thisDl {
+			height: 100%;
+			margin: 0; padding: 0;
+			position: relative;
+			display: inline-block;
+		}
+		.panel-threeSpanUl .panel-thisDl > i {
+			width: 30px;
+			height: 30px;
+			position: absolute;
+		}
+		.panel-threeSpanUl .panel-thisDl > i {
+			top: 30px;
+			left: 10px;
+		}
+		.panel-thisDl > .newsIcon {
+			width: 100px;
+			height: 55px;
+			position: absolute;
+			top: 16px;
+			left: 10px;
+		}
+		.panel-thisDl > div {
+			display: inline-block;
+			width: 190px;
+			height: 50px;
+			position: absolute;
+			top: 15px;
+			left: 50px;
+		}
+		.panel-thisDl > .newsTitleDiv {
+			width: 240px;
+			left: 120px;
+			font-size: 10px;
+		}
+		.newsTitleDiv .newsDate {
+			display: block;
+			margin-right: 10px;
+			text-align: right;
+		}
+		.yhdlCCL {
+			width: 90%;
+			margin: 0 5%;
+			display: block;
+		}
+		#yqljPanel a,
+		#lxfsPanel span {
+			display: block;
+			padding: 10px 0;
+			text-indent: 4em;
+		}
+		*+html #yqljPanel a {
+			padding: 7px 0;
+		}
+		#lxfsPanel span {
+			color: #898989;
+		}
+
+		.inputLenght {
+			width: 100%; height: 25px; margin-bottom: 10px;
+		}
+		*+html .btn {
+			height: 40px;
+		}
+		*+html .carousel-indicators  {
+			display: inline;
+			left: 77%;
+			bottom: 5px;
+		}
+		*+html .carousel-indicators li  {
+			display: inline;
+			margin-left: 5px;
+			margin-right: 5px;
+			border: none;
+			background: transparent url('resources/images/icon/icon-radius.png');
+			float: left;
+		}
+		*+html .carousel-indicators .active {
+			border: none;
+			background: transparent url('resources/images/icon/icon-radius_select.png');
+		}
+		.carousel-indicators li {
+
+
+		}
+		.carousel-indicators li {
+			background-color: rgba(0,0,0,0);
+			border: none !important;
+			border: 1px solid #fff;
+			background: transparent  url('resources/images/icon/icon-radius.png') no-repeat !important;
+			background-color: white;
+			background-image: none;
+		}
+		.carousel-indicators .active {
+			width: 12px;
+			height: 12px;
+			margin: 0;
+			border-width: 0 !important;
+			border-width: 1px;
+			background: transparent url('resources/images/icon/icon-radius_select.png') !important;;
+			background-color: #fff;
+		}
+		.icon001, .icon002, .icon003, .icon004, .icon005, .icon006 { display: inline-block; width: 30px; height: 30px; }
+		.icon001 { background: url('resources/images/sqlcsm/icon001.png'); }
+		.icon002 { background: url('resources/images/sqlcsm/icon002.png'); }
+		.icon003 { background: url('resources/images/sqlcsm/icon003.png'); }
+		.icon004 { background: url('resources/images/sqlcsm/icon004.png'); }
+		.icon005 { background: url('resources/images/sqlcsm/icon005.png'); }
+		.icon006 { background: url('resources/images/sqlcsm/icon006.png'); }
+		.iconImg { background: url('resources/images/iconImg.png'); }
+		.icon { display: inline-block; margin-right: 5px; }
+		.icon-14px { width: 14px; height: 14px; }
+		.icon-16px { width: 16px; height: 16px; }
+		.icon-24px { width: 24px; height: 24px; }
+		.icon-tzgg_sm, .icon-car, .icon-news, .icon-zcfg_sm { display: inline-block; width: 23px; height: 15px; position: relative; top: 2px; }
+		*+html .icon-tzgg_sm, *+html .icon-car, *+html .icon-news, *+html .icon-zcfg_sm { top: -2px; }
+		.icon-tzgg_sm { background: url('resources/images/icon/icon-tzgg_sm.png'); }
+		.icon-car { background: url('resources/images/icon/icon-car.png'); }
+		.icon-hydt { background: url('resources/images/icon/icon-hydt.png'); }
+		.icon-zcfg_sm { background: url('resources/images/icon/icon-zcfg_sm.png'); }
+		.icon-news { background: url('resources/images/icon/icon-news.png'); }
+		.icon-tzgg, .icon-bszn, .icon-zcfg, .icon-hydt { position: relative; top: 8px; left: 10px; }
+		#tabInfo1 a > span { display: inline-block; text-indent: 1em; }
+		*+html .icon-tzgg, *+html .icon-bszn, *+html .icon-zcfg { top: 4px; }
+		.icon-tzgg { background: url('resources/images/icon/icon-tzgg.png'); }
+		.icon-bszn { background: url('resources/images/icon/icon-bszn.png'); }
+		.icon-zcfg { background: url('resources/images/icon/icon-zcfg.png'); }
+		.icon-user { background: url('resources/images/wz_03.gif') no-repeat; }
+		.icon-yqlj { background: url('resources/images/icon/icon-yqlj.png'); }
+		.icon-lxfs { background: url('resources/images/icon/icon-lx.png'); }
+
+		.panel-default>.panel-heading {
+			/*width:246px;*/
+			/*height:34px;*/
+			/*background:url("resources/images/03.png");*/
+		}
+
+		.more{
+			float:right;
+			margin-right:16px;
+		}
+		.more a{color:#6c6c6c;}
+		.more a:hover{
+			color:#2b2b2b;
+			text-decoration: underline;
+		}
+		.flex-box{
+			display: flex;
+			display: -webkit-flex;
+		}
+		#floatDiv{
+			width:120px;
+			height:120px;
+			z-index:100;
+			right:2px;
+			top:85px;
+			position:absolute;
+		}
+		#jczdtz{
+			color:#fff !important;
+			text-align:center;
+		}
+		#lxfsPanel dt, #lxfsPanel dd {
+			/*padding-left: .4em;*/
+			text-align: center;
+			font-weight: inherit;
+			color: #428bca;
+		}
+		#lxfsPanel dd {
+			color: #d2d2d2;
+		}
+		#lxfsPanel dl {
+			padding-bottom: .5em;
+			border-bottom: 1px dashed #eeeeee;
+		}
+		.dlys{
+			width:150px;
+			font-size: 18px;
+			float:left;
+			font-weight:bold;
+			/*margin-top: 3px;*/
+			color:#E7F0F7;
+			background:none;
+		}
+		.dlys div{
+			width:143px;
+			height:94px;
+			background:url('resources/images/100.png') no-repeat;
+			margin-bottom: 6px;
+			padding-top: 20px;
+			/*line-height: 90px;*/
+			text-align: center;
+			position: relative;
+		}
+		.panel .dlys .index_1{
+			/*width:154px;*/
+			background:url("resources/images/007.png");
+			color:#0D5C9E;
+			cursor:pointer;
+		}
+		.sj{
+			width:8px;
+			height:10px;
+			background:url('resources/images/007_03.png');
+			position:absolute;
+			top:45px;
+			right:-7px;
+		}
+		.panel-oneSpanUl a{
+			color:#28BDA0;
+		}
+		.tabNavBorder li.active a{
+			background:url('resources/images/wz_a03.png');
+		}
+		.ul_info{  list-style: none;  background:url('resources/images/wz_03.png') repeat-x;}
+		.info_hiden{  display:none;  }
+		.info_block{display:block}
+		.infoBox .infoPage{background:none}
+		.panel-TGrayBorder .panel-heading{
+			background:url('resources/images/11.png');
+		}
+		.bor li{
+			border:1px solid #ddd;
+			margin-bottom: 5px;
+		}
+		.bor dt,.bor dd{
+			margin-top: 10px;
+			margin-left: 16px;
+			margin-bottom: 10px;
+		}
+		.ggxxBox {
+			position: relative;
+			margin-top: 2px;
+			padding: 10px;
+			border: 2px solid #B2BBC0;
+			clear: both;
+		}
+		.panel-opacityW {
+			box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.35);
+			background: #ffffff;
+			background: rgba(255, 255, 255, .7);
+			filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+		}
+		.panel-loginBox {
+			margin-top: 0;
+			border: 2px solid #BBBFC2;
+		}
+		.panel-loginBox #gr, .panel-loginBox #qtzz, .panel-loginBox #qy {
+			display: none; padding: 10px; border-radius: 0; border: 1px solid #ddd; box-sizing: border-box;
+		}
+	</style>
+	</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h2 class="topTitle">温州市出租汽车申报服务管理系统</h2>
+		</div>
+	</div>
+<!-- 	<div class="bbGreenDashedLine1"></div> -->
+<!-- 	<div id="mainbav"> -->
+<!-- 		<ul class="nav"> -->
+<!-- 			<li><a href="index.html">首页</a></li> -->
+<!-- 			<li><a href="xxcxck.html" target="_Blank">信息查询窗口</a></li> -->
+<!-- 			<li><a href="javascript:void(0);" class="btnSqsm">操作说明</a></li> -->
+<!-- 			<li><a href="app/html/sqlcsm/zcsq.html" class="sqlc" target="_Blank" style="display: none;">驾驶员申请流程</a></li> -->
+<!-- 			<li><a href="app/html/sqlcsm/zcsq.html" class="sqlc" target="_Blank" style="display: none;">车辆申请流程</a></li> -->
+<!-- 		</ul> -->
+<!-- 	</div> -->
+</div>
+<div id="indexInfoBox" class="infoBox" >
+	<div class="infoPage" style="width:1024px;">
+			<div id="app" style="width:1024px;min-height:730px;margin:0 auto;background:#fff;">
+<!-- 		  <div class="top_banner"> -->
+<!-- 			  <h1  class="text-center">信息查询窗口</h1> -->
+<!-- 		  </div> -->
+		  <div>
+			  <ul class="nav nav-tabs">
+				  <li class="active"><a href="#ptzg"  data-toggle="tab">平台资格信息查询</a></li>
+<!-- 				  <li><a href="#jsyzg"  data-toggle="tab">驾驶员资格信息查询</a></li> -->
+<!-- 				  <li><a href="#clzg"  data-toggle="tab">车辆资格信息查询</a></li> -->
+<!-- 				  <li><a href="#cstg"  data-toggle="tab">初审通过车辆查询</a></li> -->
+				  <li><a href="#jczsj"  data-toggle="tab">检测站数据查询</a></li>
+				  <li><a href="#gpssj"  data-toggle="tab">GPS数据查询</a></li>
+			  </ul>
+		  </div>
+		  <!-- 平台资格信息查询 -->
+		  <div class="tab-content">
+			  <div class="tab-pane fade in active" id="ptzg">
+				  <div class="form-inline"  style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">平台公司名称</label>
+					  <select name="jyzmc" id="jyzmcSelect" class="form-control">
+					  </select>
+					  <button id="ptzgxxcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group" style="border:none">
+					  <li class="list-group-item" id="ptgsmc">平台公司名称：</li>
+					  <li class="list-group-item" id="zzjgdmz">组织机构代码证：</li>
+					  <li class="list-group-item" id="jyfw">经营范围：</li>
+					  <li class="list-group-item" id="zczb">注册资本：</li>
+					  <li class="list-group-item" id="jyzh">网络预约出租汽车经营许可证号：</li>
+					  <li class="list-group-item" id="yxqq">经营许可证有效期起：</li>
+					  <li class="list-group-item" id="yxqz">经营许可证有效期止：</li>
+					  <li class="list-group-item" id="fwjgdz">注册地址：</li>
+				  </ul>
+			  </div>
+			  <!-- 驾驶员资格信息查询查询 -->
+			  <div class="tab-pane fade" id="jsyzg">
+				  <div class="form-inline" style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">驾驶员身份证号</label>
+					  <input type="text" name="sfzh" id="sfzh" class="form-control" placeholder="请输入驾驶员身份证号"/>
+					  <button id="jsyzgxxcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group" style="border:none">
+					  <li class="list-group-item" id="jsyxm">驾驶员姓名：</li>
+					  <li class="list-group-item" id="jszh">驾驶证号：</li>
+					  <li class="list-group-item" id="jsyxb">性别：</li>
+					  <li class="list-group-item" id="jsyzcrq">网约车驾驶员注册日期：</li>
+				  </ul>
+			  </div>
+			  <!-- 车辆信息查询 -->
+			  <div class="tab-pane fade" id="clzg">
+				  <div class="form-inline" style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">车辆识别代码（VIN）</label>
+					  <input type="text" name="cphm" id="cphm" style="width: 200px;" class="form-control" placeholder="请输入车辆识别代码（VIN）"/>
+					  <button id="clxxcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group">
+					  <li class="list-group-item" id="clcphm">车辆号牌：</li>
+					  <li class="list-group-item" id="clsyr">机动车所有人：</li>
+					  <li class="list-group-item" id="cpxh">厂牌型号：</li>
+					  <li class="list-group-item" id="jcyxq">综合性能检测有效期：</li>
+				  </ul>
+			  </div>
+			  <div class="tab-pane fade" id="jczsj">
+				  <div class="form-inline" style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">车辆识别代码（VIN）</label>
+					  <input type="text" name="vin" id="vin" style="width: 200px;" class="form-control" placeholder="请输入车辆识别代码（VIN）"/>
+					  <button id="jczxxcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group" style="border:none">
+					  <li class="list-group-item" id="jccphm">车辆号牌：</li>
+					  <li class="list-group-item" id="jcsyr">机动车所有人：</li>
+					  <li class="list-group-item" id="jcys">号牌颜色：</li>
+					  <li class="list-group-item" id="jccpxh">厂牌型号：</li>
+					  <li class="list-group-item" id="jcclxh">车辆类型：</li>
+					  <li class="list-group-item" id="jcrq">注册日期：</li>
+					  <li class="list-group-item" id="jcdh">识别代号：</li>
+					  <li class="list-group-item" id="jcpdrq">检验评定日期：</li>
+					  <li class="list-group-item" id="jdyxqz">等级评定有效期止：</li>
+					  <li class="list-group-item" id="jcpdjg">评定机构：</li>
+					  <li class="list-group-item" id="jypdjl">检验评定结论：</li>
+					  <li class="list-group-item" id="jccd">长度：</li>
+					  <li class="list-group-item" id="jckd">宽度：</li>
+					  <li class="list-group-item" id="jcgd">高度：</li>
+					  <li class="list-group-item" id="jczj">轴距：</li>
+					  <li class="list-group-item" id="jcyllx">燃料类型：</li>
+					  <li class="list-group-item" id="jcfdjh">发动机号：</li>
+					  <li class="list-group-item" id="jchdzkw">核定载客位：</li>
+				  </ul>
+			  </div>
+			  <!-- 车辆信息查询 -->
+			  <div class="tab-pane fade" id="gpssj">
+				  <div class="form-inline" style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">车牌号码</label>
+					  <input type="text" name="gpscphm" id="gpscphm" class="form-control" placeholder="请输入车牌号码"/>
+					  <button id="gpscx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group">
+					  <li class="list-group-item" id="gpscphmxx">车辆号牌：</li>
+					  <li class="list-group-item" id="gpssjxx">最后一条GPS时间：</li>
+				  </ul>
+			  </div>
+			  <!-- 初审通过 -->
+			  <div class="tab-pane fade" id="cstg">
+				  <div class="form-inline" style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">车牌号码</label>
+					  <input type="text" name="cstgcphm" id="cstgcphm" class="form-control" placeholder="请输入车牌号码"/>
+					  <button id="cstgcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group">
+					  <li class="list-group-item" id="cstgclsyr">车辆所有人：</li>
+					  <li class="list-group-item" id="cstgclhp">车辆号牌：</li>
+					  <li class="list-group-item" id="cstgclsbdh">车辆识别代号：</li>
+					  <li class="list-group-item" id="cstgcllx">车辆类型：</li>
+					  <li class="list-group-item" id="cstgclxh">车辆型号：</li>
+					  <li class="list-group-item" id="cstgccdjrq">初次登记日期：</li>
+					  <li class="list-group-item" id="cstgclph">车辆品牌：</li>
+					  <li class="list-group-item" id="cstgfdjh">发动机号：</li>
+				  </ul>
+			  </div>
+		  </div>
+	  </div>
+	</div>
+</div>
+<div class="bottomFooler" style="float:left;width:100%;">
+	<div class="foolerPage"><a href="http://www.wzyg.gov.cn/#" class="a-img" target="_Blank"><img src=/resources/images/blue.png" alt=""></a><a href="http://www.netpolice.gov.cn/" class="a-img" target="_Blank"><img src="/resources/images/wj.png" alt=""></a><p>建议使用IE11.0以上版本、最新版火狐或谷歌浏览器，1024*768分辨率浏览</p><p>建设单位：温州市道路运输管理局&nbsp;|&nbsp;技术支持：杭州通悟科技有限公司</p><p>浙ICP备13025962</p></div>
+</div>
+<script type="text/javascript">
+	$.ajax({
+	    type:"post",
+	    url: basePath + "xxcx/ptxx",
+	    data:{},
+	    dataType: "json",
+	    success:function(data){
+	    	for(var i=0;i<data.length;i++){
+		    	$("#jyzmcSelect").append("<option value='"+data[i].JYZMC+"'>"+data[i].JYZMC+"</option>");
+	    	}
+	    },
+	    error: function(){
+	    }         
+	 });
+	$("#ptzgxxcx").click(function(){
+		$.ajax({
+	    type:"post",
+	    url: basePath + "xxcx/ptjtxx",
+	    data:{
+	    	"ptmc" : $("#jyzmcSelect").val()
+	    },
+	    dataType: "json",
+	    success:function(data){
+// 	    	console.log(data)
+	    	$("#ptgsmc").text("平台公司名称："+data[0].JYZMC);
+	    	$("#zzjgdmz").text("组织机构代码证："+data[0].ZZJGDMZH);
+	    	$("#jyfw").text("经营范围："+data[0].JYFW);
+	    	$("#zczb").text("注册资本："+data[0].ZCZB);
+	    	$("#jyzh").text("网络预约出租汽车经营许可证号："+data[0].JYXKZH);
+	    	$("#yxqq").text("经营许可证有效期起："+fomart_time1(data[0].JYXKZYXQQ));
+	    	$("#yxqz").text("经营许可证有效期止："+fomart_time1(data[0].JYXKZYXQZ));
+	    	$("#fwjgdz").text("注册地址："+data[0].TXDZ);
+	    },
+	    error: function(){
+	    }         
+	 });
+	})
+	$("#jsyzgxxcx").click(function(){
+		if($("#sfzh").val().length>0){
+			$.ajax({
+		    type:"post",
+		    url: basePath + "xxcx/jsyjtxx",
+		    data:{
+		    	"zjhm" : $("#sfzh").val()
+		    },
+		    dataType: "json",
+		    success:function(data){
+// 		    	console.log(data)
+		    	if(data.length>0){
+			    	$("#jsyxm").text("驾驶员姓名："+data[0].XM);
+			    	$("#jszh").text("驾驶证号："+data[0].JSZH);
+			    	$("#jsyxb").text("性别："+data[0].XB);
+			    	$("#jsyzcrq").text("网约车驾驶员注册日期："+fomart_time1(data[0].SQRQ));
+		    	}else{
+		    		$("#jsyxm").text("驾驶员姓名：");
+			    	$("#jszh").text("驾驶证号：");
+			    	$("#jsyxb").text("性别：");
+			    	$("#jsyzcrq").text("网约车驾驶员注册日期：");
+		    		alert("该证件号码没有申请驾驶员资格证");
+		    	}
+		    },
+		    error: function(){
+		    }         
+		 });
+		}
+	})
+	$("#clxxcx").click(function(){
+		if($("#cphm").val().length>0){
+			$.ajax({
+		    type:"post",
+		    url: basePath + "xxcx/cljtxx",
+		    data:{
+		    	"cphm" : $("#cphm").val()
+		    },
+		    dataType: "json",
+		    success:function(data){
+// 		    	console.log(data)
+		    	if(data.length>0){
+			    	$("#clcphm").text("车辆号牌："+data[0].CPHM);
+			    	$("#clsyr").text("机动车所有人："+data[0].XM);
+			    	$("#cpxh").text("厂牌型号："+data[0].PPXH);
+			    	$("#jcyxq").text("综合性能检测有效期："+fomart_time1(data[0].DJZDJRQ));
+		    	}else{
+		    		$("#clcphm").text("车辆号牌：");
+			    	$("#clsyr").text("机动车所有人：");
+			    	$("#cpxh").text("厂牌型号：");
+			    	$("#jcyxq").text("综合性能检测有效期：");
+		    		alert("该车辆没有申请网约车");
+		    	}
+		    },
+		    error: function(){
+		    }         
+		 });
+		}
+	})
+	$("#jczxxcx").click(function(){
+		if($("#vin").val().length>0){
+			$.ajax({
+		    type:"post",
+		    url: basePath + "xxcx/cczxx",
+		    data:{
+		    	"vin" : $("#vin").val()
+		    },
+		    dataType: "json",
+		    success:function(data){
+// 		    	console.log(data)
+		    	if(data.length>0){
+			    	$("#jccphm").text("车辆号牌："+data[0].CARNO);
+			    	$("#jcsyr").text("机动车所有人："+data[0].OWNER);
+			    	$("#jcys").text("号牌颜色："+data[0].COLOR);
+			    	$("#jccpxh").text("厂牌型号："+data[0].CARMODEL);
+			    	$("#jcclxh").text("车辆类型："+data[0].CARTYPE);
+			    	$("#jcrq").text("注册日期："+fomart_time1(data[0].ZCRQ));
+			    	$("#jcdh").text("识别代号："+data[0].VIN);
+			    	$("#jccd").text("长度："+data[0].CARSIZE_C);
+			    	$("#jckd").text("宽度："+data[0].CARSIZE_K);
+			    	$("#jcgd").text("高度："+data[0].CARSIZE_G);
+			    	$("#jczj").text("轴距："+data[0].ZJ);
+			    	$("#jcyllx").text("燃料类型："+data[0].RLLX);
+			    	$("#jcfdjh").text("发动机号："+data[0].FDJH);
+			    	$("#jchdzkw").text("核定载客位："+data[0].HDZKRS);
+			    	$("#jcpdrq").text("检验评定日期："+fomart_time1(data[0].JYPDRQ));
+			    	$("#jdyxqz").text("等级评定有效期止："+fomart_time1(data[0].DJPDYXQ));
+			    	$("#jcpdjg").text("评定机构："+data[0].PDJG);
+			    	$("#jypdjl").text("检验评定结论："+data[0].JYPDJL);
+		    	}else{
+		    		$("#jccphm").text("车辆号牌：");
+			    	$("#jcsyr").text("机动车所有人：");
+			    	$("#jcys").text("号牌颜色：");
+			    	$("#jccpxh").text("厂牌型号：");
+			    	$("#jcclxh").text("车辆类型：");
+			    	$("#jcrq").text("注册日期：");
+			    	$("#jcdh").text("识别代号：");
+			    	$("#jccd").text("长度：");
+			    	$("#jckd").text("宽度：");
+			    	$("#jcgd").text("高度：");
+			    	$("#jczj").text("轴距：");
+			    	$("#jcyllx").text("燃料类型：");
+			    	$("#jcfdjh").text("发动机号：");
+			    	$("#jchdzkw").text("核定载客位：");
+			    	$("#jcpdrq").text("检验评定日期：");
+			    	$("#jdyxqz").text("等级评定有效期止：");
+			    	$("#jcpdjg").text("评定机构：");
+			    	$("#jypdjl").text("检验评定结论：");
+		    		alert("该车辆没有前往监测站检测车辆或者检测数据还未上传");
+		    	}
+		    },
+		    error: function(){
+		    }         
+		 });
+		}
+	})
+	$("#gpscx").click(function(){
+		if($("#gpscphm").val().length>0){
+			$.ajax({
+		    type:"post",
+		    url: basePath + "xxcx/gpsxx",
+		    data:{
+		    	"cphm" : $("#gpscphm").val()
+		    },
+		    dataType: "json",
+		    success:function(data){
+// 		    	console.log(data)
+		    	if(data.length>0){
+			    	$("#gpscphmxx").text("车辆号牌："+data[0].VEHICLE_NO);
+			    	$("#gpssjxx").text("最后一条GPS时间："+fomart_time(data[0].LOAD_TIME));
+		    	}else{
+		    		$("#gpscphmxx").text("车辆号牌：");
+			    	$("#gpssjxx").text("最后一条GPS时间：");
+		    		alert("该车辆没有GPS信息");
+		    	}
+		    },
+		    error: function(){
+		    }         
+		 });
+		}
+	})
+	$("#cstgcx").click(function(){
+		if($("#cstgcphm").val().length>0){
+			$.ajax({
+		    type:"post",
+		    url: basePath + "xxcx/cstg",
+		    data:{
+		    	"cphm" : $("#cstgcphm").val()
+		    },
+		    dataType: "json",
+		    success:function(data){
+		    	console.log(data)
+		    	if(data.length>0){
+			    	$("#cstgclsyr").text("车辆所有人："+data[0].XM);
+			    	$("#cstgclhp").text("车辆号牌："+data[0].CPHM);
+			    	$("#cstgclsbdh").text("车辆识别代号："+data[0].VIN);
+			    	$("#cstgcllx").text("车辆类型："+data[0].CLLX);
+			    	$("#cstgclxh").text("车辆型号："+data[0].CLXH);
+			    	$("#cstgccdjrq").text("初次登记日期："+data[0].DJZDJRQ);
+			    	$("#cstgclph").text("车辆品牌："+data[0].PPXH);
+			    	$("#cstgfdjh").text("发动机号："+data[0].FDJH);
+		    	}else{
+		    		$("#cstgclsyr").text("车辆所有人：");
+			    	$("#cstgclhp").text("车辆号牌：");
+			    	$("#cstgclsbdh").text("车辆识别代号：");
+			    	$("#cstgcllx").text("车辆类型：");
+			    	$("#cstgclxh").text("车辆型号：");
+			    	$("#cstgccdjrq").text("初次登记日期：");
+			    	$("#cstgclph").text("车辆品牌：");
+			    	$("#cstgfdjh").text("发动机号：");
+		    		alert("该车辆没有初审通过或没有申请为网约车");
+		    	}
+		    },
+		    error: function(){
+		    }         
+		 });
+		}
+	})
+</script>
+	<script type="text/javascript" src="app/index.js"></script>
+</body>
+</html>

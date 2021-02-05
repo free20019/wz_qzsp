@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<link rel="stylesheet" href="clsq.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../util.js"></script>
+	<style>
+		.btn{
+			margin-right:10px;
+		}
+		.returnSpan{
+			position:absolute;
+			top:-1.2em;
+			right:-3em;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+		</div>
+	</div>
+	<div id="mainbav">
+		<ul class="nav">
+			<li><a href="../../../index.html" id="aIndex">首页</a></li>
+			<li><a href="../../../dl_clysqlc.html" target="_Blank">操作说明</a></li>
+		</ul>
+	</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT">
+		<div class="top_banner">
+			<ul style='margin-left: 340px;'>
+				<li>
+					<i class="icon_sqtx_disabled"></i>
+					<span class="font-disabledColor">申请填写</span>
+					<i class="icon_jt"></i>
+				</li>
+<!-- 				<li> -->
+<!-- 					<i class="icon_wcsp_disabled"></i> -->
+<!-- 					<span class="font-disabledColor">完成申请</span> -->
+<!-- 					<i class="icon_jt"></i> -->
+<!-- 				</li> -->
+<!-- 				<li> -->
+<!-- 					<i class="icon_bgxz_disabled"></i> -->
+<!-- 					<span class="font-disabledColor">变更性质</span> -->
+<!-- 					<i class="icon_jt"></i> -->
+<!-- 				</li> -->
+<!-- 				<li> -->
+<!-- 					<i class="icon_bczl_disabled"></i> -->
+<!-- 					<span class="font-disabledColor">补充资料</span> -->
+<!-- 					<i class="icon_jt"></i> -->
+<!-- 				</li> -->
+				<li>
+					<i class="icon_ddfz_select"></i>
+					<span class="font-selectColor">等待发证</span>
+					<!--<i class="icon_jt"></i>-->
+				</li>
+				<!--<li>-->
+					<!--<i class="icon_xkfz_default"></i>-->
+					<!--<span class="font-defaultColor">许可发证</span>-->
+				<!--</li>-->
+			</ul>
+		</div>
+		<div class="pageCenter">
+			<div class="control-group topReturnIndexPanel">
+				<div> </div>
+				<div class="returnSpan">
+					<a href="../../../index.html" id="returnIndex" class="btn btn-link">返回首页</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<h2 style="font-weight: 900; text-align: center;">网络预约出租汽车运输证申请</h2>
+				<div class="control-group" style="position: relative; font-size: 16px;">
+					<div style="display: inline-block; width: 150px; padding-left: .5em;">
+						<label style="text-align: left; width: auto;">申请人类别：<span id="txtApplyType"></span></label>
+					</div>
+				</div>
+				<div class="panel panel-borderBlue_1 noBorderRadius">
+					<div class="panel-body">
+                        <div class="B_towSpan">
+                            <div>
+                                <label class="fontLength9 fontRight ml_5em" for="jdcsyr">机动车所有人：</label>
+                                <span class="fontSize20 fontLength12" id="jdcsyr"></span>
+                            </div>
+                            <div>
+                                <label class="fontLength9 fontRight ml_5em" for="cphm">车牌号码：</label>
+                                <span class="fontSize20 fontLength12" id="cphm"></span>
+                            </div>
+                        </div>
+                        <div class="B_towSpan bbGreenLine">
+                            <div>
+                                <label class="fontLength9 fontRight ml_5em" for="sqsj">申请时间：</label>
+                                <span class="fontSize20 fontLength12" id="sqsj"></span>
+                            </div>
+                            <div>
+                                <label class="fontLength9 fontRight ml_5em" for="clsbdh">车辆识别代号：</label>
+                                <span class="fontSize20 fontLength12" id="clsbdh"></span>
+                            </div>
+                        </div>
+                        <div class="panel-body panel-text" style="position: relative;" id="ztBox">
+                            <h4>状态：</h4>
+							<!--<div class="B_threeSpan">-->
+								<!--<label><input type="radio" name="jl" value="1" checked>&nbsp;已受理</label>-->
+								<!--<label><input type="radio" name="jl" value="0">&nbsp;不符合</label>-->
+							<!--</div>-->
+							<!--<p style="text-indent: 2em;">已受理</p>-->
+							<div id="zsxx"></div>
+                        </div>
+                        <div class="panel-body panel-text" style="position: relative;">
+                            <h4 style="margin-top: 1.5em;">温馨提醒：</h4>
+                            <p>本网站将实时更新办理状态，同时重要节点将以短信方式通知申请人，请注意查收。</p>
+                            <div id="tgewm" style="position: absolute; top: 10px; right: 50px; width: 120px; height: 120px;">
+                                <!-- 							<p style="margin-top: 10px; text-align: center;">浙A#</p> -->
+                                <!-- 							<img src="../../../jsy/qrcode" alt=""> -->
+                            </div>
+                        </div>
+                    </div>
+				</div>
+					<div class="control-group">
+						<div class="controls fontCenter" style="margin-top: 3em;" id = "bczl_div">
+<!-- 							<button type="button" class="btn btn-info" id="go_bczl">补充资料</button> -->
+							<!--<a href="xkfz.html" class="btn btn-info">下一步</a>-->
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight();
+    $('#txtApplyType').text(appleTypeName($.cookie('get', { name: 'regsiterType' })));
+    $('#aIndex, #returnIndex').attr('href', applePathName($.cookie('get', { name: 'regsiterType' })));
+</script>
+<script type="text/javascript">
+	$('#dy').click(function() {
+		var html = $('.printInfo').html();
+		console.info(html);
+		var dHtml = documentHtml(html);
+		printHtml(dHtml);
+	});
+	 $.ajax({
+        type:"post",
+        url: basePath + "db/tbsh_cl",
+        data:{
+        },
+        dataType: "json",
+        success:function(data){
+        	var type = data.info;
+//         	console.log(data)
+        	if(type == '5'){
+        		$("#zsxx").html('<p>审核中</p>');
+        	}else if(type == '6'){
+        		$("#zsxx").html('<p>恭喜您审核已通过，取得网约车运输证</p>');
+        	}else if(type == '7'){
+        		$("#zsxx").html(data.yy);
+//         		$("#bczl_div").html('<button type="button" class="btn btn-info" id="go_bczl">重新补充资料</button>');
+//         		$("#go_bczl").click(function(){
+//         			$.cookie('set', { duration: .2, name: 'regsiterType', value: $.cookie('get', { name: 'regsiterType' })});
+//         			window.location.href= "shsp.html";
+//         		})
+        	}else{
+        		location.replace('../../../index.html');
+        	}
+        	$("#jdcsyr").text(data.data[0].XM);
+    		$("#cphm").text(data.data[0].CPHM);
+    		$("#sqsj").text(fomart_time1(data.data[0].SQRQ));
+    		$("#clsbdh").text(data.data[0].VIN);
+        },
+        //调用出错执行的函数
+        error: function(){
+            //请求出错处理
+        }
+    });
+</script>
+</body>
+</html>

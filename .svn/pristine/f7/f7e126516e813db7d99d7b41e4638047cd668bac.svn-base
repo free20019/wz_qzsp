@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../main.css">
+    <script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../config.js"></script>
+    <script type="text/javascript" src="../../main.js"></script>
+    <script type="text/javascript" src="../../../libs/md5.js"></script>
+    <script type="text/javascript" src="../../json2.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cityselect.js"></script>
+    <link rel="stylesheet" href="./zcxx.css">
+</head>
+<body>
+<input type="hidden" id="twkj_jddsb" value="1">
+<div class="topWrapper">
+    <div class="topHeaderBox">
+        <div class="topHeader">
+            <div class="topGh"></div>
+            <h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+            <!--<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>-->
+        </div>
+    </div>
+    <div id="mainbav">
+        <ul class="nav">
+            <li><a href="../../../index.html">首页</a></li>
+            <li><a href="../sqlcsm/zcsq.html" target="_blank">操作说明</a></li>
+        </ul>
+    </div>
+</div>
+<div class="infoBox">
+    <div class="infoPage noMT">
+        <div class="top_banner">
+            <ul>
+                <li>
+                    <i class="icon_register_disabled"></i>
+                    <span class="font-disabledColor">注册账号</span>
+                    <i class="icon_jt"></i>
+                </li>
+                <li>
+                    <i class="icon_sqsm_disabled"></i>
+                    <span class="font-disabledColor">注册说明</span>
+                    <i class="icon_jt"></i>
+                </li>
+                <li>
+                    <i class="icon_sqtx_select"></i>
+                    <span class="font-selectColor">注册填写</span>
+                    <i class="icon_jt"></i>
+                </li>
+                <li>
+                    <i class="icon_wcsp_default"></i>
+                    <span class="font-defaultColor">注册成功</span>
+                </li>
+            </ul>
+        </div>
+        <div class="pageCenter">
+            <div class="control-group topReturnIndexPanel">
+                <div>&nbsp;</div>
+                <div class="returnSpan">
+                    <a href="../../../index.html" class="btn btn-link" onclick="window.location.href = '../../../index.html';">返回首页</a>
+                </div>
+            </div>
+            <form class="form-inline" id="zc_form" action="../../../upload/upload_qyzc" target="upload" method="post" enctype="multipart/form-data" >
+                <input type="hidden" id="regsiterType" value="gr">
+                <div class="panel-borderBlue" style="margin-top: 40px;">
+                    <h4 class="titleBlueBack pl_5em has-blue" id="regTypeTitle" style="padding-bottom: 5px">个人注册</h4>
+                    <div id="zctxxx" class="panel-body">
+
+                    </div>
+                    <div class="panel-body" style="margin-top: -30px;">
+                        <div class="B_oneSpan" style="padding-left: 1em; padding-right: 1em;">
+                            <p style="margin-top: .8em; text-align: center;">提示：必须填写真实信息，与本人身份证明信息一致。若不一致，将无法完成申请。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" style="margin-top: -30px;">
+                    <div class="control-group">
+                        <div class="controls fontCenter" style="margin-top: 2em; margin-bottom: 2em;">
+                            <button type="button" class="btn btn-info" id="go_next">提 交</button>
+                            <button type="button" class="btn btn-danger" onclick="javascript:history.back(-1);" id="go_back">返 回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <iframe id = "interface_data"  name="upload" style="display:none"></iframe>
+        </div>
+    </div>
+</div>
+<div class="bottomFooler"></div>
+<div id="opanHtml" style="display: none;"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+<script type="text/template" id="pt_html">
+</script>
+<script type="text/javascript" src="zctx.js"></script>
+<script type="text/javascript">
+//    console.info($.data('regsiterType'))
+    $('#regsiterType').val($.cookie('get', { name: 'regsiterType' }));
+    $('#zctxxx').find('div').remove().end().append(function () {
+        var html = '';
+        switch($('#regsiterType').val()) {
+            case 'gr':
+                $('#regTypeTitle').text('个人注册');
+                html = '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="jdcName">姓名：</label>&nbsp;<input type="text" id="jdcName" class="form-control" name="XM"/></div></div>' +
+//                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="sfzhm">身份证号码：</label>&nbsp;<input type="text" id="sfzhm" class="form-control" name="SFZHM"/></div></div>' +
+//                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal">性别：</label>&nbsp;<label style="width: 4em; text-align: left;"><input type="radio" name="XB" id="sexb" value="男" checked>&nbsp;男 </label><label style="width: 4em; text-align: left;"><input type="radio" name="XB" id="sexg" value="女">&nbsp;女 </label></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine" style="display:none"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="gj">国籍：</label>&nbsp;<input type="text" id="gj" class="form-control" name="GJ" value="中华人民共和国"/></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="zjlx_select">证件类型：</label>&nbsp;<select name="ZJLX" class="form-control" id="zjlx_select"><option value="居民身份证">居民身份证</option><option value="护照">护照</option><option value="军官证">军官证</option><option value="士兵证">士兵证</option></select></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="zjhm">证件号码：</label>&nbsp;<input type="text" class="form-control" id="zjhm" name="ZJHM"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="csrq">出生日期：</label>&nbsp;<input type="text" class="form-control" id="csrq" name="CSRQ" onclick="WdatePicker({dateFmt: \'yyyy-MM-dd\',minDate: \'{%y-100}-%M-%d\', maxDate: \'{%y+100}-%M-{%d}\'});"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="sjhm">手机号：</label>&nbsp;<input type="text" class="form-control" id="sjhm" name="SJHM">&nbsp;<button type="button" class="btn btn-info" id="sjhmButton">点击获取验证码</button><span class="has-red">&nbsp;此号码即为登录时用户名。</span></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="yzm">验证码：</label>&nbsp;<input id="yzm" name="YZM" class="form-control fontLength15"/></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="pwd">密码：</label>&nbsp;<input type="password" class="form-control" id="pwd" name="MM"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="repwd">确认密码：</label>&nbsp;<input type="password" class="form-control" id="repwd" name="reMM"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="lxdz">现住地址：</label><div id="city" style="display: inline-block;">&nbsp;<select class="form-control prov" name="SHENG"></select>&nbsp;<select class="form-control city" name="SHI" disabled="disabled"></select>&nbsp;<select class="form-control dist" name="QU" disabled="disabled"></select></div><div style="margin-left: 137px;"><textarea rows="3" cols="24" id="lxdz" class="form-control" name="LXDZ" style="width: 265px; margin-top: .4em; resize: none;"></textarea></div></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="sfzdz">身份证详细地址：</label><div id="sfzcity" style="display: inline-block;">&nbsp;<select class="form-control prov" name="SFZSHENG"></select>&nbsp;<select class="form-control city" name="SFZSHI" disabled="disabled">&nbsp;</select><select class="form-control dist" name="SFZQU" disabled="disabled"></select></div><div style="margin-left: 137px;"><textarea rows="3" cols="24" id="sfzdz" class="form-control" name="SFZDZ" style="width: 265px; margin-top: .4em; resize: none;"></textarea></div></div></div>';
+                bindImageChange();
+                break;
+            case 'qy':
+                $('#regTypeTitle').text('企业注册');
+                html = '<h4 class="bbGreenLine pl_5em has-blue" style="margin-top: 0px; padding-bottom: 5px">企业信息</h4>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="wycjyzxm">企业名称：</label>&nbsp;<input type="text" id="wycjyzxm" class="form-control" name="WYCJYZXM"/></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="zzjgdmz">统一社会信用代码：</label>&nbsp;<input type="text" class="form-control" id="tyshxydm" name="tyshxydm"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="zzjgdmz">证件号码：</label>&nbsp;<input type="text" class="form-control" id="zzjgdmz" name="ZZJGDMZ"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="frdbxm"> 法定代表人姓名：</label>&nbsp;<input id="frdbxm" name="FRDBXM" class="form-control fontLength15"/></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength12 fontRight ml_5em fontNormal" style="margin-left: -2.5em;" for="zjlx_select">法定代表人证件类型：</label>&nbsp;<select name="ZJLX_FR" class="form-control" id="zjlx_select"><option value="居民身份证">身份证</option><option value="护照">护照</option></select></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength12 fontRight ml_5em fontNormal" style="margin-left: -2.5em;" for="frsfzh">法定代表人证件号码：</label>&nbsp;<input type="text" class="form-control" id="frsfzh" name="FRSFZH"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength12 fontRight ml_5em fontNormal" style="margin-left: -2.5em;" for="qylxdh">企业联系电话：</label>&nbsp;<input type="text" class="form-control" id="qylxdh" name="QYLXDH"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="qylxdz">企业注册地址：</label><div id="city" style="display: inline-block;">&nbsp;<select class="form-control prov" name="SHENG"></select>&nbsp;<select class="form-control city" name="SHI" disabled="disabled"></select>&nbsp;<select class="form-control dist" name="QU" disabled="disabled"></select></div><div style="margin-left: 137px;"><textarea rows="3" cols="24" id="qylxdz" class="form-control" name="QYLXDZ" style="width: 265px; margin-top: .4em; resize: none;"></textarea></div></div></div>';
+                html+='<h4 class="bbGreenLine pl_5em has-blue" style="margin-top: 20px; padding-bottom: 5px">企业管理员</h4>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength12 fontRight ml_5em fontNormal" style="margin-left: -2.5em;" for="jbrName">企业管理员姓名：</label>&nbsp;<input type="text" id="jbrName" class="form-control" name="XM"/></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength12 fontRight ml_5em fontNormal" style="margin-left: -2.5em;" for="jbrlxfs">企业管理员手机号码：</label>&nbsp;<input type="text" class="form-control" id="jbrlxfs" name="SJHM">&nbsp;<button class="btn btn-info" type="button" id="jbrlxfsButton">点击获取验证码</button>&nbsp;<span class="has-red">此号码即为登录时用户名。</span></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="jyzyzm">验证码：</label>&nbsp;<input id="jyzyzm" name="JYZYZM" class="form-control fontLength15"/></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="jyzpwd">密码：</label>&nbsp;<input type="password" class="form-control" id="jyzpwd" name="JYZPWD"></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="pl12em"><label class="fontLength9 fontRight ml_5em fontNormal" for="jyzrepwd">确认密码：</label>&nbsp;<input type="password" class="form-control" id="jyzrepwd" name="JYZREPWD"></div></div>';
+                html+='<h4 class="bbGreenLine pl_5em has-blue" style="margin-top: 20px; padding-bottom: 5px">上传证件</h4>'+
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="control-file B_towSpan noMargin"><div class="panel-body"><label for="fileupload_zzjgdmzzp">组织机构代码证或企业营业执照（五证合一）：</label><img width="220" height="130" src="" alt=""><input type="file" id="fileupload_zzjgdmzzp" name="zzjgdmz" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_zzjgdmzzp\').click();">上传</button></div><div class="panel-body" style="position: absolute; top: 0; *left: 50%;"><label>示例：</label><img width="300" height="190" src="../../../resources/images/3232.png" alt=""></div></div></div>' +
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="control-file B_towSpan noMargin"><div class="panel-body"><label for="fileupload_jbrsfzm">企业管理员身份证明(正面)：</label><img width="220" height="130" src="" alt=""><input type="file" id="fileupload_jbrsfzm" name="jbrsfzzm" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jbrsfzm\').click();">上传</button></div><div class="panel-body"><label for="fileupload_jbrsfzmfm">企业管理员身份证明(反面)：</label><img width="220" height="130" src="" alt=""><input type="file" id="fileupload_jbrsfzmfm" name="jbrsfzfm" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jbrsfzmfm\').click();">上传</button></div></div></div>'+
+                    '<div class="B_oneSpan bbGreenDashedLine"><div class="control-file B_towSpan noMargin"><div class="panel-body"><label for="fileupload_frsfzzm">法人或负责人身份证原件(正面)：</label><img width="220" height="130" src="" alt=""><input type="file" id="fileupload_frsfz" name="frsfzzm" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_frsfzzm\').click();">上传</button></div><div class="panel-body"><label for="fileupload_frsfzfm">法人或负责人身份证原件(反面)：</label><img width="220" height="130" src="" alt=""><input type="file" id="fileupload_frsfzfm" name="frsfzfm" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_frsfzfm\').click();">上传</button></div></div></div>';;
+                bindImageChange();
+                break;
+            case 'pt':
+                $('#regTypeTitle').text('平台代办人注册');
+                html = '<div class="B_oneSpan bbGreenDashedLine"> <div class="pl12em"><label style="width: 16em;" class="fontLength9 fontRight ml_5em fontNormal" for="wycjyzxm">平台名称：</label> <select type="text" id="wycjyzxm" class="form-control" name="WYCJYZXM">  </select> </div> </div>'+
+                    '<div class="B_oneSpan bbGreenDashedLine"> <div class="pl12em"><label style="width: 16em;" class="fontLength9 fontRight ml_5em fontNormal" for="zzjgdm">组织机构代码：</label> <input type="text" id="zzjgdm" class="form-control" name="ZZJGDM"/> <button class="btn btn-info" type="button" id="querypt">查询</button> </div> </div>'+
+                    '<div class="B_oneSpan bbGreenDashedLine"> <div class="pl12em"><label style="width: 16em;" class="fontLength9 fontRight ml_5em fontNormal" for="jbrName">经办人姓名：</label> <input type="text" id="jbrName" class="form-control" name="XM" disabled/></div> </div>'+
+                    '<div class="B_oneSpan bbGreenDashedLine"> <div class="pl12em"><label style="width: 16em;" class="fontLength9 fontRight ml_5em fontNormal" for="jbrlxfs">经办人手机号码：</label> <input type="text" class="form-control" id="jbrlxfs" name="SJHM" disabled> <button class="btn btn-info" type="button" id="jbrlxfsButton" disabled>点击获取验证码</button> </div> </div>'+
+                    '<div class="B_oneSpan bbGreenDashedLine"> <div class="pl12em"><label style="width: 16em;" class="fontLength9 fontRight ml_5em fontNormal" for="jyzyzm">验证码：</label> <input id="jyzyzm" name="JYZYZM" class="form-control fontLength15" disabled/></div> </div>'+
+                    '<div class="B_oneSpan bbGreenDashedLine"> <div class="pl12em"><label style="width: 16em;" class="fontLength9 fontRight ml_5em fontNormal" for="jyzpwd">密码：</label> <input type="password" class="form-control" id="jyzpwd" name="JYZPWD" disabled> </div> </div>'+
+                    '<div class="B_oneSpan bbGreenDashedLine"> <div class="pl12em"><label style="width: 16em;" class="fontLength9 fontRight ml_5em fontNormal" for="jyzrepwd">确认密码：</label> <input type="password" class="form-control" id="jyzrepwd" name="JYZREPWD" disabled></div> </div>';
+                bindImageChange();
+                break;
+        }
+        return html;
+    });
+    bindImageChange();
+</script>
+
+<script type="text/javascript">
+    //居住地址
+    $("#lxdz").focus(function(){
+        hint_info("lxdz","请输入居住地址,为150或者小于150个任意字符","2");
+    });
+    $("#lxdz").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#lxdz").val()==""){
+            hint_info("lxdz","居住地址不能为空!","2");
+            div.addClass('has-error');
+        }else if(!regfwjgdz.test($("#lxdz").val())) {
+            hint_info("lxdz","居住地址格式不正确!","2");
+            div.addClass('has-error');
+        } else {
+            div.addClass('has-success');
+        }
+    });
+    //身份证地址
+    $("#sfzdz").focus(function(){
+        hint_info("sfzdz","请输入居住地址,为150或者小于150个任意字符","2");
+    });
+    $("#sfzdz").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#sfzdz").val()==""){
+            hint_info("sfzdz","居住地址不能为空!","2");
+            div.addClass('has-error');
+        }else if(!regfwjgdz.test($("#sfzdz").val())) {
+            hint_info("sfzdz","居住地址格式不正确!","2");
+            div.addClass('has-error');
+        } else {
+            div.addClass('has-success');
+        }
+    });
+    //日期验证
+    $("#csrq").focus(function(){
+        hint_info("csrq","请选择出生日期,与身份证上得日期保持一致","2");
+    });
+    $("#csrq").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#csrq").val()==""){
+            hint_info("csrq","出生日期不能为空!","2");
+            div.addClass('has-error');
+        }else if(!regDate.test($("#csrq").val())) {
+            hint_info("csrq","出生日期日期格式不正确!","2");
+            div.addClass('has-error');
+        } else {
+            div.addClass('has-success');
+        }
+    });
+    switch($('#regsiterType').val()) {
+        case 'gr':
+            break;
+        case 'qy':
+            qyyz();
+            break;
+        case 'pt':
+            ptzc();
+            break;
+    }
+    var a=0;
+    $('#go_next').click(function(){
+    	a=1;
+        switch($('#regsiterType').val()) {
+            case 'gr':
+                if (gr_tj()){
+                    $.cookie('delete', { name: 'regsiterType'});
+                    window.location.href= basePath+"index.html";
+                }
+                break;
+            case 'qy':
+                if(qy_tj()) {
+                    $.cookie('delete', { name: 'regsiterType'});
+                    window.location.href = basePath + "index.html";
+                }
+                break;
+            case 'pt':
+                console.info(pt_tj())
+                if(pt_tj()) {
+//                    $.cookie('delete', { name: 'regsiterType'});
+//                    window.location.href = basePath + "index.html";
+                }
+                break;
+        }
+    });
+    var wait = 60;
+    $("#city").citySelect({
+        url:"../../../resources/js/city.min.js",
+        prov:"浙江", //省份
+        city:"温州", //城市
+        dist:"鹿城区", //区县
+        nodata:"none" //当子集无数据时，隐藏select
+    });
+    $("#sfzcity").citySelect({
+        url:"../../../resources/js/city.min.js",
+        prov:"浙江", //省份
+        city:"温州", //城市
+        dist:"鹿城区", //区县
+        nodata:"none" //当子集无数据时，隐藏select
+    });
+
+    function time(o) {
+        if (wait == 0) {
+            $("#sjhmButton").css('background','#51bbdb');
+            $("#sjhmButton").css("border","1px solid #51bbdb");
+            $("#sjhmButton").css("color","#fff");
+            o.removeAttribute("disabled");
+            o.innerText = "免费获取验证码";
+            fssj = new Date().getTime();
+            wait = 60;
+        } else {
+            $("#sjhmButton").css('background-color','#ddd');
+            $("#sjhmButton").css("border","none");
+            $("#sjhmButton").css("color","#000");
+            o.setAttribute("disabled", true);
+            o.innerText = "重新发送(" + wait + ")";
+            wait--;
+            setTimeout(function() {
+                time(o)
+            }, 1000)
+        }
+    }
+    $("#sjhmButton").click(function() {
+        if ($("#sjhm").val() == "") {
+            hint_info("sjhm", "手机号码不能为空!", "1");
+            return false;
+        } else if (!regPhone.test($("#sjhm").val())) {
+            hint_info("sjhm", "手机号码格式不正确!", "1");
+            return false;
+        }
+        time(this);
+        tjstime = fomart_time(new Date());
+        $.ajax({
+            type : "post",
+            url : basePath + "register/dxfs",
+            //提交的数据
+            data:'postData={"phone":"'+$("#sjhm").val()+
+            '","type":"0"}',
+            //返回数据的格式
+            dataType : "json",
+            //成功返回之后调用的函数
+            success : function(data) {
+                if(data.info!=''){
+                	Pop_up_box(data.info,2);
+                }
+            },
+            //调用出错执行的函数
+            error : function() {
+                //请求出错处理
+            }
+        });
+    });
+    $("#jbrlxfsButton").click(function() {
+        if ($("#jbrlxfs").val() == "") {
+            hint_info("jbrlxfs", "手机号码不能为空!", "1");
+            return false;
+        } else if (!regPhone.test($("#jbrlxfs").val())) {
+            hint_info("jbrlxfs", "手机号码格式不正确!", "1");
+            return false;
+        }
+        var date = new Date();
+        var hms = date.getTime();
+        time(this);
+        tjstime = fomart_time(new Date());
+        $.ajax({
+            type : "post",
+            url : basePath + "register/dxfs",
+            data:'postData={"phone":"'+$("#jbrlxfs").val()+
+            '","type":"3"}',
+            dataType : "json",
+            success : function(data) {
+                if(data.info!=''){
+                    Pop_up_box(data.info,2);
+                }
+            },
+            //调用出错执行的函数
+            error : function() {
+                //请求出错处理
+            }
+        });
+    });
+    
+    
+    /**
+     * 短信界面提交后,由于图片form提交后天值传不过来,所以用这种onload方法获取后台的传值
+     */
+     var oFrm = document.getElementById("interface_data");
+     oFrm.onload  = function() {
+    	 console.log(a)
+     /* 	console.log('oFrm onload...') */
+     	if(a==0)return;
+          if (this.readyState && this.readyState != 'complete') return;
+          else{
+             if (document.all){//IE
+                     var sub_con = document.frames["interface_data"].document;
+             }else{//Firefox
+                     var sub_con = document.getElementById("interface_data").contentDocument;
+             }
+             sub_con = sub_con.body.innerHTML;  //取得返回值
+ 			if(sub_con.indexOf("OK")>=0){
+ 				var dataPara = getFormJson("zc_form");
+ 				dataPara.JYZPWD = hex_md5(dataPara.JYZPWD);
+ 			    dataPara.JYZREPWD = hex_md5(dataPara.JYZREPWD);
+ 				var datap = JSON.stringify(dataPara);
+ 				$.ajax({
+ 					type: "post",
+ 					url: basePath + "register/insert_qyyh",
+ 					data: {
+ 						"postData": datap
+ 					},
+ 					dataType: "json",
+ 					success: function (data) {
+ 						console.log("success")
+ 			            layer.closeAll('loading');
+ 			            if(data.info=='注册成功'){
+ 			            	layer.confirm((data.info+',请登录！'), {
+ 			            		cancel: function(index){
+ 			            			layer.closeAll('loading');
+ 			            			window.location.href= basePath+"index.html";
+ 			            			return false; 
+ 			        			},
+ 			            	    btn: ['确定'] //按钮
+ 			            	}, function(index){
+ 			            		layer.closeAll('loading');
+ 			            		layer.close(index);
+ 			            		window.location.href= basePath+"index.html";
+ 			                });
+ 			            }else{
+ 			            	layer.closeAll('loading');
+ 			                Pop_up_box(data.info,2);
+ 			            }
+ 					},
+ 					error: function () {
+ 						layer.closeAll('loading');
+ 					}
+ 				});
+ 			}else{
+ 				layer.closeAll('loading');
+ 				var dainfo = sub_con;
+ 				var obj = JSON.parse(dainfo);
+ 				Pop_up_box(obj.info,'2');
+ 			}
+       }
+     };
+     //查询注册平台
+     $.ajax({
+			type: "post",
+			url: basePath + "register/findptlb",
+			data: {
+			},
+			dataType: "json",
+			success: function (data) {
+				console.log(data)
+				for(var i=0; i<data.length; i++){
+					$("#wycjyzxm").append("<option value='"+data[i].OWNER_ID+"'>"+data[i].JYZMC+"</option>");
+				}
+			},
+			error: function () {
+				layer.closeAll('loading');
+			}
+		});
+     //根据平台名和组织结构代码证查询是否有该平台
+     var nfzc = 1;
+     $("#querypt").click(function(){
+    	 $.ajax({
+			type: "post",
+			url: basePath + "register/findptisexist",
+			data: {
+				"owner_id" : $("#wycjyzxm").val(),
+				"zzjgdm" : $("#zzjgdm").val()
+			},
+			dataType: "json",
+			success: function (data) {
+				console.log(data)
+				if(data.info=='0'){
+					nfzc = 0;
+					$("#jbrName").attr("disabled", false);
+					$("#jbrlxfs").attr("disabled", false);
+					$("#jbrlxfsButton").attr("disabled", false);
+					$("#jyzyzm").attr("disabled", false);
+					$("#jyzpwd").attr("disabled", false);
+					$("#jyzrepwd").attr("disabled", false);
+					 Pop_up_box("验证成功，请填写下方信息完成经办人注册","1");
+				}else{
+					 Pop_up_box("验证失败，请重新输入","2");
+				}
+			},
+			error: function () {
+				layer.closeAll('loading');
+			}
+		});
+     })
+</script>
+</body>
+</html>

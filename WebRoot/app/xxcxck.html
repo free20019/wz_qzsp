@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html >
+  <head >
+    <title>xxcxck.html</title>
+    <script type="text/javascript" src="./config.js"></script>
+	<script type="text/javascript" src="../resources/js/jquery-1.12.1.min.js"></script>
+	<link rel="stylesheet" href="../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../libs/bs/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="../libs/bs/js/bootstrap.min.js"></script>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <meta charset=UTF-8">
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	  <link rel="icon" href="../resources/images/I16.ico" type="image/x-icon" />
+	  <link rel="stylesheet" href="../libs/bs/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="../libs/bs/css/bootstrap-theme.min.css">
+	  <link rel="stylesheet" href="main.css">
+	  <script type="text/javascript" src="../resources/js/jquery-1.12.1.min.js"></script>
+	  <script type="text/javascript" src="../libs/bs/js/bootstrap.min.js"></script>
+	  <script type="text/javascript" src="../libs/layer/layer.js"></script>
+	  <script type="text/javascript" src="../libs/My97DatePicker/WdatePicker.js"></script>
+	  <script type="text/javascript" src="config.js"></script>
+	  <!--<script type="text/javascript" src="main.js"></script>-->
+	  <script type="text/javascript" src="json2.js"></script>
+	  <style>
+		  .top_banner{
+			  padding:10px;
+			  color:#fff;
+		  }
+		  .form-inline .form-control{
+			  width:100px;
+		  }
+	  </style>
+  </head>
+  <body class="panel panel-default">
+  <div class="topWrapper">
+	  <div class="topHeader">
+		  <div class="topGh"></div>
+		  <div class="topTitle">杭州市网约车申报服务管理系统</div>
+		  <div class="topLogin"></div>
+	  </div>
+  </div>
+  <div style="width:100%;background:url('../resources/images/bodyerBg.png') repeat-x">
+	  <div id="app" style="width:1024px;min-height:760px;margin:0 auto;background:#fff;">
+		  <div class="top_banner">
+			  <h1  class="text-center">信息查询窗口</h1>
+		  </div>
+		  <div>
+			  <ul class="nav nav-tabs">
+				  <li class="active"><a href="#ptzg"  data-toggle="tab">平台资格信息查询</a></li>
+				  <li><a href="#jsyzg"  data-toggle="tab">驾驶员资格信息查询</a></li>
+				  <li><a href="#clzg"  data-toggle="tab">车辆资格信息查询</a></li>
+				  <li><a href="#jczsj"  data-toggle="tab">检测站数据查询</a></li>
+			  </ul>
+		  </div>
+		  <!-- 平台资格信息查询 -->
+		  <div class="tab-content">
+			  <div class="tab-pane fade in active" id="ptzg">
+				  <div class="form-inline"  style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">平台公司名称</label>
+					  <select name="jyzmc" id="jyzmcSelect" class="form-control">
+						  <option v-for="item in jyzmc" v-bind:value="item.jyzmc">{{item.jyzmc}}</option>
+					  </select>
+					  <button id="ptzgxxcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group" style="border:none" v-if="ptxx.jyzmc">
+					  <li class="list-group-item">平台公司名称：{{ptxx.jyzmc}}</li>
+					  <li class="list-group-item">本地服务机构：{{ptxx.fwjgmc}}</li>
+					  <li class="list-group-item">统一社会信用代码：{{ptxx.zzjgdmzh}}</li>
+					  <li class="list-group-item">经营范围：{{ptxx.jyfw}}</li>
+					  <li class="list-group-item">注册资本：{{ptxx.zczb}}（万）</li>
+					  <li class="list-group-item">注册日期：{{ptxx.jyxkzyxqq}}</li>
+					  <li class="list-group-item">服务机构地址：{{ptxx.bgdz}}</li>
+					  <li class="list-group-item">服务机构电话：{{ptxx.glrlxfs}}</li>
+				  </ul>
+			  </div>
+			  <!-- 驾驶员资格信息查询查询 -->
+			  <div class="tab-pane fade" id="jsyzg" >
+				  <div class="form-inline" style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">驾驶员姓名</label>
+					  <input type="text" name="xm" id="xm" class="form-control" placeholder="请输入驾驶员姓名"/>
+					  <button id="jsyzgxxcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group" style="border:none" v-for="item in jsyxx">
+					  <li class="list-group-item" >驾驶员姓名：{{item.xm}}</li>
+					  <li class="list-group-item" >驾驶员证号：{{item.zjhm}}</li>
+					  <li class="list-group-item">性别：{{item.xb}}</li>
+					  <li class="list-group-item">国籍：{{item.gj}}</li>
+					  <li class="list-group-item">网约车驾驶员注册日期：{{item.zcrq}}</li>
+				  </ul>
+			  </div>
+			  <!-- 车辆信息查询 -->
+			  <div class="tab-pane fade" id="clzg">
+				  <div class="form-inline" style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">车牌号码</label>
+					  <input type="text" name="cphm" id="cphm" class="form-control" placeholder="请输入车牌号码"/>
+					  <button id="clxxcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group" style="border:none" v-for="item in clxx">
+					  <li class="list-group-item">车辆号牌：{{item.cphm}}</li>
+					  <li class="list-group-item" v-if="item.type!=1">机动车所有人：{{item.xm}}</li>
+					  <li class="list-group-item" v-if="item.type==1">机动车所有人：{{item.jyzmc}}</li>
+					  <li class="list-group-item">厂牌型号：{{item.carmodel}}</li>
+					  <!-- <li class="list-group-item">车身颜色：{{item.csys}}</li> -->
+					  <li class="list-group-item">综合性能检测有效期：{{item.djpdyxq}}</li>
+					  <li class="list-group-item">从业资格证发证日期：{{item.yszyxqq}}</li>
+					  <li class="list-group-item">从业资格证有效日期：{{item.yszyxqz}}</li>
+					  <li class="list-group-item">运输证字号：{{item.yszh}}</li>
+				  </ul>
+			  </div>
+			  <div class="tab-pane fade" id="jczsj">
+				  <div class="form-inline" style="margin:10px 0 10px 20px">
+					  <label class="col-mid-2 control-label">车辆识别代码（VIN）</label>
+					  <input type="text" name="vin" id="vin" class="form-control" placeholder="请输入车辆识别代码（VIN）"/>
+					  <button id="jczxxcx" class="btn btn-default btn-info">查询</button>
+				  </div>
+				  <ul class="panel panel-default list-group" style="border:none"  v-for="item in jczsjs">
+					  <li class="list-group-item">车辆号牌：{{item.CARNO}}</li>
+					  <li class="list-group-item">机动车所有人：{{item.OWNER}}</li>
+					  <li class="list-group-item">号牌颜色：{{item.COLOR}}</li>
+					  <li class="list-group-item">厂牌型号：{{item.CARMODEL}}</li>
+					  <li class="list-group-item">车辆型号：{{item.CARTYPE}}</li>
+					  <li class="list-group-item">注册日期：{{item.ZCRQ}}</li>
+					  <li class="list-group-item">识别代号：{{item.VIN}}</li>
+					  <li class="list-group-item">长度：{{item.CARSIZE_C}}</li>
+					  <li class="list-group-item">宽度：{{item.CARSIZE_K}}</li>
+					  <li class="list-group-item">高度：{{item.CARSIZE_G}}</li>
+					  <li class="list-group-item">轴距：{{item.ZJ}}</li>
+					  <li class="list-group-item">燃料类型：{{item.RLLX}}</li>
+					  <li class="list-group-item">发动机号：{{item.FDJH}}</li>
+					  <li class="list-group-item">核定载客位：{{item.HDZKRS}}</li>
+					  <li class="list-group-item">检验评定日期：{{item.JYPDRQ}}</li>
+					  <li class="list-group-item">等级评定有效期止：{{item.DJPDYXQ}}</li>
+					  <li class="list-group-item">评定机构：{{item.PDJG}}</li>
+				  </ul>
+			  </div>
+		  </div>
+	  </div>
+  </div>
+  <div class="bottomFooler">
+	  <div class="foolerPage">
+		  <p>建议使用IE11.0以上版本、最新版火狐或谷歌浏览器，1024*768分辨率浏览</p>
+		  <p>主办：杭州市交通运输局&nbsp;&nbsp;技术支持：杭州市综合交通信息中心</p>
+		  <p>咨询电话：12328&nbsp;|&nbsp;备案号：浙ICP备 05032714-1号&nbsp;</p>
+	  </div>
+  </div>
+  </body>
+  
+  <script>
+  var app = new Vue({
+	  el: '#app',
+	  data: {
+	  	jyzmc:[],
+	    ptxx: {},
+	    jsyxx: [],
+	    clxx: {},
+	    jczsjs:[],
+	  }
+	});
+	
+  	$.ajax({
+  		url: basePath+"xxcx/jyzmcList",
+  		success: function(data){
+  			var data = JSON.parse(data);
+ 			app.$data.jyzmc = data;
+  		}
+  	});
+  	
+  	$('#jczxxcx').click(function(){
+  		
+  		if($('#vin').val().trim()==''){
+  			alert("车辆识别代号不能为空")
+  			return ;
+  		}
+  		$.ajax({
+  			url: basePath+"xxcx/jczcx/"+$('#vin').val(),
+  			success: function(data){
+	  			var data = JSON.parse(data);
+	  			//console.log(data)
+	  			app.$data.jczsjs = data;
+	  			
+  			}	
+  		});
+  	});
+  	
+  	$('#ptzgxxcx').click(function(){
+  		if($('#jyzmcSelect').val().trim()==''){
+  			alert("平台名称不能为空")
+  			return ;
+  		}
+  		$.ajax({
+  			url: basePath+"xxcx/ptzgxxcx/"+$('#jyzmcSelect').val(),
+  			success: function(data){
+	  			var data = JSON.parse(data);
+	  			//console.log(data)
+	  			app.$data.ptxx = data;
+	  			
+  			}	
+  		});
+  	});
+  	$('#clxxcx').click(function(){
+  		if($('#cphm').val().trim()==''){
+  			alert("车辆号牌不能为空")
+  			return;
+  		}
+  		$.ajax({
+  			url: basePath+"xxcx/clxxcx/"+$('#cphm').val(),
+  			success: function(data){
+	  			var data = JSON.parse(data);
+	  			app.$data.clxx = data; 
+	  			if(data.length==0){
+	  				alert("无此车辆")
+	  			}
+  			}	
+  		});
+  	});
+  	$('#jsyzgxxcx').click(function(){
+  		if($('#xm').val().trim()==''){
+  			alert("姓名不能为空")
+  			return;
+  		}
+  		$.ajax({
+  			url: basePath+"xxcx/grxxcx/"+$('#xm').val(),
+  			success: function(data){
+	  			var data = JSON.parse(data);
+	  			app.$data.jsyxx = data; 
+	  			if(data.length==0){
+	  				alert("无此驾驶员")
+	  			}
+  			}
+  		});
+  	});
+  </script>
+</html>

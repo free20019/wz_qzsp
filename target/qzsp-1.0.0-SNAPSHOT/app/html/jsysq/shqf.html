@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cityselect.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../util.js"></script>
+	<link rel="stylesheet" href="./jsysq.css">
+	<style>
+		.btn{
+			margin-right: 10px;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+			<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>
+		</div>
+	</div>
+	<div id="mainbav">
+		<ul class="nav">
+			<li><a href="../../../index.html" id="aIndex">首页</a></li>
+			<li><a href="../sqlcsm/dl_jsyzsqsm.html" target="_blank">操作说明</a></li>
+		</ul>
+	</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT">
+		<div class="top_banner">
+			<ul>
+				<li><i class="icon_sqtx_disabled"></i> <span class="font-disabledColor">填报申请</span> <i class="icon_jt"></i> </li>
+				<li><i class="icon_wcsp_disabled"></i> <span class="font-disabledColor">审核填报</span> <i class="icon_jt"></i> </li>
+				<li><i class="icon_ksyy_disabled"></i> <span class="font-disabledColor">考试预约证明</span> <i class="icon_jt"></i> </li>
+				<li><i class="icon_zkz_disabled"></i> <span class="font-disabledColor">考试结果</span></li>
+				<!--<li><i class="icon_xkfz_select"></i> <span class="font-selectColor">审核签发</span></li>-->
+			</ul>
+		</div>
+		<div class="pageCenter">
+			<div class="control-group topReturnIndexPanel">
+				<div>&nbsp;</div>
+				<div class="returnSpan">
+					<a href="../../../index.html" id="returnIndex" class="btn btn-link" onclick="window.location.href = '../userInfo/grInfo.html';">返回首页</a>
+				</div>
+			</div>
+			<div class="panel-body form-inline">
+				<input type="hidden" class="applyType" value="1">
+				<div class="control-group statusPanel">
+					<div class="left"><label>申请人类别：<span id="txtApplyType">个人</span></label></div>
+					<div class="right">
+						<label>申请编号：<span class="sqbh" id="sqbh"></span></label>
+					</div>
+				</div>
+				<div class="printInfo">
+					<div class="panel panel-borderBlue_1 noBorderRadius">
+						<div class="panel-body">
+							<div class="B_oneSpan bbGreenLine">
+								<div style="margin: 20px auto; text-align: center;">
+									<h2>驾驶员二维码——沈菲</h2>
+								</div>
+								<div style="margin: 20px auto; text-align: center;">
+									<img width="200" height="200" src="../../../resources/images/ewm.png" alt="">
+								</div>
+							</div>
+							<div class="B_towSpan">
+								<div class="panel-body panel-text" style="position: relative;">
+									<h4>驾驶员提示：</h4>
+									<p>1、您已取得温州市网络预约出租汽车驾驶员从业资格。</p>
+									<p>2、上图二维码包含证件主要信息，在温州市行政区域内可作电子证件使用，请下载保存并妥善保管。</p>
+									<p>3、如需纸质证件，可在下方填报邮寄地址或自行到温州市道路运输管理机构指定窗口办理。</p>
+									<p>4、您与取得合法资质的网约车平台公司签订劳动合同或协议，并经平台公司向市道路运输管理机构注册后，方可从事网约车经营服务。</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="control-group" style="margin-top: -22px; margin-right: 10px;">
+				<div class="controls" style="text-align: right">
+					<button type="button" class="btn btn-danger" id="wyzx">我要注销</button>
+					<button type="button" class="btn btn-info" id="dy">打 印</button>
+				</div>
+			</div>
+			<div class="panel-body form-inline" style="margin-top: -30px;">
+				<div class="B_towSpan">
+					<form id="addressFrom" action="" method="post">
+						<p class="has-red">如您需要邮寄纸质证件，请勾选并填写“邮寄地址”</p>
+						<div>
+							<label class="fontLength9 fontRight ml_5em"><input type="checkbox" id="wyyj" class="wyyj">&nbsp;邮寄地址：</label>
+							<div id="city" style="display: inline-block;">
+								<select name="province" class="form-control prov"></select>
+								<select name="city" class="form-control city"></select>
+								<select name="dist" class="form-control dist"></select>
+							</div>
+							<input type="text" id="cyzgzjsdz" class="form-control" name="cyzgzjsdz" style="width: 380px;" placeholder="地址">
+						</div>
+						<div class="control-group">
+							<div class="controls fontCenter" id="addressButtonBox" style="padding-top: 10px;">
+								<button class="btn btn-info" style="margin-right: 5px;">邮寄</button>
+								<button class="btn btn-danger" style="margin-right: 5px;" id="addressReset">重置</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bottomFooler" style="padding-top: 20px;">
+	<div class="foolerPage">
+        <p>建议使用最新版火狐、谷歌或IE11.0以上版本，1024*768分辨率浏览</p>
+        <p>主办：温州市交通运输局&nbsp;&nbsp;技术支持：温州市综合交通信息中心</p>
+        <p>咨询电话：12328&nbsp;|&nbsp;备案号：浙ICP备 05032714-1号&nbsp;</p>
+	</div>
+</div>
+<script>
+</script>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+<script type="text/javascript">
+    $('.applyType').val('2');
+    $('#txtApplyType').text(appleTypeName($.cookie('get', { name: 'regsiterType' })));
+    $('#aIndex').attr('href', applePathName($.cookie('get', { name: 'regsiterType' })));
+</script>
+<script type="text/javascript">
+    $("#city").citySelect({
+        url:"../../../resources/js/city.min.js",
+        prov:"浙江", //省份
+        city:"温州", //城市
+        dist:"鹿城区", //区县
+        nodata:"none" //当子集无数据时，隐藏select
+    });
+    $('#addressReset').on('click', function () {
+        $("#city").citySelect({
+            url:"../../../resources/js/city.min.js",
+            prov:"浙江", //省份
+            city:"温州", //城市
+            dist:"鹿城区", //区县
+            nodata:"none" //当子集无数据时，隐藏select
+        });
+        return false;
+    });
+    $('#addressButtonBox').find('button').attr('disabled', '');
+    $('#wyyj').on('change', function () {
+        if ($(this)[0].checked) {
+            $('#city').find('select').removeAttr('disabled').end().next().removeAttr('disabled');
+            $('#addressButtonBox').find('button').removeAttr('disabled');
+        } else {
+            $('#addressButtonBox').find('button').attr('disabled', '');
+        }
+    });
+	$('#dy').click(function() {
+		var html = $('.printInfo').html();
+		console.info(html);
+		var dHtml = documentHtml(html);
+		printHtml(dHtml);
+	});
+	$('#wyzx').on('click', function () {
+		layer.open({
+		    type: '2',
+		    title: '重要提醒',
+            content: '<div style="padding: 14px; font-size: 24px; text-indent: 2em;">请确定您当前要执行的操作为“注销”驾驶员从业资格，一旦注销将不再具有温州市网络预约驾驶员从业资格，再次申请需从新填报申请资料并通过背景审查等流程。</div>',
+			btn: ['我要注销', '取消'],
+			area: ['600px', 'auto'],
+			yes: function (index) {
+		        var sjhmHtml = '<div style="margin-left: 90px; font-size: 18px"><label style="width: 6em; text-align: right">手机号码：</label><label>18268109000</label></div>';
+		        var dxyzHtml = '<div style="margin-left: 90px; font-size: 18px"><label style="width: 6em; text-align: right">短信验证：</label><label><input type="text" style="width: 7em;"></label><button class="btn btn-info" style="margin-left: 10px;">发送短信验证码</button></div>';
+				layer.open({
+				    title: '短信验证',
+					content: sjhmHtml+dxyzHtml,
+					btn: ['提交', '返回'],
+                    area: ['600px', 'auto'],
+					yes: function (index2) {
+				        layer.msg('成功处理您的请求');
+                        layer.close(index2);
+                        layer.close(index);
+                        var rt = $.cookie('get', { name: 'regsiterType' });
+                        if ('gr' === rt) {
+                            window.location.href = '../userInfo/grInfo.html';
+						} else if ('qy' === rt) {
+                            window.location.href = '../userInfo/qyInfo.html';
+						} else if ('pt' === rt) {
+                            window.location.href = '../userInfo/ptInfo.html';
+						}
+                    }
+				});
+            }
+		});
+    });
+</script>
+</body>
+</html>

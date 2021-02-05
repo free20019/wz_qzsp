@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<link rel="stylesheet" href="./zcxx.css">
+	<style>
+		.panel-certificate {
+			position: relative;
+			height: 286px;
+			margin-left: 10px;
+			margin-right: 10px;
+			text-align: center;
+			border: 1px solid #138a80;
+			box-shadow: 3px 4px 6px #777;
+			cursor: pointer;
+		}
+		.B_fourSpan .panel-certificate {
+			height: 240px;
+			margin-left: 5px;
+			margin-right: 5px;
+		}
+		.panel-certificate:hover {
+			outline: 6px solid #2bd9cb !important;
+			outline: 6px solid rgba(43, 217, 203, 0.6);
+		}
+		.panel-certificate.selected {
+			background-color:#2bd9cb;
+		}
+		.panel-certificate.selected:hover {
+			border: 1px solid #ffffff;
+		}
+		.panel-certificate:hover .pcBorder {
+			position: absolute;
+			top: -7px;
+			left: -7px;
+			right: -7px;
+			bottom: -7px;
+			border: 6px solid #6583c1;
+		}
+		.panel-certificate > h3, .panel-certificate > h5 {
+			position: absolute;
+			top: 70px;
+			left: 0;
+			padding-left: 8px;
+			padding-right: 8px;
+			width: 100%;
+			line-height: 1.5em;
+			font-weight: bold;
+			white-space: normal;
+			color: #000000;
+		}
+		.panel-certificate.selected h3, .panel-certificate.selected h5 {
+			color: #ffffff;
+		}
+		.icon-pdfFile {
+			display: inline-block;
+			width: 150px;
+			height: 150px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			/*background: url(../../../resources/images/iconFile/icon-pdfFile.png) no-repeat;*/
+		}
+		.con {
+			width: 800px;
+			height: 425px;
+			margin: 10px 55px;
+			overflow-y: scroll;
+			border: 1px solid #ccc;
+
+		}
+		.con h2{
+			width:100%;
+			text-align: center;
+			font-size:18px;
+			font-weight:bold;
+		}
+		.con p{
+			width:100%;
+			font-size:16px;
+			margin:0;
+			text-indent: 2em;
+			margin:0;
+			text-indent: 2em;
+		}
+		.focus-success {
+			margin-top: 40px;
+			font-size: 14px;
+			font-weight: bold;
+			font-family: '圆体',serif;
+			color: #2bd9c0;
+		}
+		.titleH3 {
+			font-weight: bold;
+		}
+		.rightNav {
+			float: right;
+			position: relative;
+			top: 6px;
+			font-size: 12px;
+		}
+		.rightNav a {
+			padding-left: .3em;
+			padding-right: .3em;
+			color: #05d6bb;
+		}
+		.rightNav a:first-child {
+			border-right: 1px solid #05d6bb;
+		}
+		.fontCenter {
+			text-align: center;
+		}
+		.mt2em {
+			margin-top: 2em;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+			<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>
+		</div>
+	</div>
+	<div id="mainbav">
+		<ul class="nav">
+			<li><a href="../../../index.html">首页</a></li>
+			<li><a href="../sqlcsm/zcsq.html" target="_blank">操作说明</a></li>
+		</ul>
+	</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT">
+		<div class="top_banner">
+			<ul>
+				<li>
+					<i class="icon_register_disabled"></i>
+					<span class="font-disabledColor">注册账号</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_sqsm_select"></i>
+					<span class="font-selectColor">注册说明</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_sqtx_default"></i>
+					<span class="font-defaultColor">注册填写</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_wcsp_default"></i>
+					<span class="font-defaultColor">注册成功</span>
+				</li>
+			</ul>
+		</div>
+		<div class="pageCenter">
+			<div class="control-group topReturnIndexPanel">
+				<div>&nbsp;</div>
+				<div class="returnSpan">
+					<a href="../../../index.html" class="btn btn-link" onclick="window.location.href = '../../../index.html';">返回首页</a>
+				</div>
+			</div>
+			<p class="focus-success">温馨提示：请仔细阅读以下文件，未阅读无法提交。</p>
+			<div class="form-horizontal">
+				<div class="B_threeSpan" style="width: 840px; margin: 20px auto;">
+					<div>
+						<div class="panel-certificate" bt-c="1">
+							<h5>网络预约出租汽车经营服务管理暂行办法（交通运输部 工业和信息化部 公安部 商务部 工商总局 质检总局 国家网信办令2016年第60号）</h5>
+						</div>
+					</div>
+					<div>
+						<div class="panel-certificate" bt-c="2">
+							<h5>交通运输部关于修改《出租汽车驾驶员从业资格管理规定》的决定（交通运输部令 2016 年第 63 号）</h5>
+						</div>
+					</div>
+                    <div>
+                        <div class="panel-certificate" bt-c="3">
+							<h5>温州市网络预约出租汽车经营服务管理实施细则<br>温政办〔2016〕137 号</h5>
+                        </div>
+                    </div>
+                    <!--<div>-->
+                        <!--<div class="panel-certificate" bt-c="1">-->
+                            <!--<h5>关于印发温州市网络预约<br>出租汽车驾驶员从业资格考试<br>大纲的通知（杭运〔2016〕<br>126号）</h5>-->
+                        <!--</div>-->
+                    <!--</div>-->
+				</div>
+				<div class="" style="margin-left: 70px;">
+					<label class=""><input type="checkbox" id="bwtk"> 承诺：本人已阅读，并承诺在本系统所填报的所有信息和提交的材料均真实有效</label>
+				</div>
+				<div class="" style="margin-left: 70px;">
+					<label class="control-label">用户类型：</label>
+					<select name="sflxRadio cw-label" id="yhlx_select">
+						<option value="0">请选择</option>
+						<option value="1">个人</option>
+						<option value="2">企业</option>
+						<!--<option value="3">平台代办</option>-->
+					</select>
+				</div>
+				<div class="control-group">
+					<div class="controls fontCenter mt2em">
+						<button type="button" id="txsm_xyb" class="btn btn-info">下一步</button>
+						<button type="button" class="btn btn-danger" onclick="javascript:history.back(-1);" id="go_back">返 回</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bottomFooler"></div>
+</body>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+<script type="text/javascript">
+	/*判断是IE7就添加div*/
+	if(isIE7()) {
+		$('.panel-certificate').append('<div class="pcBorder"/>')
+	}
+</script>
+<script type="text/javascript">
+	var ptf1 = false, ptf2 = false, ptf3 = false;
+	$("#txsm_xyb").click(function(){
+		var checkbox=document.getElementById('bwtk');
+		if (false == ptf1 || false == ptf2 || false == ptf3) {
+			Pop_up_box("请先阅读条款!", 2);
+			return false;
+		}
+		if (!$("input[type='checkbox']").is(':checked')) {
+			Pop_up_box("请确认本人已阅读并知悉内容!", 2);
+			return false;
+		} else if ($('#yhlx_select').val() == '0') {
+			Pop_up_box("请选择用户类型!", 2);
+			return false;
+// 			window.location.href="index.html";
+		} else {
+            if ($('#yhlx_select').val() == '1') {
+                $.cookie('set', { duration: .2, name: 'regsiterType', value: 'gr'});
+            } else if ($('#yhlx_select').val() == '2') {
+                $.cookie('set', { duration: .2, name: 'regsiterType', value: 'qy'});
+            } else if ($('#yhlx_select').val() == '3') {
+                $.cookie('set', { duration: .2, name: 'regsiterType', value: 'pt'});
+            }
+            window.location.href = "zctx.html";
+		}
+	});
+	$('.panel-certificate').click(function() {
+		var thisOne = $(this);
+		var ptfFile = {};
+		var title = '';
+        var fileName = '';
+		var url = '../../../resources/file/';
+		switch ($(thisOne).attr('bt-c')) {
+			case '1':
+                title = '网络预约出租汽车经营服务管理暂行办法（交通运输部 工业和信息化部 公安部 商务部 工商总局 质检总局 国家网信办令2016年第60号）';
+                fileName = '网络预约出租汽车经营服务管理暂行办法（交通运输部 工业和信息化部 公安部 商务部 工商总局 质检总局 国家网信办令2016年第60号）';
+				ptf1 = true;
+				break;
+			case '2':
+				title = '出租汽车驾驶员从业资格管理规定2016修订';
+				fileName = '出租汽车驾驶员从业资格管理规定2016修订';
+				ptf2 = true;
+				break;
+			case '3':
+				title = '温州市网络预约出租汽车经营服务管理实施细则';
+				fileName = '16温政办137（关于印发温州市网络预约出租汽车经营服务管理实施细则（试行）的通知）';
+				ptf3 = true;
+				break;
+		}
+		url += fileName + '.pdf';
+		/*ptfFile = window.open(url, title);
+		ptfFile.focus();*/
+		layer.open({
+			type: 2,
+			title: title,
+//			maxmin: true, //开启最大化最小化按钮
+			area: ['893px', '600px'],
+			content: url
+		});
+		thisOne.addClass('selected');
+	});
+	$('#bwtk').click(function() {
+		if (!ptf1 || !ptf2 || !ptf3) {
+			document.getElementById('bwtk').checked = false;
+			return false;
+		}
+	});
+</script>
+</html>

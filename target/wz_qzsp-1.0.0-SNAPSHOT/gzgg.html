@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>温州市出租汽车申报服务管理系统</title>
+    <link rel="icon" href="resources/images/I16.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="libs/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bs/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="app/main.css">
+    <script type="text/javascript" src="resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="libs/bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/layer/layer.js"></script>
+    <script type="text/javascript" src="libs/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="app/config.js"></script>
+    <script type="text/javascript" src="app/main.js"></script>
+    <style type="text/css">
+        .newsTitle {
+            width: 900px;
+            height: 70px;
+            line-height: 70px;
+            margin: 20px auto 0;
+            border-bottom: 2px solid #307abd;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+        .newsTime {
+            text-align: center;
+        }
+        .newsContent {
+            padding: 16px 8px;
+        }
+        .newsContent p {
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="twkj_jddsb" value="1">
+<div class="topWrapper">
+    <div class="topHeaderBox">
+        <div class="topHeader">
+            <div class="topGh"></div>
+            <h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+        </div>
+    </div>
+    <div id="mainbav">
+        <ul class="nav">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="app/html/sqlcsm/zcsq.html" target="_Blank">操作说明</a></li>
+        </ul>
+    </div>
+</div>
+<div class="infoBox">
+    <div style="height: 30px;"></div>
+    <div class="infoPage no">
+        <div class="panel-body">
+            <div class="control-group font-gray bbGrayLine" style="line-height: 30px;">
+                <a class="font-gray" href="index.html">首页</a>&gt;
+                <a class="font-gray" href="javascript:void(0);">通知公告</a>
+            </div>
+            <div class="pageCenter">
+                <h2 class="newsTitle" id="tzggbt"></h2>
+                <!--<h5 class="newsTime font-gray">2016-11-25 15:21:20</h5>-->
+                <div class="newsContent">
+                    <p id="tzggnr">
+                         <!--温州市出租汽车申报服务管理系统，即日起上线试运行。申请办理温州市网络预约出租汽车运输证和驾驶员证的，通过本网站提交申报资料。操作方法请查阅本网站办事指南栏目相关内容。如有疑问，可拨打12328交通运输服务监督电话进行咨询。-->
+                    </p>
+					<div id="tzggfj">
+					</div>
+<!--                     <p style="text-align: right;">温州市交通运输局</p> -->
+<!--                     <p style="text-align: right;" id="shrq"></p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 30px;"></div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+<script type="text/javascript">
+    $.ajax({
+		type:"post",
+		url: basePath + "user/tzggjtnr",
+// 		data:{"btsession":"obj"},
+			dataType: "json",
+		success:function(data){
+			$("#tzggnr").html(data[0].NR);
+			$("#tzggbt").html(data[0].BT);
+			var fj = data[0].FJNAME.split(';');
+			var tab = "";
+			for(var i=0; i<fj.length; i++){
+				if(fj[i].length>0){
+					tab += '<p>'+
+							 	'<a href="user/fjfile?id='+i+'">'+(i+1)+'.'+fj[i]+'</a>'+
+							'</p>';
+				}
+			}
+			$("#tzggfj").html(tab);
+		},
+		error: function(){
+		}         
+	});
+</script>
+</body>
+</html>

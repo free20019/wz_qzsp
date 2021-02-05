@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../util.js"></script>
+	<style>
+		.btn{
+			margin-right:10px;
+		}
+		.returnSpan{
+			position:absolute;
+			top:-1.2em;
+			right:-3em;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+		</div>
+	</div>
+	<div id="mainbav">
+		<ul class="nav">
+			<li><a href="czcjbsq.html" id="aIndex1">首页</a></li>
+		</ul>
+	</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT">
+		<div class="pageCenter">
+			<div class="panel-body">
+				<h2 style="font-weight: 900; text-align: center;">出租车奖补申请</h2>
+				<div class="panel panel-borderBlue_1 noBorderRadius">
+					<div class="panel-body">
+                        <div class="B_towSpan">
+                            <div>
+                                <label class="fontLength9 fontRight ml_5em" for="jdcsyr">车辆所有人：</label>
+                                <span class="fontSize20 fontLength12" id="jdcsyr"></span>
+                            </div>
+                            <div>
+                                <label class="fontLength9 fontRight ml_5em" for="cphm">车牌号码：</label>
+                                <span class="fontSize20 fontLength12" id="cphm"></span>
+                            </div>
+                        </div>
+                        <div class="B_towSpan bbGreenLine">
+                            <div>
+                                <label class="fontLength9 fontRight ml_5em" for="sqsj">奖补金额：</label>
+                                <span class="fontSize20 fontLength12" id="sqsj"></span>
+                            </div>
+                            <div>
+                                <label class="fontLength9 fontRight ml_5em" for="clsbdh">奖补类型：</label>
+                                <span class="fontSize20 fontLength12" id="jblx"></span>
+                            </div>
+                        </div>
+                        <div class="panel-body panel-text" style="position: relative;" id="ztBox">
+                            <h4>状态：</h4>
+							<div id="zsxx"></div>
+							<h4 id="ygbzh">运管备注：</h4>
+							<div id="ygbz"></div>
+                        </div>
+                        <div class="panel-body panel-text" style="position: relative;">
+                            <h4 style="margin-top: 1.5em;">温馨提醒：</h4>
+                            <p>本网站将实时更新办理状态。</p>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight();
+    $('#txtApplyType').text(appleTypeName($.cookie('get', { name: 'regsiterType' })));
+    $('#aIndex, #returnIndex').attr('href', applePathName($.cookie('get', { name: 'regsiterType' })));
+</script>
+<script type="text/javascript">
+	$('#dy').click(function() {
+		var html = $('.printInfo').html();
+		console.info(html);
+		var dHtml = documentHtml(html);
+		printHtml(dHtml);
+	});
+	 $.ajax({
+        type:"post",
+        url: basePath + "jsy/getOneJbsq",
+        data:{
+        	'bh':GetQueryString('bh')
+        },
+        dataType: "json",
+        success:function(data){
+        	console.log(data)
+        	if(data.length!=1){
+        		window.location.href = "czcjbsq.html";
+        	}else{
+            	$("#jdcsyr").text(data[0].XM);
+        		$("#cphm").text(data[0].CPHM);
+        		$("#sqsj").text(data[0].JBJE==''?'无':(parseFloat(data[0].JBJE)+parseFloat((data[0].GXJL==''?0:data[0].GXJL))+'元'));
+        		$("#jblx").text(data[0].LX);
+        		console.log(data[0].ZT)
+        		if(data[0].ZT!='审核不通过'){
+        			$('#ygbzh').hide();
+        			$('#zsxx').html(data[0].ZT)
+        		}else{
+        			$('#ygbzh').show();
+        			$('#zsxx').html(data[0].NR)
+        			$('#ygbz').html(data[0].BZ)
+        		}
+        	}
+        },
+        //调用出错执行的函数
+        error: function(){
+            //请求出错处理
+        }
+    });
+	 function GetQueryString(name) {
+	     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	     var r = window.location.search.substr(1).match(reg);
+	     if(r!=null)return  unescape(r[2]); return null;
+	}
+</script>
+</body>
+</html>

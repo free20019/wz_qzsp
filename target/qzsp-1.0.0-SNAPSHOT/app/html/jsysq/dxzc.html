@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../main.css">
+    <script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../config.js"></script>
+    <script type="text/javascript" src="../../main.js"></script>
+    <script type="text/javascript" src="../../../libs/md5.js"></script>
+    <script type="text/javascript" src="../../json2.js"></script>
+<!-- <link rel="stylesheet" href="clxxtx.css"> -->
+	<style>
+		.btn{
+			margin-right: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="infoPage noMT dialog-info">
+		<form class="form-inline" action="">
+			<div
+				style="width: 550px; margin-top: 40px; margin-left: auto; margin-right: auto;">
+				<div class="control-group">
+					<label for="sjhm">手机号码：</label>
+					<input type="text" id="sjhm" name="sjhm" class="form-control fontLength15" disabled="disabled"/>
+					<button class="btn" type="button" id="sjhmButton">点击获取验证码</button>
+				</div>
+				<div class="control-group">
+					<label for="yzm">验证码：</label>
+					<input type="text" id="yzm" name="yzm" class="form-control fontLength15" />
+					<input type="text"  name="yzm" style="display:none"/>
+				</div>
+				<br>
+				<br>
+				<br>
+				<br>
+				<div class="control-group">
+					<div class="controls fontCenter mt2em">
+						<button type="button" class="btn btn-info" id="sub_jddsb">提 交</button>
+						<button type="button" class="btn btn-danger" id="sub_fc">返 回</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+	$("#sjhm").val($(top.yjhb_bc).val());
+		var wait = 60;
+		var dsrw;
+		var index = parent.layer.getFrameIndex(window.name);
+		function time(o) {
+			if (wait == 0) {
+				o.removeAttribute("disabled");
+				o.innerText = "免费获取验证码";
+				fssj = new Date().getTime();
+				wait = 60;
+			} else {
+				o.setAttribute("disabled", true);
+				o.innerText = "重新发送(" + wait + ")";
+				wait--;
+				setTimeout(function() {
+					time(o)
+				}, 1000)
+			}
+		}
+		$("#sjhmButton").click(function() {
+			if ($("#sjhm").val() == "") {
+				hint_info("sjhm", "手机号码不能为空!", "1");
+				return false;
+			} else if (!regPhone.test($("#sjhm").val())) {
+				hint_info("sjhm", "手机号码格式不正确!", "1");
+				return false;
+			}
+			var date = new Date();
+			var hms = date.getTime();
+				time(this);
+				tjstime = fomart_time(new Date());
+				$.ajax({
+					type : "post",
+					url : basePath + "register/dxfs",
+					data:'postData={"phone":"'+$("#sjhm").val()+
+						'","type":"1"}',
+					dataType : "json",
+					success : function(data) {
+						 if(data.info!=''){
+			                	Pop_up_box(data.info,2);
+			                }
+					},
+					error : function() {
+					}
+				});
+		});
+		//手机号验证
+		$("#sjhm").focus(function() {
+			hint_info("sjhm", "请输入正确的11位手机号码!", "1");
+		})
+		$("#sjhm").blur(function() {
+			if ($("#sjhm").val() == "") {
+				hint_info("sjhm", "手机号码不能为空!", "1");
+			} else if (!regPhone.test($("#sjhm").val())) {
+				hint_info("sjhm", "手机号码格式不正确!", "1");
+			}
+		});
+		$("#yzm").focus(function() {
+			hint_info("yzm", "验证码格式为4位数字!", "2");
+		})
+		$("#yzm").blur(function() {
+			if ($("#yzm").val() == "") {
+				hint_info("yzm", "验证码不能为空!", "2");
+				return false;
+			} else if (!regyzm.test($("#yzm").val())) {
+				hint_info("yzm", "验证码格式不正确!", "2");
+				return false;
+			}
+		});
+		/**
+		 *	提交   验证输入的内容是否正确,之后首先把用户提交上去,成功后再把申请的内容全部提交上去
+		 */
+		$("#sub_jddsb").click(function() {
+			//手机验证
+			if ($("#sjhm").val() == "") {
+				hint_info("sjhm", "手机号码不能为空!", "3");
+				return false;
+			} else if (!regPhone.test($("#sjhm").val())) {
+				hint_info("sjhm", "手机号码格式不正确!", "3");
+				return false;
+			}
+			//验证码验证
+			if ($("#yzm").val() == "") {
+				hint_info("yzm", "验证码不能为空!", "3");
+				return false;
+			} else if (!regyzm.test($("#yzm").val())) {
+				hint_info("yzm", "验证码格式不正确!", "3");
+				return false;
+			}
+			$.ajax({
+				type : "post",
+				url : basePath + "jsy/grtj_dxyz",
+				data:'postData={"phone":"'+$("#sjhm").val()+
+					'","yzm":"'+$("#yzm").val()+
+					'"}',
+				dataType : "json",
+				success : function(data) {
+					if(data.info=='验证成功'){
+						top.layer.load(1);
+						top.clxxtx_form.submit();
+					}else{
+						Pop_up_box(data.info, 2);
+					}
+				},
+				error : function() {
+				}
+			});
+			
+		});
+		$('#sub_fc').click(function() {
+			parent.layer.close(index);
+		});
+	</script>
+</body>
+</html>

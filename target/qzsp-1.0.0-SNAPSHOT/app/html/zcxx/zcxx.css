@@ -1,0 +1,19 @@
+th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 30px;
+    border:1px solid #0d419d;
+    text-align: center;
+    color: #313131;
+}
+td {
+    padding: 8px 0px;
+    border:1px solid #0d419d;
+    white-space: nowrap;
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 13px;
+    text-indent: .3em;
+}
+.top_banner ul {
+    width: 550px;
+}

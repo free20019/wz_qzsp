@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../util.js"></script>
+	<link rel="stylesheet" href="./jsysq.css">
+	<style type="text/css">
+		.rwm {
+			display: block;
+			width: 206px;
+			height: 85px;
+			margin-top: 10px;
+			margin-left: 20px;
+		}
+		.span_rq {
+			display: block;
+			margin-right: 12px;
+			text-align: right;
+		}
+		.zdxx {
+			padding: 0 .2em;
+			font-size: 24px;
+			font-weight: 500;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+			<!--<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>-->
+		</div>
+	</div>
+	<div id="mainbav">
+		<ul class="nav">
+			<li><a href="../../../index.html" id="aIndex">首页</a></li>
+			<li><a href="../sqlcsm/dl_jsyzsqsm.html" target="_blank">操作说明</a></li>
+		</ul>
+	</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT">
+		<div class="top_banner">
+			<ul>
+				<li><i class="icon_sqtx_disabled"></i> <span class="font-disabledColor">填报申请</span> <i class="icon_jt"></i> </li>
+				<li><i class="icon_wcsp_disabled"></i> <span class="font-disabledColor">审核填报</span> <i class="icon_jt"></i> </li>
+				<li><i class="icon_bgxz_select"></i> <span class="font-selectColor">考试预约证明</span> <i class="icon_jt"></i> </li>
+				<li><i class="icon_bczl_default"></i> <span class="font-defaultColor">考试结果</span>  </li>
+				<!--<li><i class="icon_xkfz_default"></i> <span class="font-defaultColor">审核签发</span></li>-->
+			</ul>
+		</div>
+		<div class="pageCenter">
+			<div class="control-group topReturnIndexPanel">
+				<div>&nbsp;</div>
+				<div class="returnSpan">
+					<a href="../../../index.html" id="returnIndex" class="btn btn-link">返回首页</a>
+				</div>
+			</div>
+			<div class="panel-body form-inline">
+				<div class="">
+					<div class="control-group statusPanel">
+						<div class="left"><label>申请人类别：<span id="txtApplyType">个人</span></label></div>
+<!-- 						<div class="right"> -->
+<!-- 							<label>申请编号：<span class="sqbh" id="sqbh"></span></label> -->
+<!-- 						</div> -->
+					</div>
+					<div class="printInfo">
+						<div class="panel panel-borderBlue_1 noBorderRadius">
+							<div class="panel-body">
+								<div class="panel-body panel-text">
+									<h4>温馨提醒：</h4>
+									<p>驾驶员 ：<span id="kszm_xm"></span>，身份证 ：<span id="kszm_sfzh"></span>,你已通过温州都去网约车驾驶员证考试资格审查，请随身携带下列证明材料前往温州交通技术学校报名大厅预约考试</p>
+									<b>证明材料</b>
+									<p>1、身份证原件。</p>
+									<p>2、驾驶证原件。</p>
+									<p>3、巡游出租车从业资格证或外地核发的网约车驾驶证原件（如有）。</p>
+									<p>4、浙江省居住证原件（非温州籍）</p>
+									<p>5、公安机关出具的相关证明原件（非温州籍）</p>
+									<p>学校地址：温州市牛山北路52-1号（牛山客运中心旁50米）</p>
+									<p>咨询电话：0577-88712150</p>
+									<p id="data" style="text-align: right;margin-right:0.5em"></p>
+									<p style="text-align: right">温州市道路运输管理局</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls fontCenter mt2em">
+						<button type="button" class="btn btn-info" id="dy">打印</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bottomFooler"></div>
+</body>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+<script type="text/javascript">
+	$('#opanHtml').click(function() {
+		window.location.href="ddts.html";
+	});
+    $('#txtApplyType').text(appleTypeName($.cookie('get', { name: 'regsiterType' })));
+    $('#aIndex, #returnIndex').attr('href', applePathName($.cookie('get', { name: 'regsiterType' })));
+	//获取日期
+	$(function(){
+        var mydata=new Date();
+        var month=mydata.getMonth()+1;
+        $("#data").text(mydata.getFullYear()+'年'+month+'月'+mydata.getDate()+'日');
+
+	})
+</script>
+<script>
+	$('#dy').click(function() {
+		var html = $('.printInfo').html();
+		console.info(html);
+		var dHtml = documentHtml(html);
+		printHtml(dHtml);
+	});
+</script>
+<script type="text/javascript">
+			$.ajax({
+		        type:"post",
+		        url: basePath + "db/ksyyzm",
+		        data:{},
+		        dataType: "json",
+		        success:function(data){
+		        	console.log(data);
+		        	if(data.type=='1'){
+		        		var data = data.data[0];
+		        		$("#kszm_xm").text(data.XM);
+        				$("#kszm_sfzh").text(data.ZJHM);
+		        	}else{
+		        		location.replace('../../../index.html');
+		        	}
+		        },
+		        error: function(){
+		        }         
+		     });
+</script>
+</html>

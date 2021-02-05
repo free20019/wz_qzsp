@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../util.js"></script>
+	<script type="text/javascript" src="../../../libs/md5.js"></script>
+	<script type="text/javascript" src="../../json2.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cityselect.js"></script>
+	<link rel="stylesheet" href="userInfo.css">
+	<style>
+		.xgxxBox { display: inline-block; float: right; position: relative; }
+		.xgxxATag { color: #a0a0a0; }
+		.xgxxBox .buttonList { position: absolute; top: 100%; left: 0; width: 9em; margin: 0; padding: 0; list-style: none; }
+		.buttonList li a {color: #a0a0a0; background: white; }
+		.buttonList li:hover a { color: #0000ff; }
+		.textInfoBox table { table-layout:fixed; border: 2px solid #307abd;}
+		#xyczxInfoBox table tbody td { line-height: 35px; }
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+			<!--<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>-->
+		</div>
+	</div>
+	<div id="mainbav">
+		<ul class="nav">
+			<li class="select" data-select=""><a href="javascript:void(0);">账号信息</a></li>
+			<!-- 				<li><a href="../../qy_dl_clysqlc.html" target="_Blank">车辆运输证申请说明</a></li> -->
+			<!-- 				<li id="clyszsq"><a class="qyzjsq">车辆运输证申请</a></li> -->
+			<li><a href="../../../index.html">退出</a></li>
+		</ul>
+	</div>
+</div>
+<div id="xyczxInfoBox" class="infoBox" style="background-image: none;">
+	<div class="infoPage noMT">
+		<div class="pageCenter" style="min-height: 700px; padding: 0;">
+			<div class="panel-body userInfo">
+				<div class="form-group has-success has-feedback">
+					<label class="control-label col-sm-2" for="jsyname" style="width: 8em; line-height: 33px; text-align: right;">驾驶员姓名</label>
+					<div class="col-sm-2" style="padding: 0;">
+						<input class="form-control" id="jsyname" style="width: 100%; padding: 5px 10px;">
+					</div>
+					<label class="control-label col-sm-2" for="zjhm" style="width: 7em; line-height: 33px; text-align: right;">证件号码</label>
+					<div class="col-sm-3" style="padding: 0;">
+						<input class="form-control" id="zjhm" style="width: 100%; padding: 5px 10px;">
+					</div>
+					<label class="control-label col-sm-2" for="bzzt" style="width: 7em; line-height: 33px; text-align: right;">办证状态</label>
+					<div class="col-sm-2" style="width: 8em; margin-right: 10px; padding: 0;">
+						<select class="form-control" id="bzzt" style="width: 100%; padding-right: 20px;">
+							<option value="0">请选择</option>
+							<option value="1">注册成功</option>
+							<option value="2">注册审核中</option>
+							<option value="5">注册失败</option>
+							<option value="3">注销成功</option>
+							<option value="4">注销审核中</option>
+							<option value="6">注销失败</option>
+						</select>
+					</div>
+					<a href="javascript:void(0);" class="btn btn-primary" id="check">查询</a>
+					<a href="javascript:void(0);" class="btn btn-primary" id="push">导出</a>
+				</div>
+			</div>
+			<div class="panel-body userInfo">
+				<a href="javascript:void(0);" class="btn btn-primary" id="xyczxList-add">驾驶员注册</a>
+				<a href="javascript:void(0);" class="btn btn-primary" id="xyczxList-quit">驾驶员注销</a>
+				<table class="table">
+					<colgroup>
+						<col style="width: 50px;">
+						<col style="width: 110px;">
+						<col>
+						<col style="width: 130px;">
+						<col style="width: 120px;">
+						<col style="width: 100px;">
+						<col style="width: 100px;">
+						<col style="width: 100px;">
+						<col style="width: 100px;">
+					</colgroup>
+					<thead>
+					<tr>
+						<td>编号</td>
+						<td>驾驶员姓名</td>
+						<td>身份证号</td>
+						<td>手机号码</td>
+						<td>车牌号码</td>
+						<td>申请时间</td>
+						<td>审核时间</td>
+						<td>办证状态</td>
+						<td>备注</td>
+					</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<div id="carInfoPageTabs_blz" class="pageTabs">
+					<button class="btn btn-primary btn-firstPage" onclick="gopage()">首页</button>
+					<button class="btn btn-primary btn-prevPage" onclick="gosyy()">上一页</button>
+					<button class="btn btn-primary btn-nextPage" onclick="goxyy()">下一页</button>
+					<button class="btn btn-primary btn-lastPage" onclick="goend()">尾页</button>
+					<div class="message" style="display:inline-block;"> 共&nbsp;<i class="blue" id="blz_totalnum">0</i>&nbsp;条记录，当前显示第&nbsp;
+						<i class="blue" id="blz_currentpage">1</i>&nbsp;页&nbsp;/&nbsp;共&nbsp;
+						<i class="blue" id="blz_totalpage">0</i>&nbsp;页&nbsp;&nbsp;&nbsp;跳转到第&nbsp;
+						<input style="width:25px;height:32px;text-align:center;" id="ym">&nbsp;页&nbsp;
+						<button class="btn btn-primary btn-lastPage" onclick="tzym()">跳转</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<iframe id = "interface_data" name="upload" style="display:none"></iframe>
+<div class="bottomFooler"></div>
+<script src="Info_tj.js"></script>
+<script class="resize" type="text/javascript">
+
+var currentpage=1;
+var pagesize=8;
+var resultdata;
+var pgzs=0;
+$("#check").click(function(){
+	check(1);
+});
+$("#push").click(function(){
+	push();
+});
+	$(function () {
+		//显示办理记录
+		check(1);
+		$('#xyczxList-add').on('click', function () {
+			layer.open({
+				title: '巡游车驾驶员注册',
+				type: 2,
+				area: ['700px', '500px'],
+				content: './xyczxAddEditor.html'
+			})
+			bindImageChange();
+		});
+		$('#xyczxList-quit').on('click', function () {
+			layer.open({
+				title: '巡游车驾驶员注销',
+				type: 2,
+				area: ['700px', '500px'],
+				content: './xyczxUpdEditor.html'
+			});
+			bindImageChange();
+		});
+	});
+	function check(obj){
+		$.ajax({
+	        type:"post",
+	        url: basePath + "zxzcupload/zc",
+	        data:'postData={"jsyname":"' + $("#jsyname").val() + '","zjhm":"' + $("#zjhm").val() +'","bzzt":"' + $("#bzzt").val()+ '","type":"0","page":"'+obj+'","pagesize":"'+pagesize+'"}',
+	        dataType: "json",
+	        success:function(data){
+	        	console.log(data);
+	        	$('.table tbody').html('');
+	        	if(data.datas.length==0){
+	        		$('.table tbody').html("<tr><td colspan='8'>查询无数据</td></tr>");
+					$("#blz_totalpage").html("0");
+					$("#blz_totalnum").html("0");
+				}else{
+		        	var html= '';
+		        	for(var i=0;i<data.datas.length;i++){
+		        		var b =i ;
+		        		b++;
+		        		var sqlx = data.datas[i].SQLX == 0 ? getAddYear(data.datas[i].ZCSJ) : getAddYear(data.datas[i].ZXSJ);
+		        		var lx = data.datas[i].SQLX == 0&&data.datas[i].YWTYPE==0?"注册成功":data.datas[i].SQLX==0&&data.datas[i].YWTYPE==2?"注册审核中":data.datas[i].SQLX==1&&data.datas[i].YWTYPE==0?"注销成功":data.datas[i].SQLX==1&&data.datas[i].YWTYPE==2?"注销审核中":data.datas[i].SQLX==0&&data.datas[i].YWTYPE==1?"注册失败":data.datas[i].SQLX==1&&data.datas[i].YWTYPE==1?"注销失败":"";
+		        		var shsj = data.datas[i].SQLX == 0 ? getAddYear(data.datas[i].ZCSHSJ) : getAddYear(data.datas[i].ZXSHSJ);
+		        		var type = data.datas[i].YWTYPE == 1?true:false;
+		        		html +='<tr>'+
+									'<td>'+b+'</td>'+
+									'<td>'+data.datas[i].JSYXM+'</td>'+
+									'<td>'+data.datas[i].JSYSFZH+'</td>'+
+									'<td>'+data.datas[i].JSYSJHM+'</td>'+
+									'<td>'+data.datas[i].CPHM+'</td>'+
+									'<td>'+sqlx+'</td>'+
+									'<td>'+shsj+'</td>'+
+									'<td>'+lx+'</td>'+
+									'<td>';
+									if(type){
+										html +='&nbsp;<a href="javascript:void(0);" class="btn btn-primary xyczxList-xxx" xxxx="'+data.datas[i].ID+'">失败备注</a>';
+									}
+									html +=	'</td></tr>';
+		        	}
+		        	$('.table tbody').append(html);
+		        	if(data.datas.length>0){
+						pgzs = parseInt((data.count-1)/pagesize)+1;
+						$("#blz_totalpage").html(pgzs);
+						$("#blz_totalnum").html(data.count);
+					}else{
+						$("#blz_totalpage").html("0");
+						$("#blz_totalnum").html("0");
+					}
+					$("#blz_currentpage").html(currentpage);
+				}
+	        	$('.xyczxList-xxx').on('click', function (){
+	        		var zxid = $(this).attr('xxxx');
+	        		for(var i=0;i<data.datas.length;i++){
+	        			if(data.datas[i].ID == zxid){
+	        				layer.msg("失败理由:"+data.datas[i].BZ);
+	        			}
+	        		}
+	        	});
+	        },
+	        error: function(){
+	        }         
+	     });
+	}
+	
+	function push(){
+		if($("#blz_totalnum").text() == 0){
+			layer.msg("无数据可以导出!");			
+		}else{
+			url = basePath + "zxzcupload/dc?postData="+'{"jsyname":"' + $("#jsyname").val() + '","zjhm":"' + $("#zjhm").val() +'","bzzt":"' + $("#bzzt").val()+ '"}',window.open(url);
+		}
+	}
+	
+	function getAddYear(obj){
+       if(obj!=null&&obj!=""){
+             var date = new Date(obj);
+             var year = date.getFullYear();
+             var month = date.getMonth()+1;
+             var day = date.getDate();
+             return year+"-"+month+"-"+day;
+       }else{
+             return "";
+       }
+	}
+	
+	//首页
+	function gopage(){
+		currentpage=1;
+		check(currentpage);
+	}
+	//上一页
+	function goxyy(){
+		currentpage++;
+		if(currentpage>pgzs){
+			layer.msg("已到末页");
+			currentpage=currentpage-1;
+			return;
+		}
+		check(currentpage);
+	}
+	//下一页
+	function gosyy(){
+		currentpage--;
+		if(currentpage<=0){
+			layer.msg("已到首页");
+			currentpage=currentpage+1;
+			return;
+		}
+		check(currentpage);
+	}
+	//末页
+	function goend(){
+		currentpage = pgzs;
+		check(currentpage);
+	}
+	//跳页
+	function tzym(){
+		if($('#ym').val()!=""){
+			if(pgzs >= parseInt($('#ym').val())){
+				currentpage = $('#ym').val();
+				check(currentpage);
+			}else{
+				hint_info("ym", "数字过大", "3");
+			}
+		}
+	}
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.Wyc_testplanMapper">
+  <resultMap id="BaseResultMap" type="entity.Wyc_testplan">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="TestPaper_id" jdbcType="INTEGER" property="testpaperId" />
+    <result column="PlanStarTime" jdbcType="DATE" property="planstartime" />
+    <result column="PlanOverTime" jdbcType="DATE" property="planovertime" />
+    <result column="ImpleStarTime" jdbcType="DATE" property="implestartime" />
+    <result column="ImpleOverTime" jdbcType="DATE" property="impleovertime" />
+    <result column="Subject_id" jdbcType="INTEGER" property="subjectId" />
+    <result column="TestPosition_id" jdbcType="INTEGER" property="testpositionId" />
+    <result column="ClassRoom_id" jdbcType="INTEGER" property="classroomId" />
+    <result column="UserTable_id" jdbcType="INTEGER" property="usertableId" />
+    <result column="ExamNum" jdbcType="DECIMAL" property="examnum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, TestPaper_id, PlanStarTime, PlanOverTime, ImpleStarTime, ImpleOverTime, Subject_id, 
+    TestPosition_id, ClassRoom_id, UserTable_id, ExamNum
+  </sql>
+  <select id="selectByExample" parameterType="entity.Wyc_testplanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_wyc_testplan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="entity.Wyc_testplanExample">
+    delete from tb_wyc_testplan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Wyc_testplan">
+    insert into tb_wyc_testplan (id, TestPaper_id, PlanStarTime, 
+      PlanOverTime, ImpleStarTime, ImpleOverTime, 
+      Subject_id, TestPosition_id, ClassRoom_id, 
+      UserTable_id, ExamNum)
+    values (#{id,jdbcType=INTEGER}, #{testpaperId,jdbcType=INTEGER}, #{planstartime,jdbcType=DATE}, 
+      #{planovertime,jdbcType=DATE}, #{implestartime,jdbcType=DATE}, #{impleovertime,jdbcType=DATE}, 
+      #{subjectId,jdbcType=INTEGER}, #{testpositionId,jdbcType=INTEGER}, #{classroomId,jdbcType=INTEGER}, 
+      #{usertableId,jdbcType=INTEGER}, #{examnum,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Wyc_testplan">
+    insert into tb_wyc_testplan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="testpaperId != null">
+        TestPaper_id,
+      </if>
+      <if test="planstartime != null">
+        PlanStarTime,
+      </if>
+      <if test="planovertime != null">
+        PlanOverTime,
+      </if>
+      <if test="implestartime != null">
+        ImpleStarTime,
+      </if>
+      <if test="impleovertime != null">
+        ImpleOverTime,
+      </if>
+      <if test="subjectId != null">
+        Subject_id,
+      </if>
+      <if test="testpositionId != null">
+        TestPosition_id,
+      </if>
+      <if test="classroomId != null">
+        ClassRoom_id,
+      </if>
+      <if test="usertableId != null">
+        UserTable_id,
+      </if>
+      <if test="examnum != null">
+        ExamNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testpaperId != null">
+        #{testpaperId,jdbcType=INTEGER},
+      </if>
+      <if test="planstartime != null">
+        #{planstartime,jdbcType=DATE},
+      </if>
+      <if test="planovertime != null">
+        #{planovertime,jdbcType=DATE},
+      </if>
+      <if test="implestartime != null">
+        #{implestartime,jdbcType=DATE},
+      </if>
+      <if test="impleovertime != null">
+        #{impleovertime,jdbcType=DATE},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="testpositionId != null">
+        #{testpositionId,jdbcType=INTEGER},
+      </if>
+      <if test="classroomId != null">
+        #{classroomId,jdbcType=INTEGER},
+      </if>
+      <if test="usertableId != null">
+        #{usertableId,jdbcType=INTEGER},
+      </if>
+      <if test="examnum != null">
+        #{examnum,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.Wyc_testplanExample" resultType="java.lang.Long">
+    select count(*) from tb_wyc_testplan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_wyc_testplan
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.testpaperId != null">
+        TestPaper_id = #{record.testpaperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.planstartime != null">
+        PlanStarTime = #{record.planstartime,jdbcType=DATE},
+      </if>
+      <if test="record.planovertime != null">
+        PlanOverTime = #{record.planovertime,jdbcType=DATE},
+      </if>
+      <if test="record.implestartime != null">
+        ImpleStarTime = #{record.implestartime,jdbcType=DATE},
+      </if>
+      <if test="record.impleovertime != null">
+        ImpleOverTime = #{record.impleovertime,jdbcType=DATE},
+      </if>
+      <if test="record.subjectId != null">
+        Subject_id = #{record.subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.testpositionId != null">
+        TestPosition_id = #{record.testpositionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.classroomId != null">
+        ClassRoom_id = #{record.classroomId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usertableId != null">
+        UserTable_id = #{record.usertableId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examnum != null">
+        ExamNum = #{record.examnum,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_wyc_testplan
+    set id = #{record.id,jdbcType=INTEGER},
+      TestPaper_id = #{record.testpaperId,jdbcType=INTEGER},
+      PlanStarTime = #{record.planstartime,jdbcType=DATE},
+      PlanOverTime = #{record.planovertime,jdbcType=DATE},
+      ImpleStarTime = #{record.implestartime,jdbcType=DATE},
+      ImpleOverTime = #{record.impleovertime,jdbcType=DATE},
+      Subject_id = #{record.subjectId,jdbcType=INTEGER},
+      TestPosition_id = #{record.testpositionId,jdbcType=INTEGER},
+      ClassRoom_id = #{record.classroomId,jdbcType=INTEGER},
+      UserTable_id = #{record.usertableId,jdbcType=INTEGER},
+      ExamNum = #{record.examnum,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

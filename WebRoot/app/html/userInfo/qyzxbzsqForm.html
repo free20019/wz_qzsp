@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>温州市出租汽车申报服务管理系统</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../../main.css">
+  <script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+  <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+  <script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+  <script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+  <script type="text/javascript" src="../../config.js"></script>
+  <script type="text/javascript" src="../../main.js"></script>
+  <!-- <script type="text/javascript" src="../../util.js"></script> -->
+  <script type="text/javascript" src="../../json2.js"></script>
+  <style>
+    #jsysqxm {
+      font-weight: bold;
+    }
+
+    .btn {
+      *margin-right: 5px;
+    }
+
+    .top_banner ul {
+      width: 685px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topWrapper">
+    <div class="topHeaderBox">
+      <div class="topHeader">
+        <div class="topGh"></div>
+        <h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+      </div>
+    </div>
+    <div id="mainbav">
+      <ul class="nav">
+        <li class="select" data-select=""><a href="javascript:void(0);">账号信息</a></li>
+        <!--             <li><a href="../../../index.html">退出</a></li> -->
+      </ul>
+    </div>
+  </div>
+  <div class="infoBox">
+    <div class="infoPage noMT">
+      <div class="pageCenter">
+        <div class="panel-body form-inline">
+          <h4>企业专项补助申请表</h4>
+          <form class="form-inline" id="clxxtx_form" autocomplete="off" target="upload" method="post"
+            enctype="multipart/form-data">
+            <div class="panel panel-borderBlue_1 noBorderRadius">
+              <div class="panel-body">
+                <h4 class="bbGreenLine pl_5em has-blue" style="padding-bottom: 5px">第一步：填写信息 </h4>
+
+                <div class="B_towSpan bbGreenDashedLine">
+                  <div>
+                    <label for="pt_grjsyzdb_cphm" class="fontLength8 fontRight">车牌号码:&nbsp;</label>
+                    <input type="text" name="cphm" id="pt_grjsyzdb_cphm" class="form-control" value="浙C.">
+                  </div>
+                  <div>
+                    <label for="wz_companyname" class="fontLength8 fontRight">公司名称:&nbsp;</label>
+                    <input class="form-control pt_grjsyzdb disabled kjbky" type="text" id="wz_companyname" name="sqrxm">
+                  </div>
+                </div>
+              </div>
+              <div id="scxx" class="panel-body">
+                <h4 class=" pl_5em has-blue" style="padding-bottom: 5px">第二步：上传照片</h4>
+                <div class="bbGreenLine" style="font-size:12px;color:red;font-weight:bold;padding-left:7px">
+                  提示：所有上传图片须与申报驾驶员信息一致，格式为jpg、jpeg，图片大小不超过4M，且完整、清晰、无反光、无遮挡，照片面积不低于图框80%。
+                </div>
+                <div class="B_oneSpan bbGreenDashedLine">
+                  <div class="control-file B_towSpan noMargin">
+                    <div class="panel-body" style="*padding-right:0">
+                      <label for="fileupload_qyyyzz" class="fontLength12 fontCenter ml_5em">企业营业执照：</label>
+                      <img width="220" height="130" src="" alt="">
+                      <input onchange="fileChange(this)" type="file" id="fileupload_qyyyzz" name="qyyyzz"
+                        style="display: none;">
+                      <button type="button" class="btn btn-info btnFile"
+                        onclick="$('#fileupload_qyyyzz').click();">上传</button>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="B_oneSpan bbGreenDashedLine">
+                  <div class="control-file B_towSpan noMargin">
+                    <div class="panel-body" style="padding-right:0">
+                      <label for="fileupload_czcdlyszzb" class="fontLength12 fontCenter">出租车道路运输证（正本）：</label>
+                      <img width="220" height="130" src="" alt="">
+                      <input onchange="fileChange(this)" type="file" id="fileupload_czcdlyszzb" name="SFZJ"
+                        style="display: none;">
+                      <button type="button" class="btn btn-info btnFile"
+                        onclick="$('#fileupload_czcdlyszzb').click();">上传</button>
+                    </div>
+                    <div class="panel-body" style="padding-right:0">
+                      <label for="fileupload_czcdlyszfb" class="fontLength12 fontCenter">出租车道路运输证（副本）：</label>
+                      <img width="220" height="130" src="" alt="">
+                      <input onchange="fileChange(this)" type="file" id="fileupload_czcdlyszfb" name="SFZJ"
+                        style="display: none;">
+                      <button type="button" class="btn btn-info btnFile"
+                        onclick="$('#fileupload_czcdlyszfb').click();">上传</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" style="margin-top: -30px;">
+              <div class="control-group">
+                <div class="controls fontCenter" style="margin-top: 2em; margin-bottom: 2em;">
+                  <button type="button" class="btn btn-info" id="go_next" style="margin-right:10px;">提交</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <input type="hidden" id="yjhb_bc" />
+          <iframe id="interface_data" name="upload" style="display:none"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottomFooler"></div>
+  <script type="text/javascript" src="qyzxbzsq.js"></script>
+  <script type="text/javascript" src="jyqrzxbzsqUpload.js"></script>
+  <script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight();
+    bindImageChange();
+    $('#qycllx').hide();
+    // 车牌号码pt_grjsyzdb_cphm
+    $("#pt_grjsyzdb_cphm").focus(function () {
+      hint_info("pt_grjsyzdb_cphm", "车牌号码格式：浙C后五位字符！例如“浙C.12345”", "1");
+    });
+    $("#pt_grjsyzdb_cphm").blur(function () {
+      removeInputBorderStyle($(this));
+      var div = $(this).parent();
+      if ($("#pt_grjsyzdb_cphm").val() == "") {
+        hint_info("pt_grjsyzdb_cphm", "车牌号码不能为空!", "1");
+        div.addClass('has-error');
+      } else if (!regLicenseplate2.test($("#pt_grjsyzdb_cphm").val())) {
+        hint_info("pt_grjsyzdb_cphm", "车牌号码格式不正确!", "1");
+        div.addClass('has-error');
+      } else {
+        div.addClass('has-success');
+      }
+    });
+    // 联系电话
+    $("#pt_grjsyzdb_lxdh").focus(function () {
+      hint_info("pt_grjsyzdb_lxdh", "号码格式：11或8位数字！例如“13966666666/85656666”", "1");
+    });
+    $("#pt_grjsyzdb_lxdh").blur(function () {
+      removeInputBorderStyle($(this));
+      var div = $(this).parent();
+      if ($("#pt_grjsyzdb_lxdh").val() == "") {
+        hint_info("pt_grjsyzdb_lxdh", "联系电话不能为空!", "2");
+        div.addClass('has-error');
+      } else if (!regPhone.test($("#pt_grjsyzdb_lxdh").val())) {
+        hint_info("pt_grjsyzdb_lxdh", "联系电话格式不正确!", "2");
+        div.addClass('has-error');
+      } else {
+        div.addClass('has-success');
+      }
+    });
+    // 身份证
+    $("#pt_grjsyzdb_sfzh").focus(function () {
+      hint_info("pt_grjsyzdb_sfzh", "身份证格式：18位数字！例如“33****19990101****”", "2");
+    });
+    $("#pt_grjsyzdb_sfzh").blur(function () {
+      removeInputBorderStyle($(this));
+      var div = $(this).parent();
+      if ($("#pt_grjsyzdb_sfzh").val() == "") {
+        hint_info("pt_grjsyzdb_sfzh", "身份证不能为空!", "2");
+        div.addClass('has-error');
+      } else if (!regIDCard.test($("#pt_grjsyzdb_sfzh").val())) {
+        hint_info("pt_grjsyzdb_sfzh", "身份证格式不正确!", "2");
+        div.addClass('has-error');
+      } else {
+        div.addClass('has-success');
+      }
+    });
+
+
+    //公司名称
+    $("#wz_companyname").focus(function () {
+      hint_info("wz_companyname", "请输入公司名称", "2");
+    });
+    $("#wz_companyname").blur(function () {
+      removeInputBorderStyle($(this));
+      var div = $(this).parent();
+      if ($("#wz_companyname").val() == "") {
+        hint_info("wz_companyname", "公司名称不能为空!", "2");
+        div.addClass('has-error');
+      }
+    });
+
+
+    $('.leixing').on('click', function () {
+      var jblx = $('input[name="sqrlx"]:checked').val();
+      if (jblx == '0') {
+        $('#jdcsfz').show();
+        $('#sfzh').show();
+        $('#qyyyzz').hide();
+      } else {
+        $('#jdcsfz').hide();
+        $('#sfzh').hide();
+        $('#qyyyzz').show();
+      }
+    });
+    var aaa = 0;
+    /**
+    * 短信界面提交后,由于图片form提交后天值传不过来,所以用这种onload方法获取后台的传值
+    */
+
+    var oFrm = document.getElementById("interface_data");
+    oFrm.onload = function () {
+      if (aaa == 0) return;
+      if (this.readyState && this.readyState != 'complete') return; else {
+        // if (document.all) { //IE
+        //   var sub_con = document.frames["interface_data"].document;
+        // } else { //Firefox
+        //   var sub_con = document.getElementById("interface_data").contentDocument;
+        // }
+        // sub_con = sub_con.body.innerHTML; //取得返回值
+        // console.log(1111, sub_con)
+        // if (sub_con.indexOf("OK") >= 0) {
+        // var dataPara = getFormJson("clxxtx_form");
+        // dataPara.SQLX = 1;
+        // var datap = (dataPara);
+        // console.log('datap', datap)
+
+
+
+        // } else {
+        //   var szsz = eval('(' + sub_con + ')');
+        //   console.log(szsz)
+        //   layer.closeAll('loading');
+        //   Pop_up_box(szsz.info, '2');
+        // }
+      }
+    };
+
+  </script>
+</body>
+
+</html>

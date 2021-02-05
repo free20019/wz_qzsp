@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.JsyjcxxMapper">
+  <resultMap id="BaseResultMap" type="entity.Jsyjcxx">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="JSYBH" jdbcType="VARCHAR" property="jsybh" />
+    <result column="XM" jdbcType="VARCHAR" property="xm" />
+    <result column="XB" jdbcType="VARCHAR" property="xb" />
+    <result column="GJ" jdbcType="VARCHAR" property="gj" />
+    <result column="ZZ" jdbcType="VARCHAR" property="zz" />
+    <result column="ZJLX" jdbcType="VARCHAR" property="zjlx" />
+    <result column="ZJHM" jdbcType="VARCHAR" property="zjhm" />
+    <result column="SFZJ" jdbcType="VARCHAR" property="sfzj" />
+    <result column="JZZQFRQ" jdbcType="DATE" property="jzzqfrq" />
+    <result column="CSRQ" jdbcType="DATE" property="csrq" />
+    <result column="JSZH" jdbcType="VARCHAR" property="jszh" />
+    <result column="JSZDABH" jdbcType="VARCHAR" property="jszdabh" />
+    <result column="JSZJ" jdbcType="VARCHAR" property="jszj" />
+    <result column="CLJSZRQ" jdbcType="DATE" property="cljszrq" />
+    <result column="ZJCX" jdbcType="VARCHAR" property="zjcx" />
+    <result column="JSZYXQQ" jdbcType="DATE" property="jszyxqq" />
+    <result column="JSZYXQZ" jdbcType="DATE" property="jszyxqz" />
+    <result column="JSYZBH" jdbcType="VARCHAR" property="jsyzbh" />
+    <result column="ZP" jdbcType="VARCHAR" property="zp" />
+    <result column="MZ" jdbcType="VARCHAR" property="mz" />
+    <result column="HYZK" jdbcType="VARCHAR" property="hyzk" />
+    <result column="WYNL" jdbcType="VARCHAR" property="wynl" />
+    <result column="LXDH" jdbcType="VARCHAR" property="lxdh" />
+    <result column="SJHM" jdbcType="VARCHAR" property="sjhm" />
+    <result column="TXDZ" jdbcType="VARCHAR" property="txdz" />
+    <result column="DZYX" jdbcType="VARCHAR" property="dzyx" />
+    <result column="YB" jdbcType="VARCHAR" property="yb" />
+    <result column="XL" jdbcType="VARCHAR" property="xl" />
+    <result column="JSYZCLRQ" jdbcType="DATE" property="jsyzclrq" />
+    <result column="FZRQ" jdbcType="DATE" property="fzrq" />
+    <result column="JSYZYXQZ" jdbcType="DATE" property="jsyzyxqz" />
+    <result column="JSYZFZJG" jdbcType="VARCHAR" property="jsyzfzjg" />
+    <result column="PXKCMC" jdbcType="VARCHAR" property="pxkcmc" />
+    <result column="PXKCRQ" jdbcType="DATE" property="pxkcrq" />
+    <result column="PXKSSJ" jdbcType="DATE" property="pxkssj" />
+    <result column="PXJSSJ" jdbcType="DATE" property="pxjssj" />
+    <result column="PXSC" jdbcType="VARCHAR" property="pxsc" />
+    <result column="WCDDCS" jdbcType="VARCHAR" property="wcddcs" />
+    <result column="JTWZCS" jdbcType="VARCHAR" property="jtwzcs" />
+    <result column="HTBH" jdbcType="VARCHAR" property="htbh" />
+    <result column="QYGSBH" jdbcType="VARCHAR" property="qygsbh" />
+    <result column="QYGSMC" jdbcType="VARCHAR" property="qygsmc" />
+    <result column="QSRQ" jdbcType="DATE" property="qsrq" />
+    <result column="HTDQSJ" jdbcType="DATE" property="htdqsj" />
+    <result column="YXHTSJ" jdbcType="INTEGER" property="yxhtsj" />
+    <result column="Is_TaxiDriver" jdbcType="VARCHAR" property="isTaxidriver" />
+    <result column="SJXZ" jdbcType="VARCHAR" property="sjxz" />
+    <result column="Is_BlackList" jdbcType="VARCHAR" property="isBlacklist" />
+    <result column="SJSJXH" jdbcType="VARCHAR" property="sjsjxh" />
+    <result column="SJSJYYS" jdbcType="VARCHAR" property="sjsjyys" />
+    <result column="SJAPPBB" jdbcType="VARCHAR" property="sjappbb" />
+    <result column="SYDT" jdbcType="VARCHAR" property="sydt" />
+    <result column="JJLXR" jdbcType="VARCHAR" property="jjlxr" />
+    <result column="JJLXRDH" jdbcType="VARCHAR" property="jjlxrdh" />
+    <result column="JJLXRDZ" jdbcType="VARCHAR" property="jjlxrdz" />
+    <result column="KSYYZT" jdbcType="VARCHAR" property="ksyyzt" />
+    <result column="KSFS" jdbcType="VARCHAR" property="ksfs" />
+    <result column="Is_TrafficAccident" jdbcType="VARCHAR" property="isTrafficaccident" />
+    <result column="Is_DangerousDriving" jdbcType="VARCHAR" property="isDangerousdriving" />
+    <result column="Is_Drug" jdbcType="VARCHAR" property="isDrug" />
+    <result column="Is_DrunkDriver" jdbcType="VARCHAR" property="isDrunkdriver" />
+    <result column="Is_ViolentCrime" jdbcType="VARCHAR" property="isViolentcrime" />
+    <result column="Is_12M" jdbcType="VARCHAR" property="is12m" />
+    <result column="Is_ Revoke" jdbcType="VARCHAR" property="isRevoke" />
+    <result column="GXSJ" jdbcType="DATE" property="gxsj" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, JSYBH, XM, XB, GJ, ZZ, ZJLX, ZJHM, SFZJ, JZZQFRQ, CSRQ, JSZH, JSZDABH, JSZJ, 
+    CLJSZRQ, ZJCX, JSZYXQQ, JSZYXQZ, JSYZBH, ZP, MZ, HYZK, WYNL, LXDH, SJHM, TXDZ, DZYX, 
+    YB, XL, JSYZCLRQ, FZRQ, JSYZYXQZ, JSYZFZJG, PXKCMC, PXKCRQ, PXKSSJ, PXJSSJ, PXSC, 
+    WCDDCS, JTWZCS, HTBH, QYGSBH, QYGSMC, QSRQ, HTDQSJ, YXHTSJ, Is_TaxiDriver, SJXZ, 
+    Is_BlackList, SJSJXH, SJSJYYS, SJAPPBB, SYDT, JJLXR, JJLXRDH, JJLXRDZ, KSYYZT, KSFS, 
+    Is_TrafficAccident, Is_DangerousDriving, Is_Drug, Is_DrunkDriver, Is_ViolentCrime, 
+    Is_12M, "Is_ Revoke", GXSJ
+  </sql>
+  <select id="selectByExample" parameterType="entity.JsyjcxxExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_jsyjcxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_jsyjcxx
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_jsyjcxx
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.JsyjcxxExample">
+    delete from tb_jsyjcxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Jsyjcxx">
+    insert into tb_jsyjcxx (id, JSYBH, XM, 
+      XB, GJ, ZZ, ZJLX, 
+      ZJHM, SFZJ, JZZQFRQ, CSRQ, 
+      JSZH, JSZDABH, JSZJ, 
+      CLJSZRQ, ZJCX, JSZYXQQ, JSZYXQZ, 
+      JSYZBH, ZP, MZ, HYZK, 
+      WYNL, LXDH, SJHM, TXDZ, 
+      DZYX, YB, XL, JSYZCLRQ, 
+      FZRQ, JSYZYXQZ, JSYZFZJG, 
+      PXKCMC, PXKCRQ, PXKSSJ, PXJSSJ, 
+      PXSC, WCDDCS, JTWZCS, 
+      HTBH, QYGSBH, QYGSMC, 
+      QSRQ, HTDQSJ, YXHTSJ, Is_TaxiDriver, 
+      SJXZ, Is_BlackList, SJSJXH, 
+      SJSJYYS, SJAPPBB, SYDT, 
+      JJLXR, JJLXRDH, JJLXRDZ, 
+      KSYYZT, KSFS, Is_TrafficAccident, 
+      Is_DangerousDriving, Is_Drug, Is_DrunkDriver, 
+      Is_ViolentCrime, Is_12M, "Is_ Revoke", 
+      GXSJ)
+    values (#{id,jdbcType=VARCHAR}, #{jsybh,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, 
+      #{xb,jdbcType=VARCHAR}, #{gj,jdbcType=VARCHAR}, #{zz,jdbcType=VARCHAR}, #{zjlx,jdbcType=VARCHAR}, 
+      #{zjhm,jdbcType=VARCHAR}, #{sfzj,jdbcType=VARCHAR}, #{jzzqfrq,jdbcType=DATE}, #{csrq,jdbcType=DATE}, 
+      #{jszh,jdbcType=VARCHAR}, #{jszdabh,jdbcType=VARCHAR}, #{jszj,jdbcType=VARCHAR}, 
+      #{cljszrq,jdbcType=DATE}, #{zjcx,jdbcType=VARCHAR}, #{jszyxqq,jdbcType=DATE}, #{jszyxqz,jdbcType=DATE}, 
+      #{jsyzbh,jdbcType=VARCHAR}, #{zp,jdbcType=VARCHAR}, #{mz,jdbcType=VARCHAR}, #{hyzk,jdbcType=VARCHAR}, 
+      #{wynl,jdbcType=VARCHAR}, #{lxdh,jdbcType=VARCHAR}, #{sjhm,jdbcType=VARCHAR}, #{txdz,jdbcType=VARCHAR}, 
+      #{dzyx,jdbcType=VARCHAR}, #{yb,jdbcType=VARCHAR}, #{xl,jdbcType=VARCHAR}, #{jsyzclrq,jdbcType=DATE}, 
+      #{fzrq,jdbcType=DATE}, #{jsyzyxqz,jdbcType=DATE}, #{jsyzfzjg,jdbcType=VARCHAR}, 
+      #{pxkcmc,jdbcType=VARCHAR}, #{pxkcrq,jdbcType=DATE}, #{pxkssj,jdbcType=DATE}, #{pxjssj,jdbcType=DATE}, 
+      #{pxsc,jdbcType=VARCHAR}, #{wcddcs,jdbcType=VARCHAR}, #{jtwzcs,jdbcType=VARCHAR}, 
+      #{htbh,jdbcType=VARCHAR}, #{qygsbh,jdbcType=VARCHAR}, #{qygsmc,jdbcType=VARCHAR}, 
+      #{qsrq,jdbcType=DATE}, #{htdqsj,jdbcType=DATE}, #{yxhtsj,jdbcType=INTEGER}, #{isTaxidriver,jdbcType=VARCHAR}, 
+      #{sjxz,jdbcType=VARCHAR}, #{isBlacklist,jdbcType=VARCHAR}, #{sjsjxh,jdbcType=VARCHAR}, 
+      #{sjsjyys,jdbcType=VARCHAR}, #{sjappbb,jdbcType=VARCHAR}, #{sydt,jdbcType=VARCHAR}, 
+      #{jjlxr,jdbcType=VARCHAR}, #{jjlxrdh,jdbcType=VARCHAR}, #{jjlxrdz,jdbcType=VARCHAR}, 
+      #{ksyyzt,jdbcType=VARCHAR}, #{ksfs,jdbcType=VARCHAR}, #{isTrafficaccident,jdbcType=VARCHAR}, 
+      #{isDangerousdriving,jdbcType=VARCHAR}, #{isDrug,jdbcType=VARCHAR}, #{isDrunkdriver,jdbcType=VARCHAR}, 
+      #{isViolentcrime,jdbcType=VARCHAR}, #{is12m,jdbcType=VARCHAR}, #{isRevoke,jdbcType=VARCHAR}, 
+      #{gxsj,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Jsyjcxx">
+    insert into tb_jsyjcxx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jsybh != null">
+        JSYBH,
+      </if>
+      <if test="xm != null">
+        XM,
+      </if>
+      <if test="xb != null">
+        XB,
+      </if>
+      <if test="gj != null">
+        GJ,
+      </if>
+      <if test="zz != null">
+        ZZ,
+      </if>
+      <if test="zjlx != null">
+        ZJLX,
+      </if>
+      <if test="zjhm != null">
+        ZJHM,
+      </if>
+      <if test="sfzj != null">
+        SFZJ,
+      </if>
+      <if test="jzzqfrq != null">
+        JZZQFRQ,
+      </if>
+      <if test="csrq != null">
+        CSRQ,
+      </if>
+      <if test="jszh != null">
+        JSZH,
+      </if>
+      <if test="jszdabh != null">
+        JSZDABH,
+      </if>
+      <if test="jszj != null">
+        JSZJ,
+      </if>
+      <if test="cljszrq != null">
+        CLJSZRQ,
+      </if>
+      <if test="zjcx != null">
+        ZJCX,
+      </if>
+      <if test="jszyxqq != null">
+        JSZYXQQ,
+      </if>
+      <if test="jszyxqz != null">
+        JSZYXQZ,
+      </if>
+      <if test="jsyzbh != null">
+        JSYZBH,
+      </if>
+      <if test="zp != null">
+        ZP,
+      </if>
+      <if test="mz != null">
+        MZ,
+      </if>
+      <if test="hyzk != null">
+        HYZK,
+      </if>
+      <if test="wynl != null">
+        WYNL,
+      </if>
+      <if test="lxdh != null">
+        LXDH,
+      </if>
+      <if test="sjhm != null">
+        SJHM,
+      </if>
+      <if test="txdz != null">
+        TXDZ,
+      </if>
+      <if test="dzyx != null">
+        DZYX,
+      </if>
+      <if test="yb != null">
+        YB,
+      </if>
+      <if test="xl != null">
+        XL,
+      </if>
+      <if test="jsyzclrq != null">
+        JSYZCLRQ,
+      </if>
+      <if test="fzrq != null">
+        FZRQ,
+      </if>
+      <if test="jsyzyxqz != null">
+        JSYZYXQZ,
+      </if>
+      <if test="jsyzfzjg != null">
+        JSYZFZJG,
+      </if>
+      <if test="pxkcmc != null">
+        PXKCMC,
+      </if>
+      <if test="pxkcrq != null">
+        PXKCRQ,
+      </if>
+      <if test="pxkssj != null">
+        PXKSSJ,
+      </if>
+      <if test="pxjssj != null">
+        PXJSSJ,
+      </if>
+      <if test="pxsc != null">
+        PXSC,
+      </if>
+      <if test="wcddcs != null">
+        WCDDCS,
+      </if>
+      <if test="jtwzcs != null">
+        JTWZCS,
+      </if>
+      <if test="htbh != null">
+        HTBH,
+      </if>
+      <if test="qygsbh != null">
+        QYGSBH,
+      </if>
+      <if test="qygsmc != null">
+        QYGSMC,
+      </if>
+      <if test="qsrq != null">
+        QSRQ,
+      </if>
+      <if test="htdqsj != null">
+        HTDQSJ,
+      </if>
+      <if test="yxhtsj != null">
+        YXHTSJ,
+      </if>
+      <if test="isTaxidriver != null">
+        Is_TaxiDriver,
+      </if>
+      <if test="sjxz != null">
+        SJXZ,
+      </if>
+      <if test="isBlacklist != null">
+        Is_BlackList,
+      </if>
+      <if test="sjsjxh != null">
+        SJSJXH,
+      </if>
+      <if test="sjsjyys != null">
+        SJSJYYS,
+      </if>
+      <if test="sjappbb != null">
+        SJAPPBB,
+      </if>
+      <if test="sydt != null">
+        SYDT,
+      </if>
+      <if test="jjlxr != null">
+        JJLXR,
+      </if>
+      <if test="jjlxrdh != null">
+        JJLXRDH,
+      </if>
+      <if test="jjlxrdz != null">
+        JJLXRDZ,
+      </if>
+      <if test="ksyyzt != null">
+        KSYYZT,
+      </if>
+      <if test="ksfs != null">
+        KSFS,
+      </if>
+      <if test="isTrafficaccident != null">
+        Is_TrafficAccident,
+      </if>
+      <if test="isDangerousdriving != null">
+        Is_DangerousDriving,
+      </if>
+      <if test="isDrug != null">
+        Is_Drug,
+      </if>
+      <if test="isDrunkdriver != null">
+        Is_DrunkDriver,
+      </if>
+      <if test="isViolentcrime != null">
+        Is_ViolentCrime,
+      </if>
+      <if test="is12m != null">
+        Is_12M,
+      </if>
+      <if test="isRevoke != null">
+        "Is_ Revoke",
+      </if>
+      <if test="gxsj != null">
+        GXSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="jsybh != null">
+        #{jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null">
+        #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="gj != null">
+        #{gj,jdbcType=VARCHAR},
+      </if>
+      <if test="zz != null">
+        #{zz,jdbcType=VARCHAR},
+      </if>
+      <if test="zjlx != null">
+        #{zjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null">
+        #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzj != null">
+        #{sfzj,jdbcType=VARCHAR},
+      </if>
+      <if test="jzzqfrq != null">
+        #{jzzqfrq,jdbcType=DATE},
+      </if>
+      <if test="csrq != null">
+        #{csrq,jdbcType=DATE},
+      </if>
+      <if test="jszh != null">
+        #{jszh,jdbcType=VARCHAR},
+      </if>
+      <if test="jszdabh != null">
+        #{jszdabh,jdbcType=VARCHAR},
+      </if>
+      <if test="jszj != null">
+        #{jszj,jdbcType=VARCHAR},
+      </if>
+      <if test="cljszrq != null">
+        #{cljszrq,jdbcType=DATE},
+      </if>
+      <if test="zjcx != null">
+        #{zjcx,jdbcType=VARCHAR},
+      </if>
+      <if test="jszyxqq != null">
+        #{jszyxqq,jdbcType=DATE},
+      </if>
+      <if test="jszyxqz != null">
+        #{jszyxqz,jdbcType=DATE},
+      </if>
+      <if test="jsyzbh != null">
+        #{jsyzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zp != null">
+        #{zp,jdbcType=VARCHAR},
+      </if>
+      <if test="mz != null">
+        #{mz,jdbcType=VARCHAR},
+      </if>
+      <if test="hyzk != null">
+        #{hyzk,jdbcType=VARCHAR},
+      </if>
+      <if test="wynl != null">
+        #{wynl,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdh != null">
+        #{lxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="sjhm != null">
+        #{sjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="txdz != null">
+        #{txdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dzyx != null">
+        #{dzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="yb != null">
+        #{yb,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null">
+        #{xl,jdbcType=VARCHAR},
+      </if>
+      <if test="jsyzclrq != null">
+        #{jsyzclrq,jdbcType=DATE},
+      </if>
+      <if test="fzrq != null">
+        #{fzrq,jdbcType=DATE},
+      </if>
+      <if test="jsyzyxqz != null">
+        #{jsyzyxqz,jdbcType=DATE},
+      </if>
+      <if test="jsyzfzjg != null">
+        #{jsyzfzjg,jdbcType=VARCHAR},
+      </if>
+      <if test="pxkcmc != null">
+        #{pxkcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="pxkcrq != null">
+        #{pxkcrq,jdbcType=DATE},
+      </if>
+      <if test="pxkssj != null">
+        #{pxkssj,jdbcType=DATE},
+      </if>
+      <if test="pxjssj != null">
+        #{pxjssj,jdbcType=DATE},
+      </if>
+      <if test="pxsc != null">
+        #{pxsc,jdbcType=VARCHAR},
+      </if>
+      <if test="wcddcs != null">
+        #{wcddcs,jdbcType=VARCHAR},
+      </if>
+      <if test="jtwzcs != null">
+        #{jtwzcs,jdbcType=VARCHAR},
+      </if>
+      <if test="htbh != null">
+        #{htbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qygsbh != null">
+        #{qygsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qygsmc != null">
+        #{qygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="qsrq != null">
+        #{qsrq,jdbcType=DATE},
+      </if>
+      <if test="htdqsj != null">
+        #{htdqsj,jdbcType=DATE},
+      </if>
+      <if test="yxhtsj != null">
+        #{yxhtsj,jdbcType=INTEGER},
+      </if>
+      <if test="isTaxidriver != null">
+        #{isTaxidriver,jdbcType=VARCHAR},
+      </if>
+      <if test="sjxz != null">
+        #{sjxz,jdbcType=VARCHAR},
+      </if>
+      <if test="isBlacklist != null">
+        #{isBlacklist,jdbcType=VARCHAR},
+      </if>
+      <if test="sjsjxh != null">
+        #{sjsjxh,jdbcType=VARCHAR},
+      </if>
+      <if test="sjsjyys != null">
+        #{sjsjyys,jdbcType=VARCHAR},
+      </if>
+      <if test="sjappbb != null">
+        #{sjappbb,jdbcType=VARCHAR},
+      </if>
+      <if test="sydt != null">
+        #{sydt,jdbcType=VARCHAR},
+      </if>
+      <if test="jjlxr != null">
+        #{jjlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="jjlxrdh != null">
+        #{jjlxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="jjlxrdz != null">
+        #{jjlxrdz,jdbcType=VARCHAR},
+      </if>
+      <if test="ksyyzt != null">
+        #{ksyyzt,jdbcType=VARCHAR},
+      </if>
+      <if test="ksfs != null">
+        #{ksfs,jdbcType=VARCHAR},
+      </if>
+      <if test="isTrafficaccident != null">
+        #{isTrafficaccident,jdbcType=VARCHAR},
+      </if>
+      <if test="isDangerousdriving != null">
+        #{isDangerousdriving,jdbcType=VARCHAR},
+      </if>
+      <if test="isDrug != null">
+        #{isDrug,jdbcType=VARCHAR},
+      </if>
+      <if test="isDrunkdriver != null">
+        #{isDrunkdriver,jdbcType=VARCHAR},
+      </if>
+      <if test="isViolentcrime != null">
+        #{isViolentcrime,jdbcType=VARCHAR},
+      </if>
+      <if test="is12m != null">
+        #{is12m,jdbcType=VARCHAR},
+      </if>
+      <if test="isRevoke != null">
+        #{isRevoke,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null">
+        #{gxsj,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.JsyjcxxExample" resultType="java.lang.Long">
+    select count(*) from tb_jsyjcxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_jsyjcxx
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jsybh != null">
+        JSYBH = #{record.jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xm != null">
+        XM = #{record.xm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xb != null">
+        XB = #{record.xb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gj != null">
+        GJ = #{record.gj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zz != null">
+        ZZ = #{record.zz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zjlx != null">
+        ZJLX = #{record.zjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zjhm != null">
+        ZJHM = #{record.zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfzj != null">
+        SFZJ = #{record.sfzj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jzzqfrq != null">
+        JZZQFRQ = #{record.jzzqfrq,jdbcType=DATE},
+      </if>
+      <if test="record.csrq != null">
+        CSRQ = #{record.csrq,jdbcType=DATE},
+      </if>
+      <if test="record.jszh != null">
+        JSZH = #{record.jszh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jszdabh != null">
+        JSZDABH = #{record.jszdabh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jszj != null">
+        JSZJ = #{record.jszj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cljszrq != null">
+        CLJSZRQ = #{record.cljszrq,jdbcType=DATE},
+      </if>
+      <if test="record.zjcx != null">
+        ZJCX = #{record.zjcx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jszyxqq != null">
+        JSZYXQQ = #{record.jszyxqq,jdbcType=DATE},
+      </if>
+      <if test="record.jszyxqz != null">
+        JSZYXQZ = #{record.jszyxqz,jdbcType=DATE},
+      </if>
+      <if test="record.jsyzbh != null">
+        JSYZBH = #{record.jsyzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zp != null">
+        ZP = #{record.zp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mz != null">
+        MZ = #{record.mz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hyzk != null">
+        HYZK = #{record.hyzk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wynl != null">
+        WYNL = #{record.wynl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxdh != null">
+        LXDH = #{record.lxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sjhm != null">
+        SJHM = #{record.sjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txdz != null">
+        TXDZ = #{record.txdz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dzyx != null">
+        DZYX = #{record.dzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yb != null">
+        YB = #{record.yb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xl != null">
+        XL = #{record.xl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jsyzclrq != null">
+        JSYZCLRQ = #{record.jsyzclrq,jdbcType=DATE},
+      </if>
+      <if test="record.fzrq != null">
+        FZRQ = #{record.fzrq,jdbcType=DATE},
+      </if>
+      <if test="record.jsyzyxqz != null">
+        JSYZYXQZ = #{record.jsyzyxqz,jdbcType=DATE},
+      </if>
+      <if test="record.jsyzfzjg != null">
+        JSYZFZJG = #{record.jsyzfzjg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pxkcmc != null">
+        PXKCMC = #{record.pxkcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pxkcrq != null">
+        PXKCRQ = #{record.pxkcrq,jdbcType=DATE},
+      </if>
+      <if test="record.pxkssj != null">
+        PXKSSJ = #{record.pxkssj,jdbcType=DATE},
+      </if>
+      <if test="record.pxjssj != null">
+        PXJSSJ = #{record.pxjssj,jdbcType=DATE},
+      </if>
+      <if test="record.pxsc != null">
+        PXSC = #{record.pxsc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wcddcs != null">
+        WCDDCS = #{record.wcddcs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jtwzcs != null">
+        JTWZCS = #{record.jtwzcs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.htbh != null">
+        HTBH = #{record.htbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qygsbh != null">
+        QYGSBH = #{record.qygsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qygsmc != null">
+        QYGSMC = #{record.qygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qsrq != null">
+        QSRQ = #{record.qsrq,jdbcType=DATE},
+      </if>
+      <if test="record.htdqsj != null">
+        HTDQSJ = #{record.htdqsj,jdbcType=DATE},
+      </if>
+      <if test="record.yxhtsj != null">
+        YXHTSJ = #{record.yxhtsj,jdbcType=INTEGER},
+      </if>
+      <if test="record.isTaxidriver != null">
+        Is_TaxiDriver = #{record.isTaxidriver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sjxz != null">
+        SJXZ = #{record.sjxz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isBlacklist != null">
+        Is_BlackList = #{record.isBlacklist,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sjsjxh != null">
+        SJSJXH = #{record.sjsjxh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sjsjyys != null">
+        SJSJYYS = #{record.sjsjyys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sjappbb != null">
+        SJAPPBB = #{record.sjappbb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sydt != null">
+        SYDT = #{record.sydt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jjlxr != null">
+        JJLXR = #{record.jjlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jjlxrdh != null">
+        JJLXRDH = #{record.jjlxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jjlxrdz != null">
+        JJLXRDZ = #{record.jjlxrdz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ksyyzt != null">
+        KSYYZT = #{record.ksyyzt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ksfs != null">
+        KSFS = #{record.ksfs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isTrafficaccident != null">
+        Is_TrafficAccident = #{record.isTrafficaccident,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDangerousdriving != null">
+        Is_DangerousDriving = #{record.isDangerousdriving,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDrug != null">
+        Is_Drug = #{record.isDrug,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDrunkdriver != null">
+        Is_DrunkDriver = #{record.isDrunkdriver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isViolentcrime != null">
+        Is_ViolentCrime = #{record.isViolentcrime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.is12m != null">
+        Is_12M = #{record.is12m,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isRevoke != null">
+        "Is_ Revoke" = #{record.isRevoke,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gxsj != null">
+        GXSJ = #{record.gxsj,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_jsyjcxx
+    set id = #{record.id,jdbcType=VARCHAR},
+      JSYBH = #{record.jsybh,jdbcType=VARCHAR},
+      XM = #{record.xm,jdbcType=VARCHAR},
+      XB = #{record.xb,jdbcType=VARCHAR},
+      GJ = #{record.gj,jdbcType=VARCHAR},
+      ZZ = #{record.zz,jdbcType=VARCHAR},
+      ZJLX = #{record.zjlx,jdbcType=VARCHAR},
+      ZJHM = #{record.zjhm,jdbcType=VARCHAR},
+      SFZJ = #{record.sfzj,jdbcType=VARCHAR},
+      JZZQFRQ = #{record.jzzqfrq,jdbcType=DATE},
+      CSRQ = #{record.csrq,jdbcType=DATE},
+      JSZH = #{record.jszh,jdbcType=VARCHAR},
+      JSZDABH = #{record.jszdabh,jdbcType=VARCHAR},
+      JSZJ = #{record.jszj,jdbcType=VARCHAR},
+      CLJSZRQ = #{record.cljszrq,jdbcType=DATE},
+      ZJCX = #{record.zjcx,jdbcType=VARCHAR},
+      JSZYXQQ = #{record.jszyxqq,jdbcType=DATE},
+      JSZYXQZ = #{record.jszyxqz,jdbcType=DATE},
+      JSYZBH = #{record.jsyzbh,jdbcType=VARCHAR},
+      ZP = #{record.zp,jdbcType=VARCHAR},
+      MZ = #{record.mz,jdbcType=VARCHAR},
+      HYZK = #{record.hyzk,jdbcType=VARCHAR},
+      WYNL = #{record.wynl,jdbcType=VARCHAR},
+      LXDH = #{record.lxdh,jdbcType=VARCHAR},
+      SJHM = #{record.sjhm,jdbcType=VARCHAR},
+      TXDZ = #{record.txdz,jdbcType=VARCHAR},
+      DZYX = #{record.dzyx,jdbcType=VARCHAR},
+      YB = #{record.yb,jdbcType=VARCHAR},
+      XL = #{record.xl,jdbcType=VARCHAR},
+      JSYZCLRQ = #{record.jsyzclrq,jdbcType=DATE},
+      FZRQ = #{record.fzrq,jdbcType=DATE},
+      JSYZYXQZ = #{record.jsyzyxqz,jdbcType=DATE},
+      JSYZFZJG = #{record.jsyzfzjg,jdbcType=VARCHAR},
+      PXKCMC = #{record.pxkcmc,jdbcType=VARCHAR},
+      PXKCRQ = #{record.pxkcrq,jdbcType=DATE},
+      PXKSSJ = #{record.pxkssj,jdbcType=DATE},
+      PXJSSJ = #{record.pxjssj,jdbcType=DATE},
+      PXSC = #{record.pxsc,jdbcType=VARCHAR},
+      WCDDCS = #{record.wcddcs,jdbcType=VARCHAR},
+      JTWZCS = #{record.jtwzcs,jdbcType=VARCHAR},
+      HTBH = #{record.htbh,jdbcType=VARCHAR},
+      QYGSBH = #{record.qygsbh,jdbcType=VARCHAR},
+      QYGSMC = #{record.qygsmc,jdbcType=VARCHAR},
+      QSRQ = #{record.qsrq,jdbcType=DATE},
+      HTDQSJ = #{record.htdqsj,jdbcType=DATE},
+      YXHTSJ = #{record.yxhtsj,jdbcType=INTEGER},
+      Is_TaxiDriver = #{record.isTaxidriver,jdbcType=VARCHAR},
+      SJXZ = #{record.sjxz,jdbcType=VARCHAR},
+      Is_BlackList = #{record.isBlacklist,jdbcType=VARCHAR},
+      SJSJXH = #{record.sjsjxh,jdbcType=VARCHAR},
+      SJSJYYS = #{record.sjsjyys,jdbcType=VARCHAR},
+      SJAPPBB = #{record.sjappbb,jdbcType=VARCHAR},
+      SYDT = #{record.sydt,jdbcType=VARCHAR},
+      JJLXR = #{record.jjlxr,jdbcType=VARCHAR},
+      JJLXRDH = #{record.jjlxrdh,jdbcType=VARCHAR},
+      JJLXRDZ = #{record.jjlxrdz,jdbcType=VARCHAR},
+      KSYYZT = #{record.ksyyzt,jdbcType=VARCHAR},
+      KSFS = #{record.ksfs,jdbcType=VARCHAR},
+      Is_TrafficAccident = #{record.isTrafficaccident,jdbcType=VARCHAR},
+      Is_DangerousDriving = #{record.isDangerousdriving,jdbcType=VARCHAR},
+      Is_Drug = #{record.isDrug,jdbcType=VARCHAR},
+      Is_DrunkDriver = #{record.isDrunkdriver,jdbcType=VARCHAR},
+      Is_ViolentCrime = #{record.isViolentcrime,jdbcType=VARCHAR},
+      Is_12M = #{record.is12m,jdbcType=VARCHAR},
+      "Is_ Revoke" = #{record.isRevoke,jdbcType=VARCHAR},
+      GXSJ = #{record.gxsj,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Jsyjcxx">
+    update tb_jsyjcxx
+    <set>
+      <if test="jsybh != null">
+        JSYBH = #{jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null">
+        XB = #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="gj != null">
+        GJ = #{gj,jdbcType=VARCHAR},
+      </if>
+      <if test="zz != null">
+        ZZ = #{zz,jdbcType=VARCHAR},
+      </if>
+      <if test="zjlx != null">
+        ZJLX = #{zjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null">
+        ZJHM = #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzj != null">
+        SFZJ = #{sfzj,jdbcType=VARCHAR},
+      </if>
+      <if test="jzzqfrq != null">
+        JZZQFRQ = #{jzzqfrq,jdbcType=DATE},
+      </if>
+      <if test="csrq != null">
+        CSRQ = #{csrq,jdbcType=DATE},
+      </if>
+      <if test="jszh != null">
+        JSZH = #{jszh,jdbcType=VARCHAR},
+      </if>
+      <if test="jszdabh != null">
+        JSZDABH = #{jszdabh,jdbcType=VARCHAR},
+      </if>
+      <if test="jszj != null">
+        JSZJ = #{jszj,jdbcType=VARCHAR},
+      </if>
+      <if test="cljszrq != null">
+        CLJSZRQ = #{cljszrq,jdbcType=DATE},
+      </if>
+      <if test="zjcx != null">
+        ZJCX = #{zjcx,jdbcType=VARCHAR},
+      </if>
+      <if test="jszyxqq != null">
+        JSZYXQQ = #{jszyxqq,jdbcType=DATE},
+      </if>
+      <if test="jszyxqz != null">
+        JSZYXQZ = #{jszyxqz,jdbcType=DATE},
+      </if>
+      <if test="jsyzbh != null">
+        JSYZBH = #{jsyzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zp != null">
+        ZP = #{zp,jdbcType=VARCHAR},
+      </if>
+      <if test="mz != null">
+        MZ = #{mz,jdbcType=VARCHAR},
+      </if>
+      <if test="hyzk != null">
+        HYZK = #{hyzk,jdbcType=VARCHAR},
+      </if>
+      <if test="wynl != null">
+        WYNL = #{wynl,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdh != null">
+        LXDH = #{lxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="sjhm != null">
+        SJHM = #{sjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="txdz != null">
+        TXDZ = #{txdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dzyx != null">
+        DZYX = #{dzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="yb != null">
+        YB = #{yb,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null">
+        XL = #{xl,jdbcType=VARCHAR},
+      </if>
+      <if test="jsyzclrq != null">
+        JSYZCLRQ = #{jsyzclrq,jdbcType=DATE},
+      </if>
+      <if test="fzrq != null">
+        FZRQ = #{fzrq,jdbcType=DATE},
+      </if>
+      <if test="jsyzyxqz != null">
+        JSYZYXQZ = #{jsyzyxqz,jdbcType=DATE},
+      </if>
+      <if test="jsyzfzjg != null">
+        JSYZFZJG = #{jsyzfzjg,jdbcType=VARCHAR},
+      </if>
+      <if test="pxkcmc != null">
+        PXKCMC = #{pxkcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="pxkcrq != null">
+        PXKCRQ = #{pxkcrq,jdbcType=DATE},
+      </if>
+      <if test="pxkssj != null">
+        PXKSSJ = #{pxkssj,jdbcType=DATE},
+      </if>
+      <if test="pxjssj != null">
+        PXJSSJ = #{pxjssj,jdbcType=DATE},
+      </if>
+      <if test="pxsc != null">
+        PXSC = #{pxsc,jdbcType=VARCHAR},
+      </if>
+      <if test="wcddcs != null">
+        WCDDCS = #{wcddcs,jdbcType=VARCHAR},
+      </if>
+      <if test="jtwzcs != null">
+        JTWZCS = #{jtwzcs,jdbcType=VARCHAR},
+      </if>
+      <if test="htbh != null">
+        HTBH = #{htbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qygsbh != null">
+        QYGSBH = #{qygsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qygsmc != null">
+        QYGSMC = #{qygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="qsrq != null">
+        QSRQ = #{qsrq,jdbcType=DATE},
+      </if>
+      <if test="htdqsj != null">
+        HTDQSJ = #{htdqsj,jdbcType=DATE},
+      </if>
+      <if test="yxhtsj != null">
+        YXHTSJ = #{yxhtsj,jdbcType=INTEGER},
+      </if>
+      <if test="isTaxidriver != null">
+        Is_TaxiDriver = #{isTaxidriver,jdbcType=VARCHAR},
+      </if>
+      <if test="sjxz != null">
+        SJXZ = #{sjxz,jdbcType=VARCHAR},
+      </if>
+      <if test="isBlacklist != null">
+        Is_BlackList = #{isBlacklist,jdbcType=VARCHAR},
+      </if>
+      <if test="sjsjxh != null">
+        SJSJXH = #{sjsjxh,jdbcType=VARCHAR},
+      </if>
+      <if test="sjsjyys != null">
+        SJSJYYS = #{sjsjyys,jdbcType=VARCHAR},
+      </if>
+      <if test="sjappbb != null">
+        SJAPPBB = #{sjappbb,jdbcType=VARCHAR},
+      </if>
+      <if test="sydt != null">
+        SYDT = #{sydt,jdbcType=VARCHAR},
+      </if>
+      <if test="jjlxr != null">
+        JJLXR = #{jjlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="jjlxrdh != null">
+        JJLXRDH = #{jjlxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="jjlxrdz != null">
+        JJLXRDZ = #{jjlxrdz,jdbcType=VARCHAR},
+      </if>
+      <if test="ksyyzt != null">
+        KSYYZT = #{ksyyzt,jdbcType=VARCHAR},
+      </if>
+      <if test="ksfs != null">
+        KSFS = #{ksfs,jdbcType=VARCHAR},
+      </if>
+      <if test="isTrafficaccident != null">
+        Is_TrafficAccident = #{isTrafficaccident,jdbcType=VARCHAR},
+      </if>
+      <if test="isDangerousdriving != null">
+        Is_DangerousDriving = #{isDangerousdriving,jdbcType=VARCHAR},
+      </if>
+      <if test="isDrug != null">
+        Is_Drug = #{isDrug,jdbcType=VARCHAR},
+      </if>
+      <if test="isDrunkdriver != null">
+        Is_DrunkDriver = #{isDrunkdriver,jdbcType=VARCHAR},
+      </if>
+      <if test="isViolentcrime != null">
+        Is_ViolentCrime = #{isViolentcrime,jdbcType=VARCHAR},
+      </if>
+      <if test="is12m != null">
+        Is_12M = #{is12m,jdbcType=VARCHAR},
+      </if>
+      <if test="isRevoke != null">
+        "Is_ Revoke" = #{isRevoke,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null">
+        GXSJ = #{gxsj,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Jsyjcxx">
+    update tb_jsyjcxx
+    set JSYBH = #{jsybh,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      XB = #{xb,jdbcType=VARCHAR},
+      GJ = #{gj,jdbcType=VARCHAR},
+      ZZ = #{zz,jdbcType=VARCHAR},
+      ZJLX = #{zjlx,jdbcType=VARCHAR},
+      ZJHM = #{zjhm,jdbcType=VARCHAR},
+      SFZJ = #{sfzj,jdbcType=VARCHAR},
+      JZZQFRQ = #{jzzqfrq,jdbcType=DATE},
+      CSRQ = #{csrq,jdbcType=DATE},
+      JSZH = #{jszh,jdbcType=VARCHAR},
+      JSZDABH = #{jszdabh,jdbcType=VARCHAR},
+      JSZJ = #{jszj,jdbcType=VARCHAR},
+      CLJSZRQ = #{cljszrq,jdbcType=DATE},
+      ZJCX = #{zjcx,jdbcType=VARCHAR},
+      JSZYXQQ = #{jszyxqq,jdbcType=DATE},
+      JSZYXQZ = #{jszyxqz,jdbcType=DATE},
+      JSYZBH = #{jsyzbh,jdbcType=VARCHAR},
+      ZP = #{zp,jdbcType=VARCHAR},
+      MZ = #{mz,jdbcType=VARCHAR},
+      HYZK = #{hyzk,jdbcType=VARCHAR},
+      WYNL = #{wynl,jdbcType=VARCHAR},
+      LXDH = #{lxdh,jdbcType=VARCHAR},
+      SJHM = #{sjhm,jdbcType=VARCHAR},
+      TXDZ = #{txdz,jdbcType=VARCHAR},
+      DZYX = #{dzyx,jdbcType=VARCHAR},
+      YB = #{yb,jdbcType=VARCHAR},
+      XL = #{xl,jdbcType=VARCHAR},
+      JSYZCLRQ = #{jsyzclrq,jdbcType=DATE},
+      FZRQ = #{fzrq,jdbcType=DATE},
+      JSYZYXQZ = #{jsyzyxqz,jdbcType=DATE},
+      JSYZFZJG = #{jsyzfzjg,jdbcType=VARCHAR},
+      PXKCMC = #{pxkcmc,jdbcType=VARCHAR},
+      PXKCRQ = #{pxkcrq,jdbcType=DATE},
+      PXKSSJ = #{pxkssj,jdbcType=DATE},
+      PXJSSJ = #{pxjssj,jdbcType=DATE},
+      PXSC = #{pxsc,jdbcType=VARCHAR},
+      WCDDCS = #{wcddcs,jdbcType=VARCHAR},
+      JTWZCS = #{jtwzcs,jdbcType=VARCHAR},
+      HTBH = #{htbh,jdbcType=VARCHAR},
+      QYGSBH = #{qygsbh,jdbcType=VARCHAR},
+      QYGSMC = #{qygsmc,jdbcType=VARCHAR},
+      QSRQ = #{qsrq,jdbcType=DATE},
+      HTDQSJ = #{htdqsj,jdbcType=DATE},
+      YXHTSJ = #{yxhtsj,jdbcType=INTEGER},
+      Is_TaxiDriver = #{isTaxidriver,jdbcType=VARCHAR},
+      SJXZ = #{sjxz,jdbcType=VARCHAR},
+      Is_BlackList = #{isBlacklist,jdbcType=VARCHAR},
+      SJSJXH = #{sjsjxh,jdbcType=VARCHAR},
+      SJSJYYS = #{sjsjyys,jdbcType=VARCHAR},
+      SJAPPBB = #{sjappbb,jdbcType=VARCHAR},
+      SYDT = #{sydt,jdbcType=VARCHAR},
+      JJLXR = #{jjlxr,jdbcType=VARCHAR},
+      JJLXRDH = #{jjlxrdh,jdbcType=VARCHAR},
+      JJLXRDZ = #{jjlxrdz,jdbcType=VARCHAR},
+      KSYYZT = #{ksyyzt,jdbcType=VARCHAR},
+      KSFS = #{ksfs,jdbcType=VARCHAR},
+      Is_TrafficAccident = #{isTrafficaccident,jdbcType=VARCHAR},
+      Is_DangerousDriving = #{isDangerousdriving,jdbcType=VARCHAR},
+      Is_Drug = #{isDrug,jdbcType=VARCHAR},
+      Is_DrunkDriver = #{isDrunkdriver,jdbcType=VARCHAR},
+      Is_ViolentCrime = #{isViolentcrime,jdbcType=VARCHAR},
+      Is_12M = #{is12m,jdbcType=VARCHAR},
+      "Is_ Revoke" = #{isRevoke,jdbcType=VARCHAR},
+      GXSJ = #{gxsj,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

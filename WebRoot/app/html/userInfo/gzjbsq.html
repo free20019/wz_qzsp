@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>温州市出租汽车申报服务管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../main.css">
+    <script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../config.js"></script>
+    <script type="text/javascript" src="../../main.js"></script>
+    <script type="text/javascript" src="../../util.js"></script>
+    <script type="text/javascript" src="../../json2.js"></script>
+<style>
+#jsysqxm {
+	font-weight: bold;
+}
+
+.btn {
+	*margin-right: 5px;
+}
+.top_banner ul {
+    width: 685px;
+}
+</style>
+</head>
+<body>
+	<div class="topWrapper">
+		<div class="topHeaderBox">
+			<div class="topHeader">
+				<div class="topGh"></div>
+				<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+			</div>
+		</div>
+		<div id="mainbav">
+			<ul class="nav">
+				<li class="select" data-select=""><a href="javascript:void(0);">账号信息</a></li>
+<!--             <li><a href="../../../index.html">退出</a></li> -->
+			</ul>
+		</div>
+	</div>
+	<div class="infoBox">
+		<div class="infoPage noMT">
+			<div class="pageCenter">
+                <div class="panel-body form-inline">
+                <h4>改装奖补申请表</h4>
+                    <form class="form-inline" id="clxxtx_form" autocomplete="off" action="../../../upload/upload_gzjbsq" target="upload" method="post" enctype="multipart/form-data">
+						<div class="panel panel-borderBlue_1 noBorderRadius">
+							<div class="panel-body">
+								<h4 class="bbGreenLine pl_5em has-blue" style="padding-bottom: 5px">第一步：填写信息 </h4>
+								<div class="B_towSpan bbGreenDashedLine">
+									<div>
+                                        <label for="pt_grjsyzdb_cphm" class="fontLength8 fontRight">车牌号码:&nbsp;</label>
+                                        <input type="text" name="CPHM" id="pt_grjsyzdb_cphm" class="form-control" value="浙C">
+                                    </div><div>
+                                        <label for="pt_grjsyzdb_ccdjrq" class="fontLength8 fontRight">车辆初次登记日期:&nbsp;</label>
+                                        <input type="text" id="pt_grjsyzdb_ccdjrq" class="form-control" name="DJRQ" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd', onpicking: datetimePicking, maxDate: '{%y}-%M-%d'/*, minDate: '%y-%M-{%d}'*/});">
+                                    </div>
+								</div>
+								<div class="B_towSpan bbGreenDashedLine">
+									<div style="font-size: 24px;margin-left: 50px;">
+                                        <label for="jszfzjg" class="fontRight ml_5em" style="width: 7em;">车辆所有人类型：</label>
+                                        <label style="width: 9em;margin-left: 20px;"><input class="leixing" type="radio" name="jszfzjg" value="0" checked>&nbsp;个人</label>
+                                        <label style="width: 9em;"><input class="leixing" type="radio" name="jszfzjg" value="1">&nbsp;企业</label>
+                                    </div>
+								</div>
+								<div class="B_towSpan bbGreenDashedLine">
+									<div>
+                                        <label for="pt_grjsyzdb_syrxm" class="fontLength8 fontRight">车辆所有人名称:&nbsp;</label>
+                                            <input class="form-control pt_grjsyzdb disabled kjbky" type="text" id="pt_grjsyzdb_syrxm" name="XM">
+                                    </div>
+                                    <div>
+                                    <label for="pt_grjsyzdb_lxdh" class="fontLength8 fontRight">车辆所有人联系电话:&nbsp;</label>
+                                            <input class="form-control pt_grjsyzdb disabled kjbky" type="text" id="pt_grjsyzdb_lxdh" name="SJHM">
+                                    </div>
+								</div>
+								<div class="B_towSpan bbGreenDashedLine">
+									<div>
+                                        <label  class="fontLength8 fontRight">改装类型:&nbsp;</label>
+                                        <select class="form-control" id="gzlx" name="GZLX" style="width:182px;">
+                                            <option value="天然气">天然气</option>
+                                            <option value="液化气">液化气</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                     	<label for="pt_grjsyzdb_gzsj" class="fontLength8 fontRight">改装时间:&nbsp;</label>
+                                        <input type="text" id="pt_grjsyzdb_gzsj" class="form-control" id="gzsj" name="GZSJ" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd', onpicking: datetimePicking/*,minDate: '{%y}-%M-%d'*/, maxDate: '2020-06-30'});">
+                                    </div>
+								</div>
+							</div>
+							<div id="scxx" class="panel-body">
+								<h4 class=" pl_5em has-blue" style="padding-bottom: 5px">第二步：上传照片</h4>
+								<div class="bbGreenLine" style="font-size:12px;color:red;font-weight:bold;padding-left:7px">
+									提示：所有上传图片须与申报驾驶员信息一致，格式为jpg、jpeg，图片大小不超过4M，且完整、清晰、无反光、无遮挡，照片面积不低于图框80%。
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine" id="grcllx">
+									<div class="control-file B_towSpan noMargin">
+										<div class="panel-body" style="*padding-right:0">
+											<label for="fileupload_jdcsfzm" class="fontLength12 fontRight ml_5em">机动车所有人身份证（正面）：</label>
+											<img width="220" height="130" src="" alt="">
+											<input type="file" id="fileupload_jdcsfzm" name="SFZJ" style="display: none;">
+											<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_jdcsfzm').click();">上传</button>
+										</div>
+										<div class="panel-body" style="*padding-right:0">
+											<label for="fileupload_jdcsfzmfm" class="fontLength12 fontRight ml_5em">机动车所有人身份证（反面）：</label>
+											<img width="220" height="130" src="" alt="">
+											<input type="file" id="fileupload_jdcsfzmfm" name="SFZJFM" style="display: none;">
+											<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_jdcsfzmfm').click();">上传</button>
+										</div>
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine" id="qycllx">
+									<div class="control-file B_towSpan noMargin">
+										<div class="panel-body">
+											<label for="fileupload_qyyyzz" class="fontLength12 fontRight ml_5em">企业营业执照（五证合一）：</label>
+											<img width="250" height="220" src="" alt="">
+											<input type="file" id="fileupload_qyyyzz" name="ZZJGDMZ" style="display: none;">
+											<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_qyyyzz').click();">上传</button>
+										</div>
+										<div class="panel-body" style="position: absolute; top: 0; *left: 50%;">
+											<label class="lbl_tsCInfo">示例</label>
+											<img width="240" height="210" class="img_center" style="margin-top: 10px;" src="../../../resources/images/3232.png" alt="">
+										</div>
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine">
+									<div class="control-file B_towSpan noMargin">
+										<div class="panel-body">
+											<label for="fileupload_yyz" class="fontLength12 fontRight ml_5em">营运证：</label>
+											<img width="200" height="240" src="" alt="">
+											<input type="file" id="fileupload_yyz" name="YYZ" style="display: none;">
+											<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_yyz').click();">上传</button>
+										</div>
+										<div class="panel-body" style="position: absolute; top: 0; *left: 50%;">
+											<label class="lbl_tsCInfo">示例</label>
+											<img width="190" height="230" class="img_center" style="margin-top: 10px;" src="../../../resources/images/yyz.png" alt="">
+										</div>
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine">
+									<div class="control-file B_towSpan noMargin">
+										<div class="panel-body">
+                                            <label for="fileupload_xxszzm">机动车行驶证（主页和副页的正面）</label>
+                                            <img width="290" height="120" src="" alt="">
+                                            <input type="file" id="fileupload_xxszzm" accept="image/jpeg,image/png,image/jpg" name="XSZZM" style="display: none;">
+                                            <button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_xxszzm').click();">上传</button>
+                                        </div>
+                                        <div class="panel-body" style="position: absolute; top: 0; *left: 50%;">
+                                            <label>&nbsp;</label>
+                                            <label class="lbl_tsCInfo">示例</label>
+                                            <img width="300" height="120" class="img_center" src="../../../resources/images/xsz.png" alt="">
+                                        </div>
+									</div>
+								</div>
+								<div class="B_oneSpan bbGreenDashedLine">
+									<div class="control-file B_towSpan noMargin">
+										<div class="panel-body">
+											<label for="fileupload_tzzm" class="fontLength12 fontRight ml_5em">特种设备使用登记证：</label>
+											<img width="290" height="120" src="" alt="">
+											<input type="file" id="fileupload_tzzm" name="TZSBZM" style="display: none;">
+											<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_tzzm').click();">上传</button>
+										</div>
+										<div class="panel-body" style="position: absolute; top: 0; *left: 50%;">
+											<label class="lbl_tsCInfo">示例</label>
+											<img width="300" height="120" class="img_center" src="../../../resources/images/tzsb1.png" alt="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body" style="margin-top: -30px;">
+							<div class="control-group">
+								<div class="controls fontCenter" style="margin-top: 2em; margin-bottom: 2em;">
+									<button type="button" class="btn btn-info" id="go_next" style="margin-right:10px;">提交</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					<input type="hidden" id="yjhb_bc" />
+					<iframe id="interface_data" name="upload" style="display:none"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bottomFooler"></div>
+	<script type="text/javascript" src="gzjbsq.js"></script>
+	<script class="resize" type="text/javascript">
+		$(window).resize(setInfoPageHeight);
+		$('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+		setInfoPageHeight();
+		bindImageChange();
+		$('#qycllx').hide();
+        // 车牌号码pt_grjsyzdb_cphm
+        $("#pt_grjsyzdb_cphm").focus(function(){
+            hint_info("pt_grjsyzdb_cphm","车牌号码格式：浙C后五位字符！例如“浙C12345”","1");
+        });
+        $("#pt_grjsyzdb_cphm").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#pt_grjsyzdb_cphm").val()==""){
+                hint_info("pt_grjsyzdb_cphm","车牌号码不能为空!","1");
+                div.addClass('has-error');
+            }else if(!regLicenseplate2.test($("#pt_grjsyzdb_cphm").val())) {
+                hint_info("pt_grjsyzdb_cphm","车牌号码格式不正确!","1");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+        // 联系电话
+        $("#pt_grjsyzdb_lxdh").focus(function(){
+            hint_info("pt_grjsyzdb_lxdh","号码格式：11或8位数字！例如“13966666666/85656666”","2");
+        });
+        $("#pt_grjsyzdb_lxdh").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#pt_grjsyzdb_lxdh").val()==""){
+                hint_info("pt_grjsyzdb_lxdh","联系电话不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regPhone.test($("#pt_grjsyzdb_lxdh").val())) {
+                hint_info("pt_grjsyzdb_lxdh","联系电话格式不正确!","2");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+        // 初次登记日期
+        $("#pt_grjsyzdb_ccdjrq").focus(function(){
+            hint_info("pt_grjsyzdb_ccdjrq","请输入车辆初次登记日期！例如：1998-01-01","2");
+        });
+        $("#pt_grjsyzdb_ccdjrq").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#pt_grjsyzdb_ccdjrq").val()==""){
+                hint_info("pt_grjsyzdb_ccdjrq","车辆初次登记日期不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regDate.test($("#pt_grjsyzdb_ccdjrq").val())) {
+                hint_info("pt_grjsyzdb_ccdjrq","车辆初次登记日期格式不正确!","2");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+        //改装时间
+        $("#pt_grjsyzdb_gzsj").focus(function(){
+            hint_info("pt_grjsyzdb_gzsj","请输入改装时间！例如：1998-01-01","2");
+        });
+        $("#pt_grjsyzdb_gzsj").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#pt_grjsyzdb_gzsj").val()==""){
+                hint_info("pt_grjsyzdb_gzsj","改装时间不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regDate.test($("#pt_grjsyzdb_gzsj").val())) {
+                hint_info("pt_grjsyzdb_gzsj","改装时间格式不正确!","2");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+        //车辆所人员名称
+        $("#pt_grjsyzdb_syrxm").focus(function(){
+            hint_info("pt_grjsyzdb_syrxm","请输入所有人名称","2");
+        });
+        $("#pt_grjsyzdb_syrxm").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#pt_grjsyzdb_syrxm").val()==""){
+                hint_info("pt_grjsyzdb_syrxm","车辆所有人名称不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regName.test($("#pt_grjsyzdb_syrxm").val())) {
+                hint_info("pt_grjsyzdb_syrxm","车辆所有人名称格式不正确!","2");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+
+        $('.leixing').on('click',function () {
+			var jblx = $('input[name="jszfzjg"]:checked').val();
+			if(jblx == '0'){
+				$('#grcllx').show();
+				$('#qycllx').hide();
+			}else{
+				$('#qycllx').show();
+				$('#grcllx').hide();
+			}
+        });
+        var aaa = 0;
+        /**
+		    * 短信界面提交后,由于图片form提交后天值传不过来,所以用这种onload方法获取后台的传值
+		    */
+		var oFrm = document.getElementById("interface_data");
+		oFrm.onload = function() {
+			console.log(12312,aaa)
+			if(aaa==0)return;
+			if (this.readyState && this.readyState != 'complete') return;else {
+				if (document.all) { //IE
+					var sub_con = document.frames["interface_data"].document;
+				} else { //Firefox
+					var sub_con = document.getElementById("interface_data").contentDocument;
+				}
+				sub_con = sub_con.body.innerHTML; //取得返回值
+				console.log(1111,sub_con)
+				if (sub_con.indexOf("OK") >= 0) {
+					var dataPara = getFormJson("clxxtx_form");
+					dataPara.SQLX = 1;
+					var datap = JSON.stringify(dataPara);
+//					console.log(datap)
+					$.ajax({
+						type : "post",
+						url : basePath + "jsy/gzjbsq",
+						data : {
+							"postData" : datap
+						},
+						dataType : "json",
+						success : function(data) {
+							var data1 = data;
+							if (data1.info == '提交成功') {
+								window.location.href = "czcjbsq.html";
+								layer.closeAll('loading');
+							} else {
+								layer.closeAll('loading');
+								Pop_up_box(data1.info, '2');
+							}
+						},
+						error : function() {
+							layer.closeAll('loading');
+						}
+					});
+	
+				} else {
+					var szsz = eval('(' + sub_con + ')');
+					console.log(szsz)
+	                layer.closeAll('loading');
+	                Pop_up_box(szsz.info,'2');
+				}
+			}
+		};
+	</script>
+</body>
+</html>

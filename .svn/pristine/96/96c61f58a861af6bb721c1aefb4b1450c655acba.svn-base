@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>温州市出租汽车申报服务管理系统</title>
+    <link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../main.css">
+    <link rel="stylesheet" href="clsq.css">
+    <script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../config.js"></script>
+    <script type="text/javascript" src="../../main.js"></script>
+    <script type="text/javascript" src="../../util.js"></script>
+    <style>
+        #sqrxm,#zjhm{
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="cl_vhic"/>
+<div class="topWrapper">
+    <div class="topHeaderBox">
+        <div class="topHeader">
+            <div class="topGh"></div>
+            <h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+        </div>
+    </div>
+    <div id="mainbav">
+        <ul class="nav">
+            <li><a href="../../../index.html" id="aIndex">首页</a></li>
+            <li><a href="../sqlcsm/clysqlc.html" target="_Blank">操作说明</a></li>
+        </ul>
+    </div>
+</div>
+<div class="infoBox">
+    <div class="infoPage noMT">
+        <div class="top_banner">
+            <ul>
+                <li>
+                    <i class="icon_sqtx_disabled"></i>
+                    <span class="font-disabledColor">申请填写</span>
+                    <i class="icon_jt"></i>
+                </li>
+                <li>
+                    <i class="icon_wcsp_select"></i>
+                    <span class="font-selectColor">完成申请</span>
+                    <i class="icon_jt"></i>
+                </li>
+                <li>
+                    <i class="icon_bgxz_default"></i>
+                    <span class="font-defaultColor">变更性质</span>
+                    <i class="icon_jt"></i>
+                </li>
+                <li>
+                    <i class="icon_bczl_default"></i>
+                    <span class="font-defaultColor">补充资料</span>
+                    <i class="icon_jt"></i>
+                </li>
+                <li>
+                    <i class="icon_ddfz_default"></i>
+                    <span class="font-defaultColor">等待发证</span>
+                </li>
+            </ul>
+        </div>
+        <div class="pageCenter">
+            <div class="control-group topReturnIndexPanel">
+                <div>&nbsp;</div>
+                <div  class="returnSpan">
+                    <a href="../../../index.html" id="returnIndex" class="btn btn-link">返回首页</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="control-group" style="position: relative; font-size: 16px;">
+                    <div style="display: inline-block; width: 150px; padding-left: .5em;">
+                        <label>申请人类别：<span id="txtApplyType"></span></label>
+                    </div>
+                </div>
+                <div class="panel panel-borderBlue_1 noBorderRadius">
+                    <h3>审核结果</h3>
+                    <div class="panel-body">
+                        <div class="panel-body panel-text" id="ztBox">
+<!--                             <p>1、车辆购置税发票与申请信息匹配（该项不符合）。</p> -->
+                        </div>
+                    </div>
+                    <div class="panel-borderG"></div>
+                    <div class="panel-body" style="margin-top: -36px;">
+                        <div class="panel-body panel-text">
+                            <h4 class="wxtx">温馨提醒：</h4>
+                            <div id="btg_yy" class="wxtx">
+                                <p style="text-indent: 2em;">1、燃油车轴距大于等于2650，购置计税价格大于等于12万。</p>
+                                <p style="text-indent: 2em;">2、车辆行驶证载明的初次注册日期至申请时未满4年。</p>
+                                <p style="text-indent: 2em;">3、购置的计税价格大于等于15万元，不受车辆轴距参数限制。</p>
+                                <p style="text-indent: 2em;">4、新能源轴距大于等于2600或综合工况续航里程达到250千米。</p>
+                                <p style="text-indent: 2em;">5、不满足1、2两项的车辆将无法再次提交申请。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight();
+    $('#txtApplyType').text(appleTypeName($.cookie('get', { name: 'regsiterType' })));
+    $('#aIndex, #returnIndex').attr('href', applePathName($.cookie('get', { name: 'regsiterType' })));
+    $('#dy').click(function() {
+        var html = $('.printInfo').html();
+        console.info(html);
+        var dHtml = documentHtml(html);
+        printHtml(dHtml);
+    });
+
+    if(isIE7()){
+        $(".btn-info")
+            .append('<i class="leftRadius" />')
+            .append('<i class="midderbg" />')
+            .append('<i class="rightRadius" />');
+
+    }
+    $.ajax({
+        type:"post",
+        url: basePath + "db/tbsh_cl",
+        data:'{}',
+        dataType: "json",
+        success:function(data){
+        	var type = data.info;
+        	console.log(data)
+        	if(type == '9'){
+        		$("#ztBox").html("<p>未审核</p>");
+        	}else if(type == '2'){
+        		$("#ztBox").html(data.yy);
+        	}else{
+        		location.replace('../../../index.html');
+        	}
+        },
+        error: function(){
+        }         
+     });
+</script>
+</body>
+</html>

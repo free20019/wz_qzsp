@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.ClsyrxxMapper">
+  <resultMap id="BaseResultMap" type="entity.Clsyrxx">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="JDCSYRBH" jdbcType="VARCHAR" property="jdcsyrbh" />
+    <result column="XM" jdbcType="VARCHAR" property="xm" />
+    <result column="ZJLX" jdbcType="VARCHAR" property="zjlx" />
+    <result column="ZJHM" jdbcType="VARCHAR" property="zjhm" />
+    <result column="GJ" jdbcType="VARCHAR" property="gj" />
+    <result column="QZHULX" jdbcType="VARCHAR" property="qzhulx" />
+    <result column="QZHUHM" jdbcType="VARCHAR" property="qzhuhm" />
+    <result column="QZHUQFRQ" jdbcType="DATE" property="qzhuqfrq" />
+    <result column="QZHUYXQZ" jdbcType="DATE" property="qzhuyxqz" />
+    <result column="QZLX" jdbcType="VARCHAR" property="qzlx" />
+    <result column="QZHM" jdbcType="VARCHAR" property="qzhm" />
+    <result column="QZQFRQ" jdbcType="DATE" property="qzqfrq" />
+    <result column="QZYXQZ" jdbcType="DATE" property="qzyxqz" />
+    <result column="SJHM" jdbcType="VARCHAR" property="sjhm" />
+    <result column="DZYX" jdbcType="VARCHAR" property="dzyx" />
+    <result column="YB" jdbcType="VARCHAR" property="yb" />
+    <result column="LXDZ" jdbcType="VARCHAR" property="lxdz" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, JDCSYRBH, XM, ZJLX, ZJHM, GJ, QZHULX, QZHUHM, QZHUQFRQ, QZHUYXQZ, QZLX, QZHM, 
+    QZQFRQ, QZYXQZ, SJHM, DZYX, YB, LXDZ
+  </sql>
+  <select id="selectByExample" parameterType="entity.ClsyrxxExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_clsyrxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_clsyrxx
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_clsyrxx
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.ClsyrxxExample">
+    delete from tb_clsyrxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Clsyrxx">
+    insert into tb_clsyrxx (id, JDCSYRBH, XM, 
+      ZJLX, ZJHM, GJ, QZHULX, 
+      QZHUHM, QZHUQFRQ, QZHUYXQZ, 
+      QZLX, QZHM, QZQFRQ, QZYXQZ, 
+      SJHM, DZYX, YB, LXDZ
+      )
+    values (#{id,jdbcType=INTEGER}, #{jdcsyrbh,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, 
+      #{zjlx,jdbcType=VARCHAR}, #{zjhm,jdbcType=VARCHAR}, #{gj,jdbcType=VARCHAR}, #{qzhulx,jdbcType=VARCHAR}, 
+      #{qzhuhm,jdbcType=VARCHAR}, #{qzhuqfrq,jdbcType=DATE}, #{qzhuyxqz,jdbcType=DATE}, 
+      #{qzlx,jdbcType=VARCHAR}, #{qzhm,jdbcType=VARCHAR}, #{qzqfrq,jdbcType=DATE}, #{qzyxqz,jdbcType=DATE}, 
+      #{sjhm,jdbcType=VARCHAR}, #{dzyx,jdbcType=VARCHAR}, #{yb,jdbcType=VARCHAR}, #{lxdz,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Clsyrxx">
+    insert into tb_clsyrxx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jdcsyrbh != null">
+        JDCSYRBH,
+      </if>
+      <if test="xm != null">
+        XM,
+      </if>
+      <if test="zjlx != null">
+        ZJLX,
+      </if>
+      <if test="zjhm != null">
+        ZJHM,
+      </if>
+      <if test="gj != null">
+        GJ,
+      </if>
+      <if test="qzhulx != null">
+        QZHULX,
+      </if>
+      <if test="qzhuhm != null">
+        QZHUHM,
+      </if>
+      <if test="qzhuqfrq != null">
+        QZHUQFRQ,
+      </if>
+      <if test="qzhuyxqz != null">
+        QZHUYXQZ,
+      </if>
+      <if test="qzlx != null">
+        QZLX,
+      </if>
+      <if test="qzhm != null">
+        QZHM,
+      </if>
+      <if test="qzqfrq != null">
+        QZQFRQ,
+      </if>
+      <if test="qzyxqz != null">
+        QZYXQZ,
+      </if>
+      <if test="sjhm != null">
+        SJHM,
+      </if>
+      <if test="dzyx != null">
+        DZYX,
+      </if>
+      <if test="yb != null">
+        YB,
+      </if>
+      <if test="lxdz != null">
+        LXDZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jdcsyrbh != null">
+        #{jdcsyrbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="zjlx != null">
+        #{zjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null">
+        #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="gj != null">
+        #{gj,jdbcType=VARCHAR},
+      </if>
+      <if test="qzhulx != null">
+        #{qzhulx,jdbcType=VARCHAR},
+      </if>
+      <if test="qzhuhm != null">
+        #{qzhuhm,jdbcType=VARCHAR},
+      </if>
+      <if test="qzhuqfrq != null">
+        #{qzhuqfrq,jdbcType=DATE},
+      </if>
+      <if test="qzhuyxqz != null">
+        #{qzhuyxqz,jdbcType=DATE},
+      </if>
+      <if test="qzlx != null">
+        #{qzlx,jdbcType=VARCHAR},
+      </if>
+      <if test="qzhm != null">
+        #{qzhm,jdbcType=VARCHAR},
+      </if>
+      <if test="qzqfrq != null">
+        #{qzqfrq,jdbcType=DATE},
+      </if>
+      <if test="qzyxqz != null">
+        #{qzyxqz,jdbcType=DATE},
+      </if>
+      <if test="sjhm != null">
+        #{sjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="dzyx != null">
+        #{dzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="yb != null">
+        #{yb,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdz != null">
+        #{lxdz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.ClsyrxxExample" resultType="java.lang.Long">
+    select count(*) from tb_clsyrxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_clsyrxx
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.jdcsyrbh != null">
+        JDCSYRBH = #{record.jdcsyrbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xm != null">
+        XM = #{record.xm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zjlx != null">
+        ZJLX = #{record.zjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zjhm != null">
+        ZJHM = #{record.zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gj != null">
+        GJ = #{record.gj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qzhulx != null">
+        QZHULX = #{record.qzhulx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qzhuhm != null">
+        QZHUHM = #{record.qzhuhm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qzhuqfrq != null">
+        QZHUQFRQ = #{record.qzhuqfrq,jdbcType=DATE},
+      </if>
+      <if test="record.qzhuyxqz != null">
+        QZHUYXQZ = #{record.qzhuyxqz,jdbcType=DATE},
+      </if>
+      <if test="record.qzlx != null">
+        QZLX = #{record.qzlx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qzhm != null">
+        QZHM = #{record.qzhm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qzqfrq != null">
+        QZQFRQ = #{record.qzqfrq,jdbcType=DATE},
+      </if>
+      <if test="record.qzyxqz != null">
+        QZYXQZ = #{record.qzyxqz,jdbcType=DATE},
+      </if>
+      <if test="record.sjhm != null">
+        SJHM = #{record.sjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dzyx != null">
+        DZYX = #{record.dzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yb != null">
+        YB = #{record.yb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxdz != null">
+        LXDZ = #{record.lxdz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_clsyrxx
+    set id = #{record.id,jdbcType=INTEGER},
+      JDCSYRBH = #{record.jdcsyrbh,jdbcType=VARCHAR},
+      XM = #{record.xm,jdbcType=VARCHAR},
+      ZJLX = #{record.zjlx,jdbcType=VARCHAR},
+      ZJHM = #{record.zjhm,jdbcType=VARCHAR},
+      GJ = #{record.gj,jdbcType=VARCHAR},
+      QZHULX = #{record.qzhulx,jdbcType=VARCHAR},
+      QZHUHM = #{record.qzhuhm,jdbcType=VARCHAR},
+      QZHUQFRQ = #{record.qzhuqfrq,jdbcType=DATE},
+      QZHUYXQZ = #{record.qzhuyxqz,jdbcType=DATE},
+      QZLX = #{record.qzlx,jdbcType=VARCHAR},
+      QZHM = #{record.qzhm,jdbcType=VARCHAR},
+      QZQFRQ = #{record.qzqfrq,jdbcType=DATE},
+      QZYXQZ = #{record.qzyxqz,jdbcType=DATE},
+      SJHM = #{record.sjhm,jdbcType=VARCHAR},
+      DZYX = #{record.dzyx,jdbcType=VARCHAR},
+      YB = #{record.yb,jdbcType=VARCHAR},
+      LXDZ = #{record.lxdz,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Clsyrxx">
+    update tb_clsyrxx
+    <set>
+      <if test="jdcsyrbh != null">
+        JDCSYRBH = #{jdcsyrbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="zjlx != null">
+        ZJLX = #{zjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null">
+        ZJHM = #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="gj != null">
+        GJ = #{gj,jdbcType=VARCHAR},
+      </if>
+      <if test="qzhulx != null">
+        QZHULX = #{qzhulx,jdbcType=VARCHAR},
+      </if>
+      <if test="qzhuhm != null">
+        QZHUHM = #{qzhuhm,jdbcType=VARCHAR},
+      </if>
+      <if test="qzhuqfrq != null">
+        QZHUQFRQ = #{qzhuqfrq,jdbcType=DATE},
+      </if>
+      <if test="qzhuyxqz != null">
+        QZHUYXQZ = #{qzhuyxqz,jdbcType=DATE},
+      </if>
+      <if test="qzlx != null">
+        QZLX = #{qzlx,jdbcType=VARCHAR},
+      </if>
+      <if test="qzhm != null">
+        QZHM = #{qzhm,jdbcType=VARCHAR},
+      </if>
+      <if test="qzqfrq != null">
+        QZQFRQ = #{qzqfrq,jdbcType=DATE},
+      </if>
+      <if test="qzyxqz != null">
+        QZYXQZ = #{qzyxqz,jdbcType=DATE},
+      </if>
+      <if test="sjhm != null">
+        SJHM = #{sjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="dzyx != null">
+        DZYX = #{dzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="yb != null">
+        YB = #{yb,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdz != null">
+        LXDZ = #{lxdz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Clsyrxx">
+    update tb_clsyrxx
+    set JDCSYRBH = #{jdcsyrbh,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      ZJLX = #{zjlx,jdbcType=VARCHAR},
+      ZJHM = #{zjhm,jdbcType=VARCHAR},
+      GJ = #{gj,jdbcType=VARCHAR},
+      QZHULX = #{qzhulx,jdbcType=VARCHAR},
+      QZHUHM = #{qzhuhm,jdbcType=VARCHAR},
+      QZHUQFRQ = #{qzhuqfrq,jdbcType=DATE},
+      QZHUYXQZ = #{qzhuyxqz,jdbcType=DATE},
+      QZLX = #{qzlx,jdbcType=VARCHAR},
+      QZHM = #{qzhm,jdbcType=VARCHAR},
+      QZQFRQ = #{qzqfrq,jdbcType=DATE},
+      QZYXQZ = #{qzyxqz,jdbcType=DATE},
+      SJHM = #{sjhm,jdbcType=VARCHAR},
+      DZYX = #{dzyx,jdbcType=VARCHAR},
+      YB = #{yb,jdbcType=VARCHAR},
+      LXDZ = #{lxdz,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

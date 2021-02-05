@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="resources/images/I16.ico" type="image/x-icon" />
+	<META HTTP-EQUIV="Pragma"CONTENT="no-cache">
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+	<META HTTP-EQUIV="Expires"CONTENT="0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="app/main.css">
+	<link rel="stylesheet" href="libs/slider/css/jquery.slideBox.css" type="text/css" />
+	<style type="text/css">
+		#jczxx,#ksfbxx,#yqlj{
+			cursor:pointer;
+		}
+		#ksfbxxPanel,#lxfsPanel{
+			margin-bottom:10px;
+		}
+		#jczxxxx,#yqljxxx{
+			display:block;
+		}
+		#ksfbxxPanel a, #lxfsPanel span {
+			display: block;
+			padding: 10px 0;
+			text-indent: 1.5em;
+		}
+		#mainbav .nav {
+			text-align: left;
+		}
+		.glyphicon {
+			position: relative;
+			top: 1px;
+			display: inline-block;
+			font-family: 'Glyphicons Halflings';
+			font-style: normal;
+			font-weight: normal;
+			line-height: 1;
+			-webkit-font-smoothing: antialiased;
+		}
+		#indexTopWrapper {
+			height: 75px;
+			line-height: 75px;
+			position: relative;
+			background: url('resources/images/topHeaderBg.png');
+			z-index: 1;
+		}
+		#indexTopWrapper .topHeader {
+			position: relative;
+		}
+		#indexTopWrapper .topHeader .topTitle {
+			float: left;
+			line-height: 70px;
+			font-size: 20px;
+			font-family: "Microsoft YaHei", sans-serif;
+			text-indent: 60px;
+			color: white;
+		}
+		#topNavBox {
+			height: 100%;
+			line-height: 70px;
+			text-align: center;
+		}
+		.topNav {
+			height: 100%;
+			padding-left: 10px;
+			float: left;
+		}
+		*+html .topNav {
+			padding-left: 0;
+		}
+		.topNav li {
+			float: left;
+			width: 110px;
+			position: relative;
+			height: 100%;
+			list-style: none;
+		}
+		*+html .topNav > li {
+			width: 105px;
+			height: 67px;
+		}
+		.topNav > li {
+			border-top: 4px solid transparent;
+			border-bottom: 4px solid transparent;
+		}
+		.topNav > li > a {
+			display: block;
+			line-height: 60px;
+			font-weight: bold;
+			font-size: 15px;
+			color: white;
+		}
+		.topNav > li.select, .topNav > li[data-select] {
+			border-top: 4px solid #fff100;
+			border-bottom: 4px solid #fff100;
+		}
+		.topNav > li.select a, .topNav > li[data-select] a, .topNav > li a:hover {
+			color: #fff100;
+		}
+		.sqlcsmList {
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: #1347A4;
+			z-index: 10;
+		}
+		.sqlcsmList li {
+			width: 180px;
+		}
+		.sqlcsmList li a {
+			display: block;
+			width: 180px;
+			height: 30px;
+			margin: 0;
+			line-height: 30px;
+			text-align: left;
+			text-indent: 15px;
+			color: white;
+			border-left: 4px solid transparent;
+		}
+		.sqlcsmList li a:hover {
+			border-left-color: #fff100;
+		}
+		*+html .infoBox .infoPage {
+			padding-top: 10px;
+		}
+		.leftPage {
+			float: left;
+			width: 760px;
+		}
+		.rightPage {
+			float: right;
+			width: 254px;
+		}
+		#bannerBox {
+			height: 400px;
+			background: yellow;
+		}
+
+		.panel-TBorder { border: 0; border-top: 4px solid #6DB4F2; border-radius: 0; }
+		/*.panel-TBlueBorder { border-top: 4px solid #6DB4F2; }*/
+		.panel-TPurpleBorder { border-top: 4px solid #6DB4F2; }
+		.panel-TGreenBorder { border-top: 4px solid #2e853e; }
+		.panel-TGrayBorder { border: 2px solid #AEB9BF; }
+		.panel-TYellowBorder { border-top: 4px solid #6DB4F2; }
+		.panel-TGreen2Border { border-top: 4px solid #6DB4F2; }
+		.panel-twoSpanUl, .panel-threeSpanUl, .panel-oneSpanUl, .panel-fourSpanUl { margin: 0; padding: 0; }
+		.panel-oneSpanUl { position: relative; border-bottom: 1px dashed #D2D2D2; }
+		.panel-oneSpanUl a { display: inline-block; width: 97%; padding: .5em .3em .5em .8em; }
+		.panel-oneSpanUl .t-datetime { position: absolute; top: 8px; right: 10px; width: 6em; }
+		.panel-twoSpanUl .line { border-right: 1px dashed #2e853e; }
+		*+html .panel-twoSpanUl > a, *+html .panel-threeSpanUl > a,
+		*+html .panel-twoSpanUl > div, *+html .panel-threeSpanUl > div {
+			display: inline;
+			height: 80px;
+		}
+		.panel-twoSpanUl > a, .panel-threeSpanUl > a,
+		.panel-twoSpanUl > div, .panel-threeSpanUl > div {
+			display: inline-block;
+			height: 80px;
+		}
+		.panel-twoSpanUl > a, .panel-twoSpanUl > div, .panel-twoSpanUl > li {
+			display: inline-block;
+			width: 50%;
+			margin-right: -4px;
+			box-sizing: border-box;
+		}
+		.panel-twoSpanUl > a, .panel-twoSpanUl div {
+			position: relative;
+			width: 49.6%;
+		}
+		.panel-threeSpanUl > a, .panel-threeSpanUl > div {
+			position: relative;
+			width: 32.9%;
+		}
+		.panel-twoSpanUl > div > a, .panel-threeSpanUl > div > a {
+			display: block;
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 10px;
+			text-align: center;
+		}
+		/*.panel-threeSpanUl li.bBottom {
+            display: inline-block;
+            width: 32.7%;
+            height: 80px;
+            list-style: none;
+        }*/
+		.panel-thisDl {
+			height: 100%;
+			margin: 0; padding: 0;
+			position: relative;
+			display: inline-block;
+		}
+		.panel-threeSpanUl .panel-thisDl > i {
+			width: 30px;
+			height: 30px;
+			position: absolute;
+		}
+		.panel-threeSpanUl .panel-thisDl > i {
+			top: 30px;
+			left: 10px;
+		}
+		.panel-thisDl > .newsIcon {
+			width: 100px;
+			height: 55px;
+			position: absolute;
+			top: 16px;
+			left: 10px;
+		}
+		.panel-thisDl > div {
+			display: inline-block;
+			width: 190px;
+			height: 50px;
+			position: absolute;
+			top: 15px;
+			left: 50px;
+		}
+		.panel-thisDl > .newsTitleDiv {
+			width: 240px;
+			left: 120px;
+			font-size: 10px;
+		}
+		.newsTitleDiv .newsDate {
+			display: block;
+			margin-right: 10px;
+			text-align: right;
+		}
+		.yhdlCCL {
+			width: 90%;
+			margin: 0 5%;
+			display: block;
+		}
+		#yqljPanel a,
+		#lxfsPanel span {
+			display: block;
+			padding: 10px 0;
+			text-indent: 4em;
+		}
+		*+html #yqljPanel a {
+			padding: 7px 0;
+		}
+		#lxfsPanel span {
+			color: #898989;
+		}
+
+		.inputLenght {
+			width: 100%; height: 25px; margin-bottom: 10px;
+		}
+		*+html .btn {
+			height: 40px;
+		}
+		*+html .carousel-indicators  {
+			display: inline;
+			left: 77%;
+			bottom: 5px;
+		}
+		*+html .carousel-indicators li  {
+			display: inline;
+			margin-left: 5px;
+			margin-right: 5px;
+			border: none;
+			background: transparent url('resources/images/icon/icon-radius.png');
+			float: left;
+		}
+		*+html .carousel-indicators .active {
+			border: none;
+			background: transparent url('resources/images/icon/icon-radius_select.png');
+		}
+		.carousel-indicators li {
+
+
+		}
+		.carousel-indicators li {
+			background-color: rgba(0,0,0,0);
+			border: none !important;
+			border: 1px solid #fff;
+			background: transparent  url('resources/images/icon/icon-radius.png') no-repeat !important;
+			background-color: white;
+			background-image: none;
+		}
+		.carousel-indicators .active {
+			width: 12px;
+			height: 12px;
+			margin: 0;
+			border-width: 0 !important;
+			border-width: 1px;
+			background: transparent url('resources/images/icon/icon-radius_select.png') !important;;
+			background-color: #fff;
+		}
+		.icon001, .icon002, .icon003, .icon004, .icon005, .icon006 { display: inline-block; width: 30px; height: 30px; }
+		.icon001 { background: url('resources/images/sqlcsm/icon001.png'); }
+		.icon002 { background: url('resources/images/sqlcsm/icon002.png'); }
+		.icon003 { background: url('resources/images/sqlcsm/icon003.png'); }
+		.icon004 { background: url('resources/images/sqlcsm/icon004.png'); }
+		.icon005 { background: url('resources/images/sqlcsm/icon005.png'); }
+		.icon006 { background: url('resources/images/sqlcsm/icon006.png'); }
+		.iconImg { background: url('resources/images/iconImg.png'); }
+		.icon { display: inline-block; margin-right: 5px; }
+		.icon-14px { width: 14px; height: 14px; }
+		.icon-16px { width: 16px; height: 16px; }
+		.icon-24px { width: 24px; height: 24px; }
+		.icon-tzgg_sm, .icon-car, .icon-news, .icon-zcfg_sm { display: inline-block; width: 23px; height: 15px; position: relative; top: 2px; }
+		*+html .icon-tzgg_sm, *+html .icon-car, *+html .icon-news, *+html .icon-zcfg_sm { top: -2px; }
+		.icon-tzgg_sm { background: url('resources/images/icon/icon-tzgg_sm.png'); }
+		.icon-car { background: url('resources/images/icon/icon-car.png'); }
+		.icon-hydt { background: url('resources/images/icon/icon-hydt.png'); }
+		.icon-zcfg_sm { background: url('resources/images/icon/icon-zcfg_sm.png'); }
+		.icon-news { background: url('resources/images/icon/icon-news.png'); }
+		.icon-tzgg, .icon-bszn, .icon-zcfg, .icon-hydt { position: relative; top: 8px; left: 10px; }
+		#tabInfo1 a > span { display: inline-block; text-indent: 1em; }
+		*+html .icon-tzgg, *+html .icon-bszn, *+html .icon-zcfg { top: 4px; }
+		.icon-tzgg { background: url('resources/images/icon/icon-tzgg.png'); }
+		.icon-bszn { background: url('resources/images/icon/icon-bszn.png'); }
+		.icon-zcfg { background: url('resources/images/icon/icon-zcfg.png'); }
+		.icon-user { background: url('resources/images/wz_03.gif') no-repeat; }
+		.icon-yqlj { background: url('resources/images/icon/icon-yqlj.png'); }
+		.icon-lxfs { background: url('resources/images/icon/icon-lx.png'); }
+
+		.panel-default>.panel-heading {
+			/*width:246px;*/
+			/*height:34px;*/
+			/*background:url("resources/images/03.png");*/
+		}
+
+		.more{
+			float:right;
+			margin-right:16px;
+		}
+		.more a{color:#6c6c6c;}
+		.more a:hover{
+			color:#2b2b2b;
+			text-decoration: underline;
+		}
+		.flex-box{
+			display: flex;
+			display: -webkit-flex;
+		}
+		#floatDiv{
+			width:120px;
+			height:120px;
+			z-index:100;
+			right:2px;
+			top:85px;
+			position:absolute;
+		}
+		#jczdtz{
+			color:#fff !important;
+			text-align:center;
+		}
+		#lxfsPanel dt, #lxfsPanel dd {
+			/*padding-left: .4em;*/
+			text-align: center;
+			font-weight: inherit;
+			color: #428bca;
+		}
+		#lxfsPanel dd {
+			color: #d2d2d2;
+		}
+		#lxfsPanel dl {
+			padding-bottom: .5em;
+			border-bottom: 1px dashed #eeeeee;
+		}
+		.dlys{
+			width:150px;
+			font-size: 18px;
+			float:left;
+			font-weight:bold;
+			/*margin-top: 3px;*/
+			color:#E7F0F7;
+			background:none;
+		}
+		.dlys div{
+			width:143px;
+			height:94px;
+			background:url('resources/images/100.png') no-repeat;
+			margin-bottom: 6px;
+			padding-top: 20px;
+			/*line-height: 90px;*/
+			text-align: center;
+			position: relative;
+		}
+		.panel .dlys .index_1{
+			/*width:154px;*/
+			background:url("resources/images/007.png");
+			color:#0D5C9E;
+			cursor:pointer;
+		}
+		.sj{
+			width:8px;
+			height:10px;
+			background:url('resources/images/007_03.png');
+			position:absolute;
+			top:45px;
+			right:-7px;
+		}
+		.panel-oneSpanUl a{
+			color:#28BDA0;
+		}
+		.tabNavBorder li.active a{
+			background:url('resources/images/wz_a03.png');
+		}
+		.ul_info{  list-style: none;  background:url('resources/images/wz_03.png') repeat-x;}
+		.info_hiden{  display:none;  }
+		.info_block{display:block}
+		.infoBox .infoPage{background:none}
+		.panel-TGrayBorder .panel-heading{
+			background:url('resources/images/11.png');
+		}
+		.bor li{
+			border:1px solid #ddd;
+			margin-bottom: 5px;
+		}
+		.bor dt,.bor dd{
+			margin-top: 10px;
+			margin-left: 16px;
+			margin-bottom: 10px;
+		}
+		.ggxxBox {
+			position: relative;
+			margin-top: 2px;
+			padding: 10px;
+			border: 2px solid #B2BBC0;
+			clear: both;
+		}
+		.panel-opacityW {
+			box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.35);
+			background: #ffffff;
+			background: rgba(255, 255, 255, .7);
+			filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+		}
+		.panel-loginBox {
+			margin-top: 0;
+			border: 2px solid #BBBFC2;
+		}
+		.panel-loginBox #gr, .panel-loginBox #qtzz, .panel-loginBox #qy {
+			display: none; padding: 10px; border-radius: 0; border: 1px solid #ddd; box-sizing: border-box;
+		}
+		.carousel-inner>.item>img {
+			cursor: pointer;
+		}
+		#index-tp {
+			overflow: hidden;
+		}
+	</style>
+	</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h2 class="topTitle">温州市出租汽车申报服务管理系统</h2>
+		</div>
+	</div>
+<!-- 	<div class="bbGreenDashedLine1"></div> -->
+	<div id="mainbav">
+		<ul class="nav">
+			<li><a href="javascript:void(0);">首页</a></li>
+			<li><a href="xxcxck.html" target="_Blank">信息查询窗口</a></li>
+			<li><a href="javascript:void(0);" class="btnSqsm">操作说明</a></li>
+			<li><a href="dl_jsyzsqsm.html" class="sqlc" target="_Blank" style="display: none;">驾驶员申请流程</a></li>
+			<li><a href="dl_clysqlc.html" class="sqlc" target="_Blank" style="display: none;">车辆申请流程</a></li>
+		</ul>
+	</div>
+</div>
+<div id="indexInfoBox" class="infoBox" >
+	<div class="infoPage" style="width:1024px;">
+			<div class="leftPage">
+			<div class="panel panel-default" style="margin-bottom: 10px;">
+				<div class="panel-body">
+					<div id="index-tp">
+						<div id="demo3" class="slideBox">
+						  <ul class="items">
+						
+		<!-- 				    <li><a href="http://www.jq22.com/" title="这里是测试标题一"><img src="resources/images/textImg/3.png"></a></li> -->
+						
+		<!-- 				    <li><a href="http://www.jq22.com/" title="这里是测试标题二"><img src="resources/images/textImg/4.png"></a></li> -->
+						
+		<!-- 				    <li><a href="http://www.jq22.com/" title="这里是测试标题三"><img src="resources/images/textImg/5.png"></a></li> -->
+						
+		<!-- 				    <li><a href="http://www.jq22.com/" title="这里是测试标题四"><img src="resources/images/textImg/6.png"></a></li> -->
+						  </ul>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ggxxBox panel-opacityW" style="margin-bottom: 10px;">
+				<div id="tzgg" class="panel panel-default" style="margin-top: 0; margin-bottom: 0;">
+					<div class="panel-heading" style="color: #000;"><i class="icon icon-tzgg_sm"></i>通知公告<div class="more"><a href="more_tzgg.html">查看更多&gt;&gt;</a></div></div>
+					<div class="panel-body" id="index-tzgg">
+<!-- 						<div class='panel-oneSpanUl'><i class='icon-discYellow'></i><a href="http://wzyg.wenzhou.gov.cn/art/2017/12/1/art_1339655_13639456.html">2017年温州巡游车、网约车区域科目考试题</a><span class='t-datetime'>2017-12-06</span></div> -->
+<!-- 						<div class='panel-oneSpanUl'><i class='icon-discYellow'></i><a href="http://wzyg.wenzhou.gov.cn/art/2017/12/29/art_1339658_14727105.html">出租汽车驾驶员从业资格全国公共科目考试大纲</a><span class='t-datetime'>2017-12-29</span></div> -->
+<!-- 						<div class='panel-oneSpanUl'><i class='icon-discYellow'></i><a href="http://wzyg.wenzhou.gov.cn/art/2017/12/29/art_1339658_14727250.html">出租汽车驾驶员从业资格全国公共科目考试题库（第1版）</a><span class='t-datetime'>2017-12-29</span></div> -->
+					</div>
+				</div>
+			</div>
+			<div class="ggxxBox panel-opacityW" style="margin-bottom: 10px;">
+				<div id="zcfg" class="panel panel-default" style="margin-top: 0;  margin-bottom: 0;">
+					<div class="panel-heading" style="color: #007130;"><i class="icon icon-zcfg_sm"></i>政策法规<div class="more"><a href="more.html">查看更多&gt;&gt;</a></div></div>
+					<div class="panel-body" id="index-zcfg">
+<!-- 						<div class="panel-oneSpanUl"><i class="icon-discGreen"></i><a href="http://www.wenzhou.gov.cn/art/2016/12/29/art_1229314_40770.html">温州市网络预约出租汽车经营服务管理实施细则（试行）</a><span class="t-datetime">2017-5-23</span></div> -->
+<!-- 						<div class="panel-oneSpanUl"><i class="icon-discGreen"></i><a href="http://zizhan.mot.gov.cn/zfxxgk/bnssj/zcfgs/201607/t20160728_2068633.html">网络预约出租汽车经营服务管理暂行办法</a><span class="t-datetime">2017-5-23</span></div> -->
+<!-- 						<div class="panel-oneSpanUl"><i class="icon-discGreen"></i><a href="http://zizhan.mot.gov.cn/zfxxgk/bnssj/dlyss/201611/t20161107_2109602.html">网络预约出租汽车车辆准入和退出有关工作流程</a><span class="t-datetime">2017-5-23</span></div> -->
+<!-- 						<div class="panel-oneSpanUl"><i class="icon-discGreen"></i><a href="http://zizhan.mot.gov.cn/zfxxgk/bnssj/dlyss/201611/t20161104_2108551.html">网络预约出租汽车经营者申请线上服务能力认定工作流程</a><span class="t-datetime">2017-5-23</span></div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="rightPage">
+			<div class="panel panel-default panel-TBlueBorder panel-opacityW panel-loginBox" style="margin-bottom: 12px;">
+				<div class="panel-heading" style="height:34px; width:251px; color: #fff; position: relative;background:url('resources/images/03.png');">
+					<i class="icon icon-16px icon-user"></i>用户登录
+					<a style="position: absolute; right: 50px; font-weight: bold;" id="wjmm" href="#">忘记密码</a>
+					<a style="position: absolute; right: 10px; font-weight: bold;" href="app/html/zcxx/txsm.html">注册</a>
+				</div>
+				<div class="panel-body noPM" style="border-collapse: collapse;background:none">
+					<ul id="tabInfo2" class="tabNavBorder panel-threeSpanUl noPM" style="background:none">
+						<li class="active"><a hrejavascriptf="javascript:void(0);"><i></i><span>个人</span></a></li>
+						<li><a href="javascript:void(0);"><i></i><span>企业</span></a></li>
+						<li><a href="javascript:void(0);"><i></i><span>平台</span></a></li>
+					</ul>
+					<div id="gr" class="panel form-inline noPM" style="display:block;">
+						<form role="form">
+							<input type="phone" class="inputLenght" id="phone" placeholder="请输入注册时的手机号" autocomplete="off">
+							<input type="password" class="inputLenght" id="password" placeholder="请输入密码" autocomplete="off">
+							<input type="text" id="yzm" placeholder="验证码" style="width: 7em; margin-bottom: 10px;">
+							<img id="yzm-yzm" src="VerifyCodeServlet" onclick="this.src=basePath+'VerifyCodeServlet?'+Math.random()"/>
+							<div class="form-group" style="margin-left:25px;">
+								<button type="button" onclick="login('0','phone','password','yzm','yzm-yzm')" class="form-control btn btn-primary" style="width:190px;background:url('resources/images/07.png')" id="gr_dl"></button>
+							</div>
+						</form>
+					</div>
+					<div id="qtzz" class="panel form-inline noPM">
+						<form role="form">
+							<input type="phone" class="inputLenght" id="phone2" placeholder="请输入注册时的手机号" autocomplete="off">
+							<input type="password" class="inputLenght" id="password2" placeholder="请输入密码" autocomplete="off">
+							<input type="text" id="yzm2" placeholder="验证码" style="width: 7em; margin-bottom: 10px;">
+							<img id="yzm-yzm2" src="VerifyCodeServlet" onclick="this.src=basePath+'VerifyCodeServlet?'+Math.random()"/>
+							<div class="form-group" style="margin-left:25px;">
+								<button type="button" onclick="login('2','phone2','password2','yzm2','yzm-yzm2')" class="form-control btn btn-primary" style="width:190px;background:url('resources/images/07.png')" id="pt_dl"></button>
+							</div>
+						</form>
+					</div>
+					<div id="qy" class="panel form-inline noPM">
+						<form role="form">
+							<input type="phone" class="inputLenght" id="phone3" placeholder="请输入注册时的手机号" autocomplete="off">
+							<input type="password" class="inputLenght" id="password3" placeholder="请输入密码" autocomplete="off">
+							<input type="text" id="yzm3" placeholder="验证码" style="width: 7em; margin-bottom: 10px;">
+							<img id="yzm-yzm3" src="VerifyCodeServlet" onclick="this.src=basePath+'VerifyCodeServlet?'+Math.random()"/>
+							<div class="form-group" style="margin-left:25px;">
+								<button type="button" onclick="login('1','phone3','password3','yzm3','yzm-yzm3')"  class="form-control btn btn-primary" style="width:190px;background:url('resources/images/07.png')" id="qy_dl"></button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default panel-TGrayBorder noMargin panel-opacityW" id="ksfbxxPanel" style="padding:8px;">
+				<div class="panel-heading" id="ksfbxx" style="width:241px;;margin-left: -4px;"><i class="icon icon-16px icon-lxfs"></i>车辆综合性能检测站</div>
+				<div class="panel-body noPM" id="ksfbxxxx" style="border-collapse: collapse">
+					<ul class="bor" style="background:#fff; list-style: none; margin: -0.7em; padding: 0;" id="clzhxnjcz">
+<!-- 						<li> -->
+<!-- 							<dl> -->
+<!-- 								<dt>温州汽车检测中心站</dt> -->
+<!-- 								<dd><b>地址:</b>温州市过境公路南端一号</dd> -->
+<!-- 								<dd>咨询电话:0577-88638665</dd> -->
+<!-- 							</dl> -->
+<!-- 						</li> -->
+					</ul>
+				</div>
+			</div>
+			<div class="panel panel-default panel-TGrayBorder panel-opacityW" id="lxfsPanel" style="margin-top: 0;padding:8px;">
+				<div style="border:none;width:241px;margin-left: -4px;" class="panel-heading" id="jczxx"><i class="icon icon-16px icon-lxfs"></i>营运许可窗口</div>
+				<div class="panel-body noPM" id="jczxxxx" style="border-collapse: collapse">
+					<ul class="bor" style="list-style: none; margin: -0.7em; padding: 0;background:#fff" id="yyxkck">
+<!-- 						<li style="border: none; padding:8px 16px;"><b>地址:</b>温州市行政审批服务中心3008运政窗口(温州市鹿城区惠明路858号审批大楼)</li> -->
+<!-- 						<li style="border: none; padding:8px 16px; color:#333">咨询电话:0577-88926308</li> -->
+
+					</ul>
+				</div>
+			</div>
+			<div class="panel panel-default panel-TGrayBorder panel-opacityW" id="cyzgPanel" style="margin-top: 0;padding:8px;">
+				<div style="border:none;width:241px;margin-left: -4px;" class="panel-heading" id="cyzg"><i class="icon icon-16px icon-lxfs"></i>从业资格考试地点</div>
+				<div class="panel-body noPM" id="cyzgxx" style="border-collapse: collapse">
+					<ul class="bor" style="list-style: none; margin: -0.7em; padding: 0;background:#fff" id="cyzgksdd">
+<!-- 						<li style="border: none; padding:8px 16px;"><span style="font-weight:bold;">1，温州交通技术学校</span>（温州市牛山北路52-1号，牛山客运中心旁50米）联系电话：0577-88712150</li> -->
+<!-- 						<li style="border: none; padding:8px 16px;"><span style="font-weight:bold;">2，乐清市畅达机动车驾驶员培训有限公司</span>（乐清市经济开发区新区经八路1号）联系电话：0577-61663886</li> -->
+<!-- 						<li style="border: none; padding:8px 16px;"><span style="font-weight:bold;">3，苍南县九龙职业培训学校</span>（苍南县龙港镇杨家宅村86-1-8世纪大道加油站东首200米）联系电话：0577-68755988</li> -->
+					</ul>
+				</div>
+			</div>
+<!-- 			<div class="panel panel-default panel-TGrayBorder " id="yqljPanel" style="padding:8px; background:url('resources/images/icon-panel1.png');box-shadow: 2px 4px 6px rgba(0,0,0,0.35);"> -->
+<!-- 				<div class="panel-heading" id="yqlj"><i class="icon icon-16px icon-yqlj"></i>友情链接</div> -->
+<!-- 				<div class="panel-body noPM" id="yqljxxx" style="border-collapse: collapse;background:#fff"> -->
+<!-- 					<a href="http://www.hzyg.gov.cn/" target="_blank">温州市道路运政信息网</a> -->
+<!-- 					<hr class="noMargin"> -->
+<!-- 					<a href="http://www.hzcb.gov.cn/root/gzfw/gzfw.asp" target="_blank">温州交通信息网</a> -->
+<!-- 					<hr class="noMargin"> -->
+<!-- 					<a href="http://hz.zjzwfw.gov.cn/" target="_blank">浙江政务服务网</a> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+		</div>
+		<br class="clear">
+	</div>
+</div>
+<div class="downloadBrowser" style="position:fixed;left:0;top:100px;z-index:99;background:#f7f7f7;padding:10px;display:none" id="browser">
+	<a href="resources/exe/Firefox_53.0.3.6347_setup.exe"><div style="border-bottom:1px solid #000;padding:10px"><img src="resources/images/ff.png">火狐浏览器</div></a>
+	<a href="resources/exe/ChromeStandalone_58.0.3029.110_Setup.exe"><div style="padding:10px;"><img src="resources/images/chrome.png">谷歌浏览器</div></a>
+</div>
+<div class="bottomFooler" style="float:left;width:100%;">
+	<div class="foolerPage"></div>
+</div>
+<script type="text/javascript" src="resources/js/jquery-1.12.1.min.js"></script>
+<script src="libs/slider/js/jquery.slideBox.js" type="text/javascript"></script>
+<script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="libs/bs/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="libs/layer/layer.js"></script>
+<script type="text/javascript" src="libs/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="libs/md5.js"></script>
+<script type="text/javascript" src="app/config.js"></script>
+<script type="text/javascript" src="app/main.js"></script>
+<script class="resize" type="text/javascript">
+    $.cookie('delete', { name: 'regsiterType'});
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight();
+    //登录按钮点击事件
+//      $("#gr_dl").click(function(){
+//  		$.cookie('set', { duration: .2, name: 'regsiterType', value: 'gr'});
+//          window.location.href="app/html/userInfo/grInfo.html";
+//      });
+//      $("#qy_dl").click(function(){
+//  		$.cookie('set', { duration: .2, name: 'regsiterType', value: 'qy'});
+//          window.location.href="app/html/userInfo/qyInfo.html";
+//      });
+//      $("#pt_dl").click(function(){
+//  		$.cookie('set', { duration: .2, name: 'regsiterType', value: 'pt'});
+//  		window.location.href="app/html/userInfo/ptInfo.html";
+//      });
+	function aa(obj){
+		window.open('http://www.wzyg.gov.cn/system/2017/04/10/012718208.shtml','_blank') 
+	}
+	$('.btnSqsm').on('click', function () {
+		if ('none' === $('.sqlc').css('display')) {
+			$('.sqlc').fadeIn(400);
+		} else {
+			$('.sqlc').fadeOut(300);
+		}
+	});
+</script>
+<script type="text/javascript">
+	$(".dlys .info_1").mouseover(function(){
+	    $(this).addClass('index_1').siblings('div').removeClass('index_1');
+	   $(".ul_info .info_1").addClass('info_block').siblings('li').removeClass('info_block');
+	});
+    $(".dlys .info_2").mouseover(function(){
+        $(this).addClass('index_1').siblings('div').removeClass('index_1');
+        $(".ul_info .info_2").addClass('info_block').siblings('li').removeClass('info_block');
+    });
+    $(".dlys .info_3").mouseover(function(){
+        $(this).addClass('index_1').siblings('div').removeClass('index_1');
+        $(".ul_info .info_3").addClass('info_block').siblings('li').removeClass('info_block');
+    });
+    $(".dlys .info_4").mouseover(function(){
+        $(this).addClass('index_1').siblings('div').removeClass('index_1');
+        $(".ul_info .info_4").addClass('info_block').siblings('li').removeClass('info_block');
+    });
+
+    $('.dlys div').mouseover(function(){
+        $(this).append('<i class="sj"></i>');
+        $(this).siblings('div').children('i').remove('.sj');
+    });
+    var njxxGrid=null;
+    $(function() {
+        $('.sqlcsmList').hide();
+        stringLengthFormat($('#tzgg .panel-body div a'), 34);
+        $('#tabInfo1 a').click(function() {
+            $(this).parent('li').addClass("active").siblings('li').removeClass('active');
+
+
+            $('#tzgg, #bszn, #zcfg, #hydt').removeClass('panel-TYellowBorder').removeClass('panel-TPurpleBorder').removeClass('panel-TBlueBorder').removeClass('panel-TGreen2Border').hide();
+            var aLabel = $(this);
+            if ('通知公告' == aLabel.text()) {
+                $('#tzgg').addClass('panel-TYellowBorder').show();
+                stringLengthFormat($('#tzgg .panel-body div a'), 34);
+                //$("#zcfg").hide();
+            } else if ('行业动态' == aLabel.text()) {
+                $('#hydt').addClass('panel-TPurpleBorder').show();
+                //$("#zcfg").hide();
+            } else if ('办事指南' == aLabel.text()) {
+                $('#bszn').addClass('panel-TBlueBorder').show();
+                //$("#zcfg").hide();
+            } else if ('政策法规' == aLabel.text()) {
+                $('#zcfg').addClass('panel-TGreen2Border').show();
+                stringLengthFormat($('#zcfg .panel-body div a'), 34);
+                //$("#zcfg")[0].style.display="block";
+            }
+        });
+        $('#tabInfo2 a').click(function() {
+            $('#gr, #qy, #qtzz').hide();
+            $('#tabInfo2 a').parent().removeClass('active');
+            var aLabel = $(this);
+            aLabel.parent().addClass('active');
+            if ('个人' == aLabel.text()) {
+                $('#gr').show();
+            } else if ('企业' == aLabel.text()) {
+                $('#qy').show();
+            } else if ('平台' == aLabel.text()) {
+                $('#qtzz').show();
+            }
+        });
+        $('.sqlcsm').hover(function() {
+            $('.sqlcsmList').show();
+        }, function() {
+            $('.sqlcsmList').hide();
+        });
+    });
+    $.ajax({
+        type:"post",
+        url: basePath + "user/logout",
+        //提交的数据
+        data: {},
+        dataType: "json",
+        //成功返回之后调用的函数
+        success:function(data){
+        },
+        //调用出错执行的函数
+        error: function(){
+            //请求出错处理
+        }
+    });
+    $("#wjmm").click(function (){
+        layer.open({
+            type: 2,
+            title: '忘记密码',
+            maxmin: false, //开启最大化最小化按
+            area: ['553px', '400px'],
+            content: 'xgmm.html'
+        });
+    })
+    $('#jczdtz').click(function(){
+        var aa = window.open('./grzc/btsession?btsession=关于上线网约车驾驶员免考申报功能的通知');
+        aa.location = './gzgg.html'
+    });
+
+    
+    
+    
+    function BrowserType() {  
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+        var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器  
+        var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器  
+        var isEdge = userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器  
+        var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器  
+        var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器  
+        var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器  
+    	//alert(userAgent)
+        if (isIE){  
+             var reIE = new RegExp("MSIE (\\d+\\.\\d+);");  
+             reIE.test(userAgent);  
+             var fIEVersion = parseFloat(RegExp["$1"]);  
+             if(fIEVersion == 7)  
+             { return "IE7";}  
+             else if(fIEVersion == 8)  
+             { return "IE8";}  
+             else if(fIEVersion == 9)  
+             { return "IE9";}  
+             else if(fIEVersion == 10)  
+             { return "IE10";}  
+             else if(fIEVersion == 11)  
+             { return "IE11";}  
+             else  
+             { return "0"}//IE版本过低  
+         }//isIE end  
+           
+         if (isFF) {  return "FF";}  
+         if (isOpera) {  return "Opera";}  
+         if (isSafari) {  return "Safari";}  
+         if (isChrome) { return "Chrome";}  
+         if (isEdge) { return "Edge";}  
+     }//myBrowser() end  
+       
+     //判断是否是IE浏览器  
+     function isIE()  {  
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+        var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器  
+        if(isIE)  
+        {  
+            return "1";  
+        }  
+        else  
+        {  
+            return "-1";  
+        }  
+     }  
+       
+       
+     //判断是否是IE浏览器，包括Edge浏览器  
+     function IEVersion()  {  
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+        var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器  
+  	  var isEdge = userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器  
+        if(isIE)  {  
+             var reIE = new RegExp("MSIE (\\d+\\.\\d+);");  
+             reIE.test(userAgent);  
+             var fIEVersion = parseFloat(RegExp["$1"]);  
+             if(fIEVersion == 7)  
+             { return "IE7";}  
+             else if(fIEVersion == 8)  
+             { return "IE8";}  
+             else if(fIEVersion == 9)  
+             { return "IE9";}  
+             else if(fIEVersion == 10)  
+             { return "IE10";}  
+             else if(fIEVersion == 11)  
+             { return "IE11";}  
+             else  
+             { return "0"}//IE版本过低  
+        } else if(isEdge)  {  
+  		    return "Edge";  
+  		}  else {  
+  		      return "-1";//非IE  
+  		      }  
+  		   }  
+  	;(function(){
+  		
+  		var version = BrowserType();
+  		if(version=='Chrome'||version=='FF'||version==undefined||version=='Edge'){
+  		}else{
+  			document.getElementById('browser').style.display='';
+  			layer.alert('您正在使用的浏览器，不是此站点所推荐的浏览器，可能出现数据上传失败的情况，建议更换浏览器。可点击站点左侧浏览器图标，进行下载。')
+  		}
+  	})();
+  	
+  	
+</script>
+	<script type="text/javascript" src="app/index.js"></script>
+<!--<script src="app/float.js"></script>-->
+</body>
+</html>

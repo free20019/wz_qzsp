@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.Wyc_questionsMapper">
+  <resultMap id="BaseResultMap" type="entity.Wyc_questions">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="Subject_id" jdbcType="INTEGER" property="subjectId" />
+    <result column="TestCenter_id" jdbcType="INTEGER" property="testcenterId" />
+    <result column="TopicType_id" jdbcType="INTEGER" property="topictypeId" />
+    <result column="Score" jdbcType="DECIMAL" property="score" />
+    <result column="Source_id" jdbcType="VARCHAR" property="sourceId" />
+    <result column="Keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="Createtime" jdbcType="DATE" property="createtime" />
+    <result column="CreatePerson" jdbcType="VARCHAR" property="createperson" />
+    <result column="RightKey" jdbcType="VARCHAR" property="rightkey" />
+    <result column="UP_time" jdbcType="DATE" property="upTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="entity.Wyc_questions">
+    <result column="Content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, Subject_id, TestCenter_id, TopicType_id, Score, Source_id, Keyword, Createtime, 
+    CreatePerson, RightKey, UP_time
+  </sql>
+  <sql id="Blob_Column_List">
+    Content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="entity.Wyc_questionsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_wyc_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="entity.Wyc_questionsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_wyc_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="entity.Wyc_questionsExample">
+    delete from tb_wyc_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Wyc_questions">
+    insert into tb_wyc_questions (id, Subject_id, TestCenter_id, 
+      TopicType_id, Score, Source_id, 
+      Keyword, Createtime, CreatePerson, 
+      RightKey, UP_time, Content
+      )
+    values (#{id,jdbcType=INTEGER}, #{subjectId,jdbcType=INTEGER}, #{testcenterId,jdbcType=INTEGER}, 
+      #{topictypeId,jdbcType=INTEGER}, #{score,jdbcType=DECIMAL}, #{sourceId,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{createperson,jdbcType=VARCHAR}, 
+      #{rightkey,jdbcType=VARCHAR}, #{upTime,jdbcType=DATE}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Wyc_questions">
+    insert into tb_wyc_questions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="subjectId != null">
+        Subject_id,
+      </if>
+      <if test="testcenterId != null">
+        TestCenter_id,
+      </if>
+      <if test="topictypeId != null">
+        TopicType_id,
+      </if>
+      <if test="score != null">
+        Score,
+      </if>
+      <if test="sourceId != null">
+        Source_id,
+      </if>
+      <if test="keyword != null">
+        Keyword,
+      </if>
+      <if test="createtime != null">
+        Createtime,
+      </if>
+      <if test="createperson != null">
+        CreatePerson,
+      </if>
+      <if test="rightkey != null">
+        RightKey,
+      </if>
+      <if test="upTime != null">
+        UP_time,
+      </if>
+      <if test="content != null">
+        Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="testcenterId != null">
+        #{testcenterId,jdbcType=INTEGER},
+      </if>
+      <if test="topictypeId != null">
+        #{topictypeId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="sourceId != null">
+        #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createperson != null">
+        #{createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="rightkey != null">
+        #{rightkey,jdbcType=VARCHAR},
+      </if>
+      <if test="upTime != null">
+        #{upTime,jdbcType=DATE},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.Wyc_questionsExample" resultType="java.lang.Long">
+    select count(*) from tb_wyc_questions
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_wyc_questions
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectId != null">
+        Subject_id = #{record.subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.testcenterId != null">
+        TestCenter_id = #{record.testcenterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.topictypeId != null">
+        TopicType_id = #{record.topictypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null">
+        Score = #{record.score,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sourceId != null">
+        Source_id = #{record.sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null">
+        Keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        Createtime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.createperson != null">
+        CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightkey != null">
+        RightKey = #{record.rightkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upTime != null">
+        UP_time = #{record.upTime,jdbcType=DATE},
+      </if>
+      <if test="record.content != null">
+        Content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_wyc_questions
+    set id = #{record.id,jdbcType=INTEGER},
+      Subject_id = #{record.subjectId,jdbcType=INTEGER},
+      TestCenter_id = #{record.testcenterId,jdbcType=INTEGER},
+      TopicType_id = #{record.topictypeId,jdbcType=INTEGER},
+      Score = #{record.score,jdbcType=DECIMAL},
+      Source_id = #{record.sourceId,jdbcType=VARCHAR},
+      Keyword = #{record.keyword,jdbcType=VARCHAR},
+      Createtime = #{record.createtime,jdbcType=DATE},
+      CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+      RightKey = #{record.rightkey,jdbcType=VARCHAR},
+      UP_time = #{record.upTime,jdbcType=DATE},
+      Content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_wyc_questions
+    set id = #{record.id,jdbcType=INTEGER},
+      Subject_id = #{record.subjectId,jdbcType=INTEGER},
+      TestCenter_id = #{record.testcenterId,jdbcType=INTEGER},
+      TopicType_id = #{record.topictypeId,jdbcType=INTEGER},
+      Score = #{record.score,jdbcType=DECIMAL},
+      Source_id = #{record.sourceId,jdbcType=VARCHAR},
+      Keyword = #{record.keyword,jdbcType=VARCHAR},
+      Createtime = #{record.createtime,jdbcType=DATE},
+      CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+      RightKey = #{record.rightkey,jdbcType=VARCHAR},
+      UP_time = #{record.upTime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

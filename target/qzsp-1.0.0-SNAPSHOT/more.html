@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>温州市出租汽车申报服务管理系统</title>
+	
+    <meta charset="UTF-8">
+    <link rel="icon" href="resources/images/I16.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="libs/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bs/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="app/main.css">
+	<script type="text/javascript" src="resources/js/jquery-1.12.1.min.js"></script>
+      <script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="app/config.js"></script>
+    <script type="text/javascript" src="app/main.js"></script>
+
+     <style type="text/css">
+        .newsTitle {
+            width: 900px;
+            height: 70px;
+            line-height: 70px;
+            margin: 20px auto 0;
+            border-bottom: 2px solid #307abd;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+        .newsTime {
+            text-align: center;
+        }
+        .newsContent {
+            padding: 8px;
+            border-top: 1px dashed #2b542c;
+        }
+        p {
+            text-indent: 2em;
+        }
+        .topWrapper{
+        	//background:
+        }
+        .pageCenter{
+            margin: 0;
+        	padding: 20px 40px;
+            list-style: none;
+        }
+        .pageCenter li{
+        	height:50px;
+        	line-height:50px;
+        	border-bottom: 1px dashed #eee;
+        }
+         .pageCenter a{
+             padding: 0 1em;
+             font-size: 16px;
+             display: block;
+         }
+         .pageCenter a:hover {text-decoration: underline}
+    </style>
+  </head>
+<body>
+<input type="hidden" id="twkj_jddsb" value="1">
+<div class="topWrapper">
+  <div class="topHeaderBox">
+      <div class="topHeader">
+          <div class="topGh"></div>
+          <h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+          <span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>
+      </div>
+  </div>
+  <div id="mainbav">
+      <ul class="nav">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="app/html/sqlcsm/zcsq.html" target="_Blank">操作说明</a></li>
+      </ul>
+  </div>
+</div>
+<div class="infoBox">
+    <div class="infoPage no">
+        <div class="panel-body">
+            <div class="control-group font-gray bbGrayLine" style="line-height: 30px;">
+				<a class="font-gray" href="index.html">首页</a>&gt;
+				<a class="font-gray" href="javascript:void(0);">政策法规</a>
+            </div>
+            <h2 class="newsTitle" id="tzggbt">政策法规</h2>
+            <ul class="pageCenter">
+                <li><a href="http://www.hzyg.gov.cn/tztg/201611/t20161111_18749.htm">温州市网约车驾驶员区域科目考试学习资料</a></li>
+                <li><a href="http://www.hzyg.gov.cn/yzfc/wztt/201611/t20161108_18744.htm">关于印发温州市网络预约出租汽车驾驶员从业资格考试大纲的通知</a></li>
+                <li><a href="http://www.hangzhou.gov.cn/art/2016/10/31/art_933506_2520788.html">温州市人民政府办公厅关于印发温州市网络预约出租汽车和私人小客车合乘管理实施细则（试行）的通知</a></li>
+                <li><a href="http://zizhan.mot.gov.cn/zfxxgk/bnssj/zcfgs/201607/t20160728_2068633.html">网络预约出租汽车经营服务管理暂行办法（交通运输部 工业和信息化部 公安部 商务部 工商总局 质检总局 国家网信办令2016年第60号）</a></li>
+                <li><a href="http://zizhan.mot.gov.cn/zfxxgk/bnssj/zcfgs/201609/t20160909_2085223.html">交通运输部关于修改《出租汽车驾驶员从业资格管理规定》的决定（交通运输部令2016年第63号）</a></li>
+                <li><a href="http://zizhan.mot.gov.cn/zfxxgk/bnssj/dlyss/201611/t20161107_2109602.html">交通运输部办公厅关于网络预约出租汽车车辆准入和退出有关工作流程的通知</a></li>
+                <li><a href="http://zizhan.mot.gov.cn/zfxxgk/bnssj/dlyss/201611/t20161107_2109050.html">交通运输部办公厅关于印发出租汽车驾驶员从业资格全国公共科目考试大纲的通知</a></li>
+                <li><a href="http://zizhan.mot.gov.cn/zfxxgk/bnssj/dlyss/201611/t20161104_2108551.html">交通运输部办公厅 工业和信息化部办公厅 公安部办公厅 中国人民银行办公厅 税务总局办公厅 国家网信办秘书局关于网络预约出租汽车...</a></li>
+                <!--     			<li><a href="">温州市网约车驾驶员区域科目考试学习资料</a></li> -->
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+<script type="text/javascript">
+    stringLengthFormat($('.pageCenter a'), 55);
+</script>
+<script type="text/javascript"></script>
+</body>
+</html>

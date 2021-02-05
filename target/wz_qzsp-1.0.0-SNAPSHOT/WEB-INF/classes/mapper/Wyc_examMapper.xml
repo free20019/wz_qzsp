@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.Wyc_examMapper">
+  <resultMap id="BaseResultMap" type="entity.Wyc_exam">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="TestPaper_id" jdbcType="INTEGER" property="testpaperId" />
+    <result column="Appointment_id" jdbcType="INTEGER" property="appointmentId" />
+    <result column="StuID" jdbcType="INTEGER" property="stuid" />
+    <result column="ImpleStarTime" jdbcType="DATE" property="implestartime" />
+    <result column="ImpleOverTime" jdbcType="DATE" property="impleovertime" />
+    <result column="experienceTime" jdbcType="INTEGER" property="experiencetime" />
+    <result column="AccumulationTime" jdbcType="INTEGER" property="accumulationtime" />
+    <result column="QuestionsOrder" jdbcType="VARCHAR" property="questionsorder" />
+    <result column="Achievement" jdbcType="DECIMAL" property="achievement" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, TestPaper_id, Appointment_id, StuID, ImpleStarTime, ImpleOverTime, experienceTime, 
+    AccumulationTime, QuestionsOrder, Achievement
+  </sql>
+  <select id="selectByExample" parameterType="entity.Wyc_examExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_wyc_exam
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="entity.Wyc_examExample">
+    delete from tb_wyc_exam
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Wyc_exam">
+    insert into tb_wyc_exam (id, TestPaper_id, Appointment_id, 
+      StuID, ImpleStarTime, ImpleOverTime, 
+      experienceTime, AccumulationTime, QuestionsOrder, 
+      Achievement)
+    values (#{id,jdbcType=INTEGER}, #{testpaperId,jdbcType=INTEGER}, #{appointmentId,jdbcType=INTEGER}, 
+      #{stuid,jdbcType=INTEGER}, #{implestartime,jdbcType=DATE}, #{impleovertime,jdbcType=DATE}, 
+      #{experiencetime,jdbcType=INTEGER}, #{accumulationtime,jdbcType=INTEGER}, #{questionsorder,jdbcType=VARCHAR}, 
+      #{achievement,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Wyc_exam">
+    insert into tb_wyc_exam
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="testpaperId != null">
+        TestPaper_id,
+      </if>
+      <if test="appointmentId != null">
+        Appointment_id,
+      </if>
+      <if test="stuid != null">
+        StuID,
+      </if>
+      <if test="implestartime != null">
+        ImpleStarTime,
+      </if>
+      <if test="impleovertime != null">
+        ImpleOverTime,
+      </if>
+      <if test="experiencetime != null">
+        experienceTime,
+      </if>
+      <if test="accumulationtime != null">
+        AccumulationTime,
+      </if>
+      <if test="questionsorder != null">
+        QuestionsOrder,
+      </if>
+      <if test="achievement != null">
+        Achievement,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testpaperId != null">
+        #{testpaperId,jdbcType=INTEGER},
+      </if>
+      <if test="appointmentId != null">
+        #{appointmentId,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="implestartime != null">
+        #{implestartime,jdbcType=DATE},
+      </if>
+      <if test="impleovertime != null">
+        #{impleovertime,jdbcType=DATE},
+      </if>
+      <if test="experiencetime != null">
+        #{experiencetime,jdbcType=INTEGER},
+      </if>
+      <if test="accumulationtime != null">
+        #{accumulationtime,jdbcType=INTEGER},
+      </if>
+      <if test="questionsorder != null">
+        #{questionsorder,jdbcType=VARCHAR},
+      </if>
+      <if test="achievement != null">
+        #{achievement,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.Wyc_examExample" resultType="java.lang.Long">
+    select count(*) from tb_wyc_exam
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_wyc_exam
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.testpaperId != null">
+        TestPaper_id = #{record.testpaperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appointmentId != null">
+        Appointment_id = #{record.appointmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuid != null">
+        StuID = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.implestartime != null">
+        ImpleStarTime = #{record.implestartime,jdbcType=DATE},
+      </if>
+      <if test="record.impleovertime != null">
+        ImpleOverTime = #{record.impleovertime,jdbcType=DATE},
+      </if>
+      <if test="record.experiencetime != null">
+        experienceTime = #{record.experiencetime,jdbcType=INTEGER},
+      </if>
+      <if test="record.accumulationtime != null">
+        AccumulationTime = #{record.accumulationtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionsorder != null">
+        QuestionsOrder = #{record.questionsorder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.achievement != null">
+        Achievement = #{record.achievement,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_wyc_exam
+    set id = #{record.id,jdbcType=INTEGER},
+      TestPaper_id = #{record.testpaperId,jdbcType=INTEGER},
+      Appointment_id = #{record.appointmentId,jdbcType=INTEGER},
+      StuID = #{record.stuid,jdbcType=INTEGER},
+      ImpleStarTime = #{record.implestartime,jdbcType=DATE},
+      ImpleOverTime = #{record.impleovertime,jdbcType=DATE},
+      experienceTime = #{record.experiencetime,jdbcType=INTEGER},
+      AccumulationTime = #{record.accumulationtime,jdbcType=INTEGER},
+      QuestionsOrder = #{record.questionsorder,jdbcType=VARCHAR},
+      Achievement = #{record.achievement,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,471 @@
+package mvc.service;
+
+import helper.JacksonUtil;
+import helper.MessageClient;
+import helper.Verify;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+/**
+ * @author: xianlehuang
+ * @Description:
+ * @date: 2020/5/25 - 15:49
+ */
+@Service
+public class SubsidyService {
+    protected Verify v = new Verify();
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected JdbcTemplate jdbcTemplate = null;
+    protected JdbcTemplate jdbcTemplate2 = null;
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
+
+    @Autowired
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public JdbcTemplate getJdbcTemplate2() {
+        return jdbcTemplate2;
+    }
+
+    @Autowired
+    public void setJdbcTemplate2(JdbcTemplate jdbcTemplate2) {
+        this.jdbcTemplate2 = jdbcTemplate2;
+    }
+
+
+    private JacksonUtil jacksonUtil = JacksonUtil.buildNormalBinder();
+
+    public String findBusinessOwnerSubsidy(HttpServletRequest request) {
+        String shstime = request.getParameter("shstime") == null ? "" : request.getParameter("shstime");
+        String shetime = request.getParameter("shetime") == null ? "" : request.getParameter("shetime");
+        String sqstime = request.getParameter("sqstime") == null ? "" : request.getParameter("sqstime");
+        String sqetime = request.getParameter("sqetime") == null ? "" : request.getParameter("sqetime");
+        String cphm = request.getParameter("cphm") == null ? "" : request.getParameter("cphm");
+        String shzt = request.getParameter("shzt") == null ? "" : request.getParameter("shzt");
+        String sqrlx = request.getParameter("sqrlx") == null ? "" : request.getParameter("sqrlx");
+        String sfzh = request.getParameter("sfzh") == null ? "" : request.getParameter("sfzh");
+        String sjhm = request.getParameter("sjhm") == null ? "" : request.getParameter("sjhm");
+        Integer page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
+        Integer pagesize = request.getParameter("pagesize") == null ? 100000 : Integer.valueOf(request.getParameter("pagesize"));
+        String tj = "";
+        if(shstime!= null&&!shstime.isEmpty()&&!"null".equals(shstime)){
+            tj +=" and a.SHSJ >= to_date('"+shstime+" 00:00:00','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(shetime!= null&&!shetime.isEmpty()&&!"null".equals(shetime)){
+            tj +=" and a.SHSJ <= to_date('"+shetime+" 23:59:59','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(sqstime!= null&&!sqstime.isEmpty()&&!"null".equals(sqstime)){
+            tj +=" and a.SQSJ >= to_date('"+sqstime+" 00:00:00','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(sqetime!= null&&!sqetime.isEmpty()&&!"null".equals(sqetime)){
+            tj +=" and a.SQSJ <= to_date('"+sqetime+" 23:59:59','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(cphm!= null&&!cphm.isEmpty()&&!"null".equals(cphm)){
+            tj +=" and a.cphm = '"+cphm+"'";
+        }
+        if(shzt!= null&&!shzt.isEmpty()&&!"null".equals(shzt)){
+            tj +=" and a.shzt = '"+shzt+"'";
+        }
+        if(sqrlx!= null&&!sqrlx.isEmpty()&&!"null".equals(sqrlx)){
+            tj +=" and a.sqrlx = '"+sqrlx+"'";
+        }
+         if(sfzh!= null&&!sfzh.isEmpty()&&!"null".equals(sfzh)){
+            tj +=" and a.sfzh = '"+sfzh+"'";
+        }
+         if(sjhm!= null&&!sjhm.isEmpty()&&!"null".equals(sjhm)){
+            tj +=" and a.sjhm = '"+sjhm+"'";
+        }
+         tj += " and (a.sqrlx = '0' or a.sqrlx = '1')";
+        String sql = "select (select count(*) from (select max(SQSJ) SQSJ, cphm from tb_zxbz group by cphm) b,tb_zxbz a" +
+                " where a.cphm=b.cphm and a.SQSJ=b.SQSJ";
+        sql += tj;
+        sql +=  ") as count, tt.* from (select t.*, rownum rn from (select a.* from (select max(SQSJ) SQSJ, cphm from tb_zxbz group by cphm) b,tb_zxbz a" +
+                " where a.cphm=b.cphm and a.SQSJ=b.SQSJ ";
+        sql += tj;
+        sql += " order by a.SQSJ desc ) t where rownum <= "+(page*pagesize);
+        sql += ") tt where tt.rn > "+((page-1)*pagesize);
+
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).put("SHSJ",list.get(i).get("SHSJ")==null?"":String.valueOf(list.get(i).get("SHSJ")).substring(0,19));
+            list.get(i).put("SQSJ",list.get(i).get("SQSJ")==null?"":String.valueOf(list.get(i).get("SQSJ")).substring(0,19));
+        }
+        return jacksonUtil.toJson(list);
+    }
+
+    public String addBusinessOwnerSubsidy(HttpServletRequest request) {
+        String sqrlx = request.getParameter("sqrlx") == null ? "" : request.getParameter("sqrlx");
+        String owner_id = String.valueOf(request.getSession().getAttribute("dlid"));
+        String insert = "";
+        if("0".equals(sqrlx)){
+            String cphm = request.getParameter("cphm") == null ? "" : request.getParameter("cphm");
+            String sqrxm = request.getParameter("sqrxm") == null ? "" : request.getParameter("sqrxm");
+            String sfzh = request.getParameter("sfzh") == null ? "" : request.getParameter("sfzh");
+            String sjhm = request.getParameter("sjhm") == null ? "" : request.getParameter("sjhm");
+            String jyqrsfzzm = request.getParameter("jyqrsfzzm") == null ? "" : request.getParameter("jyqrsfzzm");
+            String jyqrsfzfm = request.getParameter("jyqrsfzfm") == null ? "" : request.getParameter("jyqrsfzfm");
+            String qksm = request.getParameter("qksm") == null ? "" : request.getParameter("qksm");
+            String yszzb = request.getParameter("yszzb") == null ? "" : request.getParameter("yszzb");
+            String yszfb = request.getParameter("yszfb") == null ? "" : request.getParameter("yszfb");
+            String cyzgz1 = request.getParameter("cyzgz1") == null ? "" : request.getParameter("cyzgz1");
+            String pyht1 = request.getParameter("pyht1") == null ? "" : request.getParameter("pyht1");
+            String cyzgz2 = request.getParameter("cyzgz2") == null ? "" : request.getParameter("cyzgz2");
+            String pyht2 = request.getParameter("pyht2") == null ? "" : request.getParameter("pyht2");
+            String cyzgz3 = request.getParameter("cyzgz3") == null ? "" : request.getParameter("cyzgz3");
+            String pyht3 = request.getParameter("pyht3") == null ? "" : request.getParameter("pyht3");
+            List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tb_zxbz where IS_YX='0' and sqrlx!='2' and cphm = '"+cphm+"'");
+            if(list.size()>0){
+                return  "{\"info\":\"该车牌号码已申请\"}";
+            }
+            if(!Verify.isCPHM(cphm)){
+                return "{\"info\":\"车牌号码错误\"}";
+            }
+            if(!Verify.isUSERName(sqrxm)){
+                return "{\"info\":\"申请人名称错误\"}";
+            }
+            if(!Verify.isIDCard(sfzh)){
+                return "{\"info\":\"身份证号错误\"}";
+            }
+            if(!Verify.isLXFS(sjhm)){
+                return "{\"info\":\"手机号码错误\"}";
+            }
+
+            if("".equals(jyqrsfzzm)){
+                return "{\"info\":\"请上传经营权人身份证正面照片\"}";
+            }
+            if("".equals(jyqrsfzfm)){
+                return "{\"info\":\"请上传经营权人身份证反面照片\"}";
+            }
+            if("".equals(qksm)){
+                return "{\"info\":\"请上传情况说明照片\"}";
+            }
+            if("".equals(yszzb)){
+                return "{\"info\":\"请上传运输证正本\"}";
+            }
+            if("".equals(yszfb)){
+                return "{\"info\":\"请上传运输证副本\"}";
+            }
+            if("".equals(cyzgz1)){
+                return "{\"info\":\"请上传从业资格证\"}";
+            }
+            if("".equals(pyht1)){
+                return "{\"info\":\"请上传聘用合同\"}";
+            }
+            if(!("".equals(cyzgz2)&&"".equals(pyht2))){
+                if("".equals(cyzgz2)){
+                    return "{\"info\":\"请上传从业资格证\"}";
+                }
+                if("".equals(pyht2)){
+                    return "{\"info\":\"请上传聘用合同\"}";
+                }
+            }
+            if(!("".equals(cyzgz3)&&"".equals(pyht3))){
+                if("".equals(cyzgz3)){
+                    return "{\"info\":\"请上传从业资格证\"}";
+                }
+                if("".equals(pyht3)){
+                    return "{\"info\":\"请上传聘用合同\"}";
+                }
+            }
+           insert = "insert into tb_zxbz (cphm, sqrlx, owner_id, sqrxm, sfzh, sjhm, jyqrsfzzm, jyqrsfzfm, qksm, yszzb, yszfb, cyzgz1, pyht1, cyzgz2, pyht2, cyzgz3, pyht3, sqsj) " +
+                    " values ('"+cphm+"', '"+sqrlx+"', '"+owner_id+"', '"+sqrxm+"', '"+sfzh+"', '"+sjhm+"', '"+jyqrsfzzm+"', '"+jyqrsfzfm+"', '"+qksm+"', '"+yszzb+"', '"+yszfb+"', '"+cyzgz1+"', '"+pyht1+"', '"+cyzgz2+"', '"+pyht2+"', '"+cyzgz3+"', '"+pyht3+"', sysdate)";
+
+
+        }else if("1".equals(sqrlx)){
+            String cphm = request.getParameter("cphm") == null ? "" : request.getParameter("cphm");
+            String sqrxm = request.getParameter("sqrxm") == null ? "" : request.getParameter("sqrxm");
+            String sjhm = request.getParameter("sjhm") == null ? "" : request.getParameter("sjhm");
+            String qyyyzz = request.getParameter("qyyyzz") == null ? "" : request.getParameter("qyyyzz");
+            String jyqrsfzzm = request.getParameter("jyqrsfzzm") == null ? "" : request.getParameter("jyqrsfzzm");
+            String jyqrsfzfm = request.getParameter("jyqrsfzfm") == null ? "" : request.getParameter("jyqrsfzfm");
+            String qksm = request.getParameter("qksm") == null ? "" : request.getParameter("qksm");
+            String yszzb = request.getParameter("yszzb") == null ? "" : request.getParameter("yszzb");
+            String yszfb = request.getParameter("yszfb") == null ? "" : request.getParameter("yszfb");
+            String cyzgz1 = request.getParameter("cyzgz1") == null ? "" : request.getParameter("cyzgz1");
+            String pyht1 = request.getParameter("pyht1") == null ? "" : request.getParameter("pyht1");
+            String cyzgz2 = request.getParameter("cyzgz2") == null ? "" : request.getParameter("cyzgz2");
+            String pyht2 = request.getParameter("pyht2") == null ? "" : request.getParameter("pyht2");
+            String cyzgz3 = request.getParameter("cyzgz3") == null ? "" : request.getParameter("cyzgz3");
+            String pyht3 = request.getParameter("pyht3") == null ? "" : request.getParameter("pyht3");
+            List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tb_zxbz where IS_YX='0' and sqrlx!='2' and cphm = '"+cphm+"'");
+            if(list.size()>0){
+                return  "{\"info\":\"该车牌号码已申请\"}";
+            }
+            if(!Verify.isCPHM(cphm)){
+                return "{\"info\":\"车牌号码错误\"}";
+            }
+            if(!Verify.isUSERName(sqrxm)){
+                return "{\"info\":\"申请人名称错误\"}";
+            }
+            if(!Verify.isLXFS(sjhm)){
+                return "{\"info\":\"手机号码错误\"}";
+            }
+
+//            if("".equals(jyqrsfzzm)){
+//                return "{\"info\":\"请上传经营权人身份证正面照片\"}";
+//            }
+//            if("".equals(jyqrsfzfm)){
+//                return "{\"info\":\"请上传经营权人身份证反面照片\"}";
+//            }
+            if("".equals(qksm)){
+                return "{\"info\":\"请上传情况说明照片\"}";
+            }
+            if("".equals(yszzb)){
+                return "{\"info\":\"请上传运输证正本\"}";
+            }
+            if("".equals(yszfb)){
+                return "{\"info\":\"请上传运输证副本\"}";
+            }
+            if("".equals(cyzgz1)){
+                return "{\"info\":\"请上传从业资格证\"}";
+            }
+            if("".equals(pyht1)){
+                return "{\"info\":\"请上传聘用合同\"}";
+            }
+            if(!("".equals(cyzgz2)&&"".equals(pyht2))){
+                if("".equals(cyzgz2)){
+                    return "{\"info\":\"请上传从业资格证\"}";
+                }
+                if("".equals(pyht2)){
+                    return "{\"info\":\"请上传聘用合同\"}";
+                }
+            }
+            if(!("".equals(cyzgz3)&&"".equals(pyht3))){
+                if("".equals(cyzgz3)){
+                    return "{\"info\":\"请上传从业资格证\"}";
+                }
+                if("".equals(pyht3)){
+                    return "{\"info\":\"请上传聘用合同\"}";
+                }
+            }
+            insert = "insert into tb_zxbz (cphm, sqrlx, owner_id, sqrxm, qyyyzz, sjhm, jyqrsfzzm, jyqrsfzfm, qksm, yszzb, yszfb, cyzgz1, pyht1, cyzgz2, pyht2, cyzgz3, pyht3, sqsj) " +
+                " values ('"+cphm+"', '"+sqrlx+"', '"+owner_id+"', '"+sqrxm+"', '"+qyyyzz+"', '"+sjhm+"', '"+jyqrsfzzm+"', '"+jyqrsfzfm+"', '"+qksm+"', '"+yszzb+"', '"+yszfb+"', '"+cyzgz1+"', '"+pyht1+"', '"+cyzgz2+"', '"+pyht2+"', '"+cyzgz3+"', '"+pyht3+"', sysdate)";
+        }else{
+            return "{\"info\":\"请选择申请人类型\"}";
+        }
+
+        int c = jdbcTemplate.update(insert);
+        if(c>0){
+            return "{\"info\":\"提交成功\"}";
+        }else{
+            return "{\"info\":\"提交失败\"}";
+        }
+    }
+
+    public String findCompanySubsidy(HttpServletRequest request) {
+        String shstime = request.getParameter("shstime") == null ? "" : request.getParameter("shstime");
+        String shetime = request.getParameter("shetime") == null ? "" : request.getParameter("shetime");
+        String sqstime = request.getParameter("sqstime") == null ? "" : request.getParameter("sqstime");
+        String sqetime = request.getParameter("sqetime") == null ? "" : request.getParameter("sqetime");
+        String cphm = request.getParameter("cphm") == null ? "" : request.getParameter("cphm");
+        String shzt = request.getParameter("shzt") == null ? "" : request.getParameter("shzt");
+        String sqrlx = request.getParameter("sqrlx") == null ? "" : request.getParameter("sqrlx");
+        String sfzh = request.getParameter("sfzh") == null ? "" : request.getParameter("sfzh");
+        String sjhm = request.getParameter("sjhm") == null ? "" : request.getParameter("sjhm");
+        String sqrxm = request.getParameter("sqrxm") == null ? "" : request.getParameter("sqrxm");
+        Integer page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
+        Integer pagesize = request.getParameter("pagesize") == null ? 100000 : Integer.valueOf(request.getParameter("pagesize"));
+        String tj = "";
+        if(shstime!= null&&!shstime.isEmpty()&&!"null".equals(shstime)){
+            tj +=" and a.SHSJ >= to_date('"+shstime+" 00:00:00','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(shetime!= null&&!shetime.isEmpty()&&!"null".equals(shetime)){
+            tj +=" and a.SHSJ <= to_date('"+shetime+" 23:59:59','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(sqstime!= null&&!sqstime.isEmpty()&&!"null".equals(sqstime)){
+            tj +=" and a.SQSJ >= to_date('"+sqstime+" 00:00:00','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(sqetime!= null&&!sqetime.isEmpty()&&!"null".equals(sqetime)){
+            tj +=" and a.SQSJ <= to_date('"+sqetime+" 23:59:59','yyyy-MM-dd hh24:mi:ss')";
+        }
+        if(cphm!= null&&!cphm.isEmpty()&&!"null".equals(cphm)){
+            tj +=" and a.cphm = '"+cphm+"'";
+        }
+        if(shzt!= null&&!shzt.isEmpty()&&!"null".equals(shzt)){
+            tj +=" and a.shzt = '"+shzt+"'";
+        }
+        if(sqrlx!= null&&!sqrlx.isEmpty()&&!"null".equals(sqrlx)){
+            tj +=" and a.sqrlx = '"+sqrlx+"'";
+        }
+        if(sfzh!= null&&!sfzh.isEmpty()&&!"null".equals(sfzh)){
+            tj +=" and a.sfzh = '"+sfzh+"'";
+        }
+        if(sjhm!= null&&!sjhm.isEmpty()&&!"null".equals(sjhm)){
+            tj +=" and a.sjhm = '"+sjhm+"'";
+        }
+        if(sqrxm!= null&&!sqrxm.isEmpty()&&!"null".equals(sqrxm)){
+            tj +=" and a.sqrxm = '"+sqrxm+"'";
+        }
+        tj += " and a.sqrlx = '2'";
+        String sql = "select (select count(*) from (select max(SQSJ) SQSJ, cphm from tb_zxbz group by cphm) b,tb_zxbz a" +
+                " where a.cphm=b.cphm and a.SQSJ=b.SQSJ";
+        sql += tj;
+        sql +=  ") as count, tt.* from (select t.*, rownum rn from (select a.* from (select max(SQSJ) SQSJ, cphm from tb_zxbz group by cphm) b,tb_zxbz a" +
+                " where a.cphm=b.cphm and a.SQSJ=b.SQSJ ";
+        sql += tj;
+        sql += " order by a.SQSJ desc ) t where rownum <= "+(page*pagesize);
+        sql += ") tt where tt.rn > "+((page-1)*pagesize);
+
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).put("SHSJ",list.get(i).get("SHSJ")==null?"":String.valueOf(list.get(i).get("SHSJ")).substring(0,19));
+            list.get(i).put("SQSJ",list.get(i).get("SQSJ")==null?"":String.valueOf(list.get(i).get("SQSJ")).substring(0,19));
+        }
+        return jacksonUtil.toJson(list);
+    }
+
+
+    public String addCompanySubsidy(HttpServletRequest request) {
+        String sqrlx = request.getParameter("sqrlx") == null ? "" : request.getParameter("sqrlx");
+        String owner_id = String.valueOf(request.getSession().getAttribute("dlid"));
+        String insert = "";
+        if("2".equals(sqrlx)){
+            String cphm = request.getParameter("cphm") == null ? "" : request.getParameter("cphm");
+            String sqrxm = request.getParameter("sqrxm") == null ? "" : request.getParameter("sqrxm");
+            String yszzb = request.getParameter("yszzb") == null ? "" : request.getParameter("yszzb");
+            String yszfb = request.getParameter("yszfb") == null ? "" : request.getParameter("yszfb");
+            String qyyyzz = request.getParameter("qyyyzz") == null ? "" : request.getParameter("qyyyzz");
+            List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tb_zxbz where IS_YX='0' and sqrlx ='2' and cphm = '"+cphm+"'");
+            if(list.size()>0){
+                return  "{\"info\":\"该车牌号码已申请\"}";
+            }
+            if(!Verify.isCPHM(cphm)){
+                return "{\"info\":\"车牌号码错误\"}";
+            }
+            if(!Verify.isUSERName(sqrxm)){
+                return "{\"info\":\"申请人名称错误\"}";
+            }
+
+            if("".equals(yszzb)){
+                return "{\"info\":\"请上传运输证正本\"}";
+            }
+            if("".equals(yszfb)){
+                return "{\"info\":\"请上传运输证副本\"}";
+            }
+            if("".equals(qyyyzz)){
+                return "{\"info\":\"请上传企业营业执照\"}";
+            }
+
+            insert = "insert into tb_zxbz (cphm, sqrlx, owner_id, sqrxm, yszzb, yszfb, qyyyzz, sqsj) " +
+                    " values ('"+cphm+"', '"+sqrlx+"', '"+owner_id+"', '"+sqrxm+"', '"+yszzb+"', '"+yszfb+"', '"+qyyyzz+"', sysdate)";
+        }else{
+            return "{\"info\":\"请选择申请人类型\"}";
+        }
+
+        int c = jdbcTemplate.update(insert);
+        if(c>0){
+            return "{\"info\":\"提交成功\"}";
+        }else{
+            return "{\"info\":\"提交失败\"}";
+        }
+    }
+
+    public String findVehicle(HttpServletRequest request) {
+        List<Map<String, Object>> list = jdbcTemplate.queryForList("select distinct cphm from tb_zxbz");
+        return jacksonUtil.toJson(list);
+    }
+
+    public String upload(HttpServletRequest request) {
+        Map<String,Object> map = new HashMap<String,Object>();
+        String file_path ="D:\\upload\\image"+File.separator;//文件存储路径
+        String upload_file_path="";
+        File file =new File(file_path);
+        if(!file.exists() && !file .isDirectory()){ //如果文件夹不存在则创建
+            file.mkdirs();  //父文件不存在则一并创建   mkdir只创建对应文件 比如 image的父文件不存在 就会报错（文件路径不存在）
+            upload_file_path=file_path;
+        }else{
+            upload_file_path=file_path;
+        }
+        DiskFileItemFactory factory = new DiskFileItemFactory();  // 设置工厂
+        factory.setRepository(new File(file_path));// 设置文件存储位置
+        factory.setSizeThreshold(2048 * 1024);// 设置大小，如果文件小于设置大小的话，放入内存中，如果大于的话则放入磁盘中
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setHeaderEncoding("utf-8");// 这里就是中文文件名处理的代码，其实只有一行
+        List<FileItem> list;
+        try {
+            list = upload.parseRequest(request);
+            for (FileItem item : list) {
+                if (item.isFormField()) {
+                } else {
+                    if(item.getSize() > 4*1024*1000){
+                        map.put("msg","上传的图片过大");
+                    }else{
+                        String value = item.getName();
+                        String prefix=value.substring(value.lastIndexOf("."),value.length()); //获取到文件类型后缀 比如  .jpg
+                        Random random = new Random();
+                        String ids = random.nextInt(9999)+System.currentTimeMillis()+"";
+                        String filenames = ids+prefix;  //组合自己的文件名字
+                        item.write(new File(upload_file_path, filenames));  //将文件保存到文件夹中
+//                      OssUtil.upload(upload_file_path+filenames,"complaints/"+filenames);
+                        map.put("old_filename",value);
+                        map.put("file_address",upload_file_path+filenames);
+                        map.put("new_filename",filenames);
+                        map.put("msg","0");
+//                      if(info.equals("1")){
+//                    	  map.put("picture","1");
+//                      }
+//                      if(info.equals("2")){
+//                    	  map.put("picture","2");
+//                      }
+//                      if(info.equals("3")){
+//                    	  map.put("picture","3");
+//                      }
+                    }
+                }
+            }
+        } catch (Exception e) {//上传失败
+            e.printStackTrace();
+            map.put("msg","1");
+        }
+        return jacksonUtil.toJson(map);
+    }
+
+
+    public void getFile(HttpServletRequest request, HttpServletResponse response, String key) {
+        try {
+            String path = key;
+            File pf = new File(path);
+            FileInputStream fin = new FileInputStream(pf);
+            ServletOutputStream fout =  response.getOutputStream();
+            byte bts [] = new byte[fin.available()];
+            int length = 0;
+            if (fin != null) {
+                while ((length = fin.read(bts)) != -1) {
+                    fout.write(bts, 0, length);
+                }
+            }
+            fin.close();
+            fout.close();
+//				URL url = new URL("http://192.168.0.102:9000/"+key);
+//				InputStream ism=url.openStream();
+//				ServletOutputStream fout =  response.getOutputStream();
+//				byte bts [] = new byte[ism.available()];
+//				ism.read(bts);
+//				fout.write(bts);
+//				ism.close();
+//				fout.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

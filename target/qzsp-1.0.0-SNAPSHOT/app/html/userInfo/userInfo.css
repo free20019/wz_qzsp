@@ -1,0 +1,148 @@
+#indexTopWrapper { height: 75px; line-height: 75px; position: relative; background: url('../../../resources/images/topHeaderBg.png'); z-index: 1; }
+#indexTopWrapper .topHeader { position: relative; }
+#indexTopWrapper .topHeader .topTitle { float: left; line-height: 70px; font-size: 20px; font-family: "Microsoft YaHei", sans-serif; text-indent: 60px; color: white; }
+#topNavBox { height: 100%; line-height: 70px; text-align: center; }
+.topNav { height: 100%; padding-left: 10px; position: absolute; right: 0;}
+*+html .topNav { position: relative; width: 100%; padding-left: 0; }
+.topNav > li { display: inline-block; width: 110px; position: relative; list-style: none; }
+*+html .topNav > li { width: 105px; height: 67px; float: left; }
+.topNav > li { border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+.topNav > li > a { display: block; line-height: 60px; font-weight: bold; font-size: 15px; color: white; }
+.topNav > li > ul { list-style: none; }
+.topNav > li > ul > li, .topNav > li > ul > li > a { display: block; height: 30px; line-height: 30px; }
+.topNav > li.select, .topNav > li[data-select] { border-top: 4px solid #fff100; border-bottom: 4px solid #fff100; }
+.topNav > li.select a, .topNav > li[data-select] a, .topNav > li a:hover { color: #fff100; }
+#mainbav .sqlcsmList { margin: 0; padding: 0; position: absolute; top: 100%; left: 0; background: #eeeeee; z-index: 10; }
+#mainbav .sqlcsmList li { margin: 0; border: none; }
+#mainbav .sqlcsmList li a { display: block; width: auto; height: 30px; margin: 0; padding: 0 6px; line-height: 30px; border-radius: 0; border: none; border-bottom: 1px solid transparent; text-align: left; color: #333333; }
+#mainbav .sqlcsmList li a:hover { border-color: #dcdcdc; color: #2d83cc; }
+
+.userInfo > .title { margin-bottom: 10px; border-bottom: 1px solid #307abd; }
+.userInfo .title span { display: inline-block; height: 1.8em; padding: 0 10px; border-bottom: 2px solid #307abd; font-weight: bold; letter-spacing: .1em; }
+.btn4p .btn { width: 23.15%; margin-right: 2%; color: white; }
+.btnImg { height: 40px; font-size: 16px; color: white; background: url(../../../resources/images/btn/btnDoubleBlue.png); }
+.btnImg:hover { color: white; background: #175ccd; }
+.btn4p .noMargin { margin: 0; }
+.myCar { display: inline-block; *display: inline; position: relative; }
+.myCar input { width: 210px; height: 37px; *height: 31px; padding-left: .3em; font-size: 16px; }
+.myCar ul { margin: 0; padding: 0; position: absolute; top: 98%; left: 0; width: 100%; list-style: none; border: 1px solid #9a9a9a; }
+.myCar ul li { padding: .4em .5em; position: relative; border-bottom: 1px solid #9a9a9a; }
+.myCar ul li:last-child { border-bottom: none; }
+.myCar ul li:hover { color: white; background: #4787ee; }
+.myCar ul li span { position: absolute; right: 10px; font-size: 8px; color: #a53030; }
+/*车辆列表*/
+.carInfoStatusList, .carInfoStatusList_pt { height: 90px; margin: 15px 0 0; padding: 0; list-style: none; }
+.carInfoStatusList li { float: left; *width: 160px !important; width: 176px; padding: .4em .5em; margin-left: 2px; margin-bottom: 5px; position: relative; border: 1px solid #9a9a9a; cursor: pointer; }
+.carInfoStatusList_pt li { float: left; *width: 90px !important; width: 110px; height: 50px; line-height: 40px; padding: .4em .5em; margin-left: 2px; margin-bottom: 5px; position: relative; cursor: pointer; }
+.carInfoStatusList li span { position: absolute; right: 10px; font-size: 8px; color: #a53030; }
+.jsyBox { display: inline-block; *display: inline; position: relative; }
+.jsyBox input { width: 210px; height: 37px; *height: 31px; padding-left: .3em; padding-right: 37px; font-size: 20px; }
+.jsyBox button { position: absolute; top: 1px; *top: 2px; right: 1px; *right: 5px; width: 35px; height: 35px; border: none; outline: none; border-radius: 0; color: #4787ee; background: #4787ee url(../../../resources/images/btn/icon-mGlass.png) no-repeat; background-position: 6px 6px; }
+.jsyBox button:hover { background-color: #175ccd; }
+
+.btnBlue {
+    height: 30px;
+    line-height: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: white;
+    background: #4787ee;
+}
+.btnBlue:hover {
+    color: white;
+    background: #0d419d;
+}
+
+table { table-layout: fixed; border: 3px solid #307abd; margin-top: 20px; margin-bottom: 20px; }
+th { padding: 8px 0px; text-align: center; color: #313131; }
+th.title { font-size: 16px; }
+td { height: 37px; padding: 8px 0; white-space: nowrap; font-family: "Microsoft YaHei", sans-serif; font-size: 13px; text-align: center; border: 1px solid #307abd; }
+.panel-tabBox {
+    position: relative;
+    /*height: 580px;*/
+    /*height: auto;*/
+    margin-bottom: 30px;
+    border: 2px solid #307abd;
+    border-radius: .5em;
+}
+.panel-leftButton {
+    position: absolute;
+    top: 15px;
+    bottom: 15px;
+    left: 15px;
+    right: 762px;
+    width: 9.5em;
+    /*border: 2px solid #307abd;*/
+    /*border-radius: .5em;*/
+    z-index: 1;
+}
+.panel-middleContent {
+    /*position: absolute;*/
+    /*top: 15px;*/
+    /*left: 12.4em;*/
+    /*right: 15px;*/
+    /*bottom: 15px;*/
+    min-height: 580px;
+    margin-left: 11.3em;
+    border-left: 2px solid #307abd;
+    /*border: 2px solid #307abd;*/
+    border-radius: .5em;
+    background: white;
+}
+.panelButton {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.panelButton li {
+    position: relative;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    text-align: center;
+}
+.panelButton .title {
+    font-size: 16px;
+    font-weight: bold;
+}
+.btn-tab {
+    position: relative;
+    width: 9em;
+    height: 30px;
+    outline: none;
+    text-shadow: 2px 2px 2px #999;
+}
+.btn-tab.btn-bgImg {
+    border: none;
+    border-radius: .2em;
+    color: #333333;
+    background: #eeeeee;
+    /*background: url(../../../resources/images/btn/btn-bgImg.png);*/
+}
+.panelButton .btn-tab.btn-bgImg {
+    width: 126px;
+    padding: 0;
+    font-size: 10px;
+}
+.btn-tab.btn-bgImg.checked {
+    color: #ffffff;
+    background: #307abd;
+    text-shadow: 2px 2px 1px #666;
+}
+.btn-tab.btn-bgImg.checked .icon-arrow {
+    display: block;
+    position: absolute;
+    top: 50%;
+    *right: -33px !important;
+    right: -31px;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    outline: none;
+    border: none;
+    background: url(../../../resources/images/icon/icon-arrow.png) no-repeat;
+
+}
+.textInfoBox table {
+    width: 100%;
+    border: none;
+}

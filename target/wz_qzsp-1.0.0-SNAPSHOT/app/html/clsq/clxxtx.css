@@ -1,0 +1,16 @@
+th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 1px solid #0d419d;
+    font-size: 30px;
+    text-align: center;
+    color: #313131;
+}
+td {
+    padding: 8px 0;
+    border: 1px solid #0d419d;
+    white-space: nowrap;
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 13px;
+    text-indent: .3em;
+}

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>温州市出租汽车申报服务管理系统</title>
+    <link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../main.css">
+    <script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../config.js"></script>
+    <script type="text/javascript" src="../../main.js"></script>
+    <script type="text/javascript" src="../../../libs/md5.js"></script>
+    <script type="text/javascript" src="../../json2.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cityselect.js"></script>
+    <link rel="stylesheet" href="userInfo.css">
+    <style>
+        .xgxxBox { display: inline-block; float: right; position: relative; }
+        .xgxxATag { color: #a0a0a0; }
+        .xgxxBox .buttonList { position: absolute; top: 100%; left: 0; width: 9em; margin: 0; padding: 0; list-style: none; }
+        .buttonList li a { color: #a0a0a0; background: white; }
+        .buttonList li:hover a { color: #0000ff; }
+        .textInfoBox table { table-layout:fixed; border: 2px solid #307abd;}
+    </style>
+</head>
+<body>
+<div class="topWrapper">
+    <div class="topHeaderBox">
+        <div class="topHeader">
+            <div class="topGh"></div>
+            <h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+            <!--<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>-->
+        </div>
+    </div>
+    <div id="mainbav">
+        <ul class="nav">
+            <li class="select" data-select=""><a href="javascript:void(0);">账号信息</a></li>
+            <li class="sqlcsm">
+                <a href="javascript:void(0);">申请流程说明</a>
+                <ul class="sqlcsmList" style="">
+                    <li><a href="../sqlcsm/dl_clysqlc.html" target="_Blank">车辆运输证申请说明</a></li>
+                    <li><a href="../sqlcsm/dl_jsyzsqsm.html" target="_Blank">驾驶员证申请说明</a></li>
+                </ul>
+            </li>
+            <!--<li><a href="../clsq/clxxtx.html">车辆运输证申请 </a></li>-->
+            <!--<li><a href="../jsysq/tbsqsc.html">驾驶员证申请 </a></li>-->
+            <li><a href="../../../index.html">退出</a></li>
+        </ul>
+    </div>
+</div>
+<div id="indexInfoBox" class="infoBox" style="background-image: none;">
+    <div class="infoPage noMT">
+        <div class="pageCenter">
+            <div class="panel-body userInfo">
+                <div class="title">
+                    <span>账号信息</span>
+                    <div class="xgxxBox">
+                        <a href="javascript:void(0);" class="xgxxATag">修改信息</a>
+                        <ul class="buttonList" style="display: none;">
+                            <li><a href="javascript:void(0);" id="xgsjhmBtn">修改手机号码</a></li>
+                            <li><a href="javascript:void(0);" id="xgmimaBtn">修改密码</a></li>
+                            <li><a href="javascript:void(0);" id="xggrxxBtn">修改个人信息</a></li>
+                            <!--<li><a href="javascript:void(0);" class="xgxxBtn">修改姓名</a></li>-->
+                            <!--<li><a href="javascript:void(0);" class="xgxxBtn">其他修改</a></li> -->
+                            <!--<li><a href="javascript:void(0);" class="xgxxBtn">修改证件号码</a></li>-->
+                            <!--<li><a href="javascript:void(0);" class="xgxxBtn">修改性别</a></li>-->
+                            <!--<li><a href="javascript:void(0);" class="xgxxBtn">修改出生日期</a></li>-->
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="center">
+                    <table border="1" width="100%">
+                        <thead>
+                        <tr>
+                            <th colspan="4" class="title has-blue">账号信息</th>
+                        </tr>
+                        <tr>
+                            <th>申请人姓名</th>
+                            <th>身份证号</th>
+                            <th>手机号码</th>
+                            <th>注册时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td id="td_xm"></td>
+                            <td id="td_sfzh"></td>
+                            <td id="td_sjhm"></td>
+                            <td id="td_zcrq"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="title">
+                    <span>车辆申请信息</span>
+                </div>
+                <div class="center" style="min-height: 100px;">
+                    <label class="" style="margin-left: 30px; margin-top: 20px;">车辆申请&nbsp;&nbsp;<a class="btn btnBlue" href="../clsq/clxxtx.html" onclick="$.cookie('set', { duration: .2, name: 'regsiterType', value: 'gr'});">填报申请</a></label>
+                    <div class="center" style="min-height: 100px;">
+                        <div class="textInfoBox">
+                            <table id="clxx_tabel" border="1">
+                                <thead>
+                                <tr>
+                                    <th style="width: 6em;">序号</th>
+                                    <th style="width: 16em;">姓名</th>
+                                    <th style="width: 16em;">车牌</th>
+                                    <th style="width: 16em;">办理状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <!--<tr>
+                                    <td colspan="4" style="height: 80px; font-size: 24px; text-align: center;">暂无数据</td>
+                                </tr>-->
+                                <tbody id="clsqjl">
+                                </tbody>
+<!--                                 <tr> -->
+<!--                                     <td>000001</td> -->
+<!--                                     <td>刘强</td> -->
+<!--                                     <td>浙C12345</td> -->
+<!--                                     <td>办理中</td> -->
+<!--                                     <td><button class="btn btnBlue">查看</button></td> -->
+<!--                                 </tr> -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="title">
+                    <span>驾驶员申请信息</span>
+                </div>
+                <div class="center" style="min-height: 100px;" id="jsysq">
+                    <label class="jsysqan" style="margin-left: 30px; margin-top: 20px;">驾驶员申请&nbsp;&nbsp;<a class="btn btnBlue" href="../jsysq/tbsqsc.html" onclick="$.cookie('set', { duration: .2, name: 'regsiterType', value: 'gr'});">填报申请</a></label>
+                    <div class="center" style="min-height: 100px;">
+                        <div class="textInfoBox">
+                            <table id="jsyxx_tabel" border="1">
+                                <thead>
+                                <tr>
+                                    <th style="width: 6em;">序号</th>
+                                    <th style="width: 16em;">姓名</th>
+                                    <th style="width: 16em;">手机</th>
+                                    <th style="width: 16em;">办理状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <!--<tr>
+                                    <td colspan="4" style="height: 80px; font-size: 24px; text-align: center;">暂无数据</td>
+                                </tr>-->
+                                <tbody id="jsysqjl">
+<!-- 	                                <tr> -->
+<!-- 	                                    <td>000001</td> -->
+<!-- 	                                    <td>刘强</td> -->
+<!-- 	                                    <td>13566148461</td> -->
+<!-- 	                                    <td>已办结</td> -->
+<!-- 	                                    <td> -->
+<!-- 	                                        <button class="btn btnBlue">查看</button> -->
+<!-- 	                                    </td> -->
+<!-- 	                                </tr> -->
+                                </tbody>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+<script type="text/javascript" src="grInfo.js"></script>
+<script src="Info_tj.js"></script>
+<script type="text/javascript">
+</script>
+<script type="text/javascript">
+	var list;
+    $('.sqlcsmList, .myCarInfo, .point').hide();
+    $('.sqlcsm').hover(function() {
+        $('.sqlcsmList').show();
+    }, function() {
+        $('.sqlcsmList').hide();
+    });
+    $('.myCar input').focus(function() {
+        $('.myCarInfo').show();
+    }).blur(function() {
+        setTimeout(function () { $('.myCarInfo').hide(); }, 300);
+    });
+
+    $('.xgxxATag').click(function () {
+        var btnList = $('.buttonList');
+        if (btnList.css('display') == 'none') {
+            btnList.show();
+        } else {
+            btnList.hide();
+        }
+    });
+    $('#xgsjhmBtn, #xggrxxBtn, #xgmimaBtn').click(function() {
+        $('.buttonList').hide();
+    });
+    $('#xgsjhmBtn').on('click', function () {
+        var title = '修改手机号码',
+            html = grHtml('editPhone', '', {sjhm: $("#td_sjhm").html()});
+        layer.open({
+            title: title,
+            type:1,
+            area: ['750px', '480px'],
+            content: html,
+            btn: ['提交', '取消'],
+            yes: function(index) {
+                if(sjxg()){
+                	xggrsjh();
+                }
+            },
+            btn2: function (index) {
+
+            }
+//            cancel: function (index) {
+//                alert('是取消还是右上角关闭按钮自行查看')
+//            }
+        });
+        grInfo_yz();
+    });
+    $('#xgmimaBtn').on('click', function () {
+        var title = '修改密码',
+            html = grHtml('editPwd', '', {sjhm: $("#td_sjhm").html()});
+        layer.open({
+            title: title,
+            type:1,
+            area: ['750px', '480px'],
+            content: html,
+            btn: ['提交', '取消'],
+            yes: function(index) {
+                if(mmxg()){
+                	xggrmm();
+                }
+            },
+            btn2: function (index) {
+
+            }
+        });
+        grInfo_yz();
+    });
+    $('#xggrxxBtn').on('click', function () {
+        var title = '修改个人信息',
+            html = grHtml('edit', '', {
+                xm: list.XM,
+                xb: list.XB,
+                zjlx: list.ZJLX,
+                zjhm: list.ZJHM,
+                csrq: new Date(list.CSRQ).format("yyyy-MM-dd"),
+                lxdz: list.DZ.split("|")[3],
+                sfzdz: list.SFZDZ.split("|")[3],
+                sjhm: 'list.USER_NAME'
+            });
+        layer.open({
+            title: title,
+            type:1,
+            area: ['750px', '480px'],
+            content: html,
+            btn: ['提交', '取消'],
+            yes: function(index) {
+                if(gr_tj()){
+                	xggrxx();
+                }
+            },
+            btn2: function (index) {
+
+            }
+        });
+
+        $("#city").citySelect({
+            url:"../../../resources/js/city.min.js",
+            prov:list.DZ.split("|")[0], //省份
+            city:list.DZ.split("|")[1], //城市
+            dist:list.DZ.split("|")[2], //区县
+            nodata:"none" //当子集无数据时，隐藏select
+        });
+        $("#sfzcity").citySelect({
+            url:"../../../resources/js/city.min.js",
+            prov:list.SFZDZ.split("|")[0], //省份
+            city:list.SFZDZ.split("|")[1], //城市
+            dist:list.SFZDZ.split("|")[2], //区县
+            nodata:"none" //当子集无数据时，隐藏select
+        });
+        grInfo_yz();
+    });
+    function grHtml(type, action, data) {
+        var html = '<form class="form-inline" id="jyz_form" action="' + (action ? action : '') + '" target="upload" method="post" enctype="multipart/form-data" >',
+            xmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="jdcName">姓名：</label>&nbsp;<input type="text" id="jdcName" class="form-control" name="XM" value="' + (data ? data.xm : '') + '"/></div></div>',
+            xbHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal">性别：</label><label style="width: 6em; text-align: left;"><input type="radio" name="XB" id="sexb" value="男"' + (data && data.xb === '男' ? ' checked' : '') + '>&nbsp;男 </label><label style="width: 6em; text-align: left;"><input type="radio" name="XB" id="sexg" value="女"' + (data && data.xb === '女' ? ' checked' : '') + '>&nbsp;女 </label></div></div>',
+            gjHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="gj">国籍：</label>&nbsp;<input type="text" id="gj" class="form-control" name="GJ" value="中华人民共和国"/></div></div>',
+            zjlxHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="zjlx_select">证件类型：</label>&nbsp;<select name="ZJLX" class="form-control" id="zjlx_select"><option value="居民身份证"' + (data && data.zjlx === '居民身份证' ? ' selected' : '') + '>居民身份证</option><option value="护照"' + (data && data.zjlx === '护照' ? ' selected' : '') + '>护照</option><option value="军官证"' + (data && data.zjlx === '军官证' ? ' selected' : '') + '>军官证</option><option value="士兵证"' + (data && data.zjlx === '士兵证' ? ' selected' : '') + '>士兵证</option></select></div></div>',
+            zjhmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="zjhm">证件号码：</label>&nbsp;<input type="text" class="form-control" id="zjhm" name="ZJHM" value="' + (data ? data.zjhm : '') + '"></div></div>',
+            csrqHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="csrq">出生日期：</label>&nbsp;<input type="text" class="form-control" id="csrq" name="CSRQ" onclick="WdatePicker({dateFmt: \'yyyy-MM-dd\',minDate: \'{%y-100}-%M-%d\', maxDate: \'{%y+100}-%M-{%d}\'});" value="' + (data ? data.csrq : '') + '"></div></div>',/*onclick="WdatePicker({dateFmt: \'yyyy-MM-dd\',minDate: \'{%y-100}-%M-%d\', maxDate: \'{%y+100}-%M-{%d}\'});"*/
+            sjhmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="sjhm">手机号：</label>&nbsp;<input type="text" class="form-control" id="sjhm" name="SJHM"' + ('editPhone' !== type ? (data ? ' value="' + data.sjhm + '"' : '') + ' readonly="readonly"' : '') + '>&nbsp;' + ('editPhone' === type ? '<span class="has-red">&nbsp;此号码即为登录时用户名。</span>' : '') + '</div></div>',
+            oldsjhmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="old_sjhm">旧手机号：</label>&nbsp;<input type="text" class="form-control" id="old_sjhm" name="OLDSJHM"' + (data ? ' value="' + data.sjhm + '"' : '') + ' readonly="readonly">&nbsp;<button type="button" class="btn btn-info" onclick="fsyzm();" id="old_sjhmButton">点击获取验证码</button><span class="has-red"></span></div></div>',
+            yzmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="yzm">验证码：</label>&nbsp;<input id="yzm" name="YZM" class="form-control fontLength15"/></div></div>',
+            mmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="pwd">密码：</label>&nbsp;<input type="password" class="form-control" id="pwd" name="MM"></div></div>',
+            rmmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="repwd">确认密码：</label>&nbsp;<input type="password" class="form-control" id="repwd" name="reMM"></div></div>',
+            old_mmHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="old_pwd">旧密码：</label>&nbsp;<input type="password" class="form-control" id="old_pwd" name="OLDMM"></div></div>',
+            jzdzHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="lxdz">居住地址：</label><div id="city" style="display: inline-block; text-indent: 0;">&nbsp;<select class="form-control prov" name="SHENG"></select>&nbsp;<select class="form-control city" name="SHI" disabled="disabled"></select>&nbsp;<select class="form-control dist" name="QU" disabled="disabled"></select></div><div style="margin-left: 137px;"><textarea rows="3" cols="24" id="lxdz" class="form-control" name="LXDZ" style="width: 265px; margin-top: .4em; resize: none;">' + (data ? data.lxdz : '') + '</textarea></div></div></div>',
+            sfzdzHtml = '<div class="B_oneSpan bbGreenDashedLine"><div style="text-indent: 2em;"><label class="fontLength9 fontRight ml_5em fontNormal" for="sfzdz">身份证地址：</label><div id="sfzcity" style="display: inline-block; text-indent: 0;">&nbsp;<select class="form-control prov" name="SFZSHENG"></select>&nbsp;<select class="form-control city" name="SFZSHI" disabled="disabled"></select>&nbsp;<select class="form-control dist" name="SFZQU" disabled="disabled"></select></div><div style="margin-left: 137px;"><textarea rows="3" cols="24" id="sfzdz" class="form-control" name="SFZDZ" style="width: 265px; margin-top: .4em; resize: none;">' + (data ? data.sfzdz : '') + '</textarea></div></div></div>';
+        if ('edit' === type) {
+            html += xmHtml + xbHtml + gjHtml + zjlxHtml + zjhmHtml + csrqHtml + mmHtml + jzdzHtml + sfzdzHtml;
+        } else if ('editPhone' === type) {
+            html += oldsjhmHtml + yzmHtml + sjhmHtml ;
+        } else if ('editPwd' === type) {
+            html += old_mmHtml + mmHtml + rmmHtml;
+        }
+        return html + '</form>';
+    }
+    var wait = 60;
+    function fsyzm(){
+    	if ($("#old_sjhm").val() == "") {
+            hint_info("old_sjhm", "手机号码不能为空!", "1");
+            return false;
+        } else if (!regPhone.test($("#old_sjhm").val())) {
+            hint_info("old_sjhm", "手机号码格式不正确!", "1");
+            return false;
+        }
+        time(this);
+        tjstime = fomart_time(new Date());
+        $.ajax({
+            type : "post",
+            url : basePath + "register/dxfs",
+            //提交的数据
+            data:'postData={"phone":"'+$("#old_sjhm").val()+
+            '","type":"0"}',
+            //返回数据的格式
+            dataType : "json",
+            //成功返回之后调用的函数
+            success : function(data) {
+                if(data.info!=''){
+                	Pop_up_box(data.info,2);
+                }
+            },
+            //调用出错执行的函数
+            error : function() {
+                //请求出错处理
+            }
+        });
+    }
+    function time(o) {
+        if (wait == 0) {
+            $("#old_sjhmButton").css('background','#51bbdb');
+            $("#old_sjhmButton").css("border","1px solid #51bbdb");
+            $("#old_sjhmButton").css("color","#fff");
+            $("#old_sjhmButton").removeAttr("disabled");
+            $("#old_sjhmButton").text("免费获取验证码");
+            fssj = new Date().getTime();
+            wait = 60;
+        } else {
+            $("#old_sjhmButton").css('background-color','#ddd');
+            $("#old_sjhmButton").css("border","none");
+            $("#old_sjhmButton").css("color","#000");
+            $("#old_sjhmButton").attr("disabled", true);
+            $("#old_sjhmButton").text("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function() {
+                time(o)
+            }, 1000)
+        }
+    }
+</script>
+</body>
+</html>

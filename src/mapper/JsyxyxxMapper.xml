@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.JsyxyxxMapper">
+  <resultMap id="BaseResultMap" type="entity.Jsyxyxx">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="JSYBH" jdbcType="VARCHAR" property="jsybh" />
+    <result column="XM" jdbcType="VARCHAR" property="xm" />
+    <result column="XYDJ" jdbcType="VARCHAR" property="xydj" />
+    <result column="KHRQ" jdbcType="DATE" property="khrq" />
+    <result column="KHJG" jdbcType="VARCHAR" property="khjg" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, JSYBH, XM, XYDJ, KHRQ, KHJG
+  </sql>
+  <select id="selectByExample" parameterType="entity.JsyxyxxExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_jsyxyxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_jsyxyxx
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_jsyxyxx
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.JsyxyxxExample">
+    delete from tb_jsyxyxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Jsyxyxx">
+    insert into tb_jsyxyxx (id, JSYBH, XM, 
+      XYDJ, KHRQ, KHJG)
+    values (#{id,jdbcType=VARCHAR}, #{jsybh,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, 
+      #{xydj,jdbcType=VARCHAR}, #{khrq,jdbcType=DATE}, #{khjg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Jsyxyxx">
+    insert into tb_jsyxyxx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jsybh != null">
+        JSYBH,
+      </if>
+      <if test="xm != null">
+        XM,
+      </if>
+      <if test="xydj != null">
+        XYDJ,
+      </if>
+      <if test="khrq != null">
+        KHRQ,
+      </if>
+      <if test="khjg != null">
+        KHJG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="jsybh != null">
+        #{jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xydj != null">
+        #{xydj,jdbcType=VARCHAR},
+      </if>
+      <if test="khrq != null">
+        #{khrq,jdbcType=DATE},
+      </if>
+      <if test="khjg != null">
+        #{khjg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.JsyxyxxExample" resultType="java.lang.Long">
+    select count(*) from tb_jsyxyxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_jsyxyxx
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jsybh != null">
+        JSYBH = #{record.jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xm != null">
+        XM = #{record.xm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xydj != null">
+        XYDJ = #{record.xydj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.khrq != null">
+        KHRQ = #{record.khrq,jdbcType=DATE},
+      </if>
+      <if test="record.khjg != null">
+        KHJG = #{record.khjg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_jsyxyxx
+    set id = #{record.id,jdbcType=VARCHAR},
+      JSYBH = #{record.jsybh,jdbcType=VARCHAR},
+      XM = #{record.xm,jdbcType=VARCHAR},
+      XYDJ = #{record.xydj,jdbcType=VARCHAR},
+      KHRQ = #{record.khrq,jdbcType=DATE},
+      KHJG = #{record.khjg,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Jsyxyxx">
+    update tb_jsyxyxx
+    <set>
+      <if test="jsybh != null">
+        JSYBH = #{jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xydj != null">
+        XYDJ = #{xydj,jdbcType=VARCHAR},
+      </if>
+      <if test="khrq != null">
+        KHRQ = #{khrq,jdbcType=DATE},
+      </if>
+      <if test="khjg != null">
+        KHJG = #{khjg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Jsyxyxx">
+    update tb_jsyxyxx
+    set JSYBH = #{jsybh,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      XYDJ = #{xydj,jdbcType=VARCHAR},
+      KHRQ = #{khrq,jdbcType=DATE},
+      KHJG = #{khjg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

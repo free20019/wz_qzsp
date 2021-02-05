@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<link rel="stylesheet" href="clsq.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../util.js"></script>
+	<style type="text/css">
+		.rwm {
+			display: block;
+			width: 206px;
+			height: 85px;
+			margin-top: 10px;
+			margin-left: 20px;
+		}
+		.span_rq {
+			display: block;
+			margin-right: 12px;
+			text-align: right;
+		}
+		.zdxx {
+			padding: 0 .2em;
+			font-size: 24px;
+			font-weight: 500;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h2 class="topTitle">温州市出租汽车申报服务管理系统</h2>
+		</div>
+	</div>
+<div id="mainbav">
+	<ul class="nav">
+	<li><a href="../../../index.html" id="aIndex">首页</a></li>
+		<li><a href="../../../dl_clysqlc.html" target="_Blank">操作说明</a></li>
+	</ul>
+</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT">
+		<div class="top_banner">
+			<ul>
+				<li>
+					<i class="icon_sqtx_disabled"></i>
+					<span class="font-disabledColor">申请填写</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_wcsp_disabled"></i>
+					<span class="font-disabledColor">完成申请</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_bgxz_select"></i>
+					<span class="font-selectColor">变更性质</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_bczl_default"></i>
+					<span class="font-defaultColor">补充资料</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_ddfz_default"></i>
+					<span class="font-defaultColor">等待发证</span>
+					<!--<i class="icon_jt"></i>-->
+				</li>
+				<!--<li>-->
+					<!--<i class="icon_xkfz_default"></i>-->
+					<!--<span class="font-defaultColor">许可发证</span>-->
+				<!--</li>-->
+			</ul>
+		</div>
+		<div class="pageCenter">
+			<div class="printInfo">
+				<div class="control-group topReturnIndexPanel">
+					<div>&nbsp;</div>
+					<div class="returnSpan">
+						<a href="../../../index.html" id="returnIndex" class="btn btn-link">返回首页</a>
+					</div>
+				</div>
+				<div class="panel-body form-inline">
+					<div class="control-group" style="position: relative; margin-bottom: .5em; font-size: 16px;">
+						<div style="display: inline-block; width: 150px; padding-left: .5em;"><label style="text-align: left; width: auto;">申请人类别：个人</label></div>
+<!-- 						<div  style="display: inline-block; position: absolute; top: 0; right: .5em;"> -->
+<!-- 							<label style="text-align: left; width: auto;">申请编号：<span class="sqbh" id="sqbh"></span></label> -->
+<!-- 						</div> -->
+					</div>
+					<div class="printInfo">
+						<div class="panel panel-borderBlue_1 noBorderRadius">
+							<div class="panel-body" id="bgxzdiv">
+								<h2 style="font-weight:bold; text-align: center;">网络预约出租车预受理证明</h2>
+<!-- 								<h3 style="text-align: right;margin-right:9em;color:darkred">0300000</h3> -->
+								<div class="panel-body control-group" id="slzm_wyc" style="margin: 0 90px; font-size: 18px; text-indent: 2em;">
+									<p>车号牌为 <span  id="cphm" class="zdxx"></span>
+										或车辆识别代号为<span id="clsbdh" class="zdxx"></span>
+										(所有人<span id="xm" class="zdxx"></span>)的机动车，经初审及车辆综合性能检测，
+										符合网络预约出租汽车车辆标准。
+										请于二十个工作日内，携此证明及相关材料到温州市公安局车辆管理部分办理登记或变更车辆使用性质为“预约出租客运”的业务。
+									</p>
+									<p style="text-align: right;margin-top:25%;">
+										<span id="nf" class="nf"></span>
+<!-- 										<span id="yf" class="yf">04</span>月 -->
+<!-- 										<span id="rq" class="rq">12</span>日 -->
+									</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls fontCenter mt2em">
+					<a href="shsp.html" class="btn btn-info">我要补充资料</a>
+					<button type="button" class="btn btn-info" id="dy">打印</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bottomFooler"></div>
+</body>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight();
+    $('#txtApplyType').text(appleTypeName($.cookie('get', { name: 'regsiterType' })));
+    $('#aIndex, #returnIndex').attr('href', applePathName($.cookie('get', { name: 'regsiterType' })));
+    $('#opanHtml').click(function() {
+        window.location.href="ddts.html";
+    });
+    $('#dy').click(function() {
+        var html = $('.printInfo').html();
+        console.info(html);
+        var dHtml = documentHtml(html);
+        printHtml(dHtml);
+    });
+    $.ajax({
+        type:"post",
+        url: basePath + "db/tbsh_cl",
+        //提交的数据
+        data:{
+            "cphm":""
+        },
+        //返回数据的格式
+        dataType: "json",//"xml", "html", "script", "json", "jsonp", "text".
+        //成功返回之后调用的函数
+        success:function(data){
+//         	console.log(data)
+        	var info = data.info;
+        	if(info == '1'){
+        		$("#cphm").text(data.data[0].CPHM);//车牌号码
+        		$("#clsbdh").text(data.data[0].VIN);//vin
+        		$("#xm").text(data.data[0].XM);//姓名
+        		$("#nf").text(fomart_time1(data.data[0].YGJCSSJ));//日期
+        	}else{
+        		location.replace('../../../index.html');
+        	}
+        },
+        //调用出错执行的函数
+        error: function(){
+            //请求出错处理
+        }
+    });
+</script>
+</html>

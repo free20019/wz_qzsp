@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>驾驶员证申请流程</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<style>
+		.dyb{
+			padding: 0 10px;
+			border:1px solid #ccc;
+		}
+		.dyb img{
+			display: block;
+			width:700px;
+			margin:0 auto;
+			border:1px solid #999;
+			padding:10px;
+		}
+		.dyb h3{
+			height:38px;
+			line-height: 38px;
+			font-size:25px;
+			color:#0030A1;
+			font-weight: bold;
+		}
+		.dyb p{
+			text-indent: 2em;
+			font-size:20px;
+		}
+		.nav{
+			width:1000px;
+			height:50px;
+			font-size: 40px;
+			font-weight:bold;
+			line-height:100px;
+			text-align: center;
+			margin:0;
+			color:#fff;
+			position:relative;
+		}
+		.txt{
+			width:100%;
+			text-indent: 2em;
+			margin:10px auto;
+		}
+		.btnfh{
+			display:block;
+			text-align: right;
+			padding-bottom: 20px;
+			font-size: 18px;
+			padding-right: 45px;
+			border-bottom:1px solid #01319D;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeader">
+		<div class="topGh"></div>
+		<div class="topTitle">温州市出租汽车申报服务管理系统</div>
+		<div class="topLogin"></div>
+	</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT">
+		<div class="infoBox">
+			<div class="infoPage noMT">
+				<div class="top_banner">
+					<h2 class="nav">驾驶员证申请流程</h2>
+				</div>
+				<div class="btnfh">
+					<a href="../../../index.html">返回首页</a>
+				</div>
+				<div class="dyb">
+					<h3>第一步：登录网址</h3>
+					<div class="txt">输入http://wyc.hzcb.gov.cn,打开温州市出租汽车申报服务管理系统首页。</div>
+					<img src="../../../resources/images/sqlcsm/shouye.png"/>
+
+					<h3>第二步：用户注册</h3>
+					<div class="txt">阅读相关政策文件并承诺所填报的所有信息和提交的材料都真实有效，点击下一步，完成注册申请，方可进行登录等其他操作。</div>
+					<img src="../../../resources/images/sqlcsm/zhuce.png">
+
+					<h3>第三步:系统登录</h3>
+					<div class="txt">输入相应账号密码进行登录。</div>
+					<img src="../../../resources/images/sqlcsm/clys/20161128105335.png">
+
+					<h3>第四步：填写申请</h3>
+					<div class="txt">输入驾驶员证号、上传驾驶员证件等相关信息，申请参加网络预约出租汽车驾驶员从业资格考试。</div>
+					<img src="../../../resources/images/sqlcsm/rysq/20161128113955.png"/>
+
+					<h3>第五步：短信确认</h3>
+					<div class="txt">获取短信验证码，进行短信验证所填信息，提交考试申请。</div>
+					<img src="../../../resources/images/sqlcsm/rysq/20161128114120.png"/>
+
+					<h3>第六步：生成网约车驾驶员从业资格考试申请</h3>
+					<div class="txt">通过考试申请的驾驶员，可以预约参加网络预约出租汽车驾驶员从业资格考试。</div>
+					<img src="../../../resources/images/sqlcsm/rysq/20161128114216.png"/>
+
+					<h3>第七步：考试预约</h3>
+					<div class="txt">通过考试申请的驾驶员，可以预约参加网络预约出租汽车驾驶员从业资格考试。</div>
+					<img src="../../../resources/images/sqlcsm/rysq/20161128140942.png"/>
+
+					<h3>第八步：生成准考证</h3>
+					<div class="txt">预约成功后，驾驶员可以凭证前往指定地点，参加考试。</div>
+					<img src="../../../resources/images/sqlcsm/rysq/20161128133846.png"/>
+
+					<h3>第九步：成绩单</h3>
+					<div class="txt">完成考试后，若有不合格科目，可查看考生考试信息并预约下一次考试。</div>
+					<img src="../../../resources/images/sqlcsm/rysq/20161128135526.png">
+
+					<h3>第十步：证件签发</h3>
+					<div class="txt">完成考试后，本网站将实时更新办理状态，或以短信方式通知申请人驾驶员证的办理结果。</div>
+					<img src="../../../resources/images/sqlcsm/rysq/20161128140257.png">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight()
+</script>
+</body>
+</html>

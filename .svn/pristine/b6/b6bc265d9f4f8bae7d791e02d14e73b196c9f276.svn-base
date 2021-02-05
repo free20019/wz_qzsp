@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<!-- <script type="text/javascript" src="../../util.js"></script> -->
+	<script type="text/javascript" src="../../../libs/md5.js"></script>
+	<script type="text/javascript" src="../../json2.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cityselect.js"></script>
+	<link rel="stylesheet" href="userInfo.css">
+	<style>
+		.xgxxBox {
+			display: inline-block;
+			float: right;
+			position: relative;
+		}
+
+		.xgxxATag {
+			color: #a0a0a0;
+		}
+
+		.xgxxBox .buttonList {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: 9em;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.buttonList li a {
+			color: #a0a0a0;
+			background: white;
+		}
+
+		.buttonList li:hover a {
+			color: #0000ff;
+		}
+
+		.textInfoBox table {
+			table-layout: fixed;
+			border: 2px solid #307abd;
+		}
+
+		#xyczxInfoBox table tbody td {
+			line-height: 35px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="topWrapper">
+		<div class="topHeaderBox">
+			<div class="topHeader">
+				<div class="topGh"></div>
+				<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+				<!--<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>-->
+			</div>
+		</div>
+		<div id="mainbav">
+			<ul class="nav">
+				<li class="select" data-select=""><a href="javascript:void(0);">账号信息</a></li>
+				<!-- 				<li><a href="../../qy_dl_clysqlc.html" target="_Blank">车辆运输证申请说明</a></li> -->
+				<!-- 				<li id="clyszsq"><a class="qyzjsq">车辆运输证申请</a></li> -->
+				<li><a href="../../../index.html">退出</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="xyczxInfoBox" class="infoBox" style="background-image: none;">
+		<div class="infoPage noMT">
+			<div class="pageCenter" style="min-height: 700px; padding: 0;">
+				<div class="panel-body userInfo">
+					<div class="form-group has-success has-feedback">
+						<label class="control-label col-sm-2" for="jbsqstime" style="width: 8em; line-height: 33px;">申请时间</label>
+						<div class="col-sm-2" style="padding: 0;margin-left: -35px;width:100px;">
+							<input type="text" id="jbsqstime" style="width: 100%; padding: 5px 10px;" class="form-control"
+								onclick="WdatePicker({dateFmt: 'yyyy-MM-dd', onpicking: datetimePicking,isShowClear:false});">
+						</div>
+						<label class="control-label col-sm-2" for="jbsqetime"
+							style="width: 0em;line-height: 33px;padding-right: 1px;padding-left: 3px;">-</label>
+						<div class="col-sm-2" style="padding: 0;margin-left: 8px;width:100px;">
+							<input type="text" id="jbsqetime" style="width: 100%; padding: 5px 10px;" class="form-control"
+								onclick="WdatePicker({dateFmt: 'yyyy-MM-dd', onpicking: datetimePicking,isShowClear:false});">
+						</div>
+						<label class="control-label col-sm-2" for="spsjstime" style="width: 8em; line-height: 33px;">审批时间</label>
+						<div class="col-sm-2" style="padding: 0;margin-left: -35px;width:100px;">
+							<input type="text" id="spsjstime" style="width: 100%; padding: 5px 10px;" class="form-control"
+								onclick="WdatePicker({dateFmt: 'yyyy-MM-dd', onpicking: datetimePicking,isShowClear:false});">
+						</div>
+						<label class="control-label col-sm-2" for="spsjetime"
+							style="width: 0em;line-height: 33px;padding-right: 1px;padding-left: 3px;">-</label>
+						<div class="col-sm-2" style="padding: 0;margin-left: 8px;width:100px;">
+							<input type="text" id="spsjetime" style="width: 100%; padding: 5px 10px;" class="form-control"
+								onclick="WdatePicker({dateFmt: 'yyyy-MM-dd', onpicking: datetimePicking,isShowClear:false});">
+						</div>
+						<label class="control-label col-sm-2" for="jsyname" style="width: 8em; line-height: 33px;">车牌号码</label>
+						<div class="col-sm-2" style="padding: 0;margin-left: -35px;width:100px;">
+							<input class="form-control" id="jbsqcphm" style="width: 100%; padding: 5px 10px;">
+						</div>
+						<label class="control-label col-sm-2" for="bzzt" style="line-height: 33px;">办理状态</label>
+						<div class="col-sm-2" style="width: 9em; margin-right: 10px; padding: 0;margin-left: -88px;">
+							<select class="form-control" id="jbsqblzt" style="width: 95%; padding-right: 15px;">
+								<option value="">全部</option>
+								<option value="2">审核中</option>
+								<option value="0">审核通过</option>
+								<option value="1">审核未通过</option>
+							</select>
+						</div>
+						<label class="control-label col-sm-2" for="zjhm" style="width: 10em; line-height: 33px; ">补助申请人类型</label>
+						<div class="col-sm-2" style="padding: 0; margin-left: -20px;width:110px;">
+							<select class="form-control" id="jbsqsqlx" style="width: 100%;padding-right: 20px;">
+								<option value="">全部</option>
+								<option value="0">个人</option>
+								<option value="1">公司</option>
+							</select>
+						</div>
+					</div>
+					<div style="margin-top: 39px;">
+						<a href="javascript:void(0);" class="btn btn-primary" id="check">查询</a>
+						<a href="javascript:void(0);" class="btn btn-primary" id="push">导出</a>
+					</div>
+				</div>
+				<div class="panel-body userInfo">
+					<a href="javascript:void(0);" class="btn btn-primary" id="ryczqcjbsq">经营权人专项补助申请</a>
+					<table class="table">
+						<thead>
+							<tr>
+								<td>编号</td>
+								<td>车牌号码</td>
+								<td>申报时间</td>
+								<td>申请人类型</td>
+								<td>审批时间</td>
+								<td>办理状态</td>
+								<td>详情</td>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<div id="carInfoPageTabs_blz" class="pageTabs">
+						<button class="btn btn-primary btn-firstPage" onclick="gopage()">首页</button>
+						<button class="btn btn-primary btn-prevPage" onclick="gosyy()">上一页</button>
+						<button class="btn btn-primary btn-nextPage" onclick="goxyy()">下一页</button>
+						<button class="btn btn-primary btn-lastPage" onclick="goend()">尾页</button>
+						<div class="message" style="display:inline-block;"> 共&nbsp;<i class="blue"
+								id="blz_totalnum">0</i>&nbsp;条记录，当前显示第&nbsp;
+							<i class="blue" id="blz_currentpage">1</i>&nbsp;页&nbsp;/&nbsp;共&nbsp;
+							<i class="blue" id="blz_totalpage">0</i>&nbsp;页&nbsp;&nbsp;&nbsp;跳转到第&nbsp;
+							<input style="width:25px;height:32px;text-align:center;" id="ym">&nbsp;页&nbsp;
+							<button class="btn btn-primary btn-lastPage" onclick="tzym()">跳转</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<iframe id="interface_data" name="upload" style="display:none"></iframe>
+	<div class="bottomFooler"></div>
+	<script src="Info_tj.js"></script>
+	<script class="resize" type="text/javascript">
+		var currentpage = 1;
+		var pagesize = 10;
+		var resultdata;
+		var pgzs = 0;
+		$("#check").click(function () {
+			check(1);
+		});
+		$("#push").click(function () {
+			if ($("#blz_totalnum").text() == 0) {
+				layer.msg("无数据可以导出!");
+			} else {
+				// 			url = basePath + "jsy/getJbsqexcle?'cphm'="+'{"":,"sqlx":"' + $("#jbsqsqlx").val() +'","blzt":"' + $("#jbsqblzt").val()+ '","page":1,"pageSize":100000}',window.open(url);
+				// url = basePath + "subsidy/findBusinessOwnerSubsidyExcel?shstime=" + $('#shstime').val() + "&shetime=" + $('#shetime').val() + "&sqstime=" + $('#sqstime').val() + "&page=1&pageSize=1000000" + "&stime=" + $('#jbsqstime').val() + "&etime=" + $('#jbsqetime').val(), window.open(url);
+				url = basePath + `subsidy/findBusinessOwnerSubsidyExcel?shstime= ${$('#spsjstime').val()}&shetime=${$('#spsjetime').val()}
+				&sqstime=${$('#jbsqstime').val()}
+				&sqetime=${$('#jbsqetime').val()}
+				&cphm=${$('#jbsqcphm').val()}
+				&sfzh=&sqrlx=${$('#jbsqsqlx').val()}
+				&shzt=${$('#jbsqblzt').val()}&sjhm=
+				`
+				console.info(url)
+				// window.open(url)
+			}
+		});
+		$(function () {
+			$('#jbsqstime').val(setformatday(new Date(new Date().getTime() - 1000 * 60 * 60 * 24)));
+			$('#jbsqetime').val(setformatday(new Date()));
+
+			check(1);
+		})
+		function check(obj) {
+			if ($('#jbsqstime').val() == '') {
+				layer.msg('申请时间不能为空！')
+				return;
+			}
+			if ($('#jbsqetime').val() == '') {
+				layer.msg('申请时间不能为空！')
+				return;
+			}
+			$.ajax({
+				type: "post",
+				url: basePath + "subsidy/findBusinessOwnerSubsidy",//地址、字段需改
+				data: {
+					'shstime': $('#spsjstime').val(),
+					'shetime': $('#spsjetime').val(),
+					'sqstime': $('#jbsqstime').val(),
+					'sqetime': $('#jbsqetime').val(),
+					'cphm': $('#jbsqcphm').val(),
+					'sfzh': '',
+					'sqrlx': $('#jbsqsqlx').val(),
+					'shzt': $('#jbsqblzt').val(),
+					'page': obj,
+					'pageSize': 10,
+				},
+				dataType: "json",
+				success: function (data) {
+					console.log(data.length);
+					$('.table tbody').html('');
+					if (data.length == 0) {
+						$('.table tbody').html("<tr><td colspan='7'>查询无数据</td></tr>");
+						$("#blz_totalpage").html("0");
+						$("#blz_totalnum").html("0");
+					} else {
+						var html = '';
+						for (var i = 0; i < data.length; i++) {
+							html += '<tr>' +
+								'<td>' + (i + 1) + '</td>' +
+								'<td>' + data[i].CPHM + '</td>' +
+								'<td>' + data[i].SQSJ + '</td>' +
+								'<td>' + (data[i].SQRLX == '0' ? '个人' : data[i].SQRLX == '1' ? '公司' : '') + '</td>' +
+								'<td>' + data[i].SHSJ + '</td>' +
+								'<td>' + (data[i].SHZT == '0' ? '审核通过' : data[i].SHZT == '1' ? '审核不通过' : data[i].SHZT == '2' ? '审核中' : '') + '</td>' +
+								'<td>' + data[i].SHBZ + '</td>' +
+								'</tr>';
+						}
+						$('.table tbody').append(html);
+						if (data.length > 0) {
+							pgzs = parseInt((data[0].C - 1) / pagesize) + 1;
+							$("#blz_totalpage").html(pgzs);
+							$("#blz_totalnum").html(data[0].COUNT);
+						} else {
+							$("#blz_totalpage").html("0");
+							$("#blz_totalnum").html("0");
+						}
+						$("#blz_currentpage").html(currentpage);
+					}
+				},
+				error: function () {
+				}
+			});
+		}
+
+
+
+
+		//首页
+		function gopage() {
+			currentpage = 1;
+			check(currentpage);
+		}
+		//上一页
+		function goxyy() {
+			currentpage++;
+			if (currentpage > pgzs) {
+				layer.msg("已到末页");
+				currentpage = currentpage - 1;
+				return;
+			}
+			check(currentpage);
+		}
+		//下一页
+		function gosyy() {
+			currentpage--;
+			if (currentpage <= 0) {
+				layer.msg("已到首页");
+				currentpage = currentpage + 1;
+				return;
+			}
+			check(currentpage);
+		}
+		//末页
+		function goend() {
+			currentpage = pgzs;
+			check(currentpage);
+		}
+		//跳页
+		function tzym() {
+			if ($('#ym').val() != "") {
+				if (pgzs >= parseInt($('#ym').val())) {
+					currentpage = $('#ym').val();
+					check(currentpage);
+				} else {
+					hint_info("ym", "数字过大", "3");
+				}
+			}
+		}
+		$('#ryczqcjbsq').on('click', function () {
+			window.open('jyqrzxbzsqForm.html')
+			// layer.open({
+			// 	type: 1,
+			// 	area: ['350px', '250px'],
+			// 	content: '<div><h4 style="margin-top: 30px;text-align: center;">请选择出租车奖补类型</h4></div><div style="margin-top: 30px;text-align: center;"><button class="btn btnBlue btnDele" id="czcgxjb">出租车更新奖补申请</button></div><div style="margin-top: 20px;text-align: center;"><button class="btn btnBlue btnDele" id="czcgzjb">出租车改装奖补申请</button></div>'
+			// });
+			// $('#czcgxjb').on('click', function () {
+			// 	layer.closeAll()
+			// 	window.open('gxjbsq.html')
+			// })
+			// $('#czcgzjb').on('click', function () {
+			// 	layer.closeAll()
+			// 	window.open('gzjbsq.html')
+			// })
+		})
+		function setformatday(obj) {
+			var y = (obj.getFullYear()).toString();
+			var m = (obj.getMonth() + 1).toString();
+			if (m.length == 1) {
+				m = "0" + m;
+			}
+			var d = obj.getDate().toString();
+			if (d.length == 1) {
+				d = "0" + d;
+			}
+			var time = y + "-" + m + "-" + d;
+			return time;
+		}
+	</script>
+
+</body>
+
+</html>

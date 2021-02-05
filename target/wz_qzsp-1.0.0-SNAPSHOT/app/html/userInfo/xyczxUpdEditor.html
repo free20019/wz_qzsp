@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>巡游车-编辑</title>
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+</head>
+<body>
+<div class="panel-body">
+	<form class="form-inline" action="../../../zxzcupload/upload_zx" target="upload" method="post" enctype="multipart/form-data" id="add">
+		<div class="form-group" style="display: block; margin-bottom: 10px;"><!--has-success-->
+			<label class="control-label" for="xyczxEditor-name" style="width: 6em; margin-right: 10px; text-align: right;">姓名</label>
+			<input type="text" class="form-control" id="xyczxEditor-name" aria-describedby="inputSuccess4Status" style="width: 260px;" name="xm">
+		</div>
+		<div class="form-group" style="display: block; margin-bottom: 10px;">
+			<label class="control-label" for="xyczxEditor-sfzh" style="width: 6em; margin-right: 10px; text-align: right;">身份证号</label>
+			<input type="text" class="form-control" id="xyczxEditor-sfzh" aria-describedby="inputSuccess4Status" style="width: 260px;" name="sfzh">
+		</div>
+		<div class="form-group" style="display: block; margin-bottom: 10px;">
+			<label class="control-label" for="xyczxEditor-sjhm" style="width: 6em; margin-right: 10px; text-align: right;">手机号码</label>
+			<input type="text" class="form-control" id="xyczxEditor-sjhm" aria-describedby="inputSuccess4Status" style="width: 260px;" name="sjhm">
+		</div>
+		<div class="form-group" style="display: block; margin-bottom: 10px;">
+			<label class="control-label" for="xyczxEditor-cphm" style="width: 6em; margin-right: 10px; text-align: right;">车牌号码</label>
+			<input type="text" class="form-control" id="xyczxEditor-cphm" aria-describedby="inputSuccess4Status" style="width: 260px;" name="cphm">
+			<p>请注意，带T的车牌格式：浙C.T1111；不带T的车牌格式：浙CE1111!</p>
+		</div>
+		<div class="panel-body control-file">
+			<label>巡游车驾驶员电子服务监督卡注销申请表：</label>
+			<img width="220" height="130" src="" alt="">
+			<input type="file" id="fileupload_xycjsydzfw" name="pic4" style="display: none;">
+			<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_xycjsydzfw').click();">上传</button>
+		</div>
+		<div class="panel-body control-file">
+			<button type="button" class="btn btn-info btnFile" onclick="insert()" style="margin-left: 250px;">提交</button>
+		</div>
+	</form>
+	<iframe id = "interface_data" name="upload" style="display:none"></iframe>
+</div>
+<script>
+	function  bindImageChange (){
+		$(document.body).find('[id^=fileupload]').bind('change',function(event){
+			change(this.previousElementSibling,this);
+		}) ;
+	}
+	function change(pic,file) {
+		  if(window.FileReader){//chrome,firefox7+,opera,IE10,IE9，IE9也可以用滤镜来实现
+		   oFReader = new FileReader();
+		   oFReader.readAsDataURL(file.files[0]);
+		   oFReader.onload = function (oFREvent) {pic.src = oFREvent.target.result;};  
+		  }
+		  else if (document.all) {//IE8-
+		   file.select();
+		   var reallocalpath = document.selection.createRange().text//IE下获取实际的本地文件路径
+		   if (window.ie6) pic.src = reallocalpath; //IE6浏览器设置img的src为本地路径可以直接显示图片
+		   else { //非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现，IE10浏览器不支持滤镜，需要用FileReader来实现，所以注意判断FileReader先
+		    pic.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" + reallocalpath + "\")";
+		    pic.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';//设置img的src为base64编码的透明图片，要不会显示红xx
+		   }
+		  }
+		  else if (file.files) {//firefox6-
+		   if (file.files.item(0)) {
+		    url = file.files.item(0).getAsDataURL();
+		    pic.src = url;
+		   }
+		  }
+		  pic.style.display = 'block';
+	}
+	$(function () {
+		bindImageChange();
+		$('#xyczxEditor-cphm').val('浙C');
+// 		$("#xyczxEditor-cphm").focus(function(){
+// 			hint_info("xyczxEditor-cphm","请注意，带T的车牌格式：浙C.T1111；不带T的车牌格式：浙CE1111!","2");
+// 		});
+	});
+	
+	//提交
+	function insert(){
+		checkAll();
+	}
+	
+	//验证不为空
+	function checkAll(){
+		if($("#xyczxEditor-name").val()==""){
+	        hint_info("xyczxEditor-name","姓名不符合规则!","2");
+	        Pop_up_box("姓名不符合规则","2");
+	        return false;
+	    }
+		if($("#xyczxEditor-sfzh").val()=="" || !regIDCard.test($("#xyczxEditor-sfzh").val())){
+	        hint_info("xyczxEditor-sfzh","身份证号不符合规则!","2");
+	        Pop_up_box("身份证号不符合规则","2");
+	        return false;
+	    }
+		if($("#xyczxEditor-sjhm").val()=="" || !regPhone.test($("#xyczxEditor-sjhm").val())){
+	        hint_info("xyczxEditor-sjhm","手机号码不符合规则!","2");
+	        Pop_up_box("手机号码不符合规则","2");
+	        return false;
+	    }
+		if($("#xyczxEditor-cphm").val()=="" || $("#xyczxEditor-cphm").val().length>10){
+	        hint_info("xyczxEditor-cphm","车牌号码不符合规则!","2");
+	        Pop_up_box("车牌号码不符合规则","2");
+	        return false;
+	    }
+		if($('[name="pic4"]').val()==""){
+			layer.msg("巡游车驾驶员电子服务监督卡注销申请表不能为空!");
+	        return false;
+	    }
+		$("#add").submit();
+	}
+	
+	/**
+	 * 注销
+	 */
+	 var oFrm = document.getElementById("interface_data");
+	 oFrm.onload  = function() {
+	      if (this.readyState && this.readyState != 'complete') return;
+	      else{
+	         if (document.all){//IE
+	                 var sub_con = document.frames["interface_data"].document;
+	         }else{//Firefox
+	                 var sub_con = document.getElementById("interface_data").contentDocument;
+	         }
+	         sub_con = sub_con.body.innerHTML;  //取得返回值
+	         console.log(sub_con)
+	         if(sub_con.indexOf("OK")>=0){
+	        	 var dataPara = getFormJson();
+ 			     var datap= JSON.stringify(dataPara);
+				 $.ajax({
+					type : "post",
+					url :  "../../../zxzcupload/insert",
+					//提交的数据
+					data:{"postData" : datap},//返回数据的格式
+					dataType : "json",//"xml", "html", "script", "json", "jsonp", "text".
+					//成功返回之后调用的函数
+					success : function(data) {
+						console.log(data)
+						if(data.data.indexOf("OK")>=0){
+							layer.msg("注销成功");
+						}else{
+							layer.msg("数据重复提交!");
+						}
+						setTimeout(function(){window.parent.location.reload();},1000);
+					} 
+				});
+	         }
+	   }
+	 };
+	 
+	 function getFormJson() {
+	    var o = {};
+	    var a = $(add).serializeArray();
+	    $.each(a, function () {
+	        if (o[this.name] !== undefined) {
+	            if (!o[this.name].push) {
+	                o[this.name] = [o[this.name]];
+	            }
+	            o[this.name].push(this.value || '');
+	        } else {
+	            o[this.name] = this.value || '';
+	        }
+	    });
+	    return o;
+	}
+	
+</script>
+</body>
+</html>

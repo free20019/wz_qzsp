@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>温州市出租汽车申报服务管理系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../../main.css">
+	<script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../config.js"></script>
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../util.js"></script>
+	<script type="text/javascript" src="../../json2.js"></script>
+	<link rel="stylesheet" href="clxxtx.css">
+	<link rel="stylesheet" href="clsq.css">
+	<style>
+		.box-inline{
+			margin-bottom: -10px;
+		}
+		.box-inline div{
+			display:inline;
+		}
+		.btn{
+			border-radius:4px;
+			margin-right:10px;
+			position: relative;
+		}
+		.image_tips{
+			color:red;
+			font-size:12px;
+			font-weight:bold;
+		}
+		.panel-body{
+			*padding-right:0;
+		}
+		#tc {
+			position: relative;
+			height: 400px;
+		}
+		.tt{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: #fff;
+		}
+		.tt_c {
+			width:420px;
+			border:1px solid #000;
+			text-align: left;
+			margin:0 auto;
+		}
+		.txtc h2{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<div class="topWrapper">
+	<div class="topHeaderBox">
+		<div class="topHeader">
+			<div class="topGh"></div>
+			<h1 class="topTitle">温州市出租汽车申报服务管理系统</h1>
+			<!--<span class="subTitle">wen zhou wang yue che shen bao fu wu guan li xi tong</span>-->
+		</div>
+	</div>
+	<div id="mainbav">
+		<ul class="nav">
+			<li><a href="../../../index.html" id="aIndex">首页</a></li>
+			<li><a href="../sqlcsm/clysqlc.html" target="_Blank">操作说明</a></li>
+		</ul>
+	</div>
+</div>
+<div class="infoBox">
+	<div class="infoPage noMT" id="tc">
+		<div class="top_banner">
+			<ul>
+				<li>
+					<i class="icon_sqtx_select"></i>
+					<span class="font-selectColor">申请填写</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_wcsp_default"></i>
+					<span class="font-defaultColor">完成申请</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_bgxz_default"></i>
+					<span class="font-defaultColor">变更性质</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_bczl_default"></i>
+					<span class="font-defaultColor">补充资料</span>
+					<i class="icon_jt"></i>
+				</li>
+				<li>
+					<i class="icon_ddfz_default"></i>
+					<span class="font-defaultColor">等待发证</span>
+					<!--<i class="icon_jt"></i>-->
+				</li>
+				<!--<li>-->
+					<!--<i class="icon_xkfz_default"></i>-->
+					<!--<span class="font-defaultColor">许可发证</span>-->
+				<!--</li>-->
+			</ul>
+		</div>
+		<div class="pageCenter">
+			<div class="control-group topReturnIndexPanel">
+				<div>&nbsp;</div>
+				<div class="returnSpan">
+					<a href="../../../index.html" id="returnIndex" class="btn btn-link">返回首页</a>
+				</div>
+			</div>
+			<div class="panel-body form-inline">
+				<div class="control-group statusPanel">
+					<div class="left"><label>申请人类别：<span id="txtApplyType">个人</span></label></div>
+					<div class="right">
+						<label>申请编号：<span class="sqbh" id="sqbh"></span></label>
+					</div>
+				</div>
+				<form class="form-inline" id="clxxtx_1_form" action="../../../upload/upload_ysztj" target="upload" method="post" enctype="multipart/form-data" >
+					<div class="panel panel-borderBlue_1 noBorderRadius">
+						<div class="panel-body">
+							<h4 class="bbGreenLine pl_5em has-blue" style="padding-bottom: 5px">第一步：请输入完整的车辆识别代号并点击“检索检测记录”</h4>
+							<div class="panel-body queryInfoBox box-inline">
+								<div>
+									<label class="fontLength9 fontRight ml_5em" for="jdcsyr_q">机动车所有人：</label>
+									<span id="jdcsyr_q" class="form-control" style="width: 12em;"></span>
+								</div>
+								<div>
+									<label class="fontLength9 fontRight ml_5em" for="clsbdh_q">车辆识别代号：</label>
+									<input type="text" id="clsbdh_q" class="form-control" name="CLSBDH">
+								</div>
+								<div>
+									<a class="btn btn-info btnQuery " style="margin-left: 30px;" id="clxxtx_cx">检索检测记录</a>
+								</div>
+							</div>
+							<div class="panel-body queryInfoBox box-inline">
+								<div>
+									<label class="fontLength9 fontRight ml_5em" for="jdcsyr_q" style="font-size: 18px">申请经营区域：</label>
+									<select id="gsd" class="form-control" name="GSD">
+										<option value="市辖区（鹿城、瓯海、龙湾）" selected>市辖区（鹿城、瓯海、龙湾）</option>
+										<option value="永嘉县">永嘉县</option>
+										<option value="平阳县">平阳县</option>
+										<option value="苍南县">苍南县</option>
+										<option value="文成县">文成县</option>
+										<option value="泰顺县">泰顺县</option>
+										<option value="瑞安市">瑞安市</option>
+										<option value="乐清市">乐清市</option>
+										<option value="洞头区">洞头区</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;<label>属地管理部门：</label>
+									<span id="gsd_right">温州市道路运输管理局</span>
+								</div>
+							</div>
+						</div>
+						<div id="zdxxBox" class="panel-body">
+							<h4 class="bbGreenLine pl_5em has-blue" style="padding-bottom: 5px">第二步：填写其他字段（全部为必填项）</h4>
+							<div class="B_towSpan bbGreenDashedLine">
+								<div id="sqclhpBox">
+									<label class="fontLength9 fontRight ml_5em" for="sqclhp">车牌号码：</label>
+									<input type="text" id="sqclhp" class="form-control fontLength12" name="CPHM" value="浙C">
+									<label><input type="checkbox" id="cph">尚未获得车牌</label>
+								</div>
+								<div id="hdzkwBox">
+									<label class="fontLength9 fontRight ml_5em" for="hdzkw">核定载客位：</label>
+									<input class="form-control fontLength12" id="hdzkw" name="HDZKW">
+								</div>
+							</div>
+							<div class="B_oneSpan bbGreenDashedLine">
+								<div id="cllxyjgBox" style="width:auto;">
+									<label class="fontLength9 fontRight ml_5em" for="cllxyjg">燃料类型：</label>
+									<select class="form-control fontLength12" name="RLLX" id="cllxyjg" style="width:8em;">
+										<option value="新能源">新能源</option>
+										<option value="非新能源">非新能源</option>
+									</select>
+								</div>
+							</div>
+							<div id="clrylx">
+								<div class="B_threeSpan bbGreenDashedLine" >
+									<div id="clzjBox" class="ryc_jg">
+										<label class="fontLength9 fontRight ml_5em" for="clzj">车辆轴距：</label>
+										<input class="form-control fontLength12" id="clzj" name="ZJ" style="width:70px">&nbsp;<i class="unitChar">毫米</i>
+									</div>
+									<div class="xnr_jg" id="xhlcBox">
+										<label class="fontLength9 fontRight ml_5em" for="xhlc">续航里程：</label>
+										<input type="text" class="form-control" style="width:100px" id="xhlc" name="XHLC">&nbsp;<i class="unitChar">千米</i>
+									</div>
+									<div class="ryc_jg" id="jgjsBox">
+										<label class="fontLength9 fontRight ml_5em" for="jgjs">价格（计税）：</label>
+										<input type="text" class="form-control" style="width:100px" id="jgjs" name="CLGZJE">&nbsp;<i class="unitChar">万元</i>
+									</div>
+								</div>
+							</div>
+							<div class="B_towSpan bbGreenDashedLine">
+								<div id="xllxBox">
+									<label class="fontLength9 fontRight ml_5em" for="xllx">车辆类型：</label>
+									<input id="xllx" class="form-control fontLength12" name="CLLX">
+								</div>
+								<div id="fdjhBox">
+									<label class="fontLength9 fontRight ml_5em" for="fdjh">发动机号：</label>
+									<input type="text" class="form-control fontLength12" id="fdjh" name="FDJH">
+								</div>
+							</div>
+							<div class="B_towSpan bbGreenDashedLine">
+								<div id="ppxhBox">
+									<label class="fontLength9 fontRight ml_5em" for="ppxh">车辆品牌型号：</label>
+									<input class="form-control fontLength12" id="ppxh" name="PPXH" style="width: 9em;">
+								</div>
+<!-- 								<div id="clxhBox"> -->
+<!-- 									<label class="fontLength9 fontRight ml_5em" for="clxh">车辆型号：</label> -->
+<!-- 									<input class="form-control fontLength12" id="clxh" style="width: 9em;"> -->
+<!-- 								</div> -->
+								<div id="cpysBox">
+									<label class="fontLength9 fontRight ml_5em" for="cpys">车牌颜色：</label>
+									<input class="form-control fontLength12" id="cpys" name="CLYS" style="width: 9em;">
+								</div>
+							</div>
+							<div class="B_threeSpan bbGreenDashedLine">
+								<div id="checBox">
+									<label class="fontLength9 fontRight ml_5em" for="chec">车长：</label>
+									<input class="form-control fontLength12" id="chec" name="CHEC" style="width: 70px;">&nbsp;<i class="unitChar">毫米</i>
+								</div>
+								<div id="chekBox">
+									<label class="fontLength9 fontRight ml_5em" for="chek">车宽：</label>
+									<input class="form-control fontLength12" id="chek" name="CHEK" style="width: 70px;">&nbsp;<i class="unitChar">毫米</i>
+								</div>
+								<div id="chegBox">
+									<label class="fontLength9 fontRight ml_5em" for="cheg">车高：</label>
+									<input class="form-control fontLength12" id="cheg" name="CHEG" style="width: 70px;">&nbsp;<i class="unitChar">毫米</i>
+								</div>
+							</div>
+							<div class="B_towSpan bbGreenDashedLine">
+								<div id="zzlBox">
+									<label class="fontLength9 fontRight ml_5em" for="zzl">总质量（重量）：</label>
+									<input class="form-control fontLength12" id="zzl" name="ZLL" style="width: 70px;">&nbsp;<i class="unitChar">千克</i>
+									<!--<input class="form-control fontLength12" id="">-->
+								</div>
+								<div id="spddjBox" class="ryc_jg">
+									<label class="fontLength12 fontRight ml_5em" for="spddj" style="margin-left: -2.5em;">技术评定结论：</label>
+									<span type="text" class="fontSize20 fontLength12" id="spddj" name="PDJL">&nbsp;</span>
+								</div>
+							</div>
+							<div class="B_towSpan bbGreenDashedLine">
+								<div id="jsdjBox">
+									<label class="fontLength9 fontRight ml_5em" for="pdjg">评定机构：</label>
+									<span class="fontSize20 fontLength12" id="pdjg" name="PDJG">&nbsp;</span>
+								</div>
+								<div id="jsdjpdyxqzBox" class="ryc_jg">
+									<label class="fontLength12 fontRight ml_5em" for="jsdjpdyxqz" style="margin-left: -2.5em;">技术等级评定有效期止：</label>
+									<span type="text" class="fontSize20 fontLength12" id="jsdjpdyxqz" name="PDYXQZ">&nbsp;</span>
+								</div>
+							</div>
+							<div class="B_towSpan bbGreenDashedLine">
+								<div id="zcrqBox" class="ryc_jg">
+									<label class="fontLength9 fontRight ml_5em" for="jdczcrq">机动车注册日期：</label>
+									<input type="text" class="form-control" id="jdczcrq" name="JDCZCRQ" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd', onpicking: datetimePicking, minDate: '{%y-4}-%M-%d', maxDate: '%y-%M-{%d}'});">
+									<span id="zcrqwzc"></span>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<h4 class=" pl_5em has-blue" style="padding-bottom: 3px">第三步：上传图片信息</h4><br>
+							<span class="image_tips" style="padding-left:7px">所有上传图片须与申报车辆信息一致，格式为jpg、jpeg、png，图片大小不超过4M，且完整、清晰、无反光、无遮挡，照片面积不低于图框80%。</span>
+							<div class="B_oneSpan bbGreenDashedLine" id="hidden">
+								<div class="control-file B_towSpan noMargin">
+									<div class="panel-body">
+										<label for="fileupload_jdcsfzm">机动车所有人身份证明原件(正面)：</label>
+										<img width="220" height="130" src="" alt="">
+										<input type="file" id="fileupload_jdcsfzm" accept="image/jpeg,image/png,image/jpg" name="SFZMJ" style="display: none;">
+										<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_jdcsfzm').click();">上传</button>
+									</div>
+									<div class="panel-body">
+										<label for="fileupload_jdcsfzmfm">机动车所有人身份证明原件(反面)：</label>
+										<img width="220" height="130" src="" alt="">
+										<input type="file" id="fileupload_jdcsfzmfm" accept="image/jpeg,image/png,image/jpg" name="SFZMJFM" style="display: none;">
+										<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_jdcsfzmfm').click();">上传</button>
+									</div>
+								</div>
+							</div>
+							<div class="B_oneSpan bbGreenDashedLine">
+								<div class="panel-body">
+									<label style=" font-size: 18px;">请选择上传的文件类型：</label>
+									<label style="width: 10em; font-size: 18px;" class="djzs"><input type="radio" class="clzj_img" name="clzj_img" value="机动车登记证书" checked>&nbsp;机动车登记证书</label>
+									<label style="width: 12em; font-size: 18px;" class="hgzs"><input type="radio" class="clzj_img" name="clzj_img" value="机动车出厂合格证书">&nbsp;机动车出厂合格证书</label>
+									<label style="width: 10em; font-size: 18px;" class="yzzs"><input type="radio" class="clzj_img" name="clzj_img" value="车辆一致性证书">&nbsp;车辆一致性证书</label>
+								</div>
+								<div id="clzjlxBox" class="control-file B_threeSpan noMargin" style="margin-top: -30px;">
+									<div class="panel-body">
+										<label for="fileupload_jdcdjzs">机动车登记证书第1、2页<br>或机动车出厂合格证书：</label>
+										<img width="200" height="270" src="" alt="">
+										<input type="file" id="fileupload_jdcdjzs" accept="image/jpeg,image/png,image/jpg" name="JDCDJZ" style="display: none;">
+										<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_jdcdjzs').click();">上传</button>
+									</div>
+									<div class="panel-body">
+										<label for="fileupload_jdcdjzs2">机动车登记证书第3、4页(若有)<br>或指标证明文件：</label>
+										<img width="200" height="270" src="" alt="">
+										<input type="file" id="fileupload_jdcdjzs2" accept="image/jpeg,image/png,image/jpg" name="JDCDJZ1" style="display: none;">
+										<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_jdcdjzs2').click();">上传</button>
+									</div>
+									<div class="panel-body">
+										<label for="fileupload_jdcdjzs3">机动车登记证书第5、6页(若有)：</label>
+										<img width="200" height="270" src="" alt="">
+										<input type="file" id="fileupload_jdcdjzs3" accept="image/jpeg,image/png,image/jpg" name="JDCDJZ2" style="display: none;">
+										<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_jdcdjzs3').click();">上传</button>
+									</div>
+								</div>
+							</div>
+							<div class="B_oneSpan bbGreenDashedLine">
+								<div class="control-file B_towSpan noMargin">
+									<div class="panel-body">
+										<label for="fileupload_clgzsjszz">车辆购置税缴税发票：</label>
+										<img width="220" height="130" src="" alt="">
+										<input type="file" id="fileupload_clgzsjszz" accept="image/jpeg,image/png,image/jpg" name="CLJSPZ" style="display: none;">
+										<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_clgzsjszz').click();">上传</button>
+									</div>
+									<div class="panel-body" style="position: absolute; top: 0; *left: 50%;">
+										<label>示例：</label>
+										<img width="260" height="160" src="../../../resources/images/fp1.png" alt="">
+									</div>
+								</div>
+							</div>
+							<div class="B_oneSpan bbGreenDashedLine">
+								<div class="control-file B_towSpan noMargin">
+									<div class="panel-body">
+										<label for="fileupload_jsfp">车辆购置发票：</label>
+										<img width="220" height="130" src="" alt="">
+										<input type="file" id="fileupload_jsfp" accept="image/jpeg,image/png,image/jpg" name="CLGZFP" style="display: none;">
+										<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_jsfp').click();">上传</button>
+									</div>
+									<div class="panel-body" style="position: absolute; top: 0; *left: 50%;">
+										<label>示例：</label>
+										<img width="260" height="160" src="../../../resources/images/fp1.png" alt="">
+									</div>
+								</div>
+							</div>
+							<div class="B_oneSpan bbGreenDashedLine">
+								<div class="control-file B_towSpan noMargin">
+									<div class="panel-body">
+										<label for="fileupload_clzhxnjcbg">车辆性能综合检测报告：</label>
+										<img width="220" height="130" src="" alt="">
+										<input type="file" id="fileupload_clzhxnjcbg" accept="image/jpeg,image/png,image/jpg" name="CLXMZHJCBG" style="display: none;">
+										<button type="button" class="btn btn-info btnFile" onclick="$('#fileupload_clzhxnjcbg').click();">上传</button>
+									</div>
+									<div class="panel-body" style="position: absolute; top: 0; *left: 50%;">
+										<label>示例：</label>
+										<img width="260" height="160" src="../../../resources/images/cljcbg.jpg" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="B_oneSpan">
+								<p style="margin-top: .8em; text-align: center;"> 提示：务必保证所填信息和提交的材料与申报车辆一致，且真实有效，若有出入，将退回申请。</p>
+							</div>
+							<input type='hidden' id="yjhb_bc"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls fontCenter" style="margin-top: 3em;">
+							<button type="button" class="btn btn-info" id="go_next">下一步</button>
+							<button type="button" class="btn btn-danger" onclick="javascript:history.back(-1);" id="go_back">返 回</button>
+						</div>
+					</div>
+				</form>
+				<iframe id = "interface_data"  name="upload" style="display:none"></iframe>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bottomFooler"></div>
+<script class="resize" type="text/javascript">
+    $(window).resize(setInfoPageHeight);
+    $('.infoPage').bind('DOMNodeInserted', setInfoPageHeight);
+    setInfoPageHeight();
+    var regsiterType = $.cookie('get', { name: 'regsiterType'});
+    var dblx = $.cookie('get', { name: 'regsiterbdlx'});
+    $('#txtApplyType').text(appleTypeName(regsiterType));
+    $('#aIndex, #returnIndex').attr('href', applePathName(regsiterType));
+    /**
+	 * 车辆模板
+     * @param tagType 标签名称（只支持'input'和'span'标签）
+     * @param title 标题
+     * @param id
+     * @param unit 单位
+     * @param width 标签的宽度：100px
+     * @returns {string}
+     */
+    //下拉菜单
+	$('#gsd').on('change',function(){
+	   if('市辖区（鹿城、瓯海、龙湾）'===$('#gsd').val()){
+           $('#gsd_right').text('温州市道路运输管理局')
+	   }else if('市辖区'===$('#gsd').val()){
+           $('#gsd_right').text('永嘉县道路运输管理局')
+	   }else if('永嘉县'===$('#gsd').val()){
+            $('#gsd_right').text('平阳县道路运输管理局')
+        }else if('平阳县'===$('#gsd').val()){
+           $('#gsd_right').text('道路运输管理局')
+	   }else if('苍南县'===$('#gsd').val()){
+            $('#gsd_right').text('道路运输管理局')
+        }else if('文成县'===$('#gsd').val()){
+           $('#gsd_right').text('道路运输管理局')
+	   }else if('泰顺县'===$('#gsd').val()){
+            $('#gsd_right').text('道路运输管理局')
+        }else if('瑞安市'===$('#gsd').val()){
+           $('#gsd_right').text('道路运输管理局')
+		}else{
+
+		}
+	});
+
+    //机动车所有人身份证明原件(正面)和机动车所有人身份证明原件(反面)
+	$(function(){
+	   if('grcl' === dblx){
+	       $('#hidden').show();
+	   }else{
+	       $('#hidden').hide();
+	   }
+	});
+	function clItemHtml(title, id, unit, width) {
+        var style = width ? ' style="width:' + width + '"' : '';
+        var html = '<label class="fontLength9 fontRight ml_5em" for="' + id + '">' + title + '：</label>';
+		html += '<input class="fontSize20 form-control fontLength12" id="' + id + '" name="' + id.toUpperCase() + '"' + style + '>';
+        html += '<i class="unitChar">&nbsp;' + unit + '</i>';
+        return html;
+    }
+    function clzjHtml(width) {
+        return '<div id="clzjBox" class="ryc_jg">' + clItemHtml('车辆轴距', 'clzj', '毫米', width) + '</div>';
+    }
+    function cljgHtml(width) {
+        return '<div class="ryc_jg" id="jgjsBox">' + clItemHtml('价格（计税）', 'jgjs', '万元', width) + '</div>';
+    }
+    function cllcHtml(width) {
+        return '<div class="xnr_jg" id="xhlcBox">' + clItemHtml('续航里程', 'xhlc', '千米', width) + '</div>';
+    }
+    function clzjjglcHtml() {
+	    var width = '100px';
+        return clzjHtml(width) + cljgHtml(width) + cllcHtml(width);
+    }
+    function clzjjgHtml() {
+        var width = '100px';
+        return clzjHtml(width) + cljgHtml(width);
+    }
+    xnyqc();
+    //新能源车
+    function xnyqc() {
+        //轴距
+        $("#clzj").focus(function(){
+            hint_info("clzj","轴距 格式:2600毫米以上!例如“2600”","2");
+        });
+        $("#clzj").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#clzj").val()==""){
+                hint_info("clzj","轴距不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regXnyc.test($("#clzj").val())) {
+                hint_info("clzj","轴距格式不正确!","2");
+                div.addClass('has-error');
+            }else {
+                div.addClass('has-success');
+            }
+        });
+//         价格（计税）
+// 		 cljgPoint();
+        //续航里程
+        $("#xhlc").focus(function(){
+            hint_info("xhlc","续航里程格式：250千米以上!例如“300”","2");
+        });
+        $("#xhlc").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#xhlc").val()==""){
+                hint_info("xhlc","续航里程不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regXhlc.test($("#xhlc").val())) {
+                hint_info("xhlc","续航里程格式不正确!","2");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+        //价格计税
+        $("#jgjs").focus(function(){
+            hint_info("jgjs","价格计税格式：15万元以上!例如“15”","2");
+        });
+        $("#jgjs").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#jgjs").val()==""){
+                hint_info("jgjs","价格计税不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regJgyjs1.test($("#jgjs").val())) {
+                hint_info("jgjs","价格计税格式不正确!","2");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+    }
+    //燃油车
+    function ryqc() {
+        //轴距
+        $("#clzj").focus(function(){
+            hint_info("clzj","轴距 格式:2650毫米以上!例如“2650”","2");
+        });
+        $("#clzj").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#clzj").val()==""){
+                hint_info("clzj","轴距不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regFxnyc.test($("#clzj").val())) {
+                hint_info("clzj","轴距格式不正确!","2");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+        //价格（计税）
+        $("#jgjs").focus(function(){
+            hint_info("jgjs","价格（计税）格式:12万以上!若在15万元以上，则可直接不验证轴距！例如“12”","2");
+        });
+        $("#jgjs").blur(function(){
+            removeInputBorderStyle($(this));
+            var div = $(this).parent();
+            if($("#jgjs").val()==""){
+                hint_info("jgjs","价格（计税）不能为空!","2");
+                div.addClass('has-error');
+            }else if(!regJgyjs.test($("#jgjs").val())) {
+                hint_info("jgjs","价格（计税）格式不正确!","2");
+                div.addClass('has-error');
+            }else{
+                div.addClass('has-success');
+            }
+        });
+    }
+    //车辆识别代码验证
+    $("#clsbdh_q").focus(function(){
+        hint_info("clsbdh_q","车辆识别代码格式:有数字和大写字母组成.例如:LGAX5DF49E3004357","3");
+    });
+    $("#clsbdh_q").blur(function(){
+        if($("#clsbdh_q").val()==""){
+            hint_info("clsbdh_q","车辆识别代码不能为空!","3");
+        }else if(!regClsbh.test($("#clsbdh_q").val())) {
+            hint_info("clsbdh_q","车辆识别代码格式不正确!","3");
+        }
+    });
+    //核定载客为
+    $("#hdzkw").focus(function(){
+        hint_info("hdzkw","请输入核定载客位。例如：“5”","3");
+    });
+    $("#hdzkw").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#hdzkw").val()==""){
+            hint_info("hdzkw","核定载客位不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regHdzkw.test($("#hdzkw").val())){
+            hint_info("hdzkw","核定载客位格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //注册日期验证
+    $("#jdczcrq").focus(function(){
+        hint_info("jdczcrq","机动车注册日期格式:必须选择当天日期之前或者当天日期,例如:2015-12-12","2");
+    });
+    $("#jdczcrq").blur(function(){
+        var div = $(this).parent();
+        if($("#jdczcrq").val()==""){
+            hint_info("jdczcrq","机动车注册日期不能为空!","2");
+            div.addClass('has-error');
+        }else if(!regDate.test($("#jdczcrq").val())) {
+            hint_info("jdczcrq","机动车注册日期格式不正确!","2");
+            div.addClass('has-error');
+        }
+    });
+    //车牌号码验证
+    $("#sqclhp").focus(function(){
+        hint_info("sqclhp","车牌号:浙C+数字或大写英文字母组成的五个字符,例如:浙C12345","3");
+    });
+    $("#sqclhp").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#sqclhp").val()==""){
+            hint_info("sqclhp","车牌号码不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regLicenseplate1.test($("#sqclhp").val())){
+            hint_info("sqclhp","车牌号码格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //车辆类型
+    $("#xllx").focus(function(){
+        hint_info("xllx","请输入车辆类型。例如“小型客车”","3");
+    });
+    $("#xllx").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#xllx").val()==""){
+            hint_info("xllx","车辆类型不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regLicenseplate1.test($("#xllx").val())){
+            hint_info("xllx","车辆累心格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //发动机号
+    $("#fdjh").focus(function(){
+        hint_info("fdjh","请输入发动机号。例如“f30f000729”","3");
+    });
+    $("#fdjh").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#fdjh").val()==""){
+            hint_info("fdjh","发动机号不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regFdjh.test($("#fdjh").val())){
+            hint_info("fdjh","发动机号格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //车辆厂牌
+    $("#ppxh").focus(function(){
+        hint_info("ppxh","请输入车辆厂牌。列入“红旗”","3");
+    });
+    $("#ppxh").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#ppxh").val()==""){
+            hint_info("ppxh","车辆厂牌不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regPpxh.test($("#ppxh").val())){
+            hint_info("ppxh","车辆厂牌格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //车辆型号
+    $("#clxh").focus(function(){
+        hint_info("clxh","请输入车辆型号。例如“CAF7202AC3”","3");
+    });
+    $("#clxh").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#clxh").val()==""){
+            hint_info("clxh","车辆型号不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regClsbh.test($("#clxh").val())){
+            hint_info("clxh","车辆型号格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //车辆颜色
+    $("#cpys").focus(function(){
+        hint_info("cpys","请输入车辆颜色。“红色”","3");
+    });
+    $("#cpys").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#cpys").val()==""){
+            hint_info("cpys","车辆颜色不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regFwjgmc.test($("#cpys").val())){
+            hint_info("cpys","车辆颜色格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //车长
+    $("#chec").focus(function(){
+        hint_info("chec","请输入车长。例如“3000”","3");
+    });
+    $("#chec").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#chec").val()==""){
+            hint_info("chec","车长不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regCkg.test($("#chec").val())){
+            hint_info("chec","车长格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //车宽
+    $("#chek").focus(function(){
+        hint_info("chek","请输入车宽。例如“2500”","3");
+    });
+    $("#chek").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#chek").val()==""){
+            hint_info("chek","车宽不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regCkg.test($("#chek").val())){
+            hint_info("chek","车宽格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //车高
+    $("#cheg").focus(function(){
+        hint_info("cheg","请输入车高。例如“1500”","3");
+    });
+    $("#cheg").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#cheg").val()==""){
+            hint_info("cheg","车高不能为空!","3");
+            div.addClass('has-error');
+        }else if(!regCkg.test($("#cheg").val())){
+            hint_info("cheg","车高格式不正确!","3");
+            div.addClass('has-error');
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    //总质量
+    $("#zzl").focus(function(){
+        hint_info("zzl","请输入总质量（总量）。例如“3”","3");
+    });
+    $("#zzl").blur(function(){
+        removeInputBorderStyle($(this));
+        var div = $(this).parent();
+        if($("#zzl").val()==""){
+            hint_info("zzl","总质量（总量）不能为空!","3");
+            div.addClass('has-error');
+//        }else if(!regCkg.test($("#zzl").val())){
+//            hint_info("zzl","总质量（总量）格式不正确!","3");
+        }else{
+            div.addClass('has-success');
+        }
+    });
+    function jdcdjzsHtml() {
+		return '<div class="panel-body" class="djzs"><label for="fileupload_jdcdjzs">机动车登记证书第1、2页：</label><img width="200" height="270" src="" alt=""><input type="file" id="fileupload_jdcdjzs" name="JDCDJZ" accept="image/jpeg,image/png,image/jpg" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jdcdjzs\').click();">上传</button></div>' +
+            '<div class="panel-body" class="djzs"><label for="fileupload_jdcdjzs2">机动车登记证书第3、4页(若有)：</label><img width="200" height="270" src="" alt=""><input type="file" id="fileupload_jdcdjzs2" name="JDCDJZ1" accept="image/jpeg,image/png,image/jpg" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jdcdjzs2\').click();">上传</button></div>' +
+            '<div class="panel-body" class="djzs"><label for="fileupload_jdcdjzs3">机动车登记证书第5、6页(若有)：</label><img width="200" height="270" src="" alt=""><input type="file" id="fileupload_jdcdjzs3" name="JDCDJZ2" accept="image/jpeg,image/png,image/jpg" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jdcdjzs3\').click();">上传</button></div>';
+    }
+    function jdccchgzsHtml() {
+		return '<div class="panel-body" class="hgzs"><label for="fileupload_jdcdjzs">机动车出厂合格证书(正面)：</label><img width="200" height="270" src="" alt=""><input type="file" id="fileupload_jdcdjzs" name="JDCDJZ" accept="image/jpeg,image/png,image/jpg" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jdcdjzs\').click();">上传</button></div>' +
+            '<div class="panel-body" class="hgzs"><label for="fileupload_jdcdjzs2">机动车出厂合格证书(反面)：</label><img width="200" height="270" src="" alt=""><input type="file" id="fileupload_jdcdjzs2" name="JDCDJZ1" accept="image/jpeg,image/png,image/jpg" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jdcdjzs2\').click();">上传</button></div>' +
+            '<div class="panel-body" class="hgzs"><label>示例：</label><img width="330" height="260" style="margin-left: -40px;" src="../../../resources/images/jdccchgzs.png" alt=""><br></div>';
+    }
+    function clyzxzsHtml() {
+		return '<div class="panel-body" class="yzzs"><label for="fileupload_jdcdjzs">车辆一致性证书(第一部分)：</label><img width="200" height="270" src="" alt=""><input type="file" id="fileupload_jdcdjzs" name="JDCDJZ" accept="image/jpeg,image/png,image/jpg" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jdcdjzs\').click();">上传</button></div>' +
+            '<div class="panel-body" class="yzzs"><label for="fileupload_jdcdjzs2">车辆一致性证书(第二部分)：</label><img width="200" height="270" src="" alt=""><input type="file" id="fileupload_jdcdjzs2" name="JDCDJZ1" accept="image/jpeg,image/png,image/jpg" style="display: none;"><button type="button" class="btn btn-info btnFile" onclick="$(\'#fileupload_jdcdjzs2\').click();">上传</button></div>' +
+            '<div class="panel-body" class="yzzs"><label>示例：</label><img width="330" height="260" style="margin-left: -40px;" src="../../../resources/images/clyzxzs.jpg" alt=""><br></div>';
+    }
+    $('#clzjlxBox').html(jdcdjzsHtml());
+    $('input.clzj_img').on('change', function () {
+		if ('机动车登记证书' === $(this).val()) {
+		    $('#clzjlxBox').html(jdcdjzsHtml());
+		    bindImageChange();
+		} else if ('机动车出厂合格证书' === $(this).val()) {
+            $('#clzjlxBox').html(jdccchgzsHtml());
+            bindImageChange();
+		} else if ('车辆一致性证书' === $(this).val()) {
+            $('#clzjlxBox').html(clyzxzsHtml());
+            bindImageChange();
+		}
+    });
+    function tsnr(){
+        var tt = "<div class='tctx' style='width:550px;'>"+
+            "<h2 style='font-size: 24px; text-align:center'>温州市网约车运输证申办须满足以下条件</h2>"+
+            "<p style='font-size: 16px; text-indent:2.5em;'>1.燃油车轴距大于等于2650毫米，购置计税价格大于等于12万。</p>"+
+            "<p style='font-size: 16px; text-indent:2.5em;'>2.新能源轴距大于等于2600毫米或综合工况续航里程达到250千米。</p>"+
+            "<p style='font-size: 16px; text-indent:2.5em;'>3.购置的计税价格大于等于15万元，不受车辆轴距参数限制。</p>"+
+            "<p style='font-size: 16px; text-indent:2.5em;'>4.车辆行驶证载明的初次注册日期至申请时未满4年。</p>"+
+            "<p style='font-size: 16px; text-indent:2.5em;'>5.车辆必须先到检测站检测。</p>"+
+            "<div style='font-size: 18px; text-indent: 1em'><label><input id='dx' type='checkbox'>我已知晓</label></div>"+
+            "</div>";
+        layer.open({
+            title: '温馨提醒',
+            type: 1,
+            area: ['600px', 'auto'],
+            content: tt,
+			btn: ['确定'],
+            btn1: ts_x,
+            cancel:ts_x
+        });
+    }
+    function ts_x(index) {
+        if (!$("#dx")[0].checked) {
+            layer.open({
+                content: '请阅读并勾选车辆申请内容提示'
+            });
+            return false
+        }
+        layer.close(index)
+	}
+    tsnr();
+
+    function clxxtx_inputBoxReg() {
+        var sqclhp = $('#sqclhp'),
+            hdzkw = $('#hdzkw'),
+            cllxyjg = $('#cllxyjg'),
+            clzj = $('#clzj'),
+            xhlc = $('#xhlc'),
+            jgjs = $('#jgjs'),
+            xllx = $('#xllx'),
+            fdjh = $('#fdjh'),
+			ppxh = $('#ppxh'),
+			cpys = $('#cpys'),
+			chec = $('#chec'),
+			chek = $('#chek'),
+			cheg = $('#cheg'),
+			zzl = $('#zzl'),
+			spddj = $('#spddj'),
+			pdjg = $('#pdjg'),
+			jdczcrq = $('#jdczcrq');
+        //车牌号码
+        if (sqclhp.val() == "" || !regLicenseplate1.test(sqclhp.val())) {
+            submitRegErrorInputBorderStyle(sqclhp);
+        }
+        //核定载客位
+        if (hdzkw.val() == "" || !regHdzkw.test(hdzkw.val())) {
+            submitRegErrorInputBorderStyle(hdzkw);
+        }
+        if(cllxyjg.val()=='新能源'){
+            if (!regXnyc.test(clzj.val()) && !regXhlc.test(xhlc.val()) && !regJgyjs1.test(jgjs.val())){
+                submitRegErrorInputBorderStyle(clzj);
+                submitRegErrorInputBorderStyle(xhlc);
+                submitRegErrorInputBorderStyle(jgjs);
+            }
+        }else{
+            if (!regXnyc.test(clzj.val()) || (!regJgyjs.test(jgjs.val()) && !regJgyjs1.test(jgjs.val()))){
+                submitRegErrorInputBorderStyle(clzj);
+                submitRegErrorInputBorderStyle(jgjs);
+            }
+        }
+        //车辆类型
+        if (xllx.val() == "" || !regName_zw.test(xllx.val())) {
+            submitRegErrorInputBorderStyle(xllx);
+        }
+        //发动机号
+        if (fdjh.val() == "" || !regFdjh.test(fdjh.val())) {
+            submitRegErrorInputBorderStyle(fdjh);
+        }
+        //车辆厂牌
+        if (ppxh.val() == "" || !regPpxh.test(ppxh.val())) {
+            submitRegErrorInputBorderStyle(ppxh);
+        }
+        //车辆颜色
+        if (cpys.val() == "" || !regName_zw.test(cpys.val())) {
+            submitRegErrorInputBorderStyle(cpys);
+        }
+        //车长
+        if (chec.val() == "" || !regCkg.test(chec.val())) {
+            submitRegErrorInputBorderStyle(chec);
+        }
+        //车宽
+        if (chek.val() == "" || !regCkg.test(chek.val())) {
+            submitRegErrorInputBorderStyle(chek);
+        }
+        //车高
+        if (cheg.val() == "" || !regCkg.test(cheg.val())) {
+            submitRegErrorInputBorderStyle(cheg);
+        }
+        //总质量
+        if (zzl.val() == "" || !regZzlzl.test(zzl.val())) {
+            submitRegErrorInputBorderStyle(zzl);
+        }
+        //技术评定结论
+        if (spddj.text() == "" || !regName_zw.test(spddj.text())) {
+            submitRegErrorInputBorderStyle(spddj);
+        }
+        //评定机构
+        if (pdjg.text() == "" || !regName_zw.test(pdjg.text())) {
+            submitRegErrorInputBorderStyle(pdjg);
+        }
+        //机动车日期验证
+        if (jdczcrq.val() == "") {
+            submitRegErrorInputBorderStyle(jdczcrq);
+        }
+    }
+    //提交验证
+    $('#go_next').click(function(){
+        clxxtx_inputBoxReg();
+		/*var gsd = $('#gsd').val();
+        console.info(gsd);
+        if ('-----请选择-----' === gsd) {
+            Pop_up_box("请选择属地管理部门","2");
+            return false;
+		}*/
+		//车辆识别代码
+        if($("#clsbdh_q").val()==""){
+            hint_info("clsbdh_q","车辆识别代码不能为空!","3");
+            Pop_up_box("车辆识别代码不能为空","2");
+            return false;
+        }else if(!regClsbh.test($("#clsbdh_q").val())) {
+            hint_info("clsbdh_q","车辆识别代码格式不正确!","3");
+            Pop_up_box("车辆识别代码格式不正确!","2");
+            return false;
+        }
+        //车牌号码
+        if($("#sqclhp").val()==""){
+            hint_info("sqclhp","车牌号码不能为空!","3");
+            Pop_up_box("车牌号码不能为空","2");
+            return false;
+        }else if(!regLicenseplate1.test($("#sqclhp").val())){
+            hint_info("sqclhp","车牌号码格式不正确!","3");
+            Pop_up_box("车牌号码格式不正确","2");
+            return false;
+        }
+        //核定载客位
+        if($("#hdzkw").val()==""){
+            hint_info("hdzkw","核定载客位不能为空!","3");
+            Pop_up_box("核定载客位不能为空","2");
+            return false;
+        }else if(!regHdzkw.test($("#hdzkw").val())){
+            hint_info("hdzkw","核定载客位格式不正确!","3");
+            Pop_up_box("核定载客位格式不正确","2");
+            return false;
+        }
+        if($("#cllxyjg").val()=='新能源'){
+        	if(!regXnyc.test($("#clzj").val())||!regXhlc.test($("#xhlc").val())||!regJgyjs1.test($("#jgjs").val())){
+        	}else{
+        		 Pop_up_box("车辆轴距、续航里程、价格与计税不满足条件，无法申请！","2");
+                 return false;
+        	}
+        }else{
+        	if((!regXnyc.test($("#clzj").val())&&!regJgyjs.test($("#jgjs").val()))||!regJgyjs1.test($("#jgjs").val())){
+        	}else{
+        		 Pop_up_box("车辆轴距、价格与计税都不满足条件，无法申请！","2");
+                 return false;
+        	}
+        }
+      //车辆类型
+        if($("#xllx").val()==""){
+            Pop_up_box("xllx","车辆类型不能为空!","2");
+            return false;
+        }else if(!regName_zw.test($("#xllx").val())){
+            Pop_up_box("xllx","车辆累心格式不正确!","2");
+            return false;
+        }
+		//发动机号
+        if($("#fdjh").val()==""){
+            Pop_up_box("fdjh","发动机号不能为空!","2");
+            return false;
+        }else if(!regFdjh.test($("#fdjh").val())){
+            Pop_up_box("fdjh","发动机号格式不正确!","2");
+            return false;
+        }
+		//车辆厂牌
+        if($("#ppxh").val()==""){
+            Pop_up_box("车辆品牌型号不能为空!","2");
+            return false;
+        }else if(!regPpxh.test($("#ppxh").val())){
+            Pop_up_box("车辆品牌型号格式不正确!","2");
+            return false;
+        }
+		//车辆颜色
+        if($("#cpys").val()==""){
+            Pop_up_box("车辆颜色不能为空!","2");
+            return false;
+        }else if(!regName_zw.test($("#cpys").val())){
+            Pop_up_box("车辆颜色不正确!","2");
+            return false;
+        }
+		//车长
+        if($("#chec").val()==""){
+            Pop_up_box("车长不能为空!","2");
+            return false;
+        }else if(!regCkg.test($("#chec").val())){
+            Pop_up_box("车长格式不正确!","2");
+            return false;
+        }
+		//车宽
+        if($("#chek").val()==""){
+            Pop_up_box("车宽不能为空!","2");
+            return false;
+        }else if(!regCkg.test($("#chek").val())){
+            Pop_up_box("车宽格式不正确!","2");
+            return false;
+        }
+		//车高
+        if($("#cheg").val()==""){
+            Pop_up_box("车高不能为空!","2");
+            return false;
+        }else if(!regCkg.test($("#cheg").val())){
+            Pop_up_box("车高格式不正确!","2");
+            return false;
+        }
+		//总质量
+        if($("#zzl").val()==""){
+            Pop_up_box("总质量（总量）不能为空!","2");
+            return false;
+        }else if(!regZzlzl.test($("#cheg").val())){
+            Pop_up_box("总质量（总量）格式不正确!","2");
+            return false;
+        }
+      //技术评定结论
+        if($("#spddj").text()==""){
+            Pop_up_box("技术评定结论不能为空!","2");
+            return false;
+        }else if(!regName_zw.test($("#spddj").text())){
+            Pop_up_box("技术评定结论格式不正确!","2");
+            return false;
+        }
+        //评定机构
+        if($("#pdjg").text()==""){
+            Pop_up_box("评定机构不能为空!","2");
+            return false;
+        }else if(!regName_zw.test($("#pdjg").text())){
+            Pop_up_box("评定机构格式不正确!","2");
+            return false;
+        }
+        //机动车日期验证
+        if($("#jdczcrq").val()==""){
+            hint_info("jdczcrq","机动车注册日期不能为空!","3");
+            Pop_up_box("机动车注册日期不能为空","2");
+            return false;
+        }
+        /*个人提交车辆运输证申请必须上传身份证*/
+        if('grcl' === dblx){
+	        //机动车所有人身份证明文件(正面)
+	        if($('#fileupload_jdcsfzm').val()==''){
+	            Pop_up_box("机动车所有人身份证明(正面)必须上传!","2");
+	            return false;
+	        }else{
+	            var jdcsfzmz=$('#fileupload_jdcsfzm').val();
+	            var a = jdcsfzmz.substr(jdcsfzmz.indexOf('.')+1);
+	            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+	                Pop_up_box("机动车身份证明(正面)只能上传.jpg或者.JPEG格式的图片！!","2");
+	                return false;
+	            }
+	        }
+	        //机动车所有人身份证明文件(反面)
+	        if($('#fileupload_jdcsfzmfm').val()==''){
+	            Pop_up_box("机动车所有人身份证明(反面)必须上传!","2");
+	            return false;
+	        }else{
+	            var jdcsfzmf=$('#fileupload_jdcsfzmfm').val();
+	            var a = jdcsfzmf.substr(jdcsfzmf.indexOf('.')+1);
+	            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+	                Pop_up_box("机动车身份证明(正面)只能上传.jpg或者.JPEG格式的图片！!","2");
+	                return false;
+	            }
+	        }
+        }
+        //机动车登记证书第1、2页或机动车出厂合格证书
+        if($('#fileupload_jdcdjzs').val()==''){
+            Pop_up_box("机动车登记证书必须上传!","2");
+            return false;
+        }else{
+            var jdcdjz=$('#fileupload_jdcdjzs').val();
+            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+                Pop_up_box("机动车登记证书只能上传.jpg或者.JPEG格式的图片!","2");
+                return false;
+            }
+        }
+        /*判断尚未获得车牌是否被选中，没选中则上传机动车登记证，上传了则上传出厂合格证或一致证书*/
+		if(!$("#cph")[0].checked){
+			if($('#fileupload_jdcdjzs').val()==''){
+	            Pop_up_box("机动车登记证书图片必须上传!","2");
+	            return false;
+	        }else{
+	            var jdcdjz=$('#fileupload_jdcdjzs').val();
+	            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+	            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+	                Pop_up_box("机动车登记证书图片只能上传.jpg或者.JPEG格式的图片!","2");
+	                return false;
+	            }
+	        }
+        }else{
+        	if($("input[type='radio']:checked").val()=='机动车出厂合格证书'){
+        		if($('#fileupload_jdcdjzs').val()==''){
+    	            Pop_up_box("机动车出厂合格证书正面图片必须上传!","2");
+    	            return false;
+    	        }else{
+    	            var jdcdjz=$('#fileupload_jdcdjzs').val();
+    	            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+    	            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+    	                Pop_up_box("机动车出厂合格证书正面图片只能上传.jpg或者.JPEG格式的图片!","2");
+    	                return false;
+    	            }
+    	        }
+        		if($('#fileupload_jdcdjzs2').val()==''){
+    	            Pop_up_box("机动车出厂合格证书反面图片必须上传!","2");
+    	            return false;
+    	        }else{
+    	            var jdcdjz=$('#fileupload_jdcdjzs2').val();
+    	            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+    	            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+    	                Pop_up_box("机动车出厂合格证书反面图片只能上传.jpg或者.JPEG格式的图片!","2");
+    	                return false;
+    	            }
+    	        }
+        	}else if($("input[type='radio']:checked").val()=='车辆一致性证书'){
+        		if($('#fileupload_jdcdjzs').val()==''){
+    	            Pop_up_box("车辆一致性证书正面图片必须上传!","2");
+    	            return false;
+    	        }else{
+    	            var jdcdjz=$('#fileupload_jdcdjzs').val();
+    	            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+    	            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+    	                Pop_up_box("车辆一致性证书正面图片只能上传.jpg或者.JPEG格式的图片!","2");
+    	                return false;
+    	            }
+    	        }
+        		if($('#fileupload_jdcdjzs2').val()==''){
+    	            Pop_up_box("车辆一致性证书反面图片必须上传!","2");
+    	            return false;
+    	        }else{
+    	            var jdcdjz=$('#fileupload_jdcdjzs2').val();
+    	            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+    	            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+    	                Pop_up_box("车辆一致性证书反面图片只能上传.jpg或者.JPEG格式的图片!","2");
+    	                return false;
+    	            }
+    	        }
+        	}else{
+        		Pop_up_box("图片上传错误!","2");
+        	}
+        }
+        //车辆购置税缴税发票
+        if($('#fileupload_clgzsjszz').val()==''){
+            Pop_up_box("车辆购置税缴税发票必须上传!","2");
+            return false;
+        }else{
+            var jdcdjz=$('#fileupload_clgzsjszz').val();
+            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+                Pop_up_box("车辆购置税缴税发票只能上传.jpg或者.JPEG格式的图片!","2");
+                return false;
+            }
+        }
+        //计税发票
+        if($('#fileupload_jsfp').val()==''){
+            Pop_up_box("计税发票必须上传!","2");
+            return false;
+        }else{
+            var jdcdjz=$('#fileupload_jsfp').val();
+            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+                Pop_up_box("计税发票只能上传.jpg或者.JPEG格式的图片!","2");
+                return false;
+            }
+        }
+//         车辆性能综合检测报告
+        if($('#fileupload_clzhxnjcbg').val()==''){
+            Pop_up_box("车辆性能综合检车报告必须上传!","2");
+            return false;
+        }else{
+            var jdcdjz=$('#fileupload_clzhxnjcbg').val();
+            var a = jdcdjz.substr(jdcdjz.indexOf('.')+1);
+            if(a!='jpg'&&a!='jpeg'&&a!='JPG'&&a!='JPEG'){
+                Pop_up_box("车辆性能综合检测报告只能上传.jpg或者.JPEG格式的图片!","2");
+                return false;
+            }
+        }
+        if('个人' === $('#txtApplyType').text()){
+            layer.open({
+                type: 2,
+                title: '提交验证',
+                maxmin: true, //开启最大化最小化按
+                area: ['593px', '400px'],
+                content: '../clsq/dxzc.html'
+            });
+        }else{
+        	clxxtx_1_form.submit();
+        }
+    });
+
+    var defaultTextLayoutHtml = function(tagId, tagText, value) {
+        var fontLength = 'fontLength9';
+        if (tagText.length <= 9) { fontLength='fontLength9'; }
+        else if (tagText.length <=12) { fontLength='fontLength12'; }
+        var html = '<label class="' + fontLength + ' fontRight ml_5em" for="' + tagId + '">' + tagText + '：</label><span type="text" id="' + tagId + '" class="fontSize20" name="' + tagId.toUpperCase() + '">' + value + '</span>';
+        return html;
+    };
+    var defaultInputTextLayoutHtml = function(tagId, tagText, tagVal){
+        var html = '<label class="fontLength9 fontRight ml_5em" for="' + tagId + '">' + tagText + '：</label>' +
+            '<input type="text" id="' + tagId + '" class="form-control" name="' + tagId.toUpperCase() + '" value="' + tagVal + '">';
+        return html;
+    };
+    function getFormJson(){
+        var o = {};
+        var a = $("#clxxtx_1_form").serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [ o[this.name] ];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    }
+    /**
+     * 短信界面提交后,由于图片form提交后天值传不过来,所以用这种onload方法获取后台的传值
+     */
+    var oFrm = document.getElementById("interface_data");
+    oFrm.onload  = function() {
+        if (this.readyState && this.readyState != 'complete') return;
+        else{
+            if (document.all){//IE
+                var sub_con = document.frames["interface_data"].document;
+            }else{//Firefox
+                var sub_con = document.getElementById("interface_data").contentDocument;
+            }
+            sub_con = sub_con.body.innerHTML;  //取得返回值
+            console.log(sub_con);
+            if(sub_con.indexOf("OK")>=0){
+				var dataPara = getFormJson("clxxtx_form");
+				//个人申请type 1   平台代办  type2
+				if('grcl' === dblx){
+					dataPara.type = '2';
+				}else{
+					dataPara.type = '1';
+				}
+				dataPara.jdcsyr = $("#jdcsyr_q").text();
+				dataPara.PDJL = $("#spddj").text();
+				dataPara.PDJG = $("#pdjg").text();
+				dataPara.PDYXQZ = $("#jsdjpdyxqz").text();
+				var datap = JSON.stringify(dataPara);
+				console.log(datap)
+				$.ajax({
+					type : "post",
+					url : basePath + "clysz/clyszwnnr",
+					data : {
+						"postData" : datap
+					},
+					dataType : "json",
+					success : function(data) {
+						var data1 = data;
+						if (data1.info == '提交成功') {
+							layer.closeAll('loading');
+							location.replace('shxx.html');
+						} else {
+							layer.closeAll('loading');
+							Pop_up_box(data1.info, '2');
+						}
+					},
+					error : function() {
+						layer.closeAll('loading');
+					}
+				});
+			}else{
+                layer.closeAll('loading');
+                Pop_up_box("提交失败",'2');
+            }
+        }
+    };
+    bindImageChange();
+    //车辆识别提交验证
+    $("#clxxtx_cx").click(function(){
+        if($("#clsbdh_q").val()==""){
+            hint_info("clsbdh_q","车辆识别码不能为空!","3");
+            Pop_up_box("车辆识别码不能为空!","2");
+            return false;
+        }else if(!regClsbh.test($("#clsbdh_q").val())) {
+            hint_info("clsbdh_q","车辆识别码格式不正确!","3");
+            Pop_up_box("车辆识别码格式不正确!","2");
+            return false;
+        }
+        $.ajax({
+            type:"post",
+            url: basePath + "clysz/czvin",
+            data:'postData={"VIN":"'+$("#clsbdh_q").val()+'","XM":"'+$("#jdcsyr_q").text()+'"}',
+            dataType: "json",
+            success:function(data){
+            	if(data.type=='1'){
+                    Pop_up_box(data.info,2);
+                }else if(data.type='0'){
+                	$("#cllxyjg").empty();
+                    var data = data.data[0];
+                    $("#sqclhp").val(data.CARNO);//车牌
+                    $("#hdzkw").val(data.HDZKRS);//核定载客位
+//                     $("#cllxyjg").val(data.RLLX);//车辆燃油类型
+                    if(data.RLLX=='新能源车'){
+                    	$("#cllxyjg").append('<option value="新能源">新能源</option><option value="非新能源">非新能源</option>');
+                    	$("#clrylx").html('<div class="B_threeSpan bbGreenDashedLine" >'+
+			        						'<div id="clzjBox" class="ryc_jg">'+
+			    							'<label class="fontLength9 fontRight ml_5em" for="clzj">车辆轴距：</label>'+
+			    							'<input class="form-control fontLength12" id="clzj" style="width:70px" name="ZJ">&nbsp;<i class="unitChar">毫米</i>'+
+			    						'</div>'+
+			    						'<div class="xnr_jg" id="xhlcBox">'+
+			    							'<label class="fontLength9 fontRight ml_5em" for="xhlc">续航里程：</label>'+
+			    							'<input type="text" class="form-control" style="width:100px" id="xhlc" name="XHLC">&nbsp;<i class="unitChar">千米</i>'+
+			    						'</div>'+
+			    						'<div class="ryc_jg" id="jgjsBox">'+
+			    						'<label class="fontLength9 fontRight ml_5em" for="jgjs">价格（计税）：</label>'+
+			    						'<input type="text" class="form-control" style="width:100px" id="jgjs" name="CLGZJE">&nbsp;<i class="unitChar">万元</i>'+
+			    					'</div>'+
+			    					'</div>');
+                    	
+                        xnyqc();
+                    }else{
+                    	$("#cllxyjg").append('<option value="非新能源">非新能源</option><option value="新能源">新能源</option>');
+                    	$("#clrylx").html('<div class="B_towSpan bbGreenDashedLine" >'+
+        						'<div id="clzjBox" class="ryc_jg">'+
+    							'<label class="fontLength9 fontRight ml_5em" for="clzj">车辆轴距：</label>'+
+    							'<input class="form-control fontLength12" id="clzj" name="ZJ" style="width:70px">&nbsp;<i class="unitChar">毫米</i>'+
+    						'</div>'+
+    						'<div class="ryc_jg" id="jgjsBox">'+
+    						'<label class="fontLength9 fontRight ml_5em" for="jgjs">价格（计税）：</label>'+
+    						'<input type="text" class="form-control" id="jgjs" name="CLGZJE">&nbsp;<i class="unitChar">万元</i>'+
+    					'</div>'+
+    					'</div>');
+                        ryqc();
+                    }
+                    $("#clzj").val(data.ZJ);//车辆轴距
+                    $("#xllx").val(data.CARTYPE);//车辆类型
+                    $("#fdjh").val(data.FDJH);//发动机号
+                    $("#ppxh").val(data.CARMODEL);//车辆品牌型号
+                    $("#jdczcrq").val(fomart_time1(data.ZCRQ));//机动车注册日期
+                    $("#chec").val(data.CARSIZE_C);//车长
+                    $("#chek").val(data.CARSIZE_K);//车宽
+                    $("#cheg").val(data.CARSIZE_G);//车高
+                    $("#pdjg").text(data.PDJG);//评定机构
+                    $("#jsdjpdyxqz").text(fomart_time1(data.DJPDYXQ));//技术等级评定有效期止
+//                     $("#clxh").val(data.CARMODEL);//车辆品牌型号
+					$("#cpys").val(data.COLOR);//车牌颜色
+					$("#zzl").val(data.KG);//总重量（质量）
+					$("#spddj").text(data.JYPDJL);//技术评定结论
+                }
+            },
+            //调用出错执行的函数
+            error: function(){
+                //请求出错处理
+            }
+        });
+    });
+    $('#cllxyjg').change(function(){
+    	if($("#cllxyjg").val()=='新能源'){
+    		$("#clrylx").html('<div class="B_threeSpan bbGreenDashedLine" >'+
+					'<div id="clzjBox" class="ryc_jg">'+
+					'<label class="fontLength9 fontRight ml_5em" for="clzj">车辆轴距：</label>'+
+					'<input class="form-control fontLength12" id="clzj" name="ZJ" style="width:70px">&nbsp;<i class="unitChar">毫米</i>'+
+				'</div>'+
+				'<div class="xnr_jg" id="xhlcBox">'+
+					'<label class="fontLength9 fontRight ml_5em" for="xhlc">续航里程：</label>'+
+					'<input type="text" class="form-control" style="width:100px" id="xhlc" name="XHLC">&nbsp;<i class="unitChar">千米</i>'+
+				'</div>'+
+				'<div class="ryc_jg" id="jgjsBox">'+
+				'<label class="fontLength9 fontRight ml_5em" for="jgjs">价格（计税）：</label>'+
+				'<input type="text" class="form-control" style="width:100px" id="jgjs" name="CLGZJE">&nbsp;<i class="unitChar">万元</i>'+
+			'</div>'+
+			'</div>');
+            xnyqc();
+        }else{
+        	$("#clrylx").html('<div class="B_towSpan bbGreenDashedLine" >'+
+					'<div id="clzjBox" class="ryc_jg">'+
+					'<label class="fontLength9 fontRight ml_5em" for="clzj">车辆轴距：</label>'+
+					'<input class="form-control fontLength12" id="clzj" name="ZJ" style="width:70px">&nbsp;<i class="unitChar">毫米</i>'+
+				'</div>'+
+				'<div class="ryc_jg" id="jgjsBox">'+
+				'<label class="fontLength9 fontRight ml_5em" for="jgjs">价格（计税）：</label>'+
+				'<input type="text" class="form-control" id="jgjs" name="CLGZJE">&nbsp;<i class="unitChar">万元</i>'+
+			'</div>'+
+			'</div>');
+            ryqc();
+        }
+	}) 
+    //判断是否选择已经拥有车牌
+	$(function(){
+	    if(!$("#cph")[0].checked){
+            $('.djzs').show();
+            $('.hgzs').hide();
+            $('.yzzs').hide();
+            removeInputBorderStyle($('#sqclhp'));
+            removeInputBorderStyle($('#jdczcrq'));
+		}
+        $("#cph").on("change",function(){
+            if (!$("#cph")[0].checked){
+                $('.djzs').show();
+                $('.djzs input').click();
+                $('.hgzs').hide();
+                $('.yzzs').hide();
+                $('#sqclhp').val('浙C');
+                $("#zcrqwzc").text("");
+                $("#sqclhp").removeAttr('readonly');
+                $("#jdczcrq").removeAttr('readonly');
+            }else{
+                $('.djzs').hide();
+                $('.hgzs').show();
+                $(".hgzs input").click();
+                $('.yzzs').show();
+                $('#sqclhp').val('浙C#');
+                $("#zcrqwzc").text("尚未注册");
+                $("#jdczcrq").val('');
+                $("#sqclhp").attr('readonly','true');
+                $("#jdczcrq").attr('readonly','true');
+                removeInputBorderStyle($('#sqclhp'));
+                removeInputBorderStyle($('#jdczcrq'));
+            }
+        })
+	})
+	$.ajax({
+		type : "post",
+		url : basePath + "jsy/findbdbxx",
+		data : {},
+		dataType : "json",
+		success : function(data) {
+			console.log(data)
+			if (data.length> 0) {
+				if('企业' === $('#txtApplyType').text()){
+					$("#jdcsyr_q").text(data[0].QYMC);
+				}else{
+					$("#jdcsyr_q").text(data[0].XM);
+				}
+				$("#yjhb_bc").val(data[0].USER_NAME);
+			} else {
+				layer.confirm(('您未登陆,请登录！'), {
+					cancel : function(index) {
+						window.location.href = basePath + "index.html";
+						return false;
+					},
+					btn : [ '确定' ] //按钮
+				}, function(index) {
+					layer.close(index);
+					window.location.href = basePath + "index.html";
+				});
+			}
+		},
+		error : function() {
+		}
+	});
+</script>
+</body>
+</html>

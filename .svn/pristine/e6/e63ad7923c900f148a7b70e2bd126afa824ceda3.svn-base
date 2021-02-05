@@ -1,0 +1,209 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" href="libs/bs/css/bootstrap.min.css">
+<link rel="stylesheet" href="libs/bs/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="app/main.css">
+<script type="text/javascript" src="resources/js/jquery-1.12.1.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="libs/bs/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="libs/layer/layer.js"></script>
+<script type="text/javascript" src="app/config.js"></script>
+<script type="text/javascript" src="app/main.js"></script>
+<script type="text/javascript" src="libs/md5.js"></script>
+<body>
+<div class="infoPage noMT dialog-info">
+    <form class="form-inline" action="" id="xgjcxx">
+        <div
+                style="width: 550px; margin-top: 40px; margin-left: auto; margin-right: auto;">
+            <div class="control-group">
+                <label for="sjhm">手机号码：</label>
+                <input type="text" id="sjhm" name="sjhm" class="form-control fontLength15"/>
+                <button class="btn btn-info" type="button" id="sjhmButton">点击获取验证码</button>
+            </div>
+            <div class="control-group">
+                <label for="yzm">验证码：</label>
+                <input type="text" id="yzm" name="yzm" class="form-control fontLength15" />
+                <input type="text"  name="yzm" style="display:none"/>
+            </div>
+            <div id="passwordBox1" class="control-group">
+                <label for="mm">新密码：</label>
+                <input type="password" id="mm" class="form-control fontLength15" autocomplete="off"/>
+            </div>
+            <div id="passwordBox2" class="control-group">
+                <label for="mm">确认密码：</label>
+                <input type="password" id="qrmm" class="form-control fontLength15" autocomplete="off"/>
+            </div>
+            <div class="control-group">
+                <div class="controls fontCenter mt2em" style="margin-top: 20px">
+                    <button type="button" class="btn btn-danger" id="sub_fc">返 回</button>
+                    <button type="button" class="btn btn-info" id="sub_jddsb">提 交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+var index = parent.layer.getFrameIndex(window.name);
+	var wait =60;
+	function time(o) {
+		if (wait == 0) {
+			o.removeAttribute("disabled");
+			o.innerText = "免费获取验证码";
+			fssj = new Date().getTime();
+			wait = 60;
+		} else {
+			o.setAttribute("disabled", true);
+			o.innerText = "重新发送(" + wait + ")";
+			wait--;
+			setTimeout(function() {
+				time(o)
+			}, 1000)
+		}
+	}
+	
+	$('#sjhmButton').click(function(){
+		if ($("#sjhm").val() == "") {
+			hint_info("sjhm", "手机号码不能为空!", "1");
+			return false;
+		} else if (!regPhone.test($("#sjhm").val())) {
+			hint_info("sjhm", "手机号码格式不正确!", "1");
+			return false;
+		}
+		var date = new Date();
+		var hms = date.getTime();
+		time(this);
+		tjstime = fomart_time(new Date());
+		$.ajax({
+			type : "post",
+			url : basePath + "register/dxfs",
+			//提交的数据
+			data:'postData={"phone":"'+$("#sjhm").val()+
+				'","type":"0"}',
+			//返回数据的格式
+			dataType : "json",
+			//成功返回之后调用的函数
+			success : function(data) {
+			},
+			//调用出错执行的函数
+			error : function() {
+				//请求出错处理
+			}
+		});
+	});
+	//手机号验证
+	$("#sjhm").focus(function(){
+		hint_info("sjhm","请输入正确的11位手机号码!","1");
+	})
+	$("#sjhm").blur(function(){
+		if($("#sjhm").val()==""){
+			hint_info("sjhm","手机号码不能为空!","1");
+		}else if(!regPhone.test($("#sjhm").val())) {
+			hint_info("sjhm","手机号码格式不正确!","1");
+		}
+	})
+	//验证码验证 当info=0时验证码输入正确 =1时输入错误 =2时验证码未发送
+	$("#yzm").focus(function(){
+		hint_info("yzm","验证码格式为:4位数字","2");
+	})
+	$("#yzm").blur(function(){
+		if($("#yzm").val()==""){
+			hint_info("yzm","验证码不能为空!","2");
+			return false;
+		}else if(!regyzm.test($("#yzm").val())) {
+			hint_info("yzm","验证码格式不正确!","2");
+			return false;
+		}
+	})
+	//密码验证
+	$("#mm").focus(function(){
+		hint_info("mm","密码格式为：6至16位数字、<br>字母、符号，必须以字母开头！","2");
+	})
+	$("#mm").blur(function(){
+		if($("#mm").val()==""){
+			hint_info("mm","密码不能为空!","2");
+		}else if(!regPassword.test($("#mm").val())) {
+			hint_info("mm","密码格式不正确!","2");
+		}
+	})
+	//确认密码验证
+	$("#qrmm").focus(function(){
+		hint_info("qrmm","密码格式为：6至16位数字、<br>字母、符号，必须以字母开头！","2");
+	})
+	$("#qrmm").blur(function(){
+		if($("#qrmm").val()==""){
+			hint_info("qrmm","密码不能为空!","2");
+		}else if(!regPassword.test($("#qrmm").val())) {
+			hint_info("qrmm","密码格式不正确!","2");
+		}
+	})
+	$("#sub_jddsb").click(function() {
+		//手机验证
+		if($("#sjhm").val()==""){
+			hint_info("sjhm","手机号码不能为空!","1");
+			return false;
+		}else if(!regPhone.test($("#sjhm").val())) {
+			hint_info("sjhm","手机号码格式不正确!","1");
+			return false;
+		}
+		//验证码验证
+		if($("#yzm").val()==""){
+			hint_info("yzm","验证码不能为空!","2");
+			return false;
+		}else if(!regyzm.test($("#yzm").val())) {
+			hint_info("yzm","验证码格式不正确!","2");
+			return false;
+		}
+		//密码验证
+		if ($("#mm").val() == "") {
+			hint_info("mm", "密码不能为空!", "3");
+			return false;
+		} else if (!regPassword.test($("#mm").val())) {
+			hint_info("mm", "密码格式不正确!", "3");
+			return false;
+		}
+		//确认密码验证
+		if ($("#qrmm").val() == "") {
+			hint_info("qrmm", "确认密码不能为空!", "3");
+			return false;
+		} else if (!regPassword.test($("#qrmm").val())) {
+			hint_info("qrmm", "确认密码格式不正确!", "3");
+			return false;
+		}
+		if($("#mm").val()!=$("#qrmm").val()){
+			hint_info("qrmm", "密码和确认密码不一致，请重新输入!", "3");
+			return false;
+		}
+		$.ajax({
+			type : "post",
+			url : basePath + "register/wjmm",
+			//提交的数据
+			data:'postData={"sjhm":"' + $("#sjhm").val()
+			+ '","yzm":"' + $("#yzm").val()
+			+ '","mm":"' + hex_md5($("#mm").val())
+			+ '","qrmm":"' + hex_md5($("#qrmm").val())
+			+ '"}',
+			//返回数据的格式
+			dataType : "json",
+			//成功返回之后调用的函数
+			success : function(data) {
+				if(data.info=='修改成功'){
+					layer.msg(data.info);
+					setTimeout(function(){
+						parent.layer.close(index);
+						window.location.href = "index.html";
+					},1000);
+				}else{
+					Pop_up_box(data.info, '2');
+				}
+			},
+			//调用出错执行的函数
+			error : function() {
+				//请求出错处理
+			}
+		});
+	});
+	$('#sub_fc').click(function() {
+		parent.layer.close(index);
+	});
+	
+</script>
+</body>

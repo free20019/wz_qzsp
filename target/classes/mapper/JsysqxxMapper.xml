@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.JsysqxxMapper">
+  <resultMap id="BaseResultMap" type="entity.Jsysqxx">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="SQBH" jdbcType="VARCHAR" property="sqbh" />
+    <result column="JSYBH" jdbcType="VARCHAR" property="jsybh" />
+    <result column="XM" jdbcType="VARCHAR" property="xm" />
+    <result column="SQLX" jdbcType="VARCHAR" property="sqlx" />
+    <result column="SQZT" jdbcType="VARCHAR" property="sqzt" />
+    <result column="SQRQ" jdbcType="DATE" property="sqrq" />
+    <result column="CGSCSYJ" jdbcType="VARCHAR" property="cgscsyj" />
+    <result column="YGJCSYJ" jdbcType="VARCHAR" property="ygjcsyj" />
+    <result column="ZAFJCSYJ" jdbcType="VARCHAR" property="zafjcsyj" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, SQBH, JSYBH, XM, SQLX, SQZT, SQRQ, CGSCSYJ, YGJCSYJ, ZAFJCSYJ
+  </sql>
+  <select id="selectByExample" parameterType="entity.JsysqxxExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_jsysqxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_jsysqxx
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_jsysqxx
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.JsysqxxExample">
+    delete from tb_jsysqxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.Jsysqxx">
+    insert into tb_jsysqxx (id, SQBH, JSYBH, 
+      XM, SQLX, SQZT, SQRQ, 
+      CGSCSYJ, YGJCSYJ, ZAFJCSYJ
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sqbh,jdbcType=VARCHAR}, #{jsybh,jdbcType=VARCHAR}, 
+      #{xm,jdbcType=VARCHAR}, #{sqlx,jdbcType=VARCHAR}, #{sqzt,jdbcType=VARCHAR}, #{sqrq,jdbcType=DATE}, 
+      #{cgscsyj,jdbcType=VARCHAR}, #{ygjcsyj,jdbcType=VARCHAR}, #{zafjcsyj,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Jsysqxx">
+    insert into tb_jsysqxx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sqbh != null">
+        SQBH,
+      </if>
+      <if test="jsybh != null">
+        JSYBH,
+      </if>
+      <if test="xm != null">
+        XM,
+      </if>
+      <if test="sqlx != null">
+        SQLX,
+      </if>
+      <if test="sqzt != null">
+        SQZT,
+      </if>
+      <if test="sqrq != null">
+        SQRQ,
+      </if>
+      <if test="cgscsyj != null">
+        CGSCSYJ,
+      </if>
+      <if test="ygjcsyj != null">
+        YGJCSYJ,
+      </if>
+      <if test="zafjcsyj != null">
+        ZAFJCSYJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sqbh != null">
+        #{sqbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsybh != null">
+        #{jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlx != null">
+        #{sqlx,jdbcType=VARCHAR},
+      </if>
+      <if test="sqzt != null">
+        #{sqzt,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrq != null">
+        #{sqrq,jdbcType=DATE},
+      </if>
+      <if test="cgscsyj != null">
+        #{cgscsyj,jdbcType=VARCHAR},
+      </if>
+      <if test="ygjcsyj != null">
+        #{ygjcsyj,jdbcType=VARCHAR},
+      </if>
+      <if test="zafjcsyj != null">
+        #{zafjcsyj,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.JsysqxxExample" resultType="java.lang.Long">
+    select count(*) from tb_jsysqxx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_jsysqxx
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqbh != null">
+        SQBH = #{record.sqbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jsybh != null">
+        JSYBH = #{record.jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xm != null">
+        XM = #{record.xm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlx != null">
+        SQLX = #{record.sqlx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqzt != null">
+        SQZT = #{record.sqzt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqrq != null">
+        SQRQ = #{record.sqrq,jdbcType=DATE},
+      </if>
+      <if test="record.cgscsyj != null">
+        CGSCSYJ = #{record.cgscsyj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ygjcsyj != null">
+        YGJCSYJ = #{record.ygjcsyj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zafjcsyj != null">
+        ZAFJCSYJ = #{record.zafjcsyj,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_jsysqxx
+    set id = #{record.id,jdbcType=VARCHAR},
+      SQBH = #{record.sqbh,jdbcType=VARCHAR},
+      JSYBH = #{record.jsybh,jdbcType=VARCHAR},
+      XM = #{record.xm,jdbcType=VARCHAR},
+      SQLX = #{record.sqlx,jdbcType=VARCHAR},
+      SQZT = #{record.sqzt,jdbcType=VARCHAR},
+      SQRQ = #{record.sqrq,jdbcType=DATE},
+      CGSCSYJ = #{record.cgscsyj,jdbcType=VARCHAR},
+      YGJCSYJ = #{record.ygjcsyj,jdbcType=VARCHAR},
+      ZAFJCSYJ = #{record.zafjcsyj,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Jsysqxx">
+    update tb_jsysqxx
+    <set>
+      <if test="sqbh != null">
+        SQBH = #{sqbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsybh != null">
+        JSYBH = #{jsybh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlx != null">
+        SQLX = #{sqlx,jdbcType=VARCHAR},
+      </if>
+      <if test="sqzt != null">
+        SQZT = #{sqzt,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrq != null">
+        SQRQ = #{sqrq,jdbcType=DATE},
+      </if>
+      <if test="cgscsyj != null">
+        CGSCSYJ = #{cgscsyj,jdbcType=VARCHAR},
+      </if>
+      <if test="ygjcsyj != null">
+        YGJCSYJ = #{ygjcsyj,jdbcType=VARCHAR},
+      </if>
+      <if test="zafjcsyj != null">
+        ZAFJCSYJ = #{zafjcsyj,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Jsysqxx">
+    update tb_jsysqxx
+    set SQBH = #{sqbh,jdbcType=VARCHAR},
+      JSYBH = #{jsybh,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      SQLX = #{sqlx,jdbcType=VARCHAR},
+      SQZT = #{sqzt,jdbcType=VARCHAR},
+      SQRQ = #{sqrq,jdbcType=DATE},
+      CGSCSYJ = #{cgscsyj,jdbcType=VARCHAR},
+      YGJCSYJ = #{ygjcsyj,jdbcType=VARCHAR},
+      ZAFJCSYJ = #{zafjcsyj,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

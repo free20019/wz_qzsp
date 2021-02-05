@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>温州市出租汽车申报服务管理系统</title>
+	<link rel="icon" href="../../../resources/images/I16.ico" type="image/x-icon" />
+</head>
+<body>
+<a href="javascript:printme()">打印</a>
+<div id="div1">打击非法剪卡的经费</div>
+<div id="div2">的飞蛾分开的司法</div>
+<script language="javascript">
+    function printme() {
+        document.body.innerHTML=document.getElementById('div1').innerHTML+'<br/>'+document.getElementById('div2').innerHTML;
+        window.print();
+    }
+    function SetPrintSettings() {
+// -- advanced features
+        factory.printing.SetMarginMeasure(2) // measure margins in inches
+        factory.SetPageRange(false, 1, 3) // need pages from 1 to 3
+        factory.printing.printer = "HP DeskJet 870C"
+        factory.printing.copies = 2
+        factory.printing.collate = true
+        factory.printing.paperSize = "A4"
+        factory.printing.paperSource = "Manual feed"
+
+// -- basic features
+        factory.printing.header = "This is MeadCo"
+        factory.printing.footer = "Advanced Printing by ScriptX"
+        factory.printing.portrait = false
+        factory.printing.leftMargin = 1.0
+        factory.printing.topMargin = 1.0
+        factory.printing.rightMargin = 1.0
+        factory.printing.bottomMargin = 1.0
+    }
+</script>
+</body>
+</html>
+

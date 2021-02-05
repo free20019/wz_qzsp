@@ -1,0 +1,771 @@
+/* 准驾车型*/
+var regZjcx = '/^[A][1-3]|[B-C][1-2]$/'
+/*身份证正则/驾驶证正则*/
+var regIDCard = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+//var regIDCard = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/;
+/*驾驶证档案编号*/
+var regDabh = /^[0-9]{12}$/
+/*护照正则*/
+var regPassport = /^1[45][0-9]{7}|G[0-9]{8}|D[0-9]+|S[0-9]{7,8}|P[0-9]{7}$/
+var regPtPassport = /^1[45][0-9]{7}|G[0-9]{8}$/
+var regWjPassport = /^D[0-9]+$/
+var regGwPassport = /^S[0-9]{7,8}$/
+var regGptPassport = /^P[0-9]{7}$/
+var regzjPassport = /^E[1][0-9]{8}[1]$/
+/*企业营业执照*/
+var regBusinessLicense = /^[0-9A-Z-]{1,20}$/
+/*手机号码*/
+var regPhone = /^1\d{10}|\d{8}$/
+/*车牌正则*/
+// var regLicenseplate = /([京津渝琼][A-C]|[沪宁][A-D]|[皖川][A-F]|[藏][A-G]|[冀豫云辽黑鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤][A-H]|[豫云辽黑鲁新苏鄂桂甘粤][J-N]|[豫云][P-S]|[渝][F-H]|[京][E-G]|[皖鲁新][P-R]|[晋][J-K]|[粤][P-Z]|[浙赣蒙川][J-L]|[川][Q-S]|[津][E]|[川][H]|[冀陕闽贵][J]|[陕闽][K]|[京][]|[辽黑鄂桂甘][P]|[鄂][Q]|[冀桂][R]|[冀][T]|[豫鲁晋陕][U]|[辽][V])[0-9A-Z]{5}$/;
+var regLicenseplate = /^([浙][C][#])$/
+var regLicenseplate1 = /^([浙][C][0-9A-Z]{5}|[浙][C][#])$/
+var regLicenseplate2 = /^([浙][C][•][T][0-9A-Z]{4})|([浙][C][•][0-9A-Z]{5})|([浙][C][•][0-9A-Z]{6})$/
+/*价格正则*/
+// var regPrice = /\d{1,10}(\.\d{1,2})?$/;
+var regPrice = /^([1-9]\d{0,5}\.\d{1,2}|0\.\d[1-9]\d)|1000000|[1-9]\d{0,5}$/
+/*电子邮箱*/
+// var regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+var regEmail = /^[a-zA-Z0-9_-]{1,16}@[a-zA-Z0-9_-]{2,10}(.[a-zA-Z0-9_-]{2,10}){1,3}$/
+/*校验姓名*/
+var regName_zw = /^[\u4E00-\u9FA5A-Za-z]+$/ //中文
+var regName = /.{1,20}$/
+//校验性别
+var regXb = /^['男'|'女']$/
+/*校验国籍*/
+var regGj = /[\u4e00-\u9fa5]{1,20}$/
+/*核定载客位*/
+//var regHdzkw = /[1-9]|[1-9]\d|99/;
+/*车辆轴距*/
+var regClzj = /^(?:(?!0{1,4})\d{1,4}|10{4}|0)$/
+/*续航里程及行驶总里程*/
+
+var regXhlcjxszlc = /^(([1-9]|[1-5][0-9]|59)|(([1-9]|[1-5][0-9]|59)\.[0-9][0-9]{0,1})|(0\.(0[1-9]|[1-9][0-9]{0,1}))|(30\.0{1,2}))$/
+/*邮编验证*/
+var regYbyz = /^[1-9]\d{5}$/
+/*密码*/
+var regPassword = /^[A-Za-z][A-Za-z0-9~!@#$%^&*]{5,15}$/
+/*验证码*/
+var regyzm = /^[0-9]{4}$/
+/*核定载客位*/
+var regHdzkw = /^[1-7]{1}$/
+/*车辆轴距---新能源车*/
+var regXnyc = /^(2[6-9]\d{2})|([3-9]\d{3})$/
+/*车辆轴距---非新能源车*/
+var regFxnyc = /^(26[5-9]\d|2[7-9]\d{2})|([3-9]\d{3})$/
+/*续航里程*/
+var regXhlc = /^(2[5-9]\d{1})|([3-9]\d{2}|\d{4})$/
+/*计税与价格*/
+var regJgyjs = /^((1[2-9])|([2-9][0-9])|(\d{3,4}))(\.([0-9]{1,2}))?$/
+var regJgyjs1 = /^((1[2-9])|([2-9][0-9])|(\d{3,4}))(\.([0-9]{1,2}))?$/
+/*工商注册号*/
+var regGszch = /^\d{15}$/
+/*服务机构名称*/
+//var regFwjgmc = /^(([\u4e00-\u9fa5]{2,50})|([a-zA-Z\.\s\,]{2,50}))$/i;
+var regFwjgmc = /^.{1,50}$/
+/*统一社会信用*/
+var regtyshxy = /^[1-9A-GY]{1}[1239]{1}[1-5]{1}[0-9]{5}[0-9A-Z]{10}$/
+/*组织机构代码*/
+var regzzjgdm = /^[0-9a-zA-Z]{1,20}$/
+/*校验服务机构具体地址*/
+var regfwjgdz = /^.{1,50}$/
+/*邮寄方式*/
+var regyjfs = /^[\u4e00-\u9fa5]{1,10}$/
+/*发动机号*/
+var regFdjh = /^[0-9A-Z]{1,20}$/
+/**
+ * 联系地址
+ * 任意字符长度1至80
+ */
+var regLxdz = /^.{1,80}$/
+/*车辆品牌*/
+var regPpxh = /^.{1,20}$/
+/*英文姓名1-20个字母*/
+var regYwName = /[A-Z,a-z]{1,20}/
+/*日期验证*/
+var regDate = /^(1[5-9][0-9]{2}|2[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|(1|2)\d|3[0-1])$/
+/*车辆识别号*/
+var regClsbh = /^[A-Z,0-9]{17}$/
+/*出生日期*/
+var regCsrq = /^\d{4}(-\d{1,2}){2}/
+/*车辆长宽高*/
+var regCkg = /^[0-9]{1,5}$/
+/* 保险额度*/
+var regBxed = /^[0-9]{1,8}$/
+/*总质量（总量）*/
+var regZzlzl = /^[0-9]{1,5}$/
+
+/*---------------Function---------------*/
+/**
+ * 获取路径传得值
+ * @param key
+ * @returns {null}
+ */
+$.getUrlValue = function (key) {
+  var reg = new RegExp('(^|&)' + key + '=([^&]*)(&|$)', 'i')
+  var r = parent.window.location.search.substr(1).match(reg)
+  if (r != null) return unescape(r[2])
+  return null
+}
+var footerHtml = function () {
+  return '<div class="foolerPage"><a href="http://www.wzyg.gov.cn/" class="a-img" target="_Blank"><img src="/wz_qzsp/resources/images/blue.png" alt=""></a><a href="http://www.netpolice.gov.cn/" class="a-img" target="_Blank"><img src="/wz_qzsp/resources/images/wj.png" alt=""></a><p>建议使用IE11.0以上版本、最新版火狐或谷歌浏览器，1024*768分辨率浏览</p><p>建设单位：温州市道路运输管理局&nbsp;|&nbsp;技术支持：杭州通悟科技有限公司</p><p>浙ICP备13025962</p></div>'
+}
+$(function () {
+  $('.bottomFooler').html(footerHtml)
+})
+/*---------------Function---------------*/
+var obtainBrowser = function () {
+  var browser = navigator.appName
+  var b_version = navigator.appVersion
+  var version = b_version.split(';')
+  var trim_Version = version[1] ? version[1].replace(/[ ]/g, '') : ''
+  // return {'browser': browser, 'b_version': b_version, 'version': version, 'trim_Version': trim_Version};
+  return { browser: browser, trim_Version: trim_Version }
+}
+var isIE6 = function () {
+  var json = obtainBrowser()
+  if (
+    json.browser == 'Microsoft Internet Explorer' &&
+    json.trim_Version == 'MSIE6.0'
+  ) {
+    return true
+  }
+  return false
+}
+var isIE7 = function () {
+  var json = obtainBrowser()
+  if (
+    json.browser == 'Microsoft Internet Explorer' &&
+    json.trim_Version == 'MSIE7.0'
+  ) {
+    return true
+  }
+  return false
+}
+var isIE8 = function () {
+  var json = obtainBrowser()
+  if (
+    json.browser == 'Microsoft Internet Explorer' &&
+    json.trim_Version == 'MSIE8.0'
+  ) {
+    return true
+  }
+  return false
+}
+var isIE9 = function () {
+  var json = obtainBrowser()
+  if (
+    json.browser == 'Microsoft Internet Explorer' &&
+    json.trim_Version == 'MSIE9.0'
+  ) {
+    return true
+  }
+  return false
+}
+/**
+ * 信息提醒模板
+ * @param id 针对的id
+ * @param promInfo 要提示的信息
+ * @param type 提示的类型（0：在标签附近提示-默认值；1：在页面直接弹框）
+ */
+function promInfoTemp(id, promInfo, type) {
+  type = type ? type : 0
+  if (0 === type) {
+    hintInfo(id, promInfo)
+  } else if (1 === type) {
+    Pop_up_box(promInfo)
+  }
+}
+function hintInfo(id, value) {
+  layer.tips(value, '#' + id, {
+    tips: [2, '#0FA6D8'], //还可配置颜色
+    time: 4 * 1000,
+    tipsMore: true,
+    area: ['atuo'],
+  })
+}
+/**
+ * 时间控件确认后修改样式
+ */
+function datetimePicking() {
+  removeInputBorderStyle($(this))
+  $(this).parent().addClass('has-success')
+}
+function submitRegErrorInputBorderStyle(thisOne) {
+  removeInputBorderStyle(thisOne)
+  thisOne.parent().addClass('has-error')
+}
+/**
+ * 删除success样式
+ * @param  thisOne: 当前标签
+ */
+function removeSuccessInputBorderStyle(thisOne) {
+  if (thisOne.attr('class').indexOf('has-success') >= 0) {
+    thisOne.removeClass('has-success')
+  }
+}
+/**
+ * 删除error样式
+ * @param thisOne: 当前标签
+ */
+function removeErrorInputBorderStyle(thisOne) {
+  if (thisOne.attr('class').indexOf('has-error') >= 0) {
+    thisOne.removeClass('has-error')
+  }
+}
+/**
+ * 删除输入框边框样式
+ * @param thisOne：当前输入框
+ */
+function removeInputBorderStyle(thisOne) {
+  var div = thisOne.parent()
+  if (!div.attr('class')) {
+    return
+  }
+  removeSuccessInputBorderStyle(div)
+  removeErrorInputBorderStyle(div)
+}
+function successInputBorderStyle(thisOne) {
+  removeInputBorderStyle(thisOne)
+  thisOne.parent().addClass('has-success')
+}
+/**
+ * 证件类型
+ * @param thisSelect 下拉框
+ * @param thisOne 当前标签
+ */
+function documentType(thisSelect, thisOne) {
+  var thisSelectVal = thisSelect.val(),
+    thisOneId = thisOne.get(0).id
+  if (thisSelectVal === '组织机构代码证') {
+    verifyMessageStyle(
+      thisOneId,
+      regzzjgdm,
+      '证件号码不能为空',
+      '证件号码格式不正确'
+    )
+  } else if (thisSelectVal === '居民身份证') {
+    verifyMessageStyle(
+      thisOneId,
+      regIDCard,
+      '身份证不能为空',
+      '身份证格式不正确'
+    )
+  } else if (thisSelectVal === '护照') {
+    verifyMessageStyle(
+      thisOneId,
+      regGwPassport,
+      '护照不能为空',
+      '护照格式不正确'
+    )
+  } else if (thisSelectVal === '企业营业执照（五证合一）') {
+    verifyMessageStyle(
+      thisOneId,
+      regBusinessLicense,
+      '企业营业执照不能为空',
+      '企业营业执照格式不正确'
+    )
+    // hintInfo('zjhm', '暂不支持');
+  } else if (thisSelectVal === '军官证') {
+    hintInfo('zjhm', '暂不支持')
+  } else if (thisSelectVal === '士兵证') {
+    hintInfo('zjhm', '暂不支持')
+  } else {
+    removeInputBorderStyle(thisOne)
+    thisOne.parent().addClass('has-error')
+  }
+}
+/**
+ * 验证信息样式
+ * @param tagId input标签id
+ * @param reg 正则验证
+ * @param val1 第一种错误情况
+ * @param val2 第二种错误情况
+ */
+function verifyMessageStyle(tagId, reg, val1, val2) {
+  var tag = $('#' + tagId)
+  removeInputBorderStyle(tag)
+  var div = tag.parent()
+  if ('' === tag.val()) {
+    hintInfo(tagId, val1)
+    div.addClass('has-error')
+  } else if (!reg.test(tag.val())) {
+    hintInfo(tagId, val2)
+    div.addClass('has-error')
+  } else {
+    div.addClass('has-success')
+  }
+}
+/**
+ * 判断标签是否是只读
+ * @param thisOne 标签对象
+ * @returns {boolean}
+ */
+function isReadOnly(thisOne) {
+  return thisOne.get(0).readOnly
+}
+/**
+ * 页面提示框
+ * 传两个值,前一个为头信息,后一个为提示信息
+ * sz=1 上 =2右 =3 下  =4左
+ */
+function hint_info(id, value, sz) {
+  layer.tips(value, '#' + id, {
+    tips: [sz, '#0FA6D8'], //还可配置颜色
+    area: ['atuo'],
+  })
+}
+/**
+ * 页面弹出框 sz=2错误提示 1正确提示
+ */
+function Pop_up_box(value, sz) {
+  layer.alert(value, {
+    icon: sz,
+    skin: 'layer-ext-moon', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+  })
+}
+/**
+ * 弹出框 增加是否按钮
+ */
+function pop_up_box() {
+  layer.confirm(
+    '注册成功,是否返回主页登陆',
+    {
+      btn: ['是', '否'], //按钮
+    },
+    function () {
+      xt_2()
+    }
+  )
+}
+/**
+ * 限制字符串长度，超出的删除并添加“…”
+ * @param thisOne 操作的元素
+ * @param length 限制超度
+ */
+var stringLengthFormat = function (thisOne, length) {
+  for (var i = 0, l = thisOne.length; i < l; i++) {
+    var thisText = thisOne[i].innerText
+    var len = length === undefined ? thisText.length : length
+    if (thisText.length > len) {
+      thisOne[i].innerText = thisText.substring(0, len) + '…'
+    }
+  }
+}
+Date.prototype.format = function (format) {
+  var o = {
+    'M+': this.getMonth() + 1, //month
+    'd+': this.getDate(), //day
+    'h+': this.getHours(), //hour
+    'm+': this.getMinutes(), //minute
+    's+': this.getSeconds(), //second
+    'q+': Math.floor((this.getMonth() + 3) / 3), //quarter
+    S: this.getMilliseconds(), //millisecond
+  }
+  if (/(y+)/.test(format))
+    format = format.replace(
+      RegExp.$1,
+      (this.getFullYear() + '').substr(4 - RegExp.$1.length)
+    )
+  for (var k in o)
+    if (new RegExp('(' + k + ')').test(format))
+      format = format.replace(
+        RegExp.$1,
+        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
+      )
+  return format
+}
+/**
+ *	当前时间 年月日时分秒
+ */
+function fomart_time(obj) {
+  if (obj != null && obj != '') {
+    var date = new Date(obj)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+    return (
+      year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
+    )
+  } else {
+    return ''
+  }
+}
+/**
+ *	当前时间 年月日
+ */
+function fomart_time1(obj) {
+  if (obj != null && obj != '') {
+    var date = new Date(obj)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    return year + '-' + month + '-' + day
+  } else {
+    return ''
+  }
+}
+/**
+ *	当前时间 年月日时分秒
+ */
+function fomart_time2(obj) {
+  if (obj != null && obj != '') {
+    var date = new Date(obj)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+    return (
+      year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
+    )
+  } else {
+    return ''
+  }
+}
+/**
+ * 判断申请人类别
+ * @returns {*}
+ */
+function appleTypeName(type) {
+  switch (type) {
+    case 'gr':
+      return '个人'
+    case 'qy':
+      return '企业'
+    case 'pt':
+      return '平台'
+  }
+}
+function applePathName(type) {
+  switch (type) {
+    case 'gr':
+      return '../userInfo/grInfo.html'
+    case 'qy':
+      return '../userInfo/qyInfo.html'
+    case 'pt':
+      return '../userInfo/ptInfo.html'
+  }
+}
+/**
+ * 注册完成,审核状态改变页面跳到首页
+ */
+function xt_2() {
+  var curWwwPath = window.document.location.href
+  //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+  var pathName = window.document.location.pathname
+  var pos = curWwwPath.indexOf(pathName)
+  //获取主机地址，如： http://localhost:8083
+  var localhostPaht = curWwwPath.substring(0, pos)
+  //获取带"/"的项目名，如：/uimcardprj
+  var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1)
+  window.location.href = localhostPaht + projectName + '/index.html'
+}
+/**
+ * 设置infoPage高度
+ */
+
+var setInfoPageHeight = function () {
+  $('.infoPage').css({ height: 'auto' })
+  var winHeight = $(window).height()
+  var domHeight = $(document).height()
+  var bodyHeight = $('body').height()
+  var infoPageH = domHeight - bodyHeight
+  if (winHeight >= bodyHeight) {
+    $('.infoPage').css({ height: '+=' + infoPageH })
+  }
+}
+
+var yesOrNoRadios = function (radios) {
+  for (var i = 0, l = radios.length; i < l; i++) {
+    if (radios[i].checked && radios[i].value == 'yes') {
+      return true
+    }
+  }
+  return false
+}
+var isYdBwtk = function (checkbox) {
+  if (checkbox.checked == true) {
+    return true
+  } else {
+    return false
+  }
+}
+var documentHtml = function (html) {
+  return (
+    '<!DOCTYPE html> <html> <head>  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> <link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css"> <link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css"> <link rel="stylesheet" href="../../main.css"> <script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script> <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script> <script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script> <script type="text/javascript" src="../../../libs/layer/layer.js"></script> <script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script> <script type="text/javascript" src="../../config.js"></script> <script type="text/javascript" src="../../main.js"></script> <style type="text/css"> th { padding-top: 15px; padding-bottom: 15px; font-size: 30px; text-align: center; color: #313131; } td { padding: 8px 0px; white-space: nowrap; font-family: "Microsoft YaHei", sans-serif; font-size: 13px; text-indent: .3em; } </style> </head><body>' +
+    html +
+    '</body></html>'
+  )
+}
+var documentHtmlzkz = function (html) {
+  return (
+    '<!DOCTYPE html> <html> <head>  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> <link rel="stylesheet" href="../../../libs/bs/css/bootstrap.min.css"> <link rel="stylesheet" href="../../../libs/bs/css/bootstrap-theme.min.css"> <link rel="stylesheet" href="../../main.css"> <link rel="stylesheet" href="../../print.css"> <script type="text/javascript" src="../../../resources/js/jquery-1.12.1.min.js"></script> <script type="text/javascript" src="../../../resources/js/jquery.cookie.js"></script> <script type="text/javascript" src="../../../libs/bs/js/bootstrap.min.js"></script> <script type="text/javascript" src="../../../libs/layer/layer.js"></script> <script type="text/javascript" src="../../../libs/My97DatePicker/WdatePicker.js"></script> <script type="text/javascript" src="../../config.js"></script> <script type="text/javascript" src="../../main.js"></script> </head><body>' +
+    html +
+    '</body></html>'
+  )
+}
+/**
+ * 打印页面
+ * @param strPrint 打印内容
+ */
+var printHtml = function (strPrint) {
+  var oWin = window.open('', '_blank')
+  oWin.document.write(strPrint)
+  oWin.focus()
+  setTimeout(function () {
+    oWin.print()
+  }, 50)
+  oWin.document.close()
+}
+
+function bindImageChange() {
+  $(window.top.document.body)
+    .find('[id^=fileupload]')
+    .bind('change', function (event) {
+      //	var i=0;
+      //		if(this.files[i].type.indexOf('image')==-1){return;}
+      //		var url = null ;
+      //		if (window.createObjectURL!=undefined) { // basic
+      //			url = window.createObjectURL(this.files[i]) ;
+      //		} else if (window.URL!=undefined) { // mozilla(firefox)
+      //			url = window.URL.createObjectURL(this.files[i]) ;
+      //		} else if (window.webkitURL!=undefined) { // webkit or chrome
+      //			url = window.webkitURL.createObjectURL(this.files[i]) ;
+      //		}
+      //		var objUrl = url;
+      //		if (objUrl) {
+      //			this.previousElementSibling.src = objUrl;
+      //			this.previousElementSibling.name=this.files[i].name;
+      //			this.previousElementSibling.style.display = 'block';
+      //			this.style.marginLeft = '60px';
+      //		}
+      change(this.previousElementSibling, this)
+    })
+}
+
+function change(pic, file) {
+  //  var pic = document.getElementById(picId);
+  // var file = document.getElementById(fileId);
+  if (window.FileReader) {
+    //chrome,firefox7+,opera,IE10,IE9，IE9也可以用滤镜来实现
+    oFReader = new FileReader()
+    oFReader.readAsDataURL(file.files[0])
+    oFReader.onload = function (oFREvent) {
+      pic.src = oFREvent.target.result
+    }
+  } else if (document.all) {
+    //IE8-
+    file.select()
+    var reallocalpath = document.selection.createRange().text //IE下获取实际的本地文件路径
+    if (window.ie6) pic.src = reallocalpath
+    //IE6浏览器设置img的src为本地路径可以直接显示图片
+    else {
+      //非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现，IE10浏览器不支持滤镜，需要用FileReader来实现，所以注意判断FileReader先
+      pic.style.filter =
+        "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" +
+        reallocalpath +
+        '")'
+      pic.src =
+        'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==' //设置img的src为base64编码的透明图片，要不会显示红xx
+    }
+  } else if (file.files) {
+    //firefox6-
+    if (file.files.item(0)) {
+      url = file.files.item(0).getAsDataURL()
+      pic.src = url
+    }
+  }
+  pic.style.display = 'block'
+}
+
+var dsq5ss = function (obj) {
+  //	obj;
+  setTimeout(function () {
+    obj
+  }, 5000)
+  //	if (1 != kzj) {
+  //	}
+}
+
+//关联状态
+function fomat_glzt(obj) {
+  if (obj == '0') {
+    return '已关联'
+  } else if (obj == '1') {
+    return '未关联'
+  } else if (obj == '2') {
+    return '已解除关联'
+  }
+}
+//操作类型
+function fomat_czlx(obj) {
+  if (obj == '1') {
+    return '解除关联'
+  } else {
+    return '添加关联'
+  }
+}
+function fomat_qyczlx(obj) {
+  if (obj == '1') {
+    return '解除签约'
+  } else {
+    return '添加签约'
+  }
+}
+//签约状态类型
+function fomat_qylx(obj) {
+  if (obj == '1') {
+    return '未签约'
+  } else {
+    return '已签约'
+  }
+}
+
+//操作类型
+function fomat_shzt(obj) {
+  if (obj == '1') {
+    return '审核不通过'
+  } else if (obj == '0') {
+    return '审核通过'
+  } else {
+    return '待审核'
+  }
+}
+//审核状态
+function color_shzt(obj) {
+  if (obj == '1') {
+    return 'red'
+  } else if (obj == '0') {
+    return 'green'
+  } else {
+    return ''
+  }
+}
+
+//圆角
+$(document).ready(function () {
+  if (isIE7() || isIE8()) {
+    var btnInfo = $('.btn-info')
+    btnInfo
+      .css({ position: 'relative', background: 'none' })
+      .append("<div class='round_left'></div>")
+      .append("<div class='round_right'></div>")
+      .append(function () {
+        var btnInfoText = $(this).text()
+        return (
+          "<div class='round_bot' style='line-height:34px;'>" +
+          btnInfoText +
+          '</div>'
+        )
+      })
+    var btndanger = $('.btn-danger')
+    btndanger
+      .css({ position: 'relative', background: 'none' })
+      .append("<div class='left_danger'></div>")
+      .append("<div class='right_danger'></div>")
+      .append(function () {
+        var btndangerText = $(this).text()
+        return (
+          "<div class='bot_danger' style='line-height:34px;'>" +
+          btndangerText +
+          '</div>'
+        )
+      })
+  }
+})
+//if (!jQuery.cookie){
+//    jQuery.cookie = function(name, value, options) {
+//        if (typeof value != 'undefined') {
+//            options = options || {};
+//            if (value === null) {
+//                value = '';
+//                options = $.extend({}, options);
+//                options.expires = -1;
+//            }
+//            var expires = '';
+//            if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) {
+//                var date;
+//                if (typeof options.expires == 'number') {
+//                    date = new Date();
+//                    date.setTime(date.getTime() + (options.expires * 60 * 60 * 1000));
+//                } else {
+//                    date = options.expires;
+//                }
+//                expires = '; expires=' + date.toUTCString();
+//            }
+//            var path = options.path ? '; path=' + (options.path) : '';
+//            var domain = options.domain ? '; domain=' + (options.domain) : '';
+//            var secure = options.secure ? '; secure' : '';
+//            document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
+//        } else {
+//            var cookieValue = null;
+//            if (document.cookie && document.cookie != '') {
+//                var cookies = document.cookie.split(';');
+//                for (var i = 0; i < cookies.length; i++) {
+//                    var cookie = jQuery.trim(cookies[i]);
+//                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+//                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                        break;
+//                    }
+//                }
+//            }
+//            return cookieValue;
+//        }
+//    };
+//}
+//$(function(){
+//	if ($.cookie('get', { name: 'regsiterType' }) === 'gr') {
+//		$('#returnIndex').attr('href', '../userInfo/grInfo.html');
+//    } else if ($.cookie('get', { name: 'regsiterType' }) === 'qy') {
+//		$('#returnIndex').attr('href', '../userInfo/qyInfo.html');
+//    } else if ($.cookie('get', { name: 'regsiterType' }) === 'pt') {
+//		$('#returnIndex').attr('href', '../userInfo/ptInfo.html');
+//    }
+//})
+
+//form提交将字符串转json
+function getFormJson(id) {
+  var o = {}
+  var a = $('#' + id).serializeArray()
+  $.each(a, function () {
+    if (o[this.name] !== undefined) {
+      if (!o[this.name].push) {
+        o[this.name] = [o[this.name]]
+      }
+      o[this.name].push(this.value || '')
+    } else {
+      o[this.name] = this.value || ''
+    }
+  })
+  return o
+}
+//时间格式化
+Date.prototype.Format = function (fmt) {
+  //author: meizz
+  var o = {
+    'M+': this.getMonth() + 1, //月份
+    'd+': this.getDate(), //日
+    'H+': this.getHours(), //小时
+    'm+': this.getMinutes(), //分
+    's+': this.getSeconds(), //秒
+    'q+': Math.floor((this.getMonth() + 3) / 3), //季度
+    S: this.getMilliseconds(), //毫秒
+  }
+  if (/(y+)/.test(fmt))
+    fmt = fmt.replace(
+      RegExp.$1,
+      (this.getFullYear() + '').substr(4 - RegExp.$1.length)
+    )
+  for (var k in o)
+    if (new RegExp('(' + k + ')').test(fmt))
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
+      )
+  return fmt
+}
